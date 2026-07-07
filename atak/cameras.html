@@ -209,217 +209,161 @@
 </head>
 
 <body>
-  <div id="app">
-    <aside>
-      <h1>SoCal TAK Cameras</h1>
-      <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
+<div id="app">
+  <aside>
+    <h1>SoCal TAK Cameras</h1>
+    <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
 
-      <div class="status" id="status">Loading camera feeds…</div>
+    <div class="status" id="status">Loading camera feed…</div>
 
-      <input id="search" type="search" placeholder="Search name, county, source…">
+    <input id="search" type="search" placeholder="Search name, source, county, route…">
 
-      <div class="filters">
-        <label><input type="checkbox" data-layer="alertwest" checked> ALERTCalifornia / AlertWest</label>
-        <label><input type="checkbox" data-layer="caloes" checked> Cal OES Webcams</label>
-      </div>
+    <div class="filters" id="filters">
+      <label><input type="checkbox" value="ALERTCalifornia / AlertWest" checked> ALERTCalifornia / AlertWest</label>
+      <label><input type="checkbox" value="Cal OES" checked> Cal OES</label>
+      <label><input type="checkbox" value="Caltrans CCTV" checked> Caltrans CCTV</label>
+    </div>
 
-      <div class="links">
-        <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
-        <a href="/atak/caloes-network.kml">ATAK: Cal OES Network KML</a>
-      </div>
+    <div class="links">
+      <a href="/atak/all-cameras-network.kml">ATAK: All Cameras Network KML</a>
+      <a href="/atak/data/cameras.json">Raw JSON Feed</a>
+      <a href="/atak/all-cameras.kml">Generated KML</a>
+    </div>
 
-      <div class="camera-list" id="cameraList"></div>
-    </aside>
+    <div class="camera-list" id="cameraList"></div>
+  </aside>
 
-    <main id="map"></main>
-  </div>
+  <main id="map"></main>
+</div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script>
-    const SOURCES = {
-      alertwest: {
-        label: "ALERTCalifornia",
-        url: "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
-      },
-      caloes: {
-        label: "Cal OES",
-        url:
-          "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query" +
-          "?f=json&where=1%3D1&outFields=*&returnGeometry=true&outSR=4326" +
-          "&geometry=" + encodeURIComponent(JSON.stringify({
-            xmin: -121.0,
-            ymin: 32.3,
-            xmax: -114.0,
-            ymax: 36.8,
-            spatialReference: { wkid: 4326 }
-          })) +
-          "&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&resultRecordCount=3000"
-      }
-    };
+<script>
+const DATA_URL = "/atak/data/cameras.json";
 
-    const map = L.map("map").setView([34.35, -117.8], 7);
+const map = L.map("map").setView([34.35, -117.8], 7);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      attribution: "&copy; OpenStreetMap contributors"
-    }).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
 
-    const layers = {
-      alertwest: L.layerGroup().addTo(map),
-      caloes: L.layerGroup().addTo(map)
-    };
+let allCameras = [];
+let markers = [];
 
-    let allCameras = [];
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function pick(obj, keys, fallback = "") {
-      for (const key of keys) {
-        if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") {
-          return obj[key];
-        }
-      }
-      return fallback;
-    }
-
-    function cameraPopup(cam) {
-      return `
+function popupHtml(cam) {
+  return `
     <div class="popup">
       <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
       <strong>${escapeHtml(cam.name)}</strong><br>
       Source: ${escapeHtml(cam.source || "")}<br>
       ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
+      ${cam.route ? `Route: ${escapeHtml(cam.route)}<br>` : ""}
+      ${cam.district ? `District: ${escapeHtml(cam.district)}<br>` : ""}
       ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
-      ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+      ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera</a><br>` : ""}
       ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
     </div>
   `;
-    }
+}
 
-    function addCamera(cam) {
-      if (!cam.lat || !cam.lon) return;
+function clearMarkers() {
+  markers.forEach(marker => map.removeLayer(marker));
+  markers = [];
+}
 
-      const marker = L.marker([cam.lat, cam.lon]).bindPopup(cameraPopup(cam));
-      marker.addTo(layers[cam.layer]);
-      cam.marker = marker;
-      allCameras.push(cam);
-    }
+function activeSources() {
+  return new Set(
+    [...document.querySelectorAll("#filters input:checked")].map(input => input.value)
+  );
+}
 
-    async function loadAlertWest() {
-      const response = await fetch(SOURCES.alertwest.url);
-      const data = await response.json();
+function filteredCameras() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const active = activeSources();
 
-      data.forEach(cam => {
-        const site = cam.site || {};
-        const image = cam.image || {};
-        const position = cam.position || {};
+  return allCameras.filter(cam => {
+    if (!active.has(cam.source)) return false;
+    if (!q) return true;
 
-        addCamera({
-          layer: "alertwest",
-          name: cam.name || "ALERTCalifornia Camera",
-          lat: site.latitude,
-          lon: site.longitude,
-          source: "ALERTCalifornia / AlertWest",
-          category: "Fire Camera",
-          county: site.county || "",
-          heading: position.pan || "",
-          thumbnail: image.url || "",
-          url: image.url || "https://alertcalifornia.org/"
-        });
-      });
-    }
+    return [
+      cam.name,
+      cam.source,
+      cam.category,
+      cam.county,
+      cam.route,
+      cam.district
+    ].join(" ").toLowerCase().includes(q);
+  });
+}
 
-    async function loadCalOES() {
-      const response = await fetch(SOURCES.caloes.url);
-      const data = await response.json();
+function render() {
+  clearMarkers();
 
-      (data.features || []).forEach(feature => {
-        const attrs = feature.attributes || {};
-        const geom = feature.geometry || {};
+  const cams = filteredCameras();
+  const list = document.getElementById("cameraList");
+  list.innerHTML = "";
 
-        addCamera({
-          layer: "caloes",
-          name: pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam"),
-          lat: geom.y,
-          lon: geom.x,
-          source: pick(attrs, ["Source"], "Cal OES"),
-          category: String(pick(attrs, ["CameraType", "Display_Type"], "Webcam")).trim(),
-          county: pick(attrs, ["County"], ""),
-          heading: pick(attrs, ["View_Degrees"], ""),
-          thumbnail: pick(attrs, ["Thumbnail_Url"], ""),
-          url: pick(attrs, ["Webcam_URL", "Consolidated_URL", "Source_URL"], "")
-        });
-      });
-    }
+  cams.forEach(cam => {
+    const marker = L.marker([cam.lat, cam.lon]).bindPopup(popupHtml(cam));
+    marker.addTo(map);
+    markers.push(marker);
+    cam.marker = marker;
+  });
 
-    function renderList() {
-      const query = document.getElementById("search").value.toLowerCase().trim();
-      const active = new Set(
-        [...document.querySelectorAll("[data-layer]:checked")].map(input => input.dataset.layer)
-      );
-
-      const filtered = allCameras.filter(cam => {
-        if (!active.has(cam.layer)) return false;
-        if (!query) return true;
-
-        return [
-          cam.name,
-          cam.source,
-          cam.category,
-          cam.county
-        ].join(" ").toLowerCase().includes(query);
-      });
-
-      const list = document.getElementById("cameraList");
-      list.innerHTML = "";
-
-      filtered.slice(0, 100).forEach(cam => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-      <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
+  cams.slice(0, 120).forEach(cam => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <span class="badge">${escapeHtml(cam.category || cam.source)}</span>
       <strong>${escapeHtml(cam.name)}</strong>
-      <div class="meta">${escapeHtml(cam.source || "")}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
+      <div class="meta">
+        ${escapeHtml(cam.source || "")}
+        ${cam.county ? " · " + escapeHtml(cam.county) : ""}
+        ${cam.route ? " · Route " + escapeHtml(cam.route) : ""}
+      </div>
     `;
-        card.addEventListener("click", () => {
-          map.setView([cam.lat, cam.lon], 12);
-          cam.marker.openPopup();
-        });
-        list.appendChild(card);
-      });
-
-      document.getElementById("status").textContent =
-        `${filtered.length} visible / ${allCameras.length} total cameras loaded`;
-    }
-
-    document.querySelectorAll("[data-layer]").forEach(input => {
-      input.addEventListener("change", () => {
-        const layer = layers[input.dataset.layer];
-        if (input.checked) map.addLayer(layer);
-        else map.removeLayer(layer);
-        renderList();
-      });
+    card.addEventListener("click", () => {
+      map.setView([cam.lat, cam.lon], 12);
+      cam.marker.openPopup();
     });
+    list.appendChild(card);
+  });
 
-    document.getElementById("search").addEventListener("input", renderList);
+  document.getElementById("status").textContent =
+    `${cams.length} visible / ${allCameras.length} total cameras loaded`;
+}
 
-    async function init() {
-      try { await loadAlertWest(); } catch (e) { console.error("AlertWest failed", e); }
-      try { await loadCalOES(); } catch (e) { console.error("Cal OES failed", e); }
+async function init() {
+  const response = await fetch(DATA_URL);
+  const payload = await response.json();
 
-      renderList();
-    }
+  allCameras = payload.cameras || [];
 
-    init();
-  </script>
+  document.getElementById("status").textContent =
+    `${allCameras.length} cameras loaded`;
+
+  render();
+}
+
+document.getElementById("search").addEventListener("input", render);
+document.querySelectorAll("#filters input").forEach(input => {
+  input.addEventListener("change", render);
+});
+
+init().catch(err => {
+  console.error(err);
+  document.getElementById("status").textContent = "Failed to load camera data.";
+});
+</script>
 </body>
-
 </html>
