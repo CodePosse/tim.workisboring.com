@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SoCal TAK Cameras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .panel {
+      position: absolute;
+      z-index: 1000;
+      top: 12px;
+      left: 12px;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.2);
+      max-width: 320px;
+    }
+
+    .panel h1 {
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .panel label {
+      display: block;
+      margin-top: 6px;
+      font-size: .9rem;
+    }
+
+    .popup {
+      max-width: 340px;
+    }
+
+    .popup img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin-top: .5rem;
+      border-radius: 6px;
+    }
+
+    .popup a {
+      display: inline-block;
+      margin-top: .35rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #eee;
+      font-size: .75rem;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="map"></div>
+
+<div class="panel">
+  <h1>SoCal TAK Cameras</h1>
+  <div id="status">Loading cameras…</div>
+<span><strong>to import for TAK</strong> 
+If you want AlertCA fire maps only <a href="alertca-network.kml">here</a> or CalOES traffic, weather, fire, etc <a href="caloes-network.kml">here</a>
+ and then <code>go Import - http url - give it a name, set to 900 seconds (that's how long it takes them to refresh) - then go overlays - netwwork resources - select the maps and click the download buttons - then go back a mnu to file overlays and toggle the eye icon to show/hide. Click a pin icon - them right men select an item - then the ring appears - them the pin with menu and then in the right there will either be a thumbnail or large image or link to click tosee image.</code></span>
+  <label>
+    <input type="checkbox" id="toggleAlertWest" checked>
+    AlertWest / ALERTCalifornia
+  </label>
+
+  <label>
+    <input type="checkbox" id="toggleCalOES" checked>
+    Cal OES Webcams
+  </label>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+const ALERTWEST_API = "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras";
+
+const CALOES_API =
+  "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query" +
+  "?f=json" +
+  "&where=1%3D1" +
+  "&outFields=*" +
+  "&returnGeometry=true" +
+  "&outSR=4326" +
+  "&geometry=" + encodeURIComponent(JSON.stringify({
+    xmin: -121.0,
+    ymin: 32.3,
+    xmax: -114.0,
+    ymax: 36.8,
+    spatialReference: { wkid: 4326 }
+  })) +
+  "&geometryType=esriGeometryEnvelope" +
+  "&spatialRel=esriSpatialRelIntersects" +
+  "&resultRecordCount=3000";
+
+const map = L.map("map").setView([34.35, -117.8], 7);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+const alertWestLayer = L.layerGroup().addTo(map);
+const calOesLayer = L.layerGroup().addTo(map);
+
+const statusEl = document.getElementById("status");
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function pick(obj, names, fallback = "") {
+  for (const name of names) {
+    if (obj && obj[name] !== undefined && obj[name] !== null && obj[name] !== "") {
+      return obj[name];
+    }
+  }
+  return fallback;
+}
+
+function addAlertWestCamera(cam) {
+  const site = cam.site || {};
+  const image = cam.image || {};
+  const pos = cam.position || {};
+
+  const lat = site.latitude;
+  const lon = site.longitude;
+  if (!lat || !lon) return false;
+
+  const name = cam.name || "AlertWest Camera";
+  const county = site.county || "";
+  const state = site.state || "";
+  const img = image.url || "";
+  const pan = pos.pan || "";
+
+  const popup = `
+    <div class="popup">
+      <span class="badge">ALERTWest / ALERTCalifornia</span><br>
+      <strong>${escapeHtml(name)}</strong><br>
+      ${escapeHtml(county)} ${escapeHtml(state)}<br>
+      Pan/Azimuth: ${escapeHtml(pan)}<br>
+      ${img ? `<a href="${escapeHtml(img)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(img)}" alt="${escapeHtml(name)}">` : ""}
+    </div>
+  `;
+
+  L.marker([lat, lon]).addTo(alertWestLayer).bindPopup(popup);
+  return true;
+}
+
+function addCalOesCamera(feature) {
+  const attrs = feature.attributes || {};
+  const geom = feature.geometry || {};
+
+  const lat = geom.y;
+  const lon = geom.x;
+  if (!lat || !lon) return false;
+
+  const name = pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam");
+  const source = pick(attrs, ["Source"], "");
+  const type = pick(attrs, ["CameraType", "Display_Type"], "Webcam");
+  const county = pick(attrs, ["County"], "");
+  const webcamUrl = pick(attrs, ["Webcam_URL", "Consolidated_URL", "Source_URL"], "");
+  const thumb = pick(attrs, ["Thumbnail_Url"], "");
+  const view = pick(attrs, ["View_Degrees"], "");
+  const tilt = pick(attrs, ["Tilt"], "");
+  const zoom = pick(attrs, ["Zoom"], "");
+
+  const popup = `
+    <div class="popup">
+      <span class="badge">${escapeHtml(type).trim()}</span><br>
+      <strong>${escapeHtml(name)}</strong><br>
+      Source: ${escapeHtml(source)}<br>
+      County: ${escapeHtml(county).toUpperCase()}<br>
+      View: ${escapeHtml(view)}°<br>
+      Tilt: ${escapeHtml(tilt)} | Zoom: ${escapeHtml(zoom)}<br>
+      ${webcamUrl ? `<a href="${escapeHtml(webcamUrl)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+      ${thumb ? `<a href="${escapeHtml(thumb)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(thumb)}" alt="${escapeHtml(name)}">` : ""}
+    </div>
+  `;
+
+  L.marker([lat, lon]).addTo(calOesLayer).bindPopup(popup);
+  return true;
+}
+
+async function loadCameras() {
+  let alertCount = 0;
+  let calOesCount = 0;
+
+  try {
+    const r = await fetch(ALERTWEST_API);
+    const cameras = await r.json();
+
+    for (const cam of cameras) {
+      if (addAlertWestCamera(cam)) alertCount++;
+    }
+  } catch (err) {
+    console.error("AlertWest failed", err);
+  }
+
+  try {
+    const r = await fetch(CALOES_API);
+    const data = await r.json();
+
+    for (const feature of data.features || []) {
+      if (addCalOesCamera(feature)) calOesCount++;
+    }
+  } catch (err) {
+    console.error("Cal OES failed", err);
+  }
+
+  statusEl.textContent = `${alertCount} AlertWest + ${calOesCount} Cal OES cameras`;
+}
+
+document.getElementById("toggleAlertWest").addEventListener("change", e => {
+  if (e.target.checked) {
+    map.addLayer(alertWestLayer);
+  } else {
+    map.removeLayer(alertWestLayer);
+  }
+});
+
+document.getElementById("toggleCalOES").addEventListener("change", e => {
+  if (e.target.checked) {
+    map.addLayer(calOesLayer);
+  } else {
+    map.removeLayer(calOesLayer);
+  }
+});
+
+loadCameras();
+</script>
+</body>
+</html>

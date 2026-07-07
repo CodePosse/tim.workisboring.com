@@ -11,6 +11,62 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <style type="text/css" media="screen">    
+ html, body, #map {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .panel {
+      position: absolute;
+      z-index: 1000;
+      top: 12px;
+      left: 12px;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.2);
+      max-width: 320px;
+    }
+
+    .panel h1 {
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .panel label {
+      display: block;
+      margin-top: 6px;
+      font-size: .9rem;
+    }
+
+    .popup {
+      max-width: 340px;
+    }
+
+    .popup img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin-top: .5rem;
+      border-radius: 6px;
+    }
+
+    .popup a {
+      display: inline-block;
+      margin-top: .35rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #eee;
+      font-size: .75rem;
+      margin-bottom: 4px;
+    }
+
     body{color:#333;
 font-family: "PT Sans", sans-serif;
   font-weight: 400;
@@ -19,55 +75,8 @@ font-family: "PT Sans", sans-serif;
   <body>greetings fellow traveller
 
 <p>If you are looking for KML maps for ATAK for Calfire, try these: 
-<a href="https://tim.workisboring.com/atak/alertca-network.kml">this</a> 
-by import - http url - check auto refresh for 900 secods (that's all they can handle) ... then overlays - network resources - select the map you added with your name - download.</p>
-<div id="map"></div>
+<a href="atak/cameras.html">this</a> 
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-const API = "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras";
-
-const map = L.map("map").setView([37.2, -119.5], 6);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap contributors"
-}).addTo(map);
-
-fetch(API)
-  .then(r => r.json())
-  .then(cameras => {
-    cameras.forEach(cam => {
-      const site = cam.site || {};
-      const image = cam.image || {};
-      const pos = cam.position || {};
-
-      const lat = site.latitude;
-      const lon = site.longitude;
-      if (!lat || !lon) return;
-
-      const name = cam.name || "AlertWest Camera";
-      const county = site.county || "";
-      const state = site.state || "";
-      const img = image.url || "";
-      const pan = pos.pan || "";
-
-      const html = `
-        <div class="popup">
-          <strong>${name}</strong><br>
-          ${county} ${state}<br>
-          Pan/Azimuth: ${pan}<br>
-          ${img ? `<a href="${img}" target="_blank">Open latest image</a><img src="${img}" alt="${name}">` : ""}
-        </div>
-      `;
-
-      L.marker([lat, lon]).addTo(map).bindPopup(html);
-    });
-  })
-  .catch(err => {
-    alert("Failed to load camera data: " + err);
-  });
-</script>
 
 </body>
 </html>
