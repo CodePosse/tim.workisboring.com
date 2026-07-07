@@ -1,2 +1,2 @@
-.
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/name/codeposse/tim.workisboring.com) ![GitHub package.json dynamic](https://img.shields.io/github/package-json/version/codeposse/toolbox) ![GitHub package.json dynamic](https://img.shields.io/github/package-json/author/codeposse/tim.workisboring.com) ![GitHub package.json dynamic](https://img.shields.io/github/package-json/description/codeposse/tim.workisboring.com)
 ATAK test pages for the west coast, arcgis, feeds, etc
