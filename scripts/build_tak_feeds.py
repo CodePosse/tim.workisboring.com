@@ -311,10 +311,9 @@ def fetch_usgs():
         cam_id = pick(cam, ["camId", "cameraId", "id"])
         name = pick(cam, ["camName", "cameraName", "name"], "USGS Camera")
 
-        lat = pick(cam, ["latitude", "lat", "siteLatitude", "decimalLatitude"])
-        lon = pick(cam, ["longitude", "lon", "siteLongitude", "decimalLongitude"])
-
-        state = str(pick(cam, ["state", "stateCode", "siteState"], "")).upper()
+        lat = pick(cam, ["lat", "latitude"])
+        lon = pick(cam, ["lng", "lon", "longitude"])
+        state = str(pick(cam, ["stateAbrv", "state", "stateCode"], "")).upper()
 
         if state and state not in ("CA", "CALIFORNIA"):
             continue
@@ -329,7 +328,7 @@ def fetch_usgs():
 
         thumbnail = f"{thumb_dir}{cam_id}_newest.jpg" if thumb_dir and cam_id else ""
         image_url = f"{small_dir or overlay_dir}{cam_id}_newest.jpg" if (small_dir or overlay_dir) and cam_id else ""
-        timelapse = f"{tl_dir}{cam_id}_720.mp4" if tl_dir and cam_id else ""
+        timelapse = f"{tl_dir}{cam_id}.mp4" if tl_dir and cam_id else ""
 
         cameras.append({
             "id": f"usgs-{cam_id}",
