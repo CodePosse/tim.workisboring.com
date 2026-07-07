@@ -250,7 +250,7 @@ def classify_caloes(attrs):
     if "traffic" in raw or "caltrans" in raw or "road" in raw or "highway" in raw:
         return "caloes-traffic", "🚗 Traffic Camera"
     if "weather" in raw or "wx" in raw:
-        return "🌦 Weather Camera", "🌦 Weather Camera"
+        return "caloes-weather", "🌦 Weather Camera"
     if "harbor" in raw or "coast" in raw or "tsunami" in raw or "beach" in raw or "pier" in raw:
         return "caloes-coastal", "🌊 Coastal / Harbor Camera"
 
