@@ -212,34 +212,58 @@
 <div id="app">
   <aside>
     <h1>SoCal TAK Cameras</h1>
-    <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
+    <div class="subtitle">Choose a camera source to load. Nothing loads by default for better performance.</div>
 
-    <div class="status" id="status">Loading camera feed…</div>
+    <div class="status" id="status">No camera layers loaded.</div>
 
-    <input id="search" type="search" placeholder="Search name, source, county, route…">
+    <input id="search" type="search" placeholder="Search name, source, county…">
 
-    <div class="filters" id="filters">
-      <label><input type="checkbox" value="ALERTCalifornia / AlertWest" checked> ALERTCalifornia / AlertWest</label>
-      <label><input type="checkbox" value="Cal OES" checked> Cal OES</label>
-      <label><input type="checkbox" value="Caltrans CCTV" checked> Caltrans CCTV</label>
+    <div class="filters">
+      <label>
+        <input type="checkbox" value="alertwest">
+        ALERTCalifornia / AlertWest
+      </label>
+
+      <label>
+        <input type="checkbox" value="caloes">
+        Cal OES Webcams
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="loadSelected">Load Selected</button>
+      <button id="clearMap">Clear Map</button>
     </div>
 
     <div class="links">
-      <a href="/atak/all-cameras-network.kml">ATAK: All Cameras Network KML</a>
-      <a href="/atak/data/cameras.json">Raw JSON Feed</a>
-      <a href="/atak/all-cameras.kml">Generated KML</a>
+      <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
+      <a href="/atak/caloes-network.kml">ATAK: Cal OES Network KML</a>
+      <a href="/atak/data/alertwest-cameras.json">AlertWest JSON</a>
+      <a href="/atak/data/caloes-webcams.json">Cal OES JSON</a>
     </div>
 
-    <div class="camera-list" id="cameraList"></div>
+    <div class="camera-list" id="cameraList">
+      <div class="empty">Select one or more sources, then click “Load Selected.”</div>
+    </div>
   </aside>
 
   <main id="map"></main>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
 <script>
-const DATA_URL = "/atak/data/cameras.json";
+const FEEDS = {
+  alertwest: {
+    label: "ALERTCalifornia / AlertWest",
+    url: "/atak/data/alertwest-cameras.json"
+  },
+  caloes: {
+    label: "Cal OES Webcams",
+    url: "/atak/data/caloes-webcams.json"
+  }
+};
 
 const map = L.map("map").setView([34.35, -117.8], 7);
 
@@ -248,8 +272,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
+const clusterLayer = L.markerClusterGroup({
+  chunkedLoading: true,
+  maxClusterRadius: 55
+});
+
+map.addLayer(clusterLayer);
+
 let allCameras = [];
-let markers = [];
+let loadedFeeds = new Set();
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -267,8 +298,6 @@ function popupHtml(cam) {
       <strong>${escapeHtml(cam.name)}</strong><br>
       Source: ${escapeHtml(cam.source || "")}<br>
       ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
-      ${cam.route ? `Route: ${escapeHtml(cam.route)}<br>` : ""}
-      ${cam.district ? `District: ${escapeHtml(cam.district)}<br>` : ""}
       ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
       ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera</a><br>` : ""}
       ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
@@ -276,51 +305,81 @@ function popupHtml(cam) {
   `;
 }
 
-function clearMarkers() {
-  markers.forEach(marker => map.removeLayer(marker));
-  markers = [];
+function updateStatus(message) {
+  document.getElementById("status").textContent = message;
 }
 
-function activeSources() {
-  return new Set(
-    [...document.querySelectorAll("#filters input:checked")].map(input => input.value)
-  );
+async function loadFeed(key) {
+  if (loadedFeeds.has(key)) return;
+
+  const feed = FEEDS[key];
+  updateStatus(`Loading ${feed.label}…`);
+
+  const response = await fetch(feed.url);
+  if (!response.ok) {
+    throw new Error(`${feed.label} failed to load`);
+  }
+
+  const payload = await response.json();
+  const cameras = payload.cameras || [];
+
+  cameras.forEach(cam => {
+    cam.feed = key;
+    cam.feedLabel = feed.label;
+  });
+
+  allCameras.push(...cameras);
+  loadedFeeds.add(key);
+}
+
+function clearMap() {
+  clusterLayer.clearLayers();
+  allCameras = [];
+  loadedFeeds.clear();
+  document.querySelectorAll(".filters input").forEach(input => {
+    input.checked = false;
+  });
+  document.getElementById("search").value = "";
+  document.getElementById("cameraList").innerHTML =
+    '<div class="empty">Select one or more sources, then click “Load Selected.”</div>';
+  updateStatus("No camera layers loaded.");
 }
 
 function filteredCameras() {
   const q = document.getElementById("search").value.toLowerCase().trim();
-  const active = activeSources();
+
+  if (!q) return allCameras;
 
   return allCameras.filter(cam => {
-    if (!active.has(cam.source)) return false;
-    if (!q) return true;
-
     return [
       cam.name,
       cam.source,
       cam.category,
-      cam.county,
-      cam.route,
-      cam.district
+      cam.county
     ].join(" ").toLowerCase().includes(q);
   });
 }
 
 function render() {
-  clearMarkers();
+  clusterLayer.clearLayers();
 
-  const cams = filteredCameras();
+  const cameras = filteredCameras();
   const list = document.getElementById("cameraList");
   list.innerHTML = "";
 
-  cams.forEach(cam => {
+  if (!cameras.length) {
+    list.innerHTML = '<div class="empty">No cameras match the current selection.</div>';
+  }
+
+  cameras.forEach(cam => {
+    if (!cam.lat || !cam.lon) return;
+
     const marker = L.marker([cam.lat, cam.lon]).bindPopup(popupHtml(cam));
-    marker.addTo(map);
-    markers.push(marker);
     cam.marker = marker;
+    clusterLayer.addLayer(marker);
   });
 
-  cams.slice(0, 120).forEach(cam => {
+  cameras.slice(0, 120).forEach(cam => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -329,41 +388,42 @@ function render() {
       <div class="meta">
         ${escapeHtml(cam.source || "")}
         ${cam.county ? " · " + escapeHtml(cam.county) : ""}
-        ${cam.route ? " · Route " + escapeHtml(cam.route) : ""}
       </div>
     `;
+
     card.addEventListener("click", () => {
       map.setView([cam.lat, cam.lon], 12);
       cam.marker.openPopup();
     });
+
     list.appendChild(card);
   });
 
-  document.getElementById("status").textContent =
-    `${cams.length} visible / ${allCameras.length} total cameras loaded`;
+  const feedLabels = [...loadedFeeds].map(key => FEEDS[key].label).join(", ");
+  updateStatus(`${cameras.length} visible / ${allCameras.length} loaded. ${feedLabels || "No feeds loaded."}`);
 }
 
-async function init() {
-  const response = await fetch(DATA_URL);
-  const payload = await response.json();
+document.getElementById("loadSelected").addEventListener("click", async () => {
+  const selected = [...document.querySelectorAll(".filters input:checked")].map(input => input.value);
 
-  allCameras = payload.cameras || [];
+  if (!selected.length) {
+    updateStatus("Select at least one source first.");
+    return;
+  }
 
-  document.getElementById("status").textContent =
-    `${allCameras.length} cameras loaded`;
+  try {
+    for (const key of selected) {
+      await loadFeed(key);
+    }
+    render();
+  } catch (err) {
+    console.error(err);
+    updateStatus(err.message || "Failed to load selected feeds.");
+  }
+});
 
-  render();
-}
-
+document.getElementById("clearMap").addEventListener("click", clearMap);
 document.getElementById("search").addEventListener("input", render);
-document.querySelectorAll("#filters input").forEach(input => {
-  input.addEventListener("change", render);
-});
-
-init().catch(err => {
-  console.error(err);
-  document.getElementById("status").textContent = "Failed to load camera data.";
-});
 </script>
 </body>
 </html>
