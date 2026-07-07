@@ -1,0 +1,73 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>SoCal TAK Cameras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <style type="text/css" media="screen">    
+    body{color:#333;
+font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;}</style>
+  </head>
+  <body>greetings fellow traveller
+
+<p>If you are looking for KML maps for ATAK for Calfire, try these: 
+<a href="https://tim.workisboring.com/atak/alertca-network.kml">this</a> 
+by import - http url - check auto refresh for 900 secods (that's all they can handle) ... then overlays - network resources - select the map you added with your name - download.</p>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const API = "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras";
+
+const map = L.map("map").setView([37.2, -119.5], 6);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+fetch(API)
+  .then(r => r.json())
+  .then(cameras => {
+    cameras.forEach(cam => {
+      const site = cam.site || {};
+      const image = cam.image || {};
+      const pos = cam.position || {};
+
+      const lat = site.latitude;
+      const lon = site.longitude;
+      if (!lat || !lon) return;
+
+      const name = cam.name || "AlertWest Camera";
+      const county = site.county || "";
+      const state = site.state || "";
+      const img = image.url || "";
+      const pan = pos.pan || "";
+
+      const html = `
+        <div class="popup">
+          <strong>${name}</strong><br>
+          ${county} ${state}<br>
+          Pan/Azimuth: ${pan}<br>
+          ${img ? `<a href="${img}" target="_blank">Open latest image</a><img src="${img}" alt="${name}">` : ""}
+        </div>
+      `;
+
+      L.marker([lat, lon]).addTo(map).bindPopup(html);
+    });
+  })
+  .catch(err => {
+    alert("Failed to load camera data: " + err);
+  });
+</script>
+
+</body>
+</html>

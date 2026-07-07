@@ -1,0 +1,28 @@
+{
+  "name": "workisboring",
+  "version": "1.0.0",
+  "description": "tims testbed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodePosse/tim.workisboring.com.git"
+  },
+  "keywords": [
+    "atak",
+    "reticulum",
+    "meshtastic",
+    "meshcore",
+    "lora",
+    "halow",
+    "lorawan"
+  ],
+  "author": "codeposse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodePosse/tim.workisboring.com/issues"
+  },
+  "homepage": "https://github.com/CodePosse/tim.workisboring.com#readme"
+}
