@@ -126,7 +126,7 @@
       margin-bottom: 1rem;
     }
 
-    label {
+    .mygroup {
       display: flex;
       align-items: center;
       gap: .5rem;
@@ -264,10 +264,10 @@
       <input id="search" type="search" placeholder="Search name, county, source…">
 
       <div class="filters">
-        <label><input type="checkbox" data-layer="alertwest"> 🔥 ALERTCalifornia / AlertWest</label>
-        <label><input type="checkbox" data-layer="caloes-fire"> 🔥 Cal OES Fire</label>
-        <label><input type="checkbox" data-layer="caloes-traffic"> 🚗 Cal OES Traffic</label>
-        <label><input type="checkbox" data-layer="usgs"> 🌊 USGS River / Water</label>
+        <div class="mygroup"><input type="checkbox" data-layer="alertwest" aria-label="ALERTCalifornia / AlertWest"> 🔥 ALERTCalifornia / AlertWest</div>
+        <div class="mygroup"><input type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire</div>
+        <div class="mygroup"><input type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES Traffic</div>
+        <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River / Water</div>
       </div>
 
       <section class="atak-help" aria-labelledby="atak-help-title">

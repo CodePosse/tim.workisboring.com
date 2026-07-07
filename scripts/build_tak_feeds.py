@@ -5,6 +5,20 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 from pathlib import Path
+import os
+
+WINDY_API_KEY = os.environ.get("WINDY_API_KEY", "")
+WINDY_API = "https://api.windy.com/webcams/api/v3/webcams"
+
+WINDY_REGIONS = [
+    ("Los Angeles", 34.0522, -118.2437),
+    ("Orange County", 33.7175, -117.8311),
+    ("San Diego", 32.7157, -117.1611),
+    ("Ventura", 34.2805, -119.2945),
+    ("Santa Barbara", 34.4208, -119.6982),
+    ("Palm Springs", 33.8303, -116.5453),
+    ("Big Bear", 34.2439, -116.9114),
+]
 
 BASE_URL = "https://tim.workisboring.com"
 OUT_DIR = Path("/var/www/html/atak")
@@ -73,6 +87,12 @@ SOURCES = {
         "kml": "faa-weathercams.kml",
         "network": "faa-weathercams-network.kml",
     },
+    "windy": {
+    "title": "Windy Southern California Webcams",
+    "json": "windy-webcams.json",
+    "kml": "windy-webcams.kml",
+    "network": "windy-webcams-network.kml",
+},
 }
 
 
