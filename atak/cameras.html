@@ -1,25 +1,28 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-<meta charset="utf-8">
-<title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A public Southern California camera dashboard for ATAK training, featuring ALERTCalifornia, AlertWest, and Cal OES webcam layers.">
+  <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="A public Southern California camera dashboard for ATAK training, featuring ALERTCalifornia, AlertWest, and Cal OES webcam layers.">
 
-<link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
+  <link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="SoCal TAK Cameras">
-<meta property="og:description" content="Public camera layers for ATAK training and Southern California situational awareness.">
-<meta property="og:url" content="https://tim.workisboring.com/atak/cameras.html">
-<meta property="og:site_name" content="tim.workisboring.com">
-<meta property="og:image" content="https://tim.workisboring.com/atak/social-card.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SoCal TAK Cameras">
+  <meta property="og:description"
+    content="Public camera layers for ATAK training and Southern California situational awareness.">
+  <meta property="og:url" content="https://tim.workisboring.com/atak/cameras.html">
+  <meta property="og:site_name" content="tim.workisboring.com">
+  <meta property="og:image" content="https://tim.workisboring.com/atak/social-card.png">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SoCal TAK Cameras">
-<meta name="twitter:description" content="Public camera layers for ATAK training and Southern California situational awareness.">
-<meta name="twitter:image" content="https://tim.workisboring.com/atak/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SoCal TAK Cameras">
+  <meta name="twitter:description"
+    content="Public camera layers for ATAK training and Southern California situational awareness.">
+  <meta name="twitter:image" content="https://tim.workisboring.com/atak/social-card.png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
@@ -35,9 +38,12 @@
       --link: #7dd3fc;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -119,6 +125,10 @@
       font-size: .9rem;
     }
 
+    .links a:hover {
+      text-decoration: underline;
+    }
+
     .camera-list {
       display: grid;
       gap: .65rem;
@@ -194,153 +204,89 @@
 </head>
 
 <body>
-<div id="app">
-  <aside>
-    <h1>SoCal TAK Cameras</h1>
-    <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
+  <div id="app">
+    <aside>
+      <h1>SoCal TAK Cameras</h1>
+      <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
 
-    <div class="status" id="status">Loading camera feeds…</div>
+      <div class="status" id="status">Loading camera feeds…</div>
 
-    <input id="search" type="search" placeholder="Search name, county, source…">
+      <input id="search" type="search" placeholder="Search name, county, source…">
 
-    <div class="filters">
-      <label><input type="checkbox" data-layer="alertwest" checked> ALERTCalifornia / AlertWest</label>
-      <label><input type="checkbox" data-layer="caloes" checked> Cal OES Webcams</label>
-    </div>
+      <div class="filters">
+        <label><input type="checkbox" data-layer="alertwest" checked> ALERTCalifornia / AlertWest</label>
+        <label><input type="checkbox" data-layer="caloes" checked> Cal OES Webcams</label>
+      </div>
 
-    <div class="links">
-      <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
-      <a href="/atak/caloes-network.kml">ATAK: Cal OES Network KML</a>
-    </div>
+      <div class="links">
+        <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
+        <a href="/atak/caloes-network.kml">ATAK: Cal OES Network KML</a>
+      </div>
 
-    <div class="camera-list" id="cameraList"></div>
-  </aside>
+      <div class="camera-list" id="cameraList"></div>
+    </aside>
 
-  <main id="map"></main>
-</div>
+    <main id="map"></main>
+  </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-const SOURCES = {
-  alertwest: {
-    label: "ALERTCalifornia",
-    type: "api",
-    url: "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
-  },
-  caloes: {
-    label: "Cal OES",
-    type: "arcgis",
-    url:
-      "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query" +
-      "?f=json&where=1%3D1&outFields=*&returnGeometry=true&outSR=4326" +
-      "&geometry=" + encodeURIComponent(JSON.stringify({
-        xmin: -121.0,
-        ymin: 32.3,
-        xmax: -114.0,
-        ymax: 36.8,
-        spatialReference: { wkid: 4326 }
-      })) +
-      "&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&resultRecordCount=3000"
-  },
-  beach: {
-    label: "Beach",
-    type: "static",
-    items: [
-      {
-        name: "Santa Monica Pier",
-        lat: 34.0089,
-        lon: -118.4973,
-        source: "Beach Cam",
-        category: "Beach",
-        url: "https://www.santamonicapier.org/"
+  <script>
+    const SOURCES = {
+      alertwest: {
+        label: "ALERTCalifornia",
+        url: "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
       },
-      {
-        name: "Huntington Beach Pier",
-        lat: 33.6553,
-        lon: -118.0030,
-        source: "Beach Cam",
-        category: "Beach",
-        url: "https://www.surfcityusa.com/"
-      },
-      {
-        name: "Oceanside Pier",
-        lat: 33.1959,
-        lon: -117.3833,
-        source: "Beach Cam",
-        category: "Beach",
-        url: "https://www.visitoceanside.org/"
+      caloes: {
+        label: "Cal OES",
+        url:
+          "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query" +
+          "?f=json&where=1%3D1&outFields=*&returnGeometry=true&outSR=4326" +
+          "&geometry=" + encodeURIComponent(JSON.stringify({
+            xmin: -121.0,
+            ymin: 32.3,
+            xmax: -114.0,
+            ymax: 36.8,
+            spatialReference: { wkid: 4326 }
+          })) +
+          "&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&resultRecordCount=3000"
       }
-    ]
-  },
-  parks: {
-    label: "Parks",
-    type: "static",
-    items: [
-      {
-        name: "California State Parks Live",
-        lat: 36.6002,
-        lon: -121.8947,
-        source: "California State Parks",
-        category: "Park",
-        url: "https://www.parks.ca.gov/live"
-      },
-      {
-        name: "Joshua Tree National Park",
-        lat: 33.8734,
-        lon: -115.9010,
-        source: "National Park Service",
-        category: "Park",
-        url: "https://www.nps.gov/jotr/"
-      },
-      {
-        name: "Santa Monica Mountains",
-        lat: 34.0976,
-        lon: -118.7706,
-        source: "National Park Service",
-        category: "Park",
-        url: "https://www.nps.gov/samo/"
-      }
-    ]
-  }
-};
+    };
 
-const map = L.map("map").setView([34.35, -117.8], 7);
+    const map = L.map("map").setView([34.35, -117.8], 7);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap contributors"
-}).addTo(map);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
 
-const layers = {
-  alertwest: L.layerGroup().addTo(map),
-  caloes: L.layerGroup().addTo(map),
-  beach: L.layerGroup().addTo(map),
-  parks: L.layerGroup().addTo(map)
-};
+    const layers = {
+      alertwest: L.layerGroup().addTo(map),
+      caloes: L.layerGroup().addTo(map)
+    };
 
-let allCameras = [];
+    let allCameras = [];
 
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function pick(obj, keys, fallback = "") {
-  for (const key of keys) {
-    if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") {
-      return obj[key];
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
-  }
-  return fallback;
-}
 
-function cameraPopup(cam) {
-  return `
+    function pick(obj, keys, fallback = "") {
+      for (const key of keys) {
+        if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") {
+          return obj[key];
+        }
+      }
+      return fallback;
+    }
+
+    function cameraPopup(cam) {
+      return `
     <div class="popup">
       <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
       <strong>${escapeHtml(cam.name)}</strong><br>
@@ -351,135 +297,124 @@ function cameraPopup(cam) {
       ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
     </div>
   `;
-}
+    }
 
-function addCamera(cam) {
-  if (!cam.lat || !cam.lon) return;
+    function addCamera(cam) {
+      if (!cam.lat || !cam.lon) return;
 
-  const marker = L.marker([cam.lat, cam.lon]).bindPopup(cameraPopup(cam));
-  marker.addTo(layers[cam.layer]);
-  cam.marker = marker;
-  allCameras.push(cam);
-}
+      const marker = L.marker([cam.lat, cam.lon]).bindPopup(cameraPopup(cam));
+      marker.addTo(layers[cam.layer]);
+      cam.marker = marker;
+      allCameras.push(cam);
+    }
 
-async function loadAlertWest() {
-  const response = await fetch(SOURCES.alertwest.url);
-  const data = await response.json();
+    async function loadAlertWest() {
+      const response = await fetch(SOURCES.alertwest.url);
+      const data = await response.json();
 
-  data.forEach(cam => {
-    const site = cam.site || {};
-    const image = cam.image || {};
-    const position = cam.position || {};
+      data.forEach(cam => {
+        const site = cam.site || {};
+        const image = cam.image || {};
+        const position = cam.position || {};
 
-    addCamera({
-      layer: "alertwest",
-      name: cam.name || "ALERTCalifornia Camera",
-      lat: site.latitude,
-      lon: site.longitude,
-      source: "ALERTCalifornia / AlertWest",
-      category: "Fire Camera",
-      county: site.county || "",
-      heading: position.pan || "",
-      thumbnail: image.url || "",
-      url: image.url || "https://alertcalifornia.org/"
-    });
-  });
-}
+        addCamera({
+          layer: "alertwest",
+          name: cam.name || "ALERTCalifornia Camera",
+          lat: site.latitude,
+          lon: site.longitude,
+          source: "ALERTCalifornia / AlertWest",
+          category: "Fire Camera",
+          county: site.county || "",
+          heading: position.pan || "",
+          thumbnail: image.url || "",
+          url: image.url || "https://alertcalifornia.org/"
+        });
+      });
+    }
 
-async function loadCalOES() {
-  const response = await fetch(SOURCES.caloes.url);
-  const data = await response.json();
+    async function loadCalOES() {
+      const response = await fetch(SOURCES.caloes.url);
+      const data = await response.json();
 
-  (data.features || []).forEach(feature => {
-    const attrs = feature.attributes || {};
-    const geom = feature.geometry || {};
+      (data.features || []).forEach(feature => {
+        const attrs = feature.attributes || {};
+        const geom = feature.geometry || {};
 
-    addCamera({
-      layer: "caloes",
-      name: pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam"),
-      lat: geom.y,
-      lon: geom.x,
-      source: pick(attrs, ["Source"], "Cal OES"),
-      category: String(pick(attrs, ["CameraType", "Display_Type"], "Webcam")).trim(),
-      county: pick(attrs, ["County"], ""),
-      heading: pick(attrs, ["View_Degrees"], ""),
-      thumbnail: pick(attrs, ["Thumbnail_Url"], ""),
-      url: pick(attrs, ["Webcam_URL", "Consolidated_URL", "Source_URL"], "")
-    });
-  });
-}
+        addCamera({
+          layer: "caloes",
+          name: pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam"),
+          lat: geom.y,
+          lon: geom.x,
+          source: pick(attrs, ["Source"], "Cal OES"),
+          category: String(pick(attrs, ["CameraType", "Display_Type"], "Webcam")).trim(),
+          county: pick(attrs, ["County"], ""),
+          heading: pick(attrs, ["View_Degrees"], ""),
+          thumbnail: pick(attrs, ["Thumbnail_Url"], ""),
+          url: pick(attrs, ["Webcam_URL", "Consolidated_URL", "Source_URL"], "")
+        });
+      });
+    }
 
-function loadStaticLayer(layerName) {
-  SOURCES[layerName].items.forEach(item => {
-    addCamera({
-      layer: layerName,
-      ...item
-    });
-  });
-}
+    function renderList() {
+      const query = document.getElementById("search").value.toLowerCase().trim();
+      const active = new Set(
+        [...document.querySelectorAll("[data-layer]:checked")].map(input => input.dataset.layer)
+      );
 
-function renderList() {
-  const query = document.getElementById("search").value.toLowerCase().trim();
-  const active = new Set(
-    [...document.querySelectorAll("[data-layer]:checked")].map(input => input.dataset.layer)
-  );
+      const filtered = allCameras.filter(cam => {
+        if (!active.has(cam.layer)) return false;
+        if (!query) return true;
 
-  const filtered = allCameras.filter(cam => {
-    if (!active.has(cam.layer)) return false;
-    if (!query) return true;
+        return [
+          cam.name,
+          cam.source,
+          cam.category,
+          cam.county
+        ].join(" ").toLowerCase().includes(query);
+      });
 
-    return [
-      cam.name,
-      cam.source,
-      cam.category,
-      cam.county
-    ].join(" ").toLowerCase().includes(query);
-  });
+      const list = document.getElementById("cameraList");
+      list.innerHTML = "";
 
-  const list = document.getElementById("cameraList");
-  list.innerHTML = "";
-
-  filtered.slice(0, 100).forEach(cam => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
+      filtered.slice(0, 100).forEach(cam => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
       <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
       <strong>${escapeHtml(cam.name)}</strong>
       <div class="meta">${escapeHtml(cam.source || "")}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
     `;
-    card.addEventListener("click", () => {
-      map.setView([cam.lat, cam.lon], 12);
-      cam.marker.openPopup();
+        card.addEventListener("click", () => {
+          map.setView([cam.lat, cam.lon], 12);
+          cam.marker.openPopup();
+        });
+        list.appendChild(card);
+      });
+
+      document.getElementById("status").textContent =
+        `${filtered.length} visible / ${allCameras.length} total cameras loaded`;
+    }
+
+    document.querySelectorAll("[data-layer]").forEach(input => {
+      input.addEventListener("change", () => {
+        const layer = layers[input.dataset.layer];
+        if (input.checked) map.addLayer(layer);
+        else map.removeLayer(layer);
+        renderList();
+      });
     });
-    list.appendChild(card);
-  });
 
-  document.getElementById("status").textContent =
-    `${filtered.length} visible / ${allCameras.length} total cameras loaded`;
-}
+    document.getElementById("search").addEventListener("input", renderList);
 
-document.querySelectorAll("[data-layer]").forEach(input => {
-  input.addEventListener("change", () => {
-    const layer = layers[input.dataset.layer];
-    if (input.checked) map.addLayer(layer);
-    else map.removeLayer(layer);
-    renderList();
-  });
-});
+    async function init() {
+      try { await loadAlertWest(); } catch (e) { console.error("AlertWest failed", e); }
+      try { await loadCalOES(); } catch (e) { console.error("Cal OES failed", e); }
 
-document.getElementById("search").addEventListener("input", renderList);
+      renderList();
+    }
 
-async function init() {
-  try { await loadAlertWest(); } catch (e) { console.error("AlertWest failed", e); }
-  try { await loadCalOES(); } catch (e) { console.error("Cal OES failed", e); }
-
-  loadStaticLayer("beach");
-  loadStaticLayer("parks");
-
-  renderList();
-}
-
-init();
-</script>
+    init();
+  </script>
 </body>
+
 </html>
