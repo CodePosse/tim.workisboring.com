@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
     content="A public Southern California camera dashboard for ATAK training, featuring ALERTCalifornia, AlertWest, and Cal OES webcam layers.">
+
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
 
   <link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
 
@@ -43,9 +43,7 @@
       --link: #7dd3fc;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html,
     body {
@@ -130,9 +128,7 @@
       font-size: .9rem;
     }
 
-    .links a:hover {
-      text-decoration: underline;
-    }
+    .links a:hover { text-decoration: underline; }
 
     .camera-list {
       display: grid;
@@ -147,9 +143,7 @@
       cursor: pointer;
     }
 
-    .card:hover {
-      border-color: var(--accent);
-    }
+    .card:hover { border-color: var(--accent); }
 
     .card strong {
       display: block;
@@ -171,9 +165,7 @@
       margin-bottom: .4rem;
     }
 
-    .popup {
-      max-width: 340px;
-    }
+    .popup { max-width: 340px; }
 
     .popup img {
       width: 100%;
@@ -201,10 +193,23 @@
         border-bottom: 1px solid var(--border);
       }
 
-      #map {
-        min-height: 58vh;
-      }
+      #map { min-height: 58vh; }
     }
+
+  button[type="submit"],
+  .btn-primary {
+    color: #fff !important;
+    background-color: #232f3d !important;
+    border-radius:1rem;
+    margin:.5rem 0;
+    padding:5px 10px;
+    border:1px solid white;
+    &:hover,
+    &:focus {
+      background-color: #005498 !important;
+      text-decoration: none !important;
+    }
+  }
   </style>
 </head>
 
@@ -213,14 +218,15 @@
     <aside>
       <h1>SoCal TAK Cameras</h1>
       <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
+    <div><button class="btn" type="submit" id="share-link-btn">Share Link </button></div>
 
-      <div class="status" id="status">Loading camera feeds…</div>
+      <div class="status" id="status">Select a camera layer to load.</div>
 
       <input id="search" type="search" placeholder="Search name, county, source…">
 
       <div class="filters">
-        <label><input type="checkbox" data-layer="alertwest" checked> ALERTCalifornia / AlertWest</label>
-        <label><input type="checkbox" data-layer="caloes" checked> Cal OES Webcams</label>
+        <label><input type="checkbox" data-layer="alertwest"> ALERTCalifornia / AlertWest</label>
+        <label><input type="checkbox" data-layer="caloes"> Cal OES Webcams</label>
       </div>
 
       <div class="links">
@@ -229,6 +235,8 @@
       </div>
 
       <div class="camera-list" id="cameraList"></div>
+      <div><small>Powered by: <a href="//codeposse.github.io/" nofollow target="_blank">Tim</a></small>
+      </div>
     </aside>
 
     <main id="map"></main>
@@ -266,10 +274,11 @@
     }).addTo(map);
 
     const layers = {
-      alertwest: L.layerGroup().addTo(map),
-      caloes: L.layerGroup().addTo(map)
+      alertwest: L.layerGroup(),
+      caloes: L.layerGroup()
     };
 
+    const loadedLayers = new Set();
     let allCameras = [];
 
     function escapeHtml(value) {
@@ -292,16 +301,16 @@
 
     function cameraPopup(cam) {
       return `
-    <div class="popup">
-      <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
-      <strong>${escapeHtml(cam.name)}</strong><br>
-      Source: ${escapeHtml(cam.source || "")}<br>
-      ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
-      ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
-      ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
-      ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
-    </div>
-  `;
+        <div class="popup">
+          <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
+          <strong>${escapeHtml(cam.name)}</strong><br>
+          Source: ${escapeHtml(cam.source || "")}<br>
+          ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
+          ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
+          ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+          ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
+        </div>
+      `;
     }
 
     function addCamera(cam) {
@@ -360,6 +369,17 @@
       });
     }
 
+    async function ensureLayerLoaded(layerName) {
+      if (loadedLayers.has(layerName)) return;
+
+      document.getElementById("status").textContent = `Loading ${SOURCES[layerName].label}…`;
+
+      if (layerName === "alertwest") await loadAlertWest();
+      if (layerName === "caloes") await loadCalOES();
+
+      loadedLayers.add(layerName);
+    }
+
     function renderList() {
       const query = document.getElementById("search").value.toLowerCase().trim();
       const active = new Set(
@@ -385,10 +405,10 @@
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-      <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
-      <strong>${escapeHtml(cam.name)}</strong>
-      <div class="meta">${escapeHtml(cam.source || "")}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
-    `;
+          <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
+          <strong>${escapeHtml(cam.name)}</strong>
+          <div class="meta">${escapeHtml(cam.source || "")}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
+        `;
         card.addEventListener("click", () => {
           map.setView([cam.lat, cam.lon], 12);
           cam.marker.openPopup();
@@ -397,29 +417,50 @@
       });
 
       document.getElementById("status").textContent =
-        `${filtered.length} visible / ${allCameras.length} total cameras loaded`;
+        `${filtered.length} visible / ${allCameras.length} loaded cameras`;
     }
 
     document.querySelectorAll("[data-layer]").forEach(input => {
-      input.addEventListener("change", () => {
-        const layer = layers[input.dataset.layer];
-        if (input.checked) map.addLayer(layer);
-        else map.removeLayer(layer);
-        renderList();
+      input.addEventListener("change", async () => {
+        const layerName = input.dataset.layer;
+        const layer = layers[layerName];
+
+        try {
+          if (input.checked) {
+            await ensureLayerLoaded(layerName);
+            map.addLayer(layer);
+          } else {
+            map.removeLayer(layer);
+          }
+
+          renderList();
+        } catch (error) {
+          console.error(error);
+          input.checked = false;
+          document.getElementById("status").textContent = `Failed to load ${SOURCES[layerName].label}.`;
+        }
       });
     });
 
     document.getElementById("search").addEventListener("input", renderList);
-
-    async function init() {
-      try { await loadAlertWest(); } catch (e) { console.error("AlertWest failed", e); }
-      try { await loadCalOES(); } catch (e) { console.error("Cal OES failed", e); }
-
-      renderList();
-    }
-
-    init();
   </script>
+  <script>const shareLinkBtn = document.getElementById('share-link-btn');
+
+shareLinkBtn.addEventListener('click', async () => {
+    try {
+        const url = document.location.href;;
+        const share = await navigator.share({
+            title: document.title,
+            text: "text doesn't work with the current API but it is req in the spec so we include it here, leave empty double parentheses",
+            url: document.location.href,
+        });
+
+        console.log('Shared successfully:');
+    } catch (error) {
+        console.error('Error sharing content:', error);
+    }
+});
+        </script>
 </body>
 
 </html>
