@@ -6,7 +6,7 @@
   <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="A public Southern California camera dashboard for ATAK training, featuring ALERTCalifornia, AlertWest, and Cal OES webcam layers.">
+    content="A public California camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, and FAA camera layers.">
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="SoCal TAK Cameras">
   <meta property="og:description"
-    content="Public camera layers for ATAK training and Southern California situational awareness.">
+    content="Public camera layers for ATAK training and California situational awareness.">
   <meta property="og:url" content="https://tim.workisboring.com/atak/cameras.html">
   <meta property="og:site_name" content="tim.workisboring.com">
   <meta property="og:image" content="https://tim.workisboring.com/atak/social-card.png">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SoCal TAK Cameras">
   <meta name="twitter:description"
-    content="Public camera layers for ATAK training and Southern California situational awareness.">
+    content="Public camera layers for ATAK training and California situational awareness.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/social-card.png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -56,7 +56,7 @@
 
     #app {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 380px 1fr;
       height: 100%;
     }
 
@@ -122,13 +122,17 @@
       margin-bottom: 1rem;
     }
 
-    .links a {
+    .links a,
+    .powered a {
       color: var(--link);
       text-decoration: none;
       font-size: .9rem;
     }
 
-    .links a:hover { text-decoration: underline; }
+    .links a:hover,
+    .powered a:hover {
+      text-decoration: underline;
+    }
 
     .camera-list {
       display: grid;
@@ -181,6 +185,30 @@
       margin-top: .35rem;
     }
 
+    .btn,
+    button {
+      color: #fff;
+      background-color: #232f3d;
+      border-radius: 1rem;
+      margin: .5rem 0 1rem;
+      padding: 6px 12px;
+      border: 1px solid white;
+      cursor: pointer;
+    }
+
+    .btn:hover,
+    .btn:focus,
+    button:hover,
+    button:focus {
+      background-color: #005498;
+      text-decoration: none;
+    }
+
+    .powered {
+      margin-top: 1rem;
+      color: var(--muted);
+    }
+
     @media (max-width: 900px) {
       #app {
         grid-template-columns: 1fr;
@@ -195,47 +223,46 @@
 
       #map { min-height: 58vh; }
     }
-
-  button[type="submit"],
-  .btn-primary {
-    color: #fff !important;
-    background-color: #232f3d !important;
-    border-radius:1rem;
-    margin:.5rem 0;
-    padding:5px 10px;
-    border:1px solid white;
-    &:hover,
-    &:focus {
-      background-color: #005498 !important;
-      text-decoration: none !important;
-    }
-  }
   </style>
 </head>
 
 <body>
   <div id="app">
     <aside>
-      <h1>SoCal TAK Cameras</h1>
+      <h1>📷 SoCal TAK Cameras</h1>
       <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
-    <div><button class="btn" type="submit" id="share-link-btn">Share Link </button></div>
+
+      <button class="btn" type="button" id="share-link-btn">Share Link</button>
 
       <div class="status" id="status">Select a camera layer to load.</div>
 
       <input id="search" type="search" placeholder="Search name, county, source…">
 
       <div class="filters">
-        <label><input type="checkbox" data-layer="alertwest"> ALERTCalifornia / AlertWest</label>
-        <label><input type="checkbox" data-layer="caloes"> Cal OES Webcams</label>
+        <label><input type="checkbox" data-layer="alertwest"> 🔥 ALERTCalifornia / AlertWest</label>
+        <label><input type="checkbox" data-layer="caloes-fire"> 🔥 Cal OES Fire</label>
+        <label><input type="checkbox" data-layer="caloes-traffic"> 🚗 Cal OES Traffic</label>
+        <label><input type="checkbox" data-layer="caloes-weather"> 🌦 Cal OES Weather</label>
+        <label><input type="checkbox" data-layer="caloes-coastal"> 🌊 Cal OES Coastal / Harbor</label>
+        <label><input type="checkbox" data-layer="caloes-other"> 📷 Cal OES Other</label>
+        <label><input type="checkbox" data-layer="usgs"> 🌊 USGS River / Water</label>
+        <label><input type="checkbox" data-layer="faa"> ✈️ FAA WeatherCams</label>
       </div>
 
       <div class="links">
         <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
-        <a href="/atak/caloes-network.kml">ATAK: Cal OES Network KML</a>
+        <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
+        <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
+        <a href="/atak/caloes-weather-network.kml">ATAK: Cal OES Weather Network KML</a>
+        <a href="/atak/caloes-coastal-network.kml">ATAK: Cal OES Coastal Network KML</a>
+        <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
+        <a href="/atak/faa-weathercams-network.kml">ATAK: FAA WeatherCams Network KML</a>
       </div>
 
       <div class="camera-list" id="cameraList"></div>
-      <div><small>Powered by: <a href="//codeposse.github.io/" nofollow target="_blank">Tim</a></small>
+
+      <div class="powered">
+        <small>Powered by: <a href="//codeposse.github.io/" rel="nofollow noopener" target="_blank">Tim</a></small>
       </div>
     </aside>
 
@@ -247,22 +274,36 @@
   <script>
     const SOURCES = {
       alertwest: {
-        label: "ALERTCalifornia",
-        url: "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
+        label: "ALERTCalifornia / AlertWest",
+        json: "/atak/data/alertwest-cameras.json"
       },
-      caloes: {
-        label: "Cal OES",
-        url:
-          "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query" +
-          "?f=json&where=1%3D1&outFields=*&returnGeometry=true&outSR=4326" +
-          "&geometry=" + encodeURIComponent(JSON.stringify({
-            xmin: -121.0,
-            ymin: 32.3,
-            xmax: -114.0,
-            ymax: 36.8,
-            spatialReference: { wkid: 4326 }
-          })) +
-          "&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&resultRecordCount=3000"
+      "caloes-fire": {
+        label: "Cal OES Fire",
+        json: "/atak/data/caloes-fire-cameras.json"
+      },
+      "caloes-traffic": {
+        label: "Cal OES Traffic",
+        json: "/atak/data/caloes-traffic-cameras.json"
+      },
+      "caloes-weather": {
+        label: "Cal OES Weather",
+        json: "/atak/data/caloes-weather-cameras.json"
+      },
+      "caloes-coastal": {
+        label: "Cal OES Coastal / Harbor",
+        json: "/atak/data/caloes-coastal-cameras.json"
+      },
+      "caloes-other": {
+        label: "Cal OES Other",
+        json: "/atak/data/caloes-other-cameras.json"
+      },
+      usgs: {
+        label: "USGS River / Water",
+        json: "/atak/data/usgs-cameras.json"
+      },
+      faa: {
+        label: "FAA WeatherCams",
+        json: "/atak/data/faa-weathercams.json"
       }
     };
 
@@ -273,10 +314,10 @@
       attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
 
-    const layers = {
-      alertwest: L.layerGroup(),
-      caloes: L.layerGroup()
-    };
+    const layers = {};
+    Object.keys(SOURCES).forEach(key => {
+      layers[key] = L.layerGroup();
+    });
 
     const loadedLayers = new Set();
     let allCameras = [];
@@ -290,15 +331,6 @@
         .replaceAll("'", "&#039;");
     }
 
-    function pick(obj, keys, fallback = "") {
-      for (const key of keys) {
-        if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") {
-          return obj[key];
-        }
-      }
-      return fallback;
-    }
-
     function cameraPopup(cam) {
       return `
         <div class="popup">
@@ -308,13 +340,14 @@
           ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
           ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+          ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
           ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
         </div>
       `;
     }
 
     function addCamera(cam) {
-      if (!cam.lat || !cam.lon) return;
+      if (!cam.lat || !cam.lon || !layers[cam.layer]) return;
 
       const marker = L.marker([cam.lat, cam.lon]).bindPopup(cameraPopup(cam));
       marker.addTo(layers[cam.layer]);
@@ -322,60 +355,21 @@
       allCameras.push(cam);
     }
 
-    async function loadAlertWest() {
-      const response = await fetch(SOURCES.alertwest.url);
-      const data = await response.json();
-
-      data.forEach(cam => {
-        const site = cam.site || {};
-        const image = cam.image || {};
-        const position = cam.position || {};
-
-        addCamera({
-          layer: "alertwest",
-          name: cam.name || "ALERTCalifornia Camera",
-          lat: site.latitude,
-          lon: site.longitude,
-          source: "ALERTCalifornia / AlertWest",
-          category: "🔥Fire Camera",
-          county: site.county || "",
-          heading: position.pan || "",
-          thumbnail: image.url || "",
-          url: image.url || "https://alertcalifornia.org/"
-        });
-      });
-    }
-
-    async function loadCalOES() {
-      const response = await fetch(SOURCES.caloes.url);
-      const data = await response.json();
-
-      (data.features || []).forEach(feature => {
-        const attrs = feature.attributes || {};
-        const geom = feature.geometry || {};
-
-        addCamera({
-          layer: "caloes",
-          name: pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam"),
-          lat: geom.y,
-          lon: geom.x,
-          source: pick(attrs, ["Source"], "Cal OES"),
-          category: String(pick(attrs, ["CameraType", "Display_Type"], "Webcam")).trim(),
-          county: pick(attrs, ["County"], ""),
-          heading: pick(attrs, ["View_Degrees"], ""),
-          thumbnail: pick(attrs, ["Thumbnail_Url"], ""),
-          url: pick(attrs, ["Webcam_URL", "Consolidated_URL", "Source_URL"], "")
-        });
-      });
-    }
-
     async function ensureLayerLoaded(layerName) {
       if (loadedLayers.has(layerName)) return;
 
-      document.getElementById("status").textContent = `Loading ${SOURCES[layerName].label}…`;
+      const source = SOURCES[layerName];
+      document.getElementById("status").textContent = `Loading ${source.label}…`;
 
-      if (layerName === "alertwest") await loadAlertWest();
-      if (layerName === "caloes") await loadCalOES();
+      const response = await fetch(source.json);
+      if (!response.ok) throw new Error(`Failed to load ${source.label}`);
+
+      const payload = await response.json();
+      const cameras = payload.cameras || [];
+
+      cameras.forEach(cam => {
+        addCamera({ ...cam, layer: layerName });
+      });
 
       loadedLayers.add(layerName);
     }
@@ -443,24 +437,30 @@
     });
 
     document.getElementById("search").addEventListener("input", renderList);
-  </script>
-  <script>const shareLinkBtn = document.getElementById('share-link-btn');
 
-shareLinkBtn.addEventListener('click', async () => {
-    try {
-        const url = document.location.href;;
-        const share = await navigator.share({
-            title: document.title,
-            text: "text doesn't work with the current API but it is req in the spec so we include it here, leave empty double parentheses",
-            url: document.location.href,
-        });
+    const shareLinkBtn = document.getElementById("share-link-btn");
 
-        console.log('Shared successfully:');
-    } catch (error) {
-        console.error('Error sharing content:', error);
+    if (shareLinkBtn) {
+      shareLinkBtn.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "SoCal TAK Cameras",
+          url: document.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            await navigator.clipboard.writeText(document.location.href);
+            document.getElementById("status").textContent = "Link copied to clipboard.";
+          }
+        } catch (error) {
+          console.error("Error sharing content:", error);
+        }
+      });
     }
-});
-        </script>
+  </script>
 </body>
 
 </html>
