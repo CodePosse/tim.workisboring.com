@@ -6,7 +6,7 @@
   <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="A public California camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, and FAA camera layers.">
+    content="A public California camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, and USGS camera layers.">
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -77,19 +77,35 @@
       margin: 0 0 .25rem;
     }
 
+    h2 {
+      font-size: 1rem;
+      margin: 1rem 0 .5rem;
+    }
+
     .subtitle {
       color: var(--muted);
       font-size: .9rem;
       margin-bottom: 1rem;
     }
 
-    .status {
+    .status,
+    .atak-help {
       background: var(--panel-2);
       border: 1px solid var(--border);
       border-radius: .75rem;
       padding: .75rem;
       margin-bottom: 1rem;
       font-size: .9rem;
+    }
+
+    .atak-help ol {
+      margin: .5rem 0 0 1.25rem;
+      padding: 0;
+      color: var(--muted);
+    }
+
+    .atak-help li {
+      margin-bottom: .35rem;
     }
 
     input[type="search"] {
@@ -127,6 +143,7 @@
       color: var(--link);
       text-decoration: none;
       font-size: .9rem;
+      overflow-wrap: anywhere;
     }
 
     .links a:hover,
@@ -216,12 +233,12 @@
       }
 
       aside {
-        max-height: 42vh;
+        max-height: 46vh;
         border-right: 0;
         border-bottom: 1px solid var(--border);
       }
 
-      #map { min-height: 58vh; }
+      #map { min-height: 54vh; }
     }
   </style>
 </head>
@@ -232,7 +249,7 @@
       <h1>📷 SoCal TAK Cameras</h1>
       <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
 
-      <button class="btn" type="button" id="share-link-btn">Share Link</button>
+      <button class="btn" type="button" id="share-link-btn">Share Link 🔗</button>
 
       <div class="status" id="status">Select a camera layer to load.</div>
 
@@ -243,8 +260,18 @@
         <label><input type="checkbox" data-layer="caloes-fire"> 🔥 Cal OES Fire</label>
         <label><input type="checkbox" data-layer="caloes-traffic"> 🚗 Cal OES Traffic</label>
         <label><input type="checkbox" data-layer="usgs"> 🌊 USGS River / Water</label>
-
       </div>
+
+      <section class="atak-help" aria-labelledby="atak-help-title">
+        <h2 id="atak-help-title">Add a camera layer to ATAK Android</h2>
+        <ol>
+          <li>Open ATAK-CIV on Android.</li>
+          <li>Open the main menu and choose <strong>Import Manager</strong>.</li>
+          <li>Choose <strong>Import from URL</strong>.</li>
+          <li>Copy one Network KML URL below and paste it into ATAK.</li>
+          <li>After import, pan/zoom to California and enable the overlay if needed.</li>
+        </ol>
+      </section>
 
       <div class="links">
         <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
@@ -279,25 +306,9 @@
         label: "Cal OES Traffic",
         json: "/atak/data/caloes-traffic-cameras.json"
       },
-      "caloes-weather": {
-        label: "Cal OES Weather",
-        json: "/atak/data/caloes-weather-cameras.json"
-      },
-      "caloes-coastal": {
-        label: "Cal OES Coastal / Harbor",
-        json: "/atak/data/caloes-coastal-cameras.json"
-      },
-      "caloes-other": {
-        label: "Cal OES Other",
-        json: "/atak/data/caloes-other-cameras.json"
-      },
       usgs: {
         label: "USGS River / Water",
         json: "/atak/data/usgs-cameras.json"
-      },
-      faa: {
-        label: "FAA WeatherCams",
-        json: "/atak/data/faa-weathercams.json"
       }
     };
 
