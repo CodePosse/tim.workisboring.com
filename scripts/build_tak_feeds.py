@@ -1,26 +1,15 @@
 #!/usr/bin/env python3
 import html
 import json
-import time
-import requests
-import xml.etree.ElementTree as ET
-from pathlib import Path
 import os
+import time
+from pathlib import Path
+import xml.etree.ElementTree as ET
 
-WINDY_API_KEY = os.environ.get("WINDY_API_KEY", "")
-WINDY_API = "https://api.windy.com/webcams/api/v3/webcams"
-
-WINDY_REGIONS = [
-    ("Los Angeles", 34.0522, -118.2437),
-    ("Orange County", 33.7175, -117.8311),
-    ("San Diego", 32.7157, -117.1611),
-    ("Ventura", 34.2805, -119.2945),
-    ("Santa Barbara", 34.4208, -119.6982),
-    ("Palm Springs", 33.8303, -116.5453),
-    ("Big Bear", 34.2439, -116.9114),
-]
+import requests
 
 BASE_URL = "https://tim.workisboring.com"
+
 OUT_DIR = Path("/var/www/html/atak")
 DATA_DIR = OUT_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -36,7 +25,19 @@ SOCAL_BBOX = {
 ALERTWEST_API = "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
 CALOES_API = "https://services.arcgis.com/BLN4oKB0N1YSgvY8/arcgis/rest/services/CalOES_California_Webcams/FeatureServer/0/query"
 USGS_NIMS_CAMERAS = "https://api.waterdata.usgs.gov/nims/v0/cameras"
-FAA_SITES_API = "https://api.weathercams.faa.gov/sites"
+
+WINDY_API_KEY = os.environ.get("WINDY_API_KEY", "")
+WINDY_API = "https://api.windy.com/webcams/api/v3/webcams"
+
+WINDY_REGIONS = [
+    ("Los Angeles", 34.0522, -118.2437),
+    ("Orange County", 33.7175, -117.8311),
+    ("San Diego", 32.7157, -117.1611),
+    ("Ventura", 34.2805, -119.2945),
+    ("Santa Barbara", 34.4208, -119.6982),
+    ("Palm Springs", 33.8303, -116.5453),
+    ("Big Bear", 34.2439, -116.9114),
+]
 
 SOURCES = {
     "alertwest": {
@@ -57,64 +58,31 @@ SOURCES = {
         "kml": "caloes-traffic-cameras.kml",
         "network": "caloes-traffic-network.kml",
     },
-    "caloes-weather": {
-        "title": "Cal OES Weather Cameras",
-        "json": "caloes-weather-cameras.json",
-        "kml": "caloes-weather-cameras.kml",
-        "network": "caloes-weather-network.kml",
-    },
-    "caloes-coastal": {
-        "title": "Cal OES Coastal / Harbor Cameras",
-        "json": "caloes-coastal-cameras.json",
-        "kml": "caloes-coastal-cameras.kml",
-        "network": "caloes-coastal-network.kml",
-    },
-    "caloes-other": {
-        "title": "Cal OES Other Cameras",
-        "json": "caloes-other-cameras.json",
-        "kml": "caloes-other-cameras.kml",
-        "network": "caloes-other-network.kml",
-    },
     "usgs": {
         "title": "USGS River / Water Cameras",
         "json": "usgs-cameras.json",
         "kml": "usgs-cameras.kml",
         "network": "usgs-network.kml",
     },
-    "faa": {
-        "title": "FAA Weather Cameras",
-        "json": "faa-weathercams.json",
-        "kml": "faa-weathercams.kml",
-        "network": "faa-weathercams-network.kml",
-    },
     "windy": {
-    "title": "Windy Southern California Webcams",
-    "json": "windy-webcams.json",
-    "kml": "windy-webcams.kml",
-    "network": "windy-webcams-network.kml",
-},
+        "title": "Windy Southern California Webcams",
+        "json": "windy-webcams.json",
+        "kml": "windy-webcams.kml",
+        "network": "windy-webcams-network.kml",
+    },
 }
 
 
 def pick(obj, keys, default=""):
+    if not isinstance(obj, dict):
+        return default
+
     for key in keys:
         value = obj.get(key)
         if value not in (None, "", []):
             return value
+
     return default
-
-
-def in_california_bbox(lat, lon):
-    try:
-        lat = float(lat)
-        lon = float(lon)
-    except (TypeError, ValueError):
-        return False
-
-    return (
-        SOCAL_BBOX["ymin"] <= lat <= 42.1 and
-        -124.6 <= lon <= SOCAL_BBOX["xmax"]
-    )
 
 
 def in_socal_bbox(lat, lon):
@@ -125,9 +93,19 @@ def in_socal_bbox(lat, lon):
         return False
 
     return (
-        SOCAL_BBOX["ymin"] <= lat <= SOCAL_BBOX["ymax"] and
-        SOCAL_BBOX["xmin"] <= lon <= SOCAL_BBOX["xmax"]
+        SOCAL_BBOX["ymin"] <= lat <= SOCAL_BBOX["ymax"]
+        and SOCAL_BBOX["xmin"] <= lon <= SOCAL_BBOX["xmax"]
     )
+
+
+def in_california_bbox(lat, lon):
+    try:
+        lat = float(lat)
+        lon = float(lon)
+    except (TypeError, ValueError):
+        return False
+
+    return 32.3 <= lat <= 42.1 and -124.6 <= lon <= -114.0
 
 
 def arcgis_params():
@@ -146,6 +124,7 @@ def arcgis_params():
 
 def write_json(source_key, cameras):
     info = SOURCES[source_key]
+
     payload = {
         "source_key": source_key,
         "title": info["title"],
@@ -153,7 +132,11 @@ def write_json(source_key, cameras):
         "count": len(cameras),
         "cameras": cameras,
     }
-    (DATA_DIR / info["json"]).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+    (DATA_DIR / info["json"]).write_text(
+        json.dumps(payload, indent=2),
+        encoding="utf-8",
+    )
 
 
 def make_kml(source_key, cameras):
@@ -174,24 +157,31 @@ def make_kml(source_key, cameras):
 
     for cam in cameras:
         placemark = ET.SubElement(folder, "Placemark")
-        ET.SubElement(placemark, "name").text = str(cam["name"])
+        ET.SubElement(placemark, "name").text = str(cam.get("name", "Camera"))
         ET.SubElement(placemark, "styleUrl").text = "#camera-style"
 
         desc = f"""<![CDATA[
-<b>{html.escape(str(cam["name"]))}</b><br>
+<b>{html.escape(str(cam.get("name", "Camera")))}</b><br>
 Type: {html.escape(str(cam.get("category", "")))}<br>
 Source: {html.escape(str(cam.get("source", "")))}<br>
 County: {html.escape(str(cam.get("county", "")))}<br>
 {f'View: {html.escape(str(cam.get("heading")))}°<br>' if cam.get("heading") else ""}
+{f'Region: {html.escape(str(cam.get("region")))}<br>' if cam.get("region") else ""}
 {f'<a href="{html.escape(str(cam.get("url")))}">Open Camera</a><br>' if cam.get("url") else ""}
+{f'<a href="{html.escape(str(cam.get("timelapse")))}">Open Timelapse</a><br>' if cam.get("timelapse") else ""}
 {f'<a href="{html.escape(str(cam.get("thumbnail")))}">Open Latest Image</a><br><img src="{html.escape(str(cam.get("thumbnail")))}" width="320">' if cam.get("thumbnail") else ""}
 ]]>"""
 
         ET.SubElement(placemark, "description").text = desc
+
         point = ET.SubElement(placemark, "Point")
         ET.SubElement(point, "coordinates").text = f'{cam["lon"]},{cam["lat"]},0'
 
-    ET.ElementTree(kml).write(OUT_DIR / info["kml"], encoding="utf-8", xml_declaration=True)
+    ET.ElementTree(kml).write(
+        OUT_DIR / info["kml"],
+        encoding="utf-8",
+        xml_declaration=True,
+    )
 
 
 def make_network_kml(source_key):
@@ -214,6 +204,7 @@ def make_network_kml(source_key):
   </Document>
 </kml>
 """
+
     (OUT_DIR / info["network"]).write_text(content, encoding="utf-8")
 
 
@@ -226,13 +217,14 @@ def write_outputs(source_key, cameras):
 
 def fetch_alertwest():
     cameras = []
-    r = requests.get(ALERTWEST_API, timeout=30)
-    r.raise_for_status()
 
-    for cam in r.json():
+    response = requests.get(ALERTWEST_API, timeout=30)
+    response.raise_for_status()
+
+    for cam in response.json():
         site = cam.get("site") or {}
         image = cam.get("image") or {}
-        pos = cam.get("position") or {}
+        position = cam.get("position") or {}
 
         lat = site.get("latitude")
         lon = site.get("longitude")
@@ -245,10 +237,10 @@ def fetch_alertwest():
             "name": cam.get("name") or "ALERTCalifornia Camera",
             "source": "ALERTCalifornia / AlertWest",
             "category": "🔥 Fire Camera",
-            "lat": lat,
-            "lon": lon,
+            "lat": float(lat),
+            "lon": float(lon),
             "county": site.get("county") or "",
-            "heading": pos.get("pan") or "",
+            "heading": position.get("pan") or "",
             "thumbnail": image.get("url") or "",
             "url": image.get("url") or "https://alertcalifornia.org/",
         })
@@ -263,52 +255,49 @@ def classify_caloes(attrs):
         str(pick(attrs, ["Source"], "")),
         str(pick(attrs, ["Location"], "")),
         str(pick(attrs, ["Webcam_URL"], "")),
+        str(pick(attrs, ["Consolidated_URL"], "")),
     ]).lower()
 
     if "alert" in raw or "fire" in raw:
         return "caloes-fire", "🔥 Fire Camera"
+
     if "traffic" in raw or "caltrans" in raw or "road" in raw or "highway" in raw:
         return "caloes-traffic", "🚗 Traffic Camera"
-    if "weather" in raw or "wx" in raw:
-        return "caloes-weather", "🌦 Weather Camera"
-    if "harbor" in raw or "coast" in raw or "tsunami" in raw or "beach" in raw or "pier" in raw:
-        return "caloes-coastal", "🌊 Coastal / Harbor Camera"
 
-    return "caloes-other", "📷 Webcam"
+    return None, None
 
 
 def fetch_caloes_split():
     buckets = {
         "caloes-fire": [],
         "caloes-traffic": [],
-        "caloes-weather": [],
-        "caloes-coastal": [],
-        "caloes-other": [],
     }
 
-    r = requests.get(CALOES_API, params=arcgis_params(), timeout=30)
-    r.raise_for_status()
+    response = requests.get(CALOES_API, params=arcgis_params(), timeout=30)
+    response.raise_for_status()
 
-    for feature in r.json().get("features", []):
+    for feature in response.json().get("features", []):
         attrs = feature.get("attributes") or {}
         geom = feature.get("geometry") or {}
 
         lat = geom.get("y")
         lon = geom.get("x")
+
         if lat is None or lon is None:
             continue
 
         key, category = classify_caloes(attrs)
-        if key == "🌦 Weather Camera":
-            key = "caloes-weather"
+
+        if not key:
+            continue
 
         buckets[key].append({
             "id": f'caloes-{pick(attrs, ["OBJECTID", "GlobalID"], lat)}',
             "name": pick(attrs, ["Location", "Name", "NAME"], "Cal OES Webcam"),
             "source": pick(attrs, ["Source"], "Cal OES"),
             "category": category,
-            "lat": lat,
-            "lon": lon,
+            "lat": float(lat),
+            "lon": float(lon),
             "county": str(pick(attrs, ["County"], "")).title(),
             "heading": pick(attrs, ["View_Degrees"], ""),
             "thumbnail": pick(attrs, ["Thumbnail_Url"], ""),
@@ -320,14 +309,19 @@ def fetch_caloes_split():
 
 def fetch_usgs():
     cameras = []
-    r = requests.get(USGS_NIMS_CAMERAS, timeout=30)
-    r.raise_for_status()
 
-    data = r.json()
+    response = requests.get(USGS_NIMS_CAMERAS, timeout=30)
+    response.raise_for_status()
+
+    data = response.json()
+
     if isinstance(data, dict):
         data = data.get("cameras", data.get("items", data.get("data", [])))
 
     for cam in data:
+        if cam.get("hideCam"):
+            continue
+
         cam_id = pick(cam, ["camId", "cameraId", "id"])
         name = pick(cam, ["camName", "cameraName", "name"], "USGS Camera")
 
@@ -357,7 +351,7 @@ def fetch_usgs():
             "category": "🌊 River / Water Camera",
             "lat": float(lat),
             "lon": float(lon),
-            "county": pick(cam, ["county", "countyName"], ""),
+            "county": "",
             "heading": "",
             "thumbnail": thumbnail or image_url,
             "url": image_url or timelapse,
@@ -367,76 +361,131 @@ def fetch_usgs():
     return cameras
 
 
-def fetch_faa():
-    cameras = []
+def first_url(value):
+    if isinstance(value, str):
+        return value
 
-    try:
-        r = requests.get(
-            FAA_SITES_API,
-            timeout=30,
-            headers={
-                "User-Agent": "Mozilla/5.0",
-                "Accept": "application/json,text/plain,*/*",
-            },
-        )
-        r.raise_for_status()
-    except Exception as exc:
-        print(f"faa failed: {exc}")
-        return cameras
+    if isinstance(value, dict):
+        for key in ["url", "preview", "thumbnail", "full", "day", "month", "lifetime"]:
+            if value.get(key):
+                return value[key]
 
-    data = r.json()
-    sites = data.get("payload", data if isinstance(data, list) else [])
+    return ""
 
-    for site in sites:
-        lat = pick(site, ["latitude", "lat"])
-        lon = pick(site, ["longitude", "lon"])
 
-        state = str(pick(site, ["state", "stateCode", "province"], "")).upper()
-        if state and state not in ("CA", "CALIFORNIA"):
+def fetch_windy():
+    cameras = {}
+
+    if not WINDY_API_KEY:
+        print("windy skipped: WINDY_API_KEY not set")
+        return []
+
+    headers = {
+        "x-windy-api-key": WINDY_API_KEY,
+        "Accept": "application/json",
+        "User-Agent": "SoCal-TAK/0.1",
+    }
+
+    for region_name, lat, lon in WINDY_REGIONS:
+        params = {
+            "limit": 50,
+            "nearby": f"{lat},{lon},250",
+            "include": "images,location,player,urls,categories",
+        }
+
+        try:
+            response = requests.get(
+                WINDY_API,
+                headers=headers,
+                params=params,
+                timeout=30,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except Exception as exc:
+            print(f"windy {region_name} failed: {exc}")
             continue
 
-        if not in_california_bbox(lat, lon):
-            continue
+        for cam in data.get("webcams", []):
+            cam_id = str(pick(cam, ["webcamId", "id"], ""))
 
-        site_id = pick(site, ["siteId", "id"])
-        site_name = pick(site, ["siteName", "name"], "FAA WeatherCam")
-        icao = pick(site, ["icao", "siteIdentifier", "identifier"], "")
+            if not cam_id:
+                continue
 
-        url = f"https://weathercams.faa.gov/cameras/cameraSite/{site_id}/details/weather" if site_id else "https://weathercams.faa.gov/"
+            location = cam.get("location") or {}
+            images = cam.get("images") or {}
+            urls = cam.get("urls") or {}
+            player = cam.get("player") or {}
 
-        cameras.append({
-            "id": f"faa-{site_id or icao or site_name}",
-            "name": f"{site_name} {f'({icao})' if icao else ''}".strip(),
-            "source": "FAA WeatherCams",
-            "category": "✈️ Aviation Weather Camera",
-            "lat": float(lat),
-            "lon": float(lon),
-            "county": "",
-            "heading": "",
-            "thumbnail": "",
-            "url": url,
-        })
+            cam_lat = pick(location, ["latitude", "lat"])
+            cam_lon = pick(location, ["longitude", "lon", "lng"])
 
-    return cameras
+            if not in_california_bbox(cam_lat, cam_lon):
+                continue
+
+            title = pick(cam, ["title", "name"], "Windy Webcam")
+
+            thumbnail = ""
+            image_url = ""
+
+            if isinstance(images, dict):
+                current = images.get("current") or {}
+                if isinstance(current, dict):
+                    thumbnail = first_url(current.get("thumbnail")) or first_url(current.get("preview"))
+                    image_url = first_url(current.get("full")) or first_url(current.get("preview")) or thumbnail
+
+            url = (
+                first_url(urls.get("detail")) if isinstance(urls, dict) else ""
+            ) or (
+                first_url(urls.get("web")) if isinstance(urls, dict) else ""
+            ) or (
+                first_url(player.get("day")) if isinstance(player, dict) else ""
+            ) or image_url or "https://www.windy.com/webcams"
+
+            cameras[cam_id] = {
+                "id": f"windy-{cam_id}",
+                "name": title,
+                "source": "Windy Webcams",
+                "category": "🌎 Public Webcam",
+                "lat": float(cam_lat),
+                "lon": float(cam_lon),
+                "county": "",
+                "heading": "",
+                "thumbnail": thumbnail or image_url,
+                "url": url,
+                "region": region_name,
+            }
+
+    return list(cameras.values())
 
 
 def main():
-    alertwest = fetch_alertwest()
-    write_outputs("alertwest", alertwest)
-
-    caloes = fetch_caloes_split()
-    for key, cameras in caloes.items():
-        write_outputs(key, cameras)
+    try:
+        write_outputs("alertwest", fetch_alertwest())
+    except Exception as exc:
+        print(f"alertwest failed: {exc}")
+        write_outputs("alertwest", [])
 
     try:
-        usgs = fetch_usgs()
-        write_outputs("usgs", usgs)
+        caloes = fetch_caloes_split()
+        write_outputs("caloes-fire", caloes["caloes-fire"])
+        write_outputs("caloes-traffic", caloes["caloes-traffic"])
+    except Exception as exc:
+        print(f"caloes failed: {exc}")
+        write_outputs("caloes-fire", [])
+        write_outputs("caloes-traffic", [])
+
+    try:
+        write_outputs("usgs", fetch_usgs())
     except Exception as exc:
         print(f"usgs failed: {exc}")
         write_outputs("usgs", [])
 
-    faa = fetch_faa()
-    write_outputs("faa", faa)
+    try:
+        write_outputs("windy", fetch_windy())
+    except Exception as exc:
+        print(f"windy failed: {exc}")
+        write_outputs("windy", [])
 
 
 if __name__ == "__main__":
