@@ -209,6 +209,17 @@ def make_network_kml(source_key):
 
 
 def write_outputs(source_key, cameras):
+    # Do not overwrite Windy with an empty response.
+    # Windy can intermittently return 0 for nearby queries.
+    if source_key == "windy" and len(cameras) == 0:
+        existing_json = DATA_DIR / SOURCES[source_key]["json"]
+        existing_kml = OUT_DIR / SOURCES[source_key]["kml"]
+
+        if existing_json.exists() and existing_kml.exists():
+            print("windy: 0 returned, keeping previous cached feed")
+            make_network_kml(source_key)
+            return
+
     write_json(source_key, cameras)
     make_kml(source_key, cameras)
     make_network_kml(source_key)
