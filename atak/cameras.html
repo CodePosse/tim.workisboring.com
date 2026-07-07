@@ -43,7 +43,9 @@
       --link: #7dd3fc;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html,
     body {
@@ -164,7 +166,9 @@
       cursor: pointer;
     }
 
-    .card:hover { border-color: var(--accent); }
+    .card:hover {
+      border-color: var(--accent);
+    }
 
     .card strong {
       display: block;
@@ -186,7 +190,9 @@
       margin-bottom: .4rem;
     }
 
-    .popup { max-width: 340px; }
+    .popup {
+      max-width: 340px;
+    }
 
     .popup img {
       width: 100%;
@@ -238,7 +244,9 @@
         border-bottom: 1px solid var(--border);
       }
 
-      #map { min-height: 54vh; }
+      #map {
+        min-height: 54vh;
+      }
     }
   </style>
 </head>
@@ -278,6 +286,8 @@
         <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
         <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
         <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
+        <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
+          rel="noopener">Flock Cameras (DIY)</a>
       </div>
 
       <div class="camera-list" id="cameraList"></div>
