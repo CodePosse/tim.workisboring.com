@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
+
+  <link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SoCal TAK Cameras">
+  <meta property="og:description"
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
+  <meta property="og:logo" content="https://tim.workisboring.com/atak/img/social-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://tim.workisboring.com/atak/cameras.html">
+  <meta property="og:site_name" content="tim.workisboring.com">
+  <meta property="og:image" content="https://tim.workisboring.com/atak/img/social-card.png">
+  <meta name="og:locale" content="en_US" />
+  <meta name="og:region" content="US-CA" />
+  <meta name="og:postal-code" content="90210" />
+  <meta name="og:country-name" content="USA" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SoCal TAK Cameras">
+  <meta name="twitter:description"
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
+  <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --border: #334155;
+      --link: #7dd3fc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    #app {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      height: 100%;
+    }
+
+    aside {
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    #map {
+      height: 100%;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 .25rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin: 1rem 0 .5rem;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 1rem;
+    }
+
+    .status,
+    .atak-help {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      padding: .75rem;
+      margin-bottom: 1rem;
+      font-size: .9rem;
+    }
+
+    .atak-help ol {
+      margin: .5rem 0 0 1.25rem;
+      padding: 0;
+      color: var(--muted);
+    }
+
+    .atak-help li {
+      margin-bottom: .35rem;
+    }
+
+    input[type="search"] {
+      width: 100%;
+      padding: .7rem .8rem;
+      border-radius: .65rem;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .filters {
+      display: grid;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    .mygroup {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .links {
+      display: grid;
+      gap: .35rem;
+      margin-bottom: 1rem;
+    }
+
+    .links a,
+    .powered a {
+      color: var(--link);
+      text-decoration: none;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .links a:hover,
+    .powered a:hover {
+      text-decoration: underline;
+    }
+
+    .camera-list {
+      display: grid;
+      gap: .65rem;
+    }
+
+    .card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      padding: .75rem;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: .2rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .15rem .45rem;
+      border-radius: 999px;
+      background: #0f766e;
+      color: white;
+      font-size: .72rem;
+      margin-bottom: .4rem;
+    }
+
+    .popup {
+      max-width: 340px;
+    }
+
+    .popup img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 8px;
+      display: block;
+      margin-top: .5rem;
+    }
+
+    .popup a {
+      color: #0369a1;
+      display: inline-block;
+      margin-top: .35rem;
+    }
+
+    .popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .65rem;
+    }
+
+    .popup-actions button {
+      margin: 0;
+      border-radius: .5rem;
+      font-size: .82rem;
+      padding: .35rem .6rem;
+    }
+
+    .popup-video {
+      display: none;
+      margin-top: .65rem;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      min-width: 280px;
+    }
+
+    .popup-video.is-visible {
+      display: block;
+    }
+
+    .popup-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: .5rem;
+      background: #000;
+    }
+
+    .popup.expanded {
+      width: min(80vw, 900px);
+      max-width: 900px;
+    }
+
+    .popup.expanded .popup-video {
+      min-width: 0;
+    }
+
+    .btn,
+    button {
+      color: #fff;
+      background-color: #232f3d;
+      border-radius: 1rem;
+      margin: .5rem 0 1rem;
+      padding: 6px 12px;
+      border: 1px solid white;
+      cursor: pointer;
+    }
+
+    .btn:hover,
+    .btn:focus,
+    button:hover,
+    button:focus {
+      background-color: #005498;
+      text-decoration: none;
+    }
+
+    .powered {
+      margin-top: 1rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      #app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      aside {
+        max-height: 46vh;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      #map {
+        min-height: 54vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <aside>
+      <h1>📷 SoCal TAK Cameras</h1>
+      <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
+
+      <button class="btn" type="button" id="share-link-btn">Share Link 🔗</button>
+
+      <div class="status" id="status">Select a camera layer to load.</div>
+
+      <input id="search" type="search" placeholder="Search name, county, source…"
+        aria-label="Search cameras by name, county, or source">
+
+      <div class="filters">
+        <div class="mygroup"><input type="checkbox" data-layer="alertwest" aria-label="ALERTCalifornia / AlertWest"> 🔥
+          ALERTCalifornia / AlertWest</div>
+        <div class="mygroup"><input type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire
+        </div>
+        <div class="mygroup"><input type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
+          Traffic</div>
+        <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
+          Water</div>
+        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy
+          Webcams
+          can timeout after 5 minutes</div>
+        <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
+            aria-label="Curated Southern California cameras"> 🏖️ Curated SoCal Beaches, Mountains &amp; Attractions
+        </div>
+      </div>
+
+      <section class="atak-help" aria-labelledby="atak-help-title">
+        <h2 id="atak-help-title">Add a camera layer to ATAK Android</h2>
+        <ol>
+          <li>Open ATAK-CIV on Android.</li>
+          <li>Open the main menu and choose <strong>Import Manager</strong>.</li>
+          <li>Choose <strong>Import from URL</strong>.</li>
+          <li>Copy one Network KML URL below and paste it into ATAK.</li>
+          <li>After import, pan/zoom to California and enable the overlay if needed.</li>
+        </ol>
+      </section>
+
+      <div class="links">
+        <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
+        <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
+        <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
+        <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
+        <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams Network KML</a>
+        <a href="/atak/curated-socal-network.kml">ATAK: Curated SoCal Cameras Network KML</a>
+        <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
+          rel="noopener">Flock Cameras (DIY)</a>
+      </div>
+
+      <div class="camera-list" id="cameraList"></div>
+
+      <div class="powered">
+        <small>Powered by: <a href="https://github.com/CodePosse/tim.workisboring.com" rel="nofollow noopener"
+            target="_blank">CodePosse</a> </small>
+      </div>
+    </aside>
+
+    <main id="map"></main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const SOURCES = {
+      alertwest: {
+        label: "ALERTCalifornia / AlertWest",
+        json: "/atak/data/alertwest-cameras.json"
+      },
+      "caloes-fire": {
+        label: "Cal OES Fire",
+        json: "/atak/data/caloes-fire-cameras.json"
+      },
+      "caloes-traffic": {
+        label: "Cal OES Traffic",
+        json: "/atak/data/caloes-traffic-cameras.json"
+      },
+      usgs: {
+        label: "USGS River / Water",
+        json: "/atak/data/usgs-cameras.json"
+      },
+      windy: {
+        label: "Windy Tourist Webcams",
+        json: "/atak/api/windy.php"
+      },
+      "curated-socal": {
+        label: "Curated SoCal Beaches, Mountains & Attractions",
+        json: "/atak/data/curated-socal-cameras.json"
+      }
+    };
+    const map = L.map("map").setView([34.35, -117.8], 7);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    const layers = {};
+    Object.keys(SOURCES).forEach(key => {
+      layers[key] = L.layerGroup();
+    });
+
+    const loadedLayers = new Set();
+    let allCameras = [];
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getYouTubeVideoId(value) {
+      if (!value) return "";
+
+      try {
+        const url = new URL(value, window.location.origin);
+        const host = url.hostname.replace(/^www\./, "");
+
+        if (host === "youtu.be") {
+          return url.pathname.split("/").filter(Boolean)[0] || "";
+        }
+
+        if (host === "youtube.com" || host === "m.youtube.com" || host === "music.youtube.com") {
+          if (url.pathname === "/watch") {
+            return url.searchParams.get("v") || "";
+          }
+
+          const parts = url.pathname.split("/").filter(Boolean);
+          if (["embed", "live", "shorts"].includes(parts[0])) {
+            return parts[1] || "";
+          }
+        }
+      } catch (error) {
+        console.warn("Invalid YouTube URL:", value, error);
+      }
+
+      return "";
+    }
+
+    function cameraPopup(cam) {
+      const youtubeUrl = cam.youtubeUrl || cam.youtube || "";
+      const youtubeId =
+        getYouTubeVideoId(youtubeUrl) ||
+        getYouTubeVideoId(cam.streamUrl) ||
+        getYouTubeVideoId(cam.url) ||
+        getYouTubeVideoId(cam.pageUrl);
+
+      const videoControls = youtubeId ? `
+        <div class="popup-actions">
+          <button type="button" class="video-toggle" data-youtube-id="${escapeHtml(youtubeId)}">
+            Show video
+          </button>
+          <button type="button" class="popup-expand-toggle">
+            Expand
+          </button>
+        </div>
+        <div class="popup-video" aria-hidden="true"></div>
+      ` : "";
+
+      return `
+        <div class="popup">
+          <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
+          <strong>${escapeHtml(cam.name)}</strong><br>
+          Source: ${escapeHtml(cam.source || "")}<br>
+          ${cam.operator && cam.operator !== cam.source ? `Operator: ${escapeHtml(cam.operator)}<br>` : ""}
+          ${cam.city ? `City: ${escapeHtml(cam.city)}<br>` : ""}
+          ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
+          ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
+          ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
+          ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+          ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
+          ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(cam.name)} camera page">
+            <img src="${escapeHtml(cam.thumbnail)}"
+                 alt="${escapeHtml(cam.name)}"
+                 loading="lazy">
+          </a>` : ""}
+          ${videoControls}
+          ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}
+        </div>
+      `;
+    }
+
+    function addCamera(cam) {
+      const lat = Number(cam.lat ?? cam.latitude);
+      const lon = Number(cam.lon ?? cam.longitude);
+
+      if (!Number.isFinite(lat) || !Number.isFinite(lon) || !layers[cam.layer]) return;
+
+      const normalizedCamera = {
+        ...cam,
+        lat,
+        lon,
+        source: cam.source || cam.operator || SOURCES[cam.layer]?.label || "",
+        url: cam.url || cam.pageUrl || cam.streamUrl || "",
+        thumbnail: cam.thumbnail || cam.imageUrl || "",
+        youtubeUrl: cam.youtubeUrl || cam.youtube || "",
+        category: cam.category || "Camera"
+      };
+
+      const marker = L.marker([lat, lon]).bindPopup(cameraPopup(normalizedCamera), {
+        maxWidth: 920,
+        minWidth: 300,
+        autoPanPadding: [24, 24]
+      });
+      marker.addTo(layers[cam.layer]);
+      normalizedCamera.marker = marker;
+      allCameras.push(normalizedCamera);
+    }
+
+    async function ensureLayerLoaded(layerName) {
+      if (loadedLayers.has(layerName)) return;
+
+      const source = SOURCES[layerName];
+      document.getElementById("status").textContent = `Loading ${source.label}…`;
+
+      const requestUrl = layerName === "windy"
+  ? `${source.json}?t=${Date.now()}`
+  : source.json;
+
+const response = await fetch(requestUrl, {
+  cache: layerName === "windy" ? "no-store" : "default"
+});
+      if (!response.ok) throw new Error(`Failed to load ${source.label}`);
+
+      const payload = await response.json();
+      const cameras = payload.cameras || [];
+
+      cameras.forEach(cam => {
+        addCamera({ ...cam, layer: layerName });
+      });
+
+      loadedLayers.add(layerName);
+    }
+
+    function renderList() {
+      const query = document.getElementById("search").value.toLowerCase().trim();
+      const active = new Set(
+        [...document.querySelectorAll("[data-layer]:checked")].map(input => input.dataset.layer)
+      );
+
+      const filtered = allCameras.filter(cam => {
+        if (!active.has(cam.layer)) return false;
+        if (!query) return true;
+
+        return [
+          cam.name,
+          cam.source,
+          cam.operator,
+          cam.category,
+          cam.city,
+          cam.county
+        ].join(" ").toLowerCase().includes(query);
+      });
+
+      const list = document.getElementById("cameraList");
+      list.innerHTML = "";
+
+      filtered.slice(0, 100).forEach(cam => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
+          <strong>${escapeHtml(cam.name)}</strong>
+          <div class="meta">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
+        `;
+        card.addEventListener("click", () => {
+          map.setView([cam.lat, cam.lon], 12);
+          cam.marker.openPopup();
+        });
+        list.appendChild(card);
+      });
+
+      document.getElementById("status").textContent =
+        `${filtered.length} visible / ${allCameras.length} loaded cameras`;
+    }
+
+    document.querySelectorAll("[data-layer]").forEach(input => {
+      input.addEventListener("change", async () => {
+        const layerName = input.dataset.layer;
+        const layer = layers[layerName];
+
+        try {
+          if (input.checked) {
+            await ensureLayerLoaded(layerName);
+            map.addLayer(layer);
+          } else {
+            map.removeLayer(layer);
+          }
+
+          renderList();
+        } catch (error) {
+          console.error(error);
+          input.checked = false;
+          document.getElementById("status").textContent = `Failed to load ${SOURCES[layerName].label}.`;
+        }
+      });
+    });
+
+    document.getElementById("search").addEventListener("input", renderList);
+
+    document.addEventListener("click", event => {
+      const videoButton = event.target.closest(".video-toggle");
+
+      if (videoButton) {
+        const popup = videoButton.closest(".popup");
+        const videoContainer = popup?.querySelector(".popup-video");
+        const videoId = videoButton.dataset.youtubeId;
+
+        if (!popup || !videoContainer || !videoId) return;
+
+        const isVisible = videoContainer.classList.toggle("is-visible");
+        videoContainer.setAttribute("aria-hidden", String(!isVisible));
+        videoButton.textContent = isVisible ? "Hide video" : "Show video";
+
+        if (isVisible && !videoContainer.querySelector("iframe")) {
+          const iframe = document.createElement("iframe");
+          iframe.src =
+            `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} live video`;
+          iframe.loading = "lazy";
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allowFullscreen = true;
+          videoContainer.appendChild(iframe);
+        }
+
+        map.invalidateSize();
+        return;
+      }
+
+      const expandButton = event.target.closest(".popup-expand-toggle");
+
+      if (expandButton) {
+        const popup = expandButton.closest(".popup");
+        const leafletContent = expandButton.closest(".leaflet-popup-content");
+
+        if (!popup || !leafletContent) return;
+
+        const expanded = popup.classList.toggle("expanded");
+        expandButton.textContent = expanded ? "Collapse" : "Expand";
+        leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
+
+        map.invalidateSize();
+      }
+    });
+
+    const shareLinkBtn = document.getElementById("share-link-btn");
+
+    if (shareLinkBtn) {
+      shareLinkBtn.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "SoCal TAK Cameras",
+          url: document.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            await navigator.clipboard.writeText(document.location.href);
+            document.getElementById("status").textContent = "Link copied to clipboard.";
+          }
+        } catch (error) {
+          console.error("Error sharing content:", error);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

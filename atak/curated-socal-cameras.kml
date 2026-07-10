@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Southern California Beaches, Mountains, and Attractions</name>
-    <description>Generated 2026-07-10T21:00:19.909049+00:00; 17 enabled cameras</description>
+    <description>Generated 2026-07-10T21:50:21.342375+00:00; 21 enabled cameras</description>
     <Style id="camera">
       <IconStyle>
         <scale>1.0</scale>
@@ -35,6 +35,48 @@ Notes: Use the operator page; do not cache an expiring player URL.]]></descripti
         </ExtendedData>
         <Point>
           <coordinates>-118.497600,34.009200,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>City of Huntington Beach — YouTube Streams</name>
+        <description><![CDATA[<b>City of Huntington Beach — YouTube Streams</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: City of Huntington Beach<br>
+Official city YouTube streams page, including the Huntington Beach Pier live view.<br>
+<a href="https://www.huntingtonbeachca.gov/departments/parks_recreation/beach_information/city_pier_webcam.php">Camera Page</a><br>
+Notes: The direct Pier video is embedded; the channel link opens other city streams.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>city-of-huntington-beach-youtube</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>City of Huntington Beach</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.003800,33.655300,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HBcams — YouTube Channel</name>
+        <description><![CDATA[<b>HBcams — YouTube Channel</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: HBcams<br>
+Huntington Beach live cameras and time-lapse videos.<br>
+<a href="https://hbcams.com/">Camera Page</a><br>
+Notes: Open the channel to select an active livestream.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>hbcams-youtube-channel</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>HBcams</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.003500,33.657000,0</coordinates>
         </Point>
       </Placemark>
       <Placemark>
@@ -161,6 +203,27 @@ Peak and upper-mountain camera views.<br>
         </Point>
       </Placemark>
       <Placemark>
+        <name>Bear Mountain — YouTube Live Streams</name>
+        <description><![CDATA[<b>Bear Mountain — YouTube Live Streams</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Official Bear Mountain YouTube streams page. Select an active stream from the channel.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/bear-mountain">Camera Page</a><br>
+Notes: A channel streams page cannot be embedded as one video; open it to select the currently active stream.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>bear-mountain-youtube-streams</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.861300,34.228700,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>Big Bear Mountain Resort — Camera Hub</name>
         <description><![CDATA[<b>Big Bear Mountain Resort — Camera Hub</b><br>
 Category: Mountain<br>
@@ -198,6 +261,27 @@ Collection of Big Bear Valley weather and mountain cameras.<br>
         </ExtendedData>
         <Point>
           <coordinates>-116.911400,34.243900,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>MTN WebCams — Southern California Mountains</name>
+        <description><![CDATA[<b>MTN WebCams — Southern California Mountains</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: MTN WebCams<br>
+Mountain webcam directory covering Big Bear Lake, Crestline, Lake Arrowhead, Running Springs, and Wrightwood.<br>
+<a href="https://mtnwebcams.com/">Camera Page</a><br>
+Notes: Directory entry. Add individual cameras as separate records after verifying their locations and URLs.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>mtnwebcams-directory-expanded</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>MTN WebCams</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.911000,34.243000,0</coordinates>
         </Point>
       </Placemark>
       <Placemark>
@@ -342,6 +426,30 @@ Live view along the Santa Monica Pier and coastline.<br>
         </ExtendedData>
         <Point>
           <coordinates>-118.499000,34.008900,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Wildlife</name>
+      <Placemark>
+        <name>Big Bear Bald Eagle — Wide View</name>
+        <description><![CDATA[<b>Big Bear Bald Eagle — Wide View</b><br>
+Category: Wildlife<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Friends of Big Bear Valley<br>
+Public wildlife livestream page for the Big Bear bald eagle nest area.<br>
+<a href="https://friendsofbigbearvalley.org/livestream/">Camera Page</a><br>
+Notes: Link to the operator page only; do not restream or copy imagery without permission.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-bald-eagle-wide</value></Data>
+          <Data name="category"><value>Wildlife</value></Data>
+          <Data name="operator"><value>Friends of Big Bear Valley</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.944000,34.275000,0</coordinates>
         </Point>
       </Placemark>
     </Folder>
