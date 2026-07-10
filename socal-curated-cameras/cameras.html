@@ -445,12 +445,9 @@
     }
 
     function cameraPopup(cam) {
-      const youtubeUrl = cam.youtubeUrl || cam.youtube || "";
-      const youtubeId =
-        getYouTubeVideoId(youtubeUrl) ||
-        getYouTubeVideoId(cam.streamUrl) ||
-        getYouTubeVideoId(cam.url) ||
-        getYouTubeVideoId(cam.pageUrl);
+      const youtubeUrl = cam.youtubeUrl || "";
+      const channelUrl = cam.channelUrl || "";
+      const youtubeId = getYouTubeVideoId(youtubeUrl);
 
       const videoControls = youtubeId ? `
         <div class="popup-actions">
@@ -475,6 +472,8 @@
           ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
           ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+          ${channelUrl ? `<a href="${escapeHtml(channelUrl)}" target="_blank" rel="noopener">Open YouTube streams</a><br>` : ""}
+          ${cam.tags?.length ? `Tags: ${escapeHtml(cam.tags.join(", "))}<br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
           ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(cam.name)} camera page">
             <img src="${escapeHtml(cam.thumbnail)}"
@@ -501,6 +500,11 @@
         url: cam.url || cam.pageUrl || cam.streamUrl || "",
         thumbnail: cam.thumbnail || cam.imageUrl || "",
         youtubeUrl: cam.youtubeUrl || cam.youtube || "",
+        channelUrl: cam.channelUrl || "",
+        sourceType: cam.sourceType || "webcam",
+        priority: Number(cam.priority ?? 50),
+        featured: Boolean(cam.featured),
+        tags: Array.isArray(cam.tags) ? cam.tags : [],
         category: cam.category || "Camera"
       };
 
@@ -530,7 +534,16 @@ const response = await fetch(requestUrl, {
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
-      const cameras = payload.cameras || [];
+      let cameras = payload.cameras || [];
+
+      // The curated Southern California layer is YouTube-only.
+      // Do not create markers or popups unless a direct embeddable
+      // YouTube video URL is explicitly present in the JSON entry.
+      if (layerName === "curated-socal") {
+        cameras = cameras.filter(cam =>
+          Boolean(getYouTubeVideoId(cam.youtubeUrl || ""))
+        );
+      }
 
       cameras.forEach(cam => {
         addCamera({ ...cam, layer: layerName });
@@ -555,9 +568,17 @@ const response = await fetch(requestUrl, {
           cam.operator,
           cam.category,
           cam.city,
-          cam.county
+          cam.county,
+          cam.sourceType,
+          ...(cam.tags || [])
         ].join(" ").toLowerCase().includes(query);
       });
+
+      filtered.sort((a, b) =>
+        Number(b.featured) - Number(a.featured) ||
+        Number(b.priority || 0) - Number(a.priority || 0) ||
+        String(a.name || "").localeCompare(String(b.name || ""))
+      );
 
       const list = document.getElementById("cameraList");
       list.innerHTML = "";
@@ -566,7 +587,7 @@ const response = await fetch(requestUrl, {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
+          <span class="badge">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
           <strong>${escapeHtml(cam.name)}</strong>
           <div class="meta">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
         `;
