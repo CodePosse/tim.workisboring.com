@@ -6,7 +6,7 @@
   <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, and USGS camera layers. This is a learning resource, have fun!">
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.ico">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="SoCal TAK Cameras">
   <meta property="og:description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, and USGS camera layers. This is a learning resource, have fun!">
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
   <meta property="og:logo" content="https://tim.workisboring.com/atak/img/social-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -32,7 +32,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SoCal TAK Cameras">
   <meta name="twitter:description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, and USGS camera layers. This is a learning resource, have fun!">
+    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -282,6 +282,9 @@
         <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy
           Webcams
           can timeout after 5 minutes</div>
+        <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
+            aria-label="Curated Southern California cameras"> 🏖️ Curated SoCal Beaches, Mountains &amp; Attractions
+        </div>
       </div>
 
       <section class="atak-help" aria-labelledby="atak-help-title">
@@ -301,6 +304,7 @@
         <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
         <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
         <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams Network KML</a>
+        <a href="/atak/curated-socal-network.kml">ATAK: Curated SoCal Cameras Network KML</a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -339,6 +343,10 @@
       windy: {
         label: "Windy Tourist Webcams",
         json: "/atak/api/windy.php"
+      },
+      "curated-socal": {
+        label: "Curated SoCal Beaches, Mountains & Attractions",
+        json: "/atak/data/curated-socal-cameras.json"
       }
     };
     const map = L.map("map").setView([34.35, -117.8], 7);
@@ -371,7 +379,10 @@
           <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
           <strong>${escapeHtml(cam.name)}</strong><br>
           Source: ${escapeHtml(cam.source || "")}<br>
+          ${cam.operator && cam.operator !== cam.source ? `Operator: ${escapeHtml(cam.operator)}<br>` : ""}
+          ${cam.city ? `City: ${escapeHtml(cam.city)}<br>` : ""}
           ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
+          ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
           ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
@@ -386,12 +397,25 @@ ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}</div>
     }
 
     function addCamera(cam) {
-      if (!cam.lat || !cam.lon || !layers[cam.layer]) return;
+      const lat = Number(cam.lat ?? cam.latitude);
+      const lon = Number(cam.lon ?? cam.longitude);
 
-      const marker = L.marker([cam.lat, cam.lon]).bindPopup(cameraPopup(cam));
+      if (!Number.isFinite(lat) || !Number.isFinite(lon) || !layers[cam.layer]) return;
+
+      const normalizedCamera = {
+        ...cam,
+        lat,
+        lon,
+        source: cam.source || cam.operator || SOURCES[cam.layer]?.label || "",
+        url: cam.url || cam.pageUrl || cam.streamUrl || "",
+        thumbnail: cam.thumbnail || cam.imageUrl || "",
+        category: cam.category || "Camera"
+      };
+
+      const marker = L.marker([lat, lon]).bindPopup(cameraPopup(normalizedCamera));
       marker.addTo(layers[cam.layer]);
-      cam.marker = marker;
-      allCameras.push(cam);
+      normalizedCamera.marker = marker;
+      allCameras.push(normalizedCamera);
     }
 
     async function ensureLayerLoaded(layerName) {
@@ -432,7 +456,9 @@ const response = await fetch(requestUrl, {
         return [
           cam.name,
           cam.source,
+          cam.operator,
           cam.category,
+          cam.city,
           cam.county
         ].join(" ").toLowerCase().includes(query);
       });
@@ -446,7 +472,7 @@ const response = await fetch(requestUrl, {
         card.innerHTML = `
           <span class="badge">${escapeHtml(cam.category || cam.layer)}</span>
           <strong>${escapeHtml(cam.name)}</strong>
-          <div class="meta">${escapeHtml(cam.source || "")}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
+          <div class="meta">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
         `;
         card.addEventListener("click", () => {
           map.setView([cam.lat, cam.lon], 12);
