@@ -244,22 +244,6 @@
       "notes": ""
     },
     {
-      "id": "big-bear-bald-eagle-wide",
-      "name": "Big Bear Bald Eagle \u2014 Wide View",
-      "enabled": true,
-      "category": "Wildlife",
-      "latitude": 34.275,
-      "longitude": -116.944,
-      "city": "Big Bear Lake",
-      "county": "San Bernardino",
-      "operator": "Friends of Big Bear Valley",
-      "description": "Public wildlife livestream page for the Big Bear bald eagle nest area.",
-      "pageUrl": "https://friendsofbigbearvalley.org/livestream/",
-      "imageUrl": "",
-      "streamUrl": "",
-      "notes": "Link to the operator page only; do not restream or copy imagery without permission."
-    },
-    {
       "id": "socal-mountain-webcam-directory",
       "name": "Southern California Mountain Webcam Directory",
       "enabled": true,

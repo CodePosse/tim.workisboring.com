@@ -345,29 +345,5 @@ Live view along the Santa Monica Pier and coastline.<br>
         </Point>
       </Placemark>
     </Folder>
-    <Folder>
-      <name>Wildlife</name>
-      <Placemark>
-        <name>Big Bear Bald Eagle — Wide View</name>
-        <description><![CDATA[<b>Big Bear Bald Eagle — Wide View</b><br>
-Category: Wildlife<br>
-City: Big Bear Lake<br>
-County: San Bernardino<br>
-Operator: Friends of Big Bear Valley<br>
-Public wildlife livestream page for the Big Bear bald eagle nest area.<br>
-<a href="https://friendsofbigbearvalley.org/livestream/">Camera Page</a><br>
-Notes: Link to the operator page only; do not restream or copy imagery without permission.]]></description>
-        <styleUrl>#camera</styleUrl>
-        <ExtendedData>
-          <Data name="id"><value>big-bear-bald-eagle-wide</value></Data>
-          <Data name="category"><value>Wildlife</value></Data>
-          <Data name="operator"><value>Friends of Big Bear Valley</value></Data>
-          <Data name="source"><value>Curated Southern California Cameras</value></Data>
-        </ExtendedData>
-        <Point>
-          <coordinates>-116.944000,34.275000,0</coordinates>
-        </Point>
-      </Placemark>
-    </Folder>
   </Document>
 </kml>
