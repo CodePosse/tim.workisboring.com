@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>Cal OES SoCal Webcams Auto Refresh</name>
+    <name>Cal OES Webcams Auto Refresh</name>
     <NetworkLink>
-      <name>Cal OES Southern California Webcams</name>
+      <name>Cal OES Webcams</name>
       <refreshVisibility>1</refreshVisibility>
       <Link>
         <href>https://tim.workisboring.com/atak/caloes-webcams.kml</href>

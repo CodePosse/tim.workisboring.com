@@ -1,0 +1,67 @@
+{
+  "source_key": "curated-tourist",
+  "title": "Curated California Tourist Cameras",
+  "count": 5,
+  "cameras": [
+    {
+      "id": "tourist-santa-monica-pier",
+      "name": "Santa Monica Pier",
+      "source": "Pacific Park",
+      "category": "🏖️ Beach / Pier",
+      "lat": 34.0083,
+      "lon": -118.4988,
+      "county": "Los Angeles",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://pacpark.com/santa-monica-pier-live-cams/"
+    },
+    {
+      "id": "tourist-venice-beach",
+      "name": "Venice Beach",
+      "source": "Westland",
+      "category": "🏖️ Beach",
+      "lat": 33.985,
+      "lon": -118.4695,
+      "county": "Los Angeles",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.westland.net/beachcam/"
+    },
+    {
+      "id": "tourist-scripps-pier",
+      "name": "Scripps Pier",
+      "source": "Scripps Institution of Oceanography",
+      "category": "🌊 Pier / Ocean",
+      "lat": 32.8662,
+      "lon": -117.2545,
+      "county": "San Diego",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://scripps.ucsd.edu/piercam"
+    },
+    {
+      "id": "tourist-del-mar",
+      "name": "Del Mar Beach",
+      "source": "City of Del Mar",
+      "category": "🏖️ Beach",
+      "lat": 32.9595,
+      "lon": -117.2653,
+      "county": "San Diego",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.delmar.ca.us/206/Beach-Web-Cam"
+    },
+    {
+      "id": "tourist-santa-barbara-harbor",
+      "name": "Santa Barbara Harbor",
+      "source": "Visit Santa Barbara",
+      "category": "⚓ Harbor",
+      "lat": 34.4037,
+      "lon": -119.6928,
+      "county": "Santa Barbara",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.santabarbara.com/webcams/"
+    }
+  ]
+}

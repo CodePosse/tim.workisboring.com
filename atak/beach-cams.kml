@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Southern California Beach Cameras</name><Style id="camera-style"><IconStyle><scale>1.1</scale><Icon><href>https://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style><Folder><name>Southern California Beach Cameras</name><Placemark><name>Santa Monica Pier</name><styleUrl>#camera-style</styleUrl><description>&lt;![CDATA[
+&lt;b&gt;Santa Monica Pier&lt;/b&gt;&lt;br&gt;
+Type: Beach Cam&lt;br&gt;
+Source: Public beach webcam&lt;br&gt;
+&lt;a href="https://www.santamonicapier.org/"&gt;Open Camera Page&lt;/a&gt;
+]]&gt;</description><Point><coordinates>-118.4973,34.0089,0</coordinates></Point></Placemark><Placemark><name>Huntington Beach Pier</name><styleUrl>#camera-style</styleUrl><description>&lt;![CDATA[
+&lt;b&gt;Huntington Beach Pier&lt;/b&gt;&lt;br&gt;
+Type: Beach Cam&lt;br&gt;
+Source: Public beach webcam&lt;br&gt;
+&lt;a href="https://www.surfcityusa.com/"&gt;Open Camera Page&lt;/a&gt;
+]]&gt;</description><Point><coordinates>-118.003,33.6553,0</coordinates></Point></Placemark><Placemark><name>Oceanside Pier</name><styleUrl>#camera-style</styleUrl><description>&lt;![CDATA[
+&lt;b&gt;Oceanside Pier&lt;/b&gt;&lt;br&gt;
+Type: Beach Cam&lt;br&gt;
+Source: Public beach webcam&lt;br&gt;
+&lt;a href="https://www.visitoceanside.org/"&gt;Open Camera Page&lt;/a&gt;
+]]&gt;</description><Point><coordinates>-117.3833,33.1959,0</coordinates></Point></Placemark></Folder></Document></kml>
