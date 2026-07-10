@@ -279,7 +279,9 @@
           Traffic</div>
         <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
-        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="Windy Webcams"> 🌎 Windy Webcams 
+          <div class="mygroup"><input type="checkbox" data-layer="openwebcamdb">
+  🏖️ Tourist & Destination Webcams</div>
+        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="Tourist Webcams — Windy"> 🌎 Windy Webcams 
         can timeout after 5 minutes</div>
       </div>
 
@@ -336,8 +338,8 @@
         json: "/atak/data/usgs-cameras.json"
       },
       windy: {
-        label: "Windy Webcams",
-        json: "/atak/data/windy-webcams.json"
+        label: "Tourist Webcams — Windy",
+  json: "/atak/api/windy.php"
       }
     };
 
