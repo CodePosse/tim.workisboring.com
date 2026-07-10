@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Southern California Beaches, Mountains, and Attractions</name>
+    <description>Generated 2026-07-10T21:00:19.909049+00:00; 17 enabled cameras</description>
+    <Style id="camera">
+      <IconStyle>
+        <scale>1.0</scale>
+        <Icon>
+          <href>https://maps.google.com/mapfiles/kml/shapes/camera.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0.8</scale>
+      </LabelStyle>
+    </Style>
+    <Folder>
+      <name>Beach</name>
+      <Placemark>
+        <name>Santa Monica Pier — Pacific Wheel Cam</name>
+        <description><![CDATA[<b>Santa Monica Pier — Pacific Wheel Cam</b><br>
+Category: Beach<br>
+City: Santa Monica<br>
+County: Los Angeles<br>
+Operator: Pacific Park<br>
+Live camera view from the Santa Monica Pier and Pacific Wheel.<br>
+<a href="https://pacpark.com/santa-monica-pier-live-cams/">Camera Page</a><br>
+Notes: Use the operator page; do not cache an expiring player URL.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>santa-monica-pier-wheel</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>Pacific Park</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.497600,34.009200,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Huntington Beach City Pier</name>
+        <description><![CDATA[<b>Huntington Beach City Pier</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: City of Huntington Beach<br>
+Official city webcam overlooking Huntington Beach Pier.<br>
+<a href="https://www.huntingtonbeachca.gov/departments/parks_recreation/beach_information/city_pier_webcam.php">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>huntington-beach-city-pier</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>City of Huntington Beach</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.003800,33.655300,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Huntington Beach Overview</name>
+        <description><![CDATA[<b>Huntington Beach Overview</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: HBcams<br>
+General live view of the beach, pier, weather, and crowds.<br>
+<a href="https://hbcams.com/">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>huntington-beach-overview</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>HBcams</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.001400,33.659500,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Huntington Beach — North of Pier</name>
+        <description><![CDATA[<b>Huntington Beach — North of Pier</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: HBcams<br>
+Live beach and surf view north of Huntington Beach Pier.<br>
+<a href="https://hbcams.com/webcams-huntington-beach-north-of-pier/">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>huntington-beach-north-pier</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>HBcams</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.004200,33.657100,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Huntington Beach — Surf City USA Cam</name>
+        <description><![CDATA[<b>Huntington Beach — Surf City USA Cam</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: Visit Huntington Beach<br>
+Surf and weather webcam from the Huntington Beach Pier area.<br>
+<a href="https://www.surfcityusa.com/things-to-do/surfing/live-surf-cam/">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>huntington-beach-surfcity</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>Visit Huntington Beach</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.005000,33.654900,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Mountain</name>
+      <Placemark>
+        <name>Bear Mountain — Base Area</name>
+        <description><![CDATA[<b>Bear Mountain — Base Area</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera views from the Bear Mountain base and terrain.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/bear-mountain">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>bear-mountain-base</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.861300,34.228700,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bear Mountain — Peak</name>
+        <description><![CDATA[<b>Bear Mountain — Peak</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Peak and upper-mountain camera views.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/bear-mountain">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>bear-mountain-peak</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.854800,34.218800,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Big Bear Mountain Resort — Camera Hub</name>
+        <description><![CDATA[<b>Big Bear Mountain Resort — Camera Hub</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Official hub for Bear Mountain, Snow Summit, and Snow Valley live cameras.<br>
+<a href="https://www.bigbearmountainresort.com/webcams">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-resort-webcams</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.889000,34.236400,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Big Bear Valley Weather Cameras</name>
+        <description><![CDATA[<b>Big Bear Valley Weather Cameras</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: BensWeather<br>
+Collection of Big Bear Valley weather and mountain cameras.<br>
+<a href="https://www.bensweather.com/wxwebcams.php">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-valley-weather-cams</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>BensWeather</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.911400,34.243900,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Summit — Base Area</name>
+        <description><![CDATA[<b>Snow Summit — Base Area</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera from the Snow Summit base area.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-summit">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-summit-base</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.889500,34.236900,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Summit — Miracle Mile</name>
+        <description><![CDATA[<b>Snow Summit — Miracle Mile</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live upper-slope view near Miracle Mile.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-summit">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-summit-miracle-mile</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.885000,34.231500,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Southern California Mountain Webcam Directory</name>
+        <description><![CDATA[<b>Southern California Mountain Webcam Directory</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: MTN WebCams<br>
+Directory of Big Bear, Lake Arrowhead, Running Springs, and nearby mountain webcams.<br>
+<a href="https://mtnwebcams.com/">Camera Page</a><br>
+Notes: Directory link; individual camera entries can be added after manual verification.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>socal-mountain-webcam-directory</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>MTN WebCams</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.911000,34.243000,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Valley — Base Area</name>
+        <description><![CDATA[<b>Snow Valley — Base Area</b><br>
+Category: Mountain<br>
+City: Running Springs<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live Snow Valley base-area conditions.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-valley">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-valley-base</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-117.036400,34.224800,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Valley — Peak</name>
+        <description><![CDATA[<b>Snow Valley — Peak</b><br>
+Category: Mountain<br>
+City: Running Springs<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live upper-mountain and peak conditions.<br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-valley">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-valley-peak</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-117.027500,34.216900,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Tourist Attraction</name>
+      <Placemark>
+        <name>Santa Monica Pier — Park Cam</name>
+        <description><![CDATA[<b>Santa Monica Pier — Park Cam</b><br>
+Category: Tourist Attraction<br>
+City: Santa Monica<br>
+County: Los Angeles<br>
+Operator: Pacific Park<br>
+Sweeping view of Pacific Park, the beach, and pier activity.<br>
+<a href="https://pacpark.com/santa-monica-pier-live-cams/park/">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>santa-monica-pier-park</value></Data>
+          <Data name="category"><value>Tourist Attraction</value></Data>
+          <Data name="operator"><value>Pacific Park</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.497300,34.009400,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Santa Monica Pier — Pier Cam</name>
+        <description><![CDATA[<b>Santa Monica Pier — Pier Cam</b><br>
+Category: Tourist Attraction<br>
+City: Santa Monica<br>
+County: Los Angeles<br>
+Operator: Pacific Park<br>
+Live view along the Santa Monica Pier and coastline.<br>
+<a href="https://pacpark.com/santa-monica-pier-live-cams/pier/">Camera Page</a>]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>santa-monica-pier-pier</value></Data>
+          <Data name="category"><value>Tourist Attraction</value></Data>
+          <Data name="operator"><value>Pacific Park</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-118.499000,34.008900,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Wildlife</name>
+      <Placemark>
+        <name>Big Bear Bald Eagle — Wide View</name>
+        <description><![CDATA[<b>Big Bear Bald Eagle — Wide View</b><br>
+Category: Wildlife<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Friends of Big Bear Valley<br>
+Public wildlife livestream page for the Big Bear bald eagle nest area.<br>
+<a href="https://friendsofbigbearvalley.org/livestream/">Camera Page</a><br>
+Notes: Link to the operator page only; do not restream or copy imagery without permission.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-bald-eagle-wide</value></Data>
+          <Data name="category"><value>Wildlife</value></Data>
+          <Data name="operator"><value>Friends of Big Bear Valley</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-116.944000,34.275000,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
