@@ -366,6 +366,36 @@
         "youtube"
       ],
       "notes": "Use is subject to the operator's published terms."
+    },
+    {
+      "id": "venicebeach",
+      "name": "Venice Beach",
+      "enabled": true,
+      "category": "Beach",
+      "latitude": 33.9886778,
+      "longitude": -118.4774527,
+      "city": "Venice Beach",
+      "county": "Los Angeles",
+      "operator": "Teleport",
+      "description": "We would like to thank the Venice V Hotel in Los Angeles for gifting us this amazing opportunity to broadcast the eagle eye view of the amazing Venice Beach live 24/7. ",
+      "pageUrl": "https://venicehotel.com/",
+      "youtubeUrl": "https://www.youtube.com/watch?v=EO_1LWqsCNE",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 89,
+      "featured": false,
+      "tags": [
+        "bald eagle",
+        "big bear",
+        "fawnskin",
+        "live",
+        "nest",
+        "wildlife",
+        "youtube"
+      ],
+      "notes": "Use is subject to the operator's published terms."
     }
   ]
 }
