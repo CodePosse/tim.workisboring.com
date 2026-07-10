@@ -302,6 +302,7 @@
         <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
         <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
         <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
+        <a href="/atak/openwebcamdb-tourist-network.kml">OpenWebcamDB KML</a>
         <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams Network KML</a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
@@ -344,7 +345,6 @@
         json: "/atak/api/windy.php"
       }
     };
-
     const map = L.map("map").setView([34.35, -117.8], 7);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -379,8 +379,13 @@
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
           ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
-          ${cam.thumbnail ? `<a href="${escapeHtml(cam.thumbnail)}" target="_blank" rel="noopener">Open latest image</a><img src="${escapeHtml(cam.thumbnail)}" alt="${escapeHtml(cam.name)}">` : ""}
-        </div>
+         ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" alt="thumbnail for ${escapeHtml(cam.name)}">
+    <img src="${escapeHtml(cam.thumbnail)}"
+         alt="${escapeHtml(cam.name)}"
+         loading="lazy">
+  </a>
+` : ""}
+${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}</div>
       `;
     }
 
@@ -399,7 +404,13 @@
       const source = SOURCES[layerName];
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
-      const response = await fetch(source.json);
+      const requestUrl = layerName === "windy"
+  ? `${source.json}?t=${Date.now()}`
+  : source.json;
+
+const response = await fetch(requestUrl, {
+  cache: layerName === "windy" ? "no-store" : "default"
+});
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
