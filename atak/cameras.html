@@ -214,6 +214,49 @@
       margin-top: .35rem;
     }
 
+    .popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .65rem;
+    }
+
+    .popup-actions button {
+      margin: 0;
+      border-radius: .5rem;
+      font-size: .82rem;
+      padding: .35rem .6rem;
+    }
+
+    .popup-video {
+      display: none;
+      margin-top: .65rem;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      min-width: 280px;
+    }
+
+    .popup-video.is-visible {
+      display: block;
+    }
+
+    .popup-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: .5rem;
+      background: #000;
+    }
+
+    .popup.expanded {
+      width: min(80vw, 900px);
+      max-width: 900px;
+    }
+
+    .popup.expanded .popup-video {
+      min-width: 0;
+    }
+
     .btn,
     button {
       color: #fff;
@@ -373,7 +416,54 @@
         .replaceAll("'", "&#039;");
     }
 
+    function getYouTubeVideoId(value) {
+      if (!value) return "";
+
+      try {
+        const url = new URL(value, window.location.origin);
+        const host = url.hostname.replace(/^www\./, "");
+
+        if (host === "youtu.be") {
+          return url.pathname.split("/").filter(Boolean)[0] || "";
+        }
+
+        if (host === "youtube.com" || host === "m.youtube.com" || host === "music.youtube.com") {
+          if (url.pathname === "/watch") {
+            return url.searchParams.get("v") || "";
+          }
+
+          const parts = url.pathname.split("/").filter(Boolean);
+          if (["embed", "live", "shorts"].includes(parts[0])) {
+            return parts[1] || "";
+          }
+        }
+      } catch (error) {
+        console.warn("Invalid YouTube URL:", value, error);
+      }
+
+      return "";
+    }
+
     function cameraPopup(cam) {
+      const youtubeUrl = cam.youtubeUrl || cam.youtube || "";
+      const youtubeId =
+        getYouTubeVideoId(youtubeUrl) ||
+        getYouTubeVideoId(cam.streamUrl) ||
+        getYouTubeVideoId(cam.url) ||
+        getYouTubeVideoId(cam.pageUrl);
+
+      const videoControls = youtubeId ? `
+        <div class="popup-actions">
+          <button type="button" class="video-toggle" data-youtube-id="${escapeHtml(youtubeId)}">
+            Show video
+          </button>
+          <button type="button" class="popup-expand-toggle">
+            Expand
+          </button>
+        </div>
+        <div class="popup-video" aria-hidden="true"></div>
+      ` : "";
+
       return `
         <div class="popup">
           <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
@@ -386,13 +476,14 @@
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
           ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
-         ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" alt="thumbnail for ${escapeHtml(cam.name)}">
-    <img src="${escapeHtml(cam.thumbnail)}"
-         alt="${escapeHtml(cam.name)}"
-         loading="lazy">
-  </a>
-` : ""}
-${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}</div>
+          ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(cam.name)} camera page">
+            <img src="${escapeHtml(cam.thumbnail)}"
+                 alt="${escapeHtml(cam.name)}"
+                 loading="lazy">
+          </a>` : ""}
+          ${videoControls}
+          ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}
+        </div>
       `;
     }
 
@@ -409,10 +500,15 @@ ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}</div>
         source: cam.source || cam.operator || SOURCES[cam.layer]?.label || "",
         url: cam.url || cam.pageUrl || cam.streamUrl || "",
         thumbnail: cam.thumbnail || cam.imageUrl || "",
+        youtubeUrl: cam.youtubeUrl || cam.youtube || "",
         category: cam.category || "Camera"
       };
 
-      const marker = L.marker([lat, lon]).bindPopup(cameraPopup(normalizedCamera));
+      const marker = L.marker([lat, lon]).bindPopup(cameraPopup(normalizedCamera), {
+        maxWidth: 920,
+        minWidth: 300,
+        autoPanPadding: [24, 24]
+      });
       marker.addTo(layers[cam.layer]);
       normalizedCamera.marker = marker;
       allCameras.push(normalizedCamera);
@@ -508,6 +604,53 @@ const response = await fetch(requestUrl, {
     });
 
     document.getElementById("search").addEventListener("input", renderList);
+
+    document.addEventListener("click", event => {
+      const videoButton = event.target.closest(".video-toggle");
+
+      if (videoButton) {
+        const popup = videoButton.closest(".popup");
+        const videoContainer = popup?.querySelector(".popup-video");
+        const videoId = videoButton.dataset.youtubeId;
+
+        if (!popup || !videoContainer || !videoId) return;
+
+        const isVisible = videoContainer.classList.toggle("is-visible");
+        videoContainer.setAttribute("aria-hidden", String(!isVisible));
+        videoButton.textContent = isVisible ? "Hide video" : "Show video";
+
+        if (isVisible && !videoContainer.querySelector("iframe")) {
+          const iframe = document.createElement("iframe");
+          iframe.src =
+            `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} live video`;
+          iframe.loading = "lazy";
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allowFullscreen = true;
+          videoContainer.appendChild(iframe);
+        }
+
+        map.invalidateSize();
+        return;
+      }
+
+      const expandButton = event.target.closest(".popup-expand-toggle");
+
+      if (expandButton) {
+        const popup = expandButton.closest(".popup");
+        const leafletContent = expandButton.closest(".leaflet-popup-content");
+
+        if (!popup || !leafletContent) return;
+
+        const expanded = popup.classList.toggle("expanded");
+        expandButton.textContent = expanded ? "Collapse" : "Expand";
+        leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
+
+        map.invalidateSize();
+      }
+    });
 
     const shareLinkBtn = document.getElementById("share-link-btn");
 
