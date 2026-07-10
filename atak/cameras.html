@@ -534,7 +534,16 @@ const response = await fetch(requestUrl, {
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
-      const cameras = payload.cameras || [];
+      let cameras = payload.cameras || [];
+
+      // The curated Southern California layer is YouTube-only.
+      // Do not create markers or popups unless a direct embeddable
+      // YouTube video URL is explicitly present in the JSON entry.
+      if (layerName === "curated-socal") {
+        cameras = cameras.filter(cam =>
+          Boolean(getYouTubeVideoId(cam.youtubeUrl || ""))
+        );
+      }
 
       cameras.forEach(cam => {
         addCamera({ ...cam, layer: layerName });
