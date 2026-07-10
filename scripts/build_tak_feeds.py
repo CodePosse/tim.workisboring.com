@@ -69,26 +69,76 @@ def nested(data: Any, paths: list[tuple[str, ...]], default: Any = "") -> Any:
     return default
 
 
-def request_json(path_or_url: str, params: dict[str, Any] | None = None) -> Any:
+def request_json(
+    path_or_url: str,
+    params: dict[str, Any] | None = None,
+) -> Any:
     if not API_KEY:
-        raise RuntimeError("OPENWEBCAMDB_API_KEY is not set.")
+        raise RuntimeError(
+            "OPENWEBCAMDB_API_KEY is not exported. "
+            "Run: source /etc/socal-tak.env"
+        )
 
-    url = (
-        path_or_url
-        if path_or_url.startswith(("http://", "https://"))
-        else urljoin(API_BASE, path_or_url.lstrip("/"))
-    )
+    if path_or_url.startswith(("https://", "http://")):
+        url = path_or_url
+    else:
+        url = urljoin(API_BASE, path_or_url.lstrip("/"))
 
-    response = SESSION.get(
-        url,
-        params=params,
-        headers={"Authorization": f"Bearer {API_KEY}"},
-        timeout=30,
-    )
+    max_attempts = 5
 
-    response.raise_for_status()
-    return response.json()
+    for attempt in range(1, max_attempts + 1):
+        response = SESSION.get(
+            url,
+            params=params,
+            headers={"Authorization": f"Bearer {API_KEY}"},
+            timeout=REQUEST_TIMEOUT,
+        )
 
+        log(f"GET {response.url} -> HTTP {response.status_code}")
+
+        if response.status_code == 429:
+            try:
+                payload = response.json()
+            except ValueError:
+                payload = {}
+
+            retry_after = payload.get("retry_after")
+
+            if retry_after is None:
+                retry_after = response.headers.get("Retry-After", 60)
+
+            try:
+                retry_after = int(retry_after)
+            except (TypeError, ValueError):
+                retry_after = 60
+
+            retry_after = max(retry_after, 5)
+
+            if attempt >= max_attempts:
+                raise RuntimeError(
+                    f"OpenWebcamDB rate limit persisted after "
+                    f"{max_attempts} attempts."
+                )
+
+            log(
+                f"Rate limited. Waiting {retry_after + 2} seconds "
+                f"before retry {attempt + 1}/{max_attempts}."
+            )
+
+            time.sleep(retry_after + 2)
+            continue
+
+        response.raise_for_status()
+
+        try:
+            return response.json()
+        except ValueError as exc:
+            preview = response.text[:500]
+            raise RuntimeError(
+                f"OpenWebcamDB returned invalid JSON: {preview}"
+            ) from exc
+
+    raise RuntimeError("OpenWebcamDB request failed unexpectedly.")
 
 def extract_items(payload: Any) -> list[dict[str, Any]]:
     if isinstance(payload, list):
