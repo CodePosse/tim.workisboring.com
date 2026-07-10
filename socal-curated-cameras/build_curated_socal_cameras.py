@@ -129,14 +129,28 @@ def normalize_camera(raw: Any, index: int) -> dict[str, Any]:
         "pageUrl": clean_url(raw.get("pageUrl")),
         "imageUrl": clean_url(raw.get("imageUrl")),
         "streamUrl": clean_url(raw.get("streamUrl")),
+        "youtubeUrl": clean_url(raw.get("youtubeUrl")),
+        "channelUrl": clean_url(raw.get("channelUrl")),
+        "sourceType": clean_text(raw.get("sourceType")) or "webcam",
+        "priority": int(raw.get("priority", 50)),
+        "featured": bool(raw.get("featured", False)),
+        "tags": [
+            clean_text(tag)
+            for tag in raw.get("tags", [])
+            if clean_text(tag)
+        ] if isinstance(raw.get("tags", []), list) else [],
         "notes": clean_text(raw.get("notes")),
     }
 
     if not any(
-        camera[field] for field in ("pageUrl", "imageUrl", "streamUrl")
+        camera[field]
+        for field in (
+            "pageUrl", "imageUrl", "streamUrl",
+            "youtubeUrl", "channelUrl"
+        )
     ):
         raise CatalogError(
-            f'Camera "{camera_id}" must have pageUrl, imageUrl, or streamUrl.'
+            f'Camera "{camera_id}" must have at least one page, image, stream, YouTube, or channel URL.'
         )
 
     return camera
@@ -159,6 +173,8 @@ def normalize_catalog(catalog: dict[str, Any]) -> list[dict[str, Any]]:
 
     normalized.sort(
         key=lambda camera: (
+            not camera["featured"],
+            -camera["priority"],
             camera["category"].casefold(),
             camera["county"].casefold(),
             camera["city"].casefold(),
@@ -200,9 +216,15 @@ def description_html(camera: dict[str, Any]) -> str:
         link("Camera Page", camera["pageUrl"]),
         link("Latest Image", camera["imageUrl"]),
         link("Open Stream", camera["streamUrl"]),
+        link("Watch YouTube Video", camera["youtubeUrl"]),
+        link("Open YouTube Streams", camera["channelUrl"]),
     ]
     lines.extend(item for item in links if item)
 
+    if camera["sourceType"]:
+        lines.append(f"Type: {html.escape(camera['sourceType'])}")
+    if camera["tags"]:
+        lines.append(f"Tags: {html.escape(', '.join(camera['tags']))}")
     if camera["notes"]:
         lines.append(f"Notes: {html.escape(camera['notes'])}")
 
@@ -351,6 +373,8 @@ def validate_urls(cameras: list[dict[str, Any]]) -> bool:
             ("page", camera["pageUrl"]),
             ("image", camera["imageUrl"]),
             ("stream", camera["streamUrl"]),
+            ("youtube", camera["youtubeUrl"]),
+            ("channel", camera["channelUrl"]),
         ]
 
         for url_type, url in urls:
