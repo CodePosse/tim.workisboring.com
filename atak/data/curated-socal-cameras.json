@@ -396,6 +396,66 @@
         "youtube"
       ],
       "notes": "Use is subject to the operator's published terms."
+    },
+    {
+      "id": "hermosastrand",
+      "name": "Hermosa Beach Strand",
+      "enabled": true,
+      "category": "Beach",
+      "latitude": 33.8626011,
+      "longitude": -118.4043335,
+      "city": "Hermosa Beach",
+      "county": "Los Angeles",
+      "operator": "Teleport",
+      "description": "Welcome to the Good Stuff Hermosa Beach Strand Cam! We stream 24 hours a day, 7 days a week. See the beautiful, and world-famous Strand, take in the sun, or people watch!",
+      "pageUrl": "https://hermosabeach.com/",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Jwna-J3L0NM",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 89,
+      "featured": false,
+      "tags": [
+        "bald eagle",
+        "big bear",
+        "fawnskin",
+        "live",
+        "nest",
+        "wildlife",
+        "youtube"
+      ],
+      "notes": "Use is subject to the operator's published terms."
+    },
+        {
+      "id": "oceanside",
+      "name": "Oceanside Pier",
+      "enabled": true,
+      "category": "Beach",
+      "latitude": 33.1945699,
+      "longitude": -117.3853611,
+      "city": "Oceanside",
+      "county": "San Diego",
+      "operator": "San Diego Webcam",
+      "description": "Perched high atop The Rooftop Bar on the sixth floor of the Mission Pacific Beach Resort in Oceanside, California—right at the base of the historic Oceanside Pier—this west-facing webcam delivers breathtaking panoramic views of the Pacific Ocean. ",
+      "pageUrl": "https://www.rooftopbaroceanside.com/cocktails-bites/",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cvP_F-c2Upw",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 89,
+      "featured": false,
+      "tags": [
+        "bald eagle",
+        "big bear",
+        "fawnskin",
+        "live",
+        "nest",
+        "wildlife",
+        "youtube"
+      ],
+      "notes": "Use is subject to the operator's published terms."
     }
   ]
 }
