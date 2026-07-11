@@ -248,6 +248,36 @@
       background: #000;
     }
 
+    .popup-image {
+      margin-top: .65rem;
+      width: 100%;
+    }
+
+    .popup-image button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: .5rem;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .popup-image img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: .5rem;
+      display: block;
+      margin: 0;
+      background: #000;
+    }
+
+    .popup.expanded .popup-image img {
+      max-width: none;
+    }
+
     .popup.expanded {
       width: min(80vw, 900px);
       max-width: 900px;
@@ -325,8 +355,8 @@
         <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy
           Webcams
           can timeout after 5 minutes</div>
-        <div class="mygroup"><input type="checkbox" data-layer="curated-socal" aria-label="Curated Live cameras"> 🏖️
-          Curated LIVE cameras
+        <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
+            aria-label="Curated Southern California cameras"> 🏖️ Curated SoCal Beaches, Mountains &amp; Attractions
         </div>
       </div>
 
@@ -341,14 +371,13 @@
         </ol>
       </section>
 
-      <div class="links"><span>KML files for ATAK, Google Earth, etc</span>
-
+      <div class="links">
         <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
         <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
         <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
         <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
-        <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams KML</a>
-        <a href="/atak/curated-socal-network.kml">ATAK: Curated Live Cameras KML</a>
+        <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams Network KML</a>
+        <a href="/atak/curated-socal-network.kml">ATAK: Curated SoCal Cameras Network KML</a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -449,17 +478,57 @@
       const youtubeUrl = cam.youtubeUrl || "";
       const channelUrl = cam.channelUrl || "";
       const youtubeId = getYouTubeVideoId(youtubeUrl);
+      const largeImageUrl =
+        cam.originalImageUrl ||
+        cam.fullImageUrl ||
+        cam.largeImageUrl ||
+        cam.imageUrl ||
+        cam.thumbnail ||
+        "";
 
-      const videoControls = youtubeId ? `
-        <div class="popup-actions">
+      const mediaControls = [];
+
+      if (youtubeId) {
+        mediaControls.push(`
           <button type="button" class="video-toggle" data-youtube-id="${escapeHtml(youtubeId)}">
             Show video
           </button>
+        `);
+      }
+
+      const thumbnailUrl =
+        cam.thumbnail ||
+        cam.imageUrl ||
+        largeImageUrl ||
+        "";
+
+      if (youtubeId || largeImageUrl) {
+        mediaControls.push(`
           <button type="button" class="popup-expand-toggle">
             Expand
           </button>
+        `);
+      }
+
+      const imageSection = !youtubeId && thumbnailUrl ? `
+        <div class="popup-image">
+          <button type="button"
+                  class="image-expand-toggle"
+                  data-thumbnail-url="${escapeHtml(thumbnailUrl)}"
+                  data-large-image-url="${escapeHtml(largeImageUrl || thumbnailUrl)}"
+                  aria-label="Expand ${escapeHtml(cam.name)} image">
+            <img src="${escapeHtml(thumbnailUrl)}"
+                 alt="${escapeHtml(cam.name)} current view"
+                 loading="lazy"
+                 decoding="async">
+          </button>
         </div>
-        <div class="popup-video" aria-hidden="true"></div>
+      ` : "";
+
+      const mediaSection = mediaControls.length || imageSection ? `
+        ${mediaControls.length ? `<div class="popup-actions">${mediaControls.join("")}</div>` : ""}
+        ${youtubeId ? '<div class="popup-video" aria-hidden="true"></div>' : ""}
+        ${imageSection}
       ` : "";
 
       return `
@@ -476,12 +545,7 @@
           ${channelUrl ? `<a href="${escapeHtml(channelUrl)}" target="_blank" rel="noopener">Open YouTube streams</a><br>` : ""}
           ${cam.tags?.length ? `Tags: ${escapeHtml(cam.tags.join(", "))}<br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
-          ${cam.thumbnail ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(cam.name)} camera page">
-            <img src="${escapeHtml(cam.thumbnail)}"
-                 alt="${escapeHtml(cam.name)}"
-                 loading="lazy">
-          </a>` : ""}
-          ${videoControls}
+          ${mediaSection}
           ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}
         </div>
       `;
@@ -500,6 +564,10 @@
         source: cam.source || cam.operator || SOURCES[cam.layer]?.label || "",
         url: cam.url || cam.pageUrl || cam.streamUrl || "",
         thumbnail: cam.thumbnail || cam.imageUrl || "",
+        imageUrl: cam.imageUrl || "",
+        largeImageUrl: cam.largeImageUrl || cam.previewUrl || "",
+        fullImageUrl: cam.fullImageUrl || "",
+        originalImageUrl: cam.originalImageUrl || "",
         youtubeUrl: cam.youtubeUrl || cam.youtube || "",
         channelUrl: cam.channelUrl || "",
         sourceType: cam.sourceType || "webcam",
@@ -526,25 +594,16 @@
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
       const requestUrl = layerName === "windy"
-        ? `${source.json}?t=${Date.now()}`
-        : source.json;
+  ? `${source.json}?t=${Date.now()}`
+  : source.json;
 
-      const response = await fetch(requestUrl, {
-        cache: layerName === "windy" ? "no-store" : "default"
-      });
+const response = await fetch(requestUrl, {
+  cache: layerName === "windy" ? "no-store" : "default"
+});
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
-      let cameras = payload.cameras || [];
-
-      // The curated Southern California layer is YouTube-only.
-      // Do not create markers or popups unless a direct embeddable
-      // YouTube video URL is explicitly present in the JSON entry.
-      if (layerName === "curated-socal") {
-        cameras = cameras.filter(cam =>
-          Boolean(getYouTubeVideoId(cam.youtubeUrl || ""))
-        );
-      }
+      const cameras = payload.cameras || [];
 
       cameras.forEach(cam => {
         addCamera({ ...cam, layer: layerName });
@@ -658,6 +717,34 @@
         return;
       }
 
+      const imageButton = event.target.closest(".image-expand-toggle");
+
+      if (imageButton) {
+        const popup = imageButton.closest(".popup");
+        const leafletContent = imageButton.closest(".leaflet-popup-content");
+        const image = imageButton.querySelector("img");
+        const thumbnailUrl = imageButton.dataset.thumbnailUrl;
+        const largeImageUrl = imageButton.dataset.largeImageUrl || thumbnailUrl;
+
+        if (!popup || !leafletContent || !image || !largeImageUrl) return;
+
+        const expanded = popup.classList.toggle("expanded");
+        leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
+        image.src = expanded ? largeImageUrl : thumbnailUrl;
+        imageButton.setAttribute(
+          "aria-label",
+          expanded ? "Collapse camera image" : "Expand camera image"
+        );
+
+        const expandButton = popup.querySelector(".popup-expand-toggle");
+        if (expandButton) {
+          expandButton.textContent = expanded ? "Collapse" : "Expand";
+        }
+
+        map.invalidateSize();
+        return;
+      }
+
       const expandButton = event.target.closest(".popup-expand-toggle");
 
       if (expandButton) {
@@ -669,6 +756,19 @@
         const expanded = popup.classList.toggle("expanded");
         expandButton.textContent = expanded ? "Collapse" : "Expand";
         leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
+
+        const imageButton = popup.querySelector(".image-expand-toggle");
+        const image = imageButton?.querySelector("img");
+
+        if (imageButton && image) {
+          const thumbnailUrl = imageButton.dataset.thumbnailUrl;
+          const largeImageUrl = imageButton.dataset.largeImageUrl || thumbnailUrl;
+          image.src = expanded ? largeImageUrl : thumbnailUrl;
+          imageButton.setAttribute(
+            "aria-label",
+            expanded ? "Collapse camera image" : "Expand camera image"
+          );
+        }
 
         map.invalidateSize();
       }
