@@ -6,19 +6,16 @@
   <title>SoCal TAK/GIS Cameras | Public Camera Maps</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
-
+    content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIV camera feeds.">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
-
   <link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
-
   <meta property="og:type" content="website">
   <meta property="og:title" content="SoCal TAK/GIS Cameras">
   <meta property="og:description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
+    content="CCamera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIV camera feeds.">
   <meta property="og:logo" content="https://tim.workisboring.com/atak/img/social-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -32,11 +29,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SoCal TAK/GIS Cameras">
   <meta name="twitter:description"
-    content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
+    content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIV camera feeds.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
   <style>
     :root {
       --bg: #0f172a;
@@ -62,24 +57,26 @@
       color: var(--text);
       scrollbar-gutter: stable;
     }
-::selection {
-  color: white;
-  background-color: rgba(26, 168, 40, 0.337);}
+
+    ::selection {
+      color: white;
+      background-color: rgba(26, 168, 40, 0.337);
+    }
+
     #app {
       display: grid;
       grid-template-columns: 380px 1fr;
       height: 100%;
     }
 
-    aside {  background-attachment: fixed;
-       background:
-    radial-gradient(circle at top right, #f5329d51, transparent 28%),
-    radial-gradient(
-      circle at left 20%,
-      rgba(133, 168, 26, 0.337),
-      transparent 25%
-    ),
-    linear-gradient(180deg, var(--bg) 0%, hwb(221 10% 64%) 100%);
+    aside {
+      background-attachment: fixed;
+      background:
+        radial-gradient(circle at top right, #f5329d51, transparent 28%),
+        radial-gradient(circle at left 20%,
+          rgba(133, 168, 26, 0.337),
+          transparent 25%),
+        linear-gradient(180deg, var(--bg) 0%, hwb(221 10% 64%) 100%);
       border-right: 1px solid var(--border);
       overflow-y: auto;
       padding: 1rem;
@@ -156,7 +153,8 @@
       margin-bottom: 1rem;
     }
 
-    a, .links a,
+    a,
+    .links a,
     .powered a {
       color: var(--link);
       text-decoration: none;
@@ -205,7 +203,12 @@
       font-size: .72rem;
       margin-bottom: .4rem;
     }
-#atak-help-title{margin:0px;padding:0px 5px}
+
+    #atak-help-title {
+      margin: 0px;
+      padding: 0px 5px
+    }
+
     .popup {
       max-width: 340px;
     }
@@ -344,9 +347,12 @@
   <div id="app">
     <aside>
       <h1>📷 SoCal TAK/GIS Cameras</h1>
-      <div class="subtitle">Public camera layers for <a href="https://tak.gov/" target="_blank" rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank" rel="noopener noreferrer">Google Earth</a><br>
-      <button type="button" id="share-link-btn">Share 🔗</button>
-</div>  
+      <div class="subtitle">Public camera layers for <a href="https://tak.gov/" target="_blank"
+          rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be
+        used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank"
+          rel="noopener noreferrer">Google Earth</a><br>
+        <button type="button" id="share-link-btn">Share 🔗</button>
+      </div>
       <div class="status" id="status">Select a camera layer to load.</div>
 
       <input id="search" type="search" placeholder="Search name, county, source…"
@@ -361,7 +367,7 @@
           Traffic</div>
         <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
-        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy   Webcams</div>
+        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
         <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
             aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
@@ -601,12 +607,12 @@
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
       const requestUrl = layerName === "windy"
-  ? `${source.json}?t=${Date.now()}`
-  : source.json;
+        ? `${source.json}?t=${Date.now()}`
+        : source.json;
 
-const response = await fetch(requestUrl, {
-  cache: layerName === "windy" ? "no-store" : "default"
-});
+      const response = await fetch(requestUrl, {
+        cache: layerName === "windy" ? "no-store" : "default"
+      });
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
