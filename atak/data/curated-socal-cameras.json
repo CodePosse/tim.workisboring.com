@@ -386,15 +386,7 @@
       "sourceType": "youtube",
       "priority": 89,
       "featured": false,
-      "tags": [
-        "bald eagle",
-        "big bear",
-        "fawnskin",
-        "live",
-        "nest",
-        "wildlife",
-        "youtube"
-      ],
+      "tags": ["beach", "tourists"],
       "notes": "Use is subject to the operator's published terms."
     },
     {
@@ -416,18 +408,10 @@
       "sourceType": "youtube",
       "priority": 89,
       "featured": false,
-      "tags": [
-        "bald eagle",
-        "big bear",
-        "fawnskin",
-        "live",
-        "nest",
-        "wildlife",
-        "youtube"
-      ],
+      "tags": ["beach"],
       "notes": "Use is subject to the operator's published terms."
     },
-        {
+    {
       "id": "oceanside",
       "name": "Oceanside Pier",
       "enabled": true,
@@ -439,22 +423,58 @@
       "operator": "San Diego Webcam",
       "description": "Perched high atop The Rooftop Bar on the sixth floor of the Mission Pacific Beach Resort in Oceanside, California—right at the base of the historic Oceanside Pier—this west-facing webcam delivers breathtaking panoramic views of the Pacific Ocean. ",
       "pageUrl": "https://www.rooftopbaroceanside.com/cocktails-bites/",
-      "youtubeUrl": "https://www.youtube.com/watch?v=cvP_F-c2Upw",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OYqo4dqYjh0",
       "channelUrl": "",
       "imageUrl": "",
       "streamUrl": "",
       "sourceType": "youtube",
       "priority": 89,
       "featured": false,
-      "tags": [
-        "bald eagle",
-        "big bear",
-        "fawnskin",
-        "live",
-        "nest",
-        "wildlife",
-        "youtube"
-      ],
+      "tags": ["beach"],
+      "notes": "Use is subject to the operator's published terms."
+    },
+    {
+      "id": "hollywood",
+      "name": "Hollywood Boulevard",
+      "enabled": true,
+      "category": "Tourist",
+      "latitude": 34.1014071,
+      "longitude": -118.3425371,
+      "city": "Hollywood",
+      "county": "Los Angeles",
+      "operator": "LA Times",
+      "description": "The camera is located on the 3rd floor of the El Capitan Theater, facing the Dolby Theatre and TCL Chinese Theatre on the Hollywood Walk of Fame.",
+      "pageUrl": "https://www.latimes.com/",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OYqo4dqYjh0",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 89,
+      "featured": false,
+      "tags": ["hollywood", "fame"],
+      "notes": "Use is subject to the operator's published terms."
+    },
+    {
+      "id": "lasvegas",
+      "name": "Las Vegas Strip",
+      "enabled": true,
+      "category": "Tourist",
+      "latitude": 36.1294437,
+      "longitude": -115.1667917,
+      "city": "Las Vegas",
+      "county": "Clark",
+      "operator": "LV Strip Cam",
+      "description": "Encore Hotel Las Vegas Strip Live feed.",
+      "pageUrl": "https://www.wynnlasvegas.com/rooms-and-suites/encore-rooms/encore-deluxe-resort",
+      "youtubeUrl": "https://www.youtube.com/watch?v=nylxuqRtOPk",
+      "channelUrl": "https://www.youtube.com/@LVsphere",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 89,
+      "featured": false,
+      "tags": ["las vegas", "sphere", "strip"],
       "notes": "Use is subject to the operator's published terms."
     }
   ]
