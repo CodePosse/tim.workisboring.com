@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>DeFlock ALPR Camera Map</name>
+
+    <NetworkLink>
+      <name>DeFlock United States ALPR Cameras</name>
+      <refreshVisibility>1</refreshVisibility>
+      <flyToView>0</flyToView>
+
+      <Link>
+        <href>http://training.gotak.cloud:3000/deflock_us_conus.kml</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>86400</refreshInterval>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
