@@ -325,8 +325,8 @@
         <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy
           Webcams
           can timeout after 5 minutes</div>
-        <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
-            aria-label="Curated Live cameras"> 🏖️ Curated LIVE cameras
+        <div class="mygroup"><input type="checkbox" data-layer="curated-socal" aria-label="Curated Live cameras"> 🏖️
+          Curated LIVE cameras
         </div>
       </div>
 
@@ -526,12 +526,12 @@
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
       const requestUrl = layerName === "windy"
-  ? `${source.json}?t=${Date.now()}`
-  : source.json;
+        ? `${source.json}?t=${Date.now()}`
+        : source.json;
 
-const response = await fetch(requestUrl, {
-  cache: layerName === "windy" ? "no-store" : "default"
-});
+      const response = await fetch(requestUrl, {
+        cache: layerName === "windy" ? "no-store" : "default"
+      });
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
