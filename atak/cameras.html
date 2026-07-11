@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
+  <title>SoCal TAK/GIS Cameras | Public Camera Map for ATAK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
     content="Camera dashboard for ATAK training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated Southern California beach, mountain, and tourist camera layers.">
@@ -333,7 +333,7 @@
 <body>
   <div id="app">
     <aside>
-      <h1>📷 SoCal TAK Cameras</h1>
+      <h1>📷 SoCal TAK/GIS Cameras</h1>
       <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
 
       <button class="btn" type="button" id="share-link-btn">Share Link 🔗</button>
@@ -780,7 +780,7 @@ const response = await fetch(requestUrl, {
       shareLinkBtn.addEventListener("click", async () => {
         const shareData = {
           title: document.title,
-          text: "SoCal TAK Cameras",
+          text: "SoCal TAK/GIS Cameras",
           url: document.location.href
         };
 
