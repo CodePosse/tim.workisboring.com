@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Cal OES Weather Cameras</name><Style id="camera-style"><IconStyle><scale>1.1</scale><Icon><href>https://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style><Folder><name>Cal OES Weather Cameras</name></Folder></Document></kml>

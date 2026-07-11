@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>FAA Weather Cameras Auto Refresh</name>
+    <NetworkLink>
+      <name>FAA Weather Cameras</name>
+      <refreshVisibility>1</refreshVisibility>
+      <Link>
+        <href>https://tim.workisboring.com/atak/data/kml/faa-weathercams.kml</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>900</refreshInterval>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>

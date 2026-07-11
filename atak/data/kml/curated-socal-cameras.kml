@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Southern California Embeddable YouTube Cameras</name>
+    <description>Generated 2026-07-11T00:58:27.180177+00:00; 27 enabled embeddable YouTube cameras</description>
+    <Style id="youtube-camera">
+      <IconStyle><scale>1.0</scale><Icon><href>https://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle>
+      <LabelStyle><scale>0.8</scale></LabelStyle>
+    </Style>
+    <Folder>
+      <name>Airport</name>
+      <Placemark>
+        <name>LAX Airport</name>
+        <description><![CDATA[<b>LAX Airport</b><br>
+Category: Airport<br>
+City: Los Angeles<br>
+County: Los Angeles<br>
+State: California<br>
+Operator: LAX Live Camera<br>
+Live aviation view near Los Angeles International Airport.<br>
+<a href="https://www.youtube.com/watch?v=n4I0d44oBEs">Watch YouTube Live Feed</a><br>
+Tags: airport, airplanes, aviation, lax, los angeles, live, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>lax-airport-live</value></Data>
+          <Data name="category"><value>Airport</value></Data>
+          <Data name="operator"><value>LAX Live Camera</value></Data>
+          <Data name="youtubeVideoId"><value>n4I0d44oBEs</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=n4I0d44oBEs</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-118.4099335,33.9432263,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Aquarium</name>
+      <Placemark>
+        <name>Monterey Bay Aquarium</name>
+        <description><![CDATA[<b>Monterey Bay Aquarium</b><br>
+Category: Aquarium<br>
+City: Monterey<br>
+County: Monterey<br>
+Operator: Monterey Bay Aquarium<br>
+Live view from the Monterey Bay Aquarium.<br>
+<a href="https://www.youtube.com/watch?v=fVa6-zCBR7A">Watch YouTube Live Feed</a><br>
+<a href="https://www.montereybayaquarium.org/">Open Camera or Operator Page</a><br>
+Tags: aquarium, bay, marine, monterey, ocean, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>monterey-bay-aquarium-live</value></Data>
+          <Data name="category"><value>Aquarium</value></Data>
+          <Data name="operator"><value>Monterey Bay Aquarium</value></Data>
+          <Data name="youtubeVideoId"><value>fVa6-zCBR7A</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=fVa6-zCBR7A</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-121.9045291,36.6182622,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Beach</name>
+      <Placemark>
+        <name>Huntington Beach Pier — Live</name>
+        <description><![CDATA[<b>Huntington Beach Pier — Live</b><br>
+Category: Beach<br>
+City: Huntington Beach<br>
+County: Orange<br>
+Operator: City of Huntington Beach<br>
+Official live view from Huntington Beach Pier.<br>
+<a href="https://www.youtube.com/watch?v=mhQjsLBfOoY">Watch YouTube Live Feed</a><br>
+<a href="https://www.youtube.com/@cityofhb/streams">Open YouTube Channel</a><br>
+Tags: beach, huntington beach, live, orange county, pier, surf, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>huntington-beach-pier-live</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>City of Huntington Beach</value></Data>
+          <Data name="youtubeVideoId"><value>mhQjsLBfOoY</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=mhQjsLBfOoY</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-118.0038000,33.6553000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Hermosa Beach Strand</name>
+        <description><![CDATA[<b>Hermosa Beach Strand</b><br>
+Category: Beach<br>
+City: Hermosa Beach<br>
+County: Los Angeles<br>
+Operator: Teleport<br>
+Welcome to the Good Stuff Hermosa Beach Strand Cam! We stream 24 hours a day, 7 days a week. See the beautiful, and world-famous Strand, take in the sun, or people watch!<br>
+<a href="https://www.youtube.com/watch?v=Jwna-J3L0NM">Watch YouTube Live Feed</a><br>
+<a href="https://hermosabeach.com/">Open Camera or Operator Page</a><br>
+Tags: beach]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>hermosastrand</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>Teleport</value></Data>
+          <Data name="youtubeVideoId"><value>Jwna-J3L0NM</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=Jwna-J3L0NM</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-118.4043335,33.8626011,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Oceanside Pier</name>
+        <description><![CDATA[<b>Oceanside Pier</b><br>
+Category: Beach<br>
+City: Oceanside<br>
+County: San Diego<br>
+Operator: San Diego Webcam<br>
+Perched high atop The Rooftop Bar on the sixth floor of the Mission Pacific Beach Resort in Oceanside, California—right at the base of the historic Oceanside Pier—this west-facing webcam delivers breathtaking panoramic views of the Pacific Ocean. <br>
+<a href="https://www.youtube.com/watch?v=OYqo4dqYjh0">Watch YouTube Live Feed</a><br>
+<a href="https://www.rooftopbaroceanside.com/cocktails-bites/">Open Camera or Operator Page</a><br>
+Tags: beach]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>oceanside</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>San Diego Webcam</value></Data>
+          <Data name="youtubeVideoId"><value>OYqo4dqYjh0</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=OYqo4dqYjh0</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-117.3853611,33.1945699,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Venice Beach</name>
+        <description><![CDATA[<b>Venice Beach</b><br>
+Category: Beach<br>
+City: Venice Beach<br>
+County: Los Angeles<br>
+Operator: Teleport<br>
+We would like to thank the Venice V Hotel in Los Angeles for gifting us this amazing opportunity to broadcast the eagle eye view of the amazing Venice Beach live 24/7. <br>
+<a href="https://www.youtube.com/watch?v=EO_1LWqsCNE">Watch YouTube Live Feed</a><br>
+<a href="https://venicehotel.com/">Open Camera or Operator Page</a><br>
+Tags: beach, tourists]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>venicebeach</value></Data>
+          <Data name="category"><value>Beach</value></Data>
+          <Data name="operator"><value>Teleport</value></Data>
+          <Data name="youtubeVideoId"><value>EO_1LWqsCNE</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=EO_1LWqsCNE</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-118.4774527,33.9886778,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>City</name>
+      <Placemark>
+        <name>Morgan Hill</name>
+        <description><![CDATA[<b>Morgan Hill</b><br>
+Category: City<br>
+City: Morgan Hill<br>
+County: Santa Clara<br>
+Operator: Morgan Hill Live Camera<br>
+Live city view from Morgan Hill.<br>
+<a href="https://www.youtube.com/watch?v=Ul6wlBwXz9Y">Watch YouTube Live Feed</a><br>
+Tags: city, morgan hill, santa clara, traffic, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>morgan-hill-live</value></Data>
+          <Data name="category"><value>City</value></Data>
+          <Data name="operator"><value>Morgan Hill Live Camera</value></Data>
+          <Data name="youtubeVideoId"><value>Ul6wlBwXz9Y</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=Ul6wlBwXz9Y</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-121.7230515,37.1292364,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Coast</name>
+      <Placemark>
+        <name>Mori Point</name>
+        <description><![CDATA[<b>Mori Point</b><br>
+Category: Coast<br>
+City: Pacifica<br>
+County: San Mateo<br>
+Operator: Golden Gate National Parks Conservancy<br>
+Live coastal view from Mori Point.<br>
+<a href="https://www.youtube.com/watch?v=UYu-TjvAVFs">Watch YouTube Live Feed</a><br>
+<a href="https://www.parksconservancy.org/parks/mori-point">Open Camera or Operator Page</a><br>
+Tags: coast, pacifica, ocean, cliffs, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>mori-point-live</value></Data>
+          <Data name="category"><value>Coast</value></Data>
+          <Data name="operator"><value>Golden Gate National Parks Conservancy</value></Data>
+          <Data name="youtubeVideoId"><value>UYu-TjvAVFs</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=UYu-TjvAVFs</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-122.5033082,37.6200207,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Harbor</name>
+      <Placemark>
+        <name>Harbor Island</name>
+        <description><![CDATA[<b>Harbor Island</b><br>
+Category: Harbor<br>
+City: San Diego<br>
+County: San Diego<br>
+Operator: Port of San Diego<br>
+Live harbor view from Harbor Island.<br>
+<a href="https://www.youtube.com/watch?v=iaBfYxbmwXA">Watch YouTube Live Feed</a><br>
+<a href="https://www.portofsandiego.org/">Open Camera or Operator Page</a><br>
+Tags: boats, harbor, port, san diego, waterfront, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>harbor-island-san-diego-live</value></Data>
+          <Data name="category"><value>Harbor</value></Data>
+          <Data name="operator"><value>Port of San Diego</value></Data>
+          <Data name="youtubeVideoId"><value>iaBfYxbmwXA</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=iaBfYxbmwXA</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-117.2115738,32.7253370,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Mersea Restaurant</name>
+        <description><![CDATA[<b>Mersea Restaurant</b><br>
+Category: Harbor<br>
+City: San Francisco<br>
+County: San Francisco<br>
+Operator: Mersea Restaurant<br>
+Live waterfront view from Treasure Island.<br>
+<a href="https://www.youtube.com/watch?v=BSWhGNXxT9A">Watch YouTube Live Feed</a><br>
+<a href="https://mersea.restaurant/">Open Camera or Operator Page</a><br>
+Tags: bay, harbor, restaurant, san francisco, treasure island, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>mersea-san-francisco-live</value></Data>
+          <Data name="category"><value>Harbor</value></Data>
+          <Data name="operator"><value>Mersea Restaurant</value></Data>
+          <Data name="youtubeVideoId"><value>BSWhGNXxT9A</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=BSWhGNXxT9A</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-122.3781705,37.8225055,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Mountain</name>
+      <Placemark>
+        <name>Goldmine Mountain — Live</name>
+        <description><![CDATA[<b>Goldmine Mountain — Live</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: SoCalMountains<br>
+Live camera from Goldmine Mountain above Bear Mountain.<br>
+<a href="https://www.youtube.com/watch?v=IRT4RgQPwmY">Watch YouTube Live Feed</a><br>
+<a href="https://www.bensweather.com/wxwebcams.php">Open Camera or Operator Page</a><br>
+Tags: bear mountain, bensweather, big bear, goldmine mountain, live, mountain, snow, weather, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>goldmine-mountain-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>SoCalMountains</value></Data>
+          <Data name="youtubeVideoId"><value>IRT4RgQPwmY</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=IRT4RgQPwmY</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8579000,34.2208000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>San Gorgonio Wilderness — Live</name>
+        <description><![CDATA[<b>San Gorgonio Wilderness — Live</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: BensWeather<br>
+Live view of the San Gorgonio Wilderness and San Bernardino Mountains.<br>
+<a href="https://www.youtube.com/watch?v=VXMe-WsgZFs">Watch YouTube Live Feed</a><br>
+<a href="https://www.bensweather.com/wxwebcams.php">Open Camera or Operator Page</a><br>
+Tags: bensweather, live, mountain, san bernardino mountains, san gorgonio, weather, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>san-gorgonio-wilderness-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>BensWeather</value></Data>
+          <Data name="youtubeVideoId"><value>VXMe-WsgZFs</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=VXMe-WsgZFs</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8249000,34.0992000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Bear Mountain — Base Cam</name>
+        <description><![CDATA[<b>Bear Mountain — Base Cam</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera overlooking the Bear Mountain base area.<br>
+<a href="https://www.youtube.com/watch?v=f_OUEF4csuo">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/bear-mountain">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: bear mountain, base, big bear, live, resort, ski, snow, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>bear-mountain-base-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>f_OUEF4csuo</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=f_OUEF4csuo</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8613000,34.2287000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Bear Mountain — Westridge Cam</name>
+        <description><![CDATA[<b>Bear Mountain — Westridge Cam</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live Westridge terrain camera at Bear Mountain.<br>
+<a href="https://www.youtube.com/watch?v=s7NTCLxH5c0">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/bear-mountain">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: bear mountain, big bear, live, ski, snow, westridge, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>bear-mountain-westridge-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>s7NTCLxH5c0</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=s7NTCLxH5c0</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8558000,34.2228000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Summit — Miracle Mile Cam</name>
+        <description><![CDATA[<b>Snow Summit — Miracle Mile Cam</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera overlooking Miracle Mile at Snow Summit.<br>
+<a href="https://www.youtube.com/watch?v=1sa8cuSm7dk">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-summit">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: big bear, live, miracle mile, ski, snow, snow summit, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-summit-miracle-mile-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>1sa8cuSm7dk</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=1sa8cuSm7dk</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8873000,34.2302000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Summit — Slopeside Cam</name>
+        <description><![CDATA[<b>Snow Summit — Slopeside Cam</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live slopeside camera at Snow Summit.<br>
+<a href="https://www.youtube.com/watch?v=SOo3NBmvJQI">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-summit">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: big bear, live, ski, slopeside, snow, snow summit, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-summit-slopeside-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>SOo3NBmvJQI</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=SOo3NBmvJQI</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8890000,34.2360000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Valley — Slide Peak Cam</name>
+        <description><![CDATA[<b>Snow Valley — Slide Peak Cam</b><br>
+Category: Mountain<br>
+City: Running Springs<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera from Slide Peak at Snow Valley.<br>
+<a href="https://www.youtube.com/watch?v=qPqufIWZAd4">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-valley">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: live, running springs, ski, slide peak, snow, snow valley, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-valley-slide-peak-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>qPqufIWZAd4</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=qPqufIWZAd4</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-117.0275000,34.2169000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Mt. Hood Outfitters</name>
+        <description><![CDATA[<b>Mt. Hood Outfitters</b><br>
+Category: Mountain<br>
+City: Government Camp<br>
+County: Clackamas<br>
+State: Oregon<br>
+Operator: Mt. Hood Outfitters<br>
+Live mountain view near Mt. Hood, Oregon.<br>
+<a href="https://www.youtube.com/watch?v=-CXU5UhysBE">Watch YouTube Live Feed</a><br>
+<a href="https://mthoodoutfitters.com/">Open Camera or Operator Page</a><br>
+Tags: government camp, live, mountain, mt hood, oregon, snow, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>mt-hood-outfitters-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Mt. Hood Outfitters</value></Data>
+          <Data name="youtubeVideoId"><value>-CXU5UhysBE</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=-CXU5UhysBE</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-121.7568375,45.3040855,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Summit — Beginner Area Cam</name>
+        <description><![CDATA[<b>Snow Summit — Beginner Area Cam</b><br>
+Category: Mountain<br>
+City: Big Bear Lake<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live camera overlooking the Snow Summit beginner area.<br>
+<a href="https://www.youtube.com/watch?v=Kn4IAs67hNo">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-summit">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: beginner area, big bear, live, ski, snow, snow summit, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-summit-beginner-area-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>Kn4IAs67hNo</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=Kn4IAs67hNo</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.8901000,34.2370000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Snow Valley — Base Area Cam</name>
+        <description><![CDATA[<b>Snow Valley — Base Area Cam</b><br>
+Category: Mountain<br>
+City: Running Springs<br>
+County: San Bernardino<br>
+Operator: Big Bear Mountain Resort<br>
+Live view of the Snow Valley base area.<br>
+<a href="https://www.youtube.com/watch?v=RBYyWnu8nhM">Watch YouTube Live Feed</a><br>
+<a href="https://www.bigbearmountainresort.com/webcams/snow-valley">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@bearmountain/streams">Open YouTube Channel</a><br>
+Tags: base area, live, running springs, ski, snow, snow valley, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>snow-valley-base-live</value></Data>
+          <Data name="category"><value>Mountain</value></Data>
+          <Data name="operator"><value>Big Bear Mountain Resort</value></Data>
+          <Data name="youtubeVideoId"><value>RBYyWnu8nhM</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=RBYyWnu8nhM</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-117.0364000,34.2248000,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>National Park</name>
+      <Placemark>
+        <name>Yosemite Falls</name>
+        <description><![CDATA[<b>Yosemite Falls</b><br>
+Category: National Park<br>
+City: Yosemite Valley<br>
+County: Mariposa<br>
+State: California<br>
+Operator: Yosemite Conservancy<br>
+Live view of Upper Yosemite Fall in Yosemite National Park.<br>
+<a href="https://www.youtube.com/watch?v=vk62QErdX4Q">Watch YouTube Live Feed</a><br>
+<a href="https://www.nps.gov/yose/learn/photosmultimedia/webcams.htm">Open Camera or Operator Page</a><br>
+Tags: california, national park, waterfall, yosemite, yosemite falls, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>yosemite-falls-live</value></Data>
+          <Data name="category"><value>National Park</value></Data>
+          <Data name="operator"><value>Yosemite Conservancy</value></Data>
+          <Data name="youtubeVideoId"><value>vk62QErdX4Q</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=vk62QErdX4Q</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-119.5967000,37.7563000,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Railroad</name>
+      <Placemark>
+        <name>Union Pacific Railroad — Redding</name>
+        <description><![CDATA[<b>Union Pacific Railroad — Redding</b><br>
+Category: Railroad<br>
+City: Redding<br>
+County: Shasta<br>
+State: California<br>
+Operator: Redding Railroad Live Camera<br>
+Live railroad view near the Union Pacific line in Redding.<br>
+<a href="https://www.youtube.com/watch?v=fKakDFoyBeM">Watch YouTube Live Feed</a><br>
+Tags: railroad, redding, shasta county, train, union pacific, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>union-pacific-redding-live</value></Data>
+          <Data name="category"><value>Railroad</value></Data>
+          <Data name="operator"><value>Redding Railroad Live Camera</value></Data>
+          <Data name="youtubeVideoId"><value>fKakDFoyBeM</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=fKakDFoyBeM</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-122.4028910,40.5836275,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Tourist</name>
+      <Placemark>
+        <name>Hollywood Boulevard</name>
+        <description><![CDATA[<b>Hollywood Boulevard</b><br>
+Category: Tourist<br>
+City: Hollywood<br>
+County: Los Angeles<br>
+Operator: LA Times<br>
+The camera is located on the 3rd floor of the El Capitan Theater, facing the Dolby Theatre and TCL Chinese Theatre on the Hollywood Walk of Fame.<br>
+<a href="https://www.youtube.com/watch?v=OYqo4dqYjh0">Watch YouTube Live Feed</a><br>
+<a href="https://www.latimes.com/">Open Camera or Operator Page</a><br>
+Tags: hollywood, fame]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>hollywood</value></Data>
+          <Data name="category"><value>Tourist</value></Data>
+          <Data name="operator"><value>LA Times</value></Data>
+          <Data name="youtubeVideoId"><value>OYqo4dqYjh0</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=OYqo4dqYjh0</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-118.3425371,34.1014071,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Las Vegas Strip</name>
+        <description><![CDATA[<b>Las Vegas Strip</b><br>
+Category: Tourist<br>
+City: Las Vegas<br>
+County: Clark<br>
+Operator: LV Strip Cam<br>
+Encore Hotel Las Vegas Strip Live feed.<br>
+<a href="https://www.youtube.com/watch?v=nylxuqRtOPk">Watch YouTube Live Feed</a><br>
+<a href="https://www.wynnlasvegas.com/rooms-and-suites/encore-rooms/encore-deluxe-resort">Open Camera or Operator Page</a><br>
+<a href="https://www.youtube.com/@LVsphere">Open YouTube Channel</a><br>
+Tags: las vegas, sphere, strip]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>lasvegas</value></Data>
+          <Data name="category"><value>Tourist</value></Data>
+          <Data name="operator"><value>LV Strip Cam</value></Data>
+          <Data name="youtubeVideoId"><value>nylxuqRtOPk</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=nylxuqRtOPk</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-115.1667917,36.1294437,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Wildlife</name>
+      <Placemark>
+        <name>Big Bear Bald Eagle Nest — Cam 1</name>
+        <description><![CDATA[<b>Big Bear Bald Eagle Nest — Cam 1</b><br>
+Category: Wildlife<br>
+City: Fawnskin<br>
+County: San Bernardino<br>
+Operator: Friends of Big Bear Valley<br>
+Live bald eagle nest camera in Big Bear Valley.<br>
+<a href="https://www.youtube.com/watch?v=B4-L2nfGcuE">Watch YouTube Live Feed</a><br>
+<a href="https://friendsofbigbearvalley.org/livestream/">Open Camera or Operator Page</a><br>
+Tags: bald eagle, big bear, fawnskin, live, nest, wildlife, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-bald-eagle-cam-1</value></Data>
+          <Data name="category"><value>Wildlife</value></Data>
+          <Data name="operator"><value>Friends of Big Bear Valley</value></Data>
+          <Data name="youtubeVideoId"><value>B4-L2nfGcuE</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=B4-L2nfGcuE</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.9440000,34.2750000,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Umpqua Fish Bridge</name>
+        <description><![CDATA[<b>Umpqua Fish Bridge</b><br>
+Category: Wildlife<br>
+City: Roseburg<br>
+County: Douglas<br>
+State: Oregon<br>
+Operator: Umpqua Fish<br>
+Live view of the fish passage and bridge area near Roseburg.<br>
+<a href="https://www.youtube.com/watch?v=80XC0Ebt9tE">Watch YouTube Live Feed</a><br>
+<a href="https://www.umpquafish.com/">Open Camera or Operator Page</a><br>
+Tags: fish, fish passage, live, oregon, roseburg, umpqua, wildlife, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>umpqua-fish-bridge-live</value></Data>
+          <Data name="category"><value>Wildlife</value></Data>
+          <Data name="operator"><value>Umpqua Fish</value></Data>
+          <Data name="youtubeVideoId"><value>80XC0Ebt9tE</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=80XC0Ebt9tE</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-123.3558806,43.2827758,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>Big Bear Bald Eagle Nest — Cam 2</name>
+        <description><![CDATA[<b>Big Bear Bald Eagle Nest — Cam 2</b><br>
+Category: Wildlife<br>
+City: Fawnskin<br>
+County: San Bernardino<br>
+Operator: Friends of Big Bear Valley<br>
+Second live bald eagle nest view in Big Bear Valley.<br>
+<a href="https://www.youtube.com/watch?v=tz_oiJvzNV4">Watch YouTube Live Feed</a><br>
+<a href="https://friendsofbigbearvalley.org/livestream/">Open Camera or Operator Page</a><br>
+Tags: bald eagle, big bear, fawnskin, live, nest, wildlife, youtube]]></description>
+        <styleUrl>#youtube-camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>big-bear-bald-eagle-cam-2</value></Data>
+          <Data name="category"><value>Wildlife</value></Data>
+          <Data name="operator"><value>Friends of Big Bear Valley</value></Data>
+          <Data name="youtubeVideoId"><value>tz_oiJvzNV4</value></Data>
+          <Data name="youtubeUrl"><value>https://www.youtube.com/watch?v=tz_oiJvzNV4</value></Data>
+        </ExtendedData>
+        <Point><coordinates>-116.9438000,34.2751000,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

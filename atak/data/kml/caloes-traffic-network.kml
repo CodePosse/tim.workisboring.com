@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Cal OES Traffic Cameras Auto Refresh</name>
+    <NetworkLink>
+      <name>Cal OES Traffic Cameras</name>
+      <refreshVisibility>1</refreshVisibility>
+      <Link>
+        <href>https://tim.workisboring.com/atak/data/kml/caloes-traffic-cameras.kml</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>900</refreshInterval>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
