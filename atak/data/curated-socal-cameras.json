@@ -717,6 +717,36 @@
         "youtube"
       ],
       "notes": ""
-    }
+    },
+    {
+  "id": "yosemite-falls-live",
+  "name": "Yosemite Falls",
+  "enabled": true,
+  "category": "National Park",
+  "latitude": 37.7563,
+  "longitude": -119.5967,
+  "city": "Yosemite Valley",
+  "county": "Mariposa",
+  "state": "California",
+  "operator": "Yosemite Conservancy",
+  "description": "Live view of Upper Yosemite Fall in Yosemite National Park.",
+  "pageUrl": "https://www.nps.gov/yose/learn/photosmultimedia/webcams.htm",
+  "youtubeUrl": "https://www.youtube.com/watch?v=vk62QErdX4Q",
+  "channelUrl": "",
+  "imageUrl": "",
+  "streamUrl": "",
+  "sourceType": "youtube",
+  "priority": 98,
+  "featured": true,
+  "tags": [
+    "california",
+    "national park",
+    "waterfall",
+    "yosemite",
+    "yosemite falls",
+    "youtube"
+  ],
+  "notes": ""
+}
   ]
 }
