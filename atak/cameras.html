@@ -335,7 +335,7 @@
     <aside>
       <h1>📷 SoCal TAK/GIS Cameras</h1>
       <div class="subtitle">Public camera layers for <a href="https://tak.gov/" target="_blank" rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank" rel="noopener noreferrer">Google Earth</a><br>
-      <a href="javascrpt:void(0);" id="share-link-btn">Share Link 🔗</a>
+      <button type="button" id="share-link-btn">Share 🔗</button>
 </div>  
       <div class="status" id="status">Select a camera layer to load.</div>
 
@@ -374,7 +374,7 @@
         <a href="/atak/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
         <a href="/atak/usgs-network.kml">USGS Network KML</a>
         <a href="/atak/windy-webcams-network.kml">Windy Webcams Network KML</a>
-        <a href="/atak/curated-socal-network.kml">Curated SoCal Cameras Network KML</a>
+        <a href="/atak/curated-socal-network.kml">Curated LIVE Cameras KML</a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -793,6 +793,8 @@ const response = await fetch(requestUrl, {
         }
       });
     }
+    console.log("%c Welcome to: " + window.location.href + " now go home or my GitHub: CodePosse", "background: navy; color: #bada55; font-size: 28px;font-family:'Comic Sans MS';padding:10px;border:3px dashed red;");
+
   </script>
 </body>
 
