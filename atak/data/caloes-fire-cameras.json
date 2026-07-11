@@ -1,7 +1,7 @@
 {
   "source_key": "caloes-fire",
   "title": "Cal OES Fire Cameras",
-  "generated_at": 1783752309,
+  "generated_at": 1783755002,
   "count": 525,
   "cameras": [
     {
@@ -1344,7 +1344,7 @@
       "lat": 34.358002000000006,
       "lon": -117.682297,
       "county": "Losangeles",
-      "heading": 12.59,
+      "heading": 259.53,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-MtnHighEast2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-MtnHighEast2"
     },
@@ -2196,7 +2196,7 @@
       "lat": 33.83496899999999,
       "lon": -117.74254599999999,
       "county": "Orange",
-      "heading": 140.71,
+      "heading": 140.69,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-WeirEastridge2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-WeirEastridge2"
     },
@@ -3024,7 +3024,7 @@
       "lat": 34.80382199999999,
       "lon": -118.815796,
       "county": "Losangeles",
-      "heading": 65.15,
+      "heading": 65.13,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Gorman2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Gorman2"
     },
@@ -3192,7 +3192,7 @@
       "lat": 34.086665999999994,
       "lon": -118.51062000000002,
       "county": "Losangeles",
-      "heading": 257.58,
+      "heading": 257.61,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Westridge1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Westridge1"
     },
@@ -3624,7 +3624,7 @@
       "lat": 35.646034,
       "lon": -120.738747,
       "county": "Sanluisobispo",
-      "heading": 36.6,
+      "heading": 36.58,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-PortnoffHill2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-PortnoffHill2"
     },
@@ -4920,7 +4920,7 @@
       "lat": 34.255396,
       "lon": -117.36302799999999,
       "county": "Sanbernardino",
-      "heading": 305.46,
+      "heading": 266.59,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-BaileyPeak1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-BaileyPeak1"
     },
@@ -6168,7 +6168,7 @@
       "lat": 33.832844999999985,
       "lon": -117.78527399999999,
       "county": "Orange",
-      "heading": 13.6,
+      "heading": 13.58,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-PeraltaHills2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-PeraltaHills2"
     },

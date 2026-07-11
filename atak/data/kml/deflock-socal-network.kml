@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>DeFlock Southern California ALPR Camera Locations</name>
+
+    <NetworkLink>
+      <name>DeFlock Southern California ALPR Camera Locations</name>
+      <refreshVisibility>1</refreshVisibility>
+      <flyToView>0</flyToView>
+
+      <Link>
+        <href>https://tim.workisboring.com/atak/data/kml/deflock-socal.kml</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>86400</refreshInterval>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
