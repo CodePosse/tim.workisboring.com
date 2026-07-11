@@ -87,7 +87,7 @@
         <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
         <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
         <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
-        <a href="/atak/data/kml/deflock-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
+        <a href="/atak/data/kml/deflock-california-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -96,7 +96,9 @@
 
       <div class="powered">
         <small>Powered by: <a href="https://github.com/CodePosse/tim.workisboring.com" rel="nofollow noopener"
-            target="_blank">CodePosse</a> </small>
+            target="_blank">CodePosse</a> and
+          <a href="https://maps.deflock.org/" rel="nofollow noopener" target="_blank"> Camera-location data provided by
+            DeFlock </a></small>
       </div>
     </aside>
 
@@ -120,9 +122,8 @@
         json: "/atak/data/caloes-traffic-cameras.json"
       },
       deflock: {
-        label: "DeFlock ALPR Cameras",
-        type: "kml",
-        url: "/atak/data/kml/deflock-us-conus.kml"
+        label: "DeFlock California ALPR Locations",
+        json: "/atak/data/deflock-california.json"
       },
       usgs: {
         label: "USGS River / Water",
