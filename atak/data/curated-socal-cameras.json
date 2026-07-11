@@ -445,7 +445,7 @@
       "operator": "LA Times",
       "description": "The camera is located on the 3rd floor of the El Capitan Theater, facing the Dolby Theatre and TCL Chinese Theatre on the Hollywood Walk of Fame.",
       "pageUrl": "https://www.latimes.com/",
-      "youtubeUrl": "https://www.youtube.com/watch?v=OYqo4dqYjh0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YHWJd_DNgKY",
       "channelUrl": "",
       "imageUrl": "",
       "streamUrl": "",
@@ -719,34 +719,34 @@
       "notes": ""
     },
     {
-  "id": "yosemite-falls-live",
-  "name": "Yosemite Falls",
-  "enabled": true,
-  "category": "National Park",
-  "latitude": 37.7563,
-  "longitude": -119.5967,
-  "city": "Yosemite Valley",
-  "county": "Mariposa",
-  "state": "California",
-  "operator": "Yosemite Conservancy",
-  "description": "Live view of Upper Yosemite Fall in Yosemite National Park.",
-  "pageUrl": "https://www.nps.gov/yose/learn/photosmultimedia/webcams.htm",
-  "youtubeUrl": "https://www.youtube.com/watch?v=vk62QErdX4Q",
-  "channelUrl": "",
-  "imageUrl": "",
-  "streamUrl": "",
-  "sourceType": "youtube",
-  "priority": 98,
-  "featured": true,
-  "tags": [
-    "california",
-    "national park",
-    "waterfall",
-    "yosemite",
-    "yosemite falls",
-    "youtube"
-  ],
-  "notes": ""
-}
+      "id": "yosemite-falls-live",
+      "name": "Yosemite Falls",
+      "enabled": true,
+      "category": "National Park",
+      "latitude": 37.7563,
+      "longitude": -119.5967,
+      "city": "Yosemite Valley",
+      "county": "Mariposa",
+      "state": "California",
+      "operator": "Yosemite Conservancy",
+      "description": "Live view of Upper Yosemite Fall in Yosemite National Park.",
+      "pageUrl": "https://www.nps.gov/yose/learn/photosmultimedia/webcams.htm",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vk62QErdX4Q",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 98,
+      "featured": true,
+      "tags": [
+        "california",
+        "national park",
+        "waterfall",
+        "yosemite",
+        "yosemite falls",
+        "youtube"
+      ],
+      "notes": ""
+    }
   ]
 }
