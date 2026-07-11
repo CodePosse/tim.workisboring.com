@@ -34,15 +34,15 @@ ATAK_DIRECTORY = Path("/var/www/html/atak")
 DATA_DIRECTORY = ATAK_DIRECTORY / "data"
 KML_DIRECTORY = DATA_DIRECTORY / "kml"
 
-JSON_FILE = DATA_DIRECTORY / "deflock-california.json"
-KML_FILE = KML_DIRECTORY / "deflock-california.kml"
-NETWORK_FILE = KML_DIRECTORY / "deflock-california-network.kml"
+JSON_FILE = DATA_DIRECTORY / "deflock-socal.json"
+KML_FILE = KML_DIRECTORY / "deflock-socal.kml"
+NETWORK_FILE = KML_DIRECTORY / "deflock-socal-network.kml"
 
 # Broad California bounding box.
-CA_MIN_LAT = 32.3
-CA_MAX_LAT = 42.1
-CA_MIN_LON = -124.6
-CA_MAX_LON = -114.0
+SOCAL_MIN_LAT = 32.3
+SOCAL_MAX_LAT = 35.9
+SOCAL_MIN_LON = -121.0
+SOCAL_MAX_LON = -114.0
 
 REQUEST_TIMEOUT = 180
 
@@ -150,20 +150,22 @@ def placemark_coordinates(
     return coordinates
 
 
-def is_in_california(latitude: float, longitude: float) -> bool:
+def is_in_southern_california(
+    latitude: float,
+    longitude: float,
+) -> bool:
     return (
-        CA_MIN_LAT <= latitude <= CA_MAX_LAT
-        and CA_MIN_LON <= longitude <= CA_MAX_LON
+        SOCAL_MIN_LAT <= latitude <= SOCAL_MAX_LAT
+        and SOCAL_MIN_LON <= longitude <= SOCAL_MAX_LON
     )
 
-
-def placemark_is_in_california(
+def placemark_is_in_southern_california(
     placemark: ET.Element,
 ) -> bool:
     coordinates = placemark_coordinates(placemark)
 
     return any(
-        is_in_california(latitude, longitude)
+        is_in_southern_california(latitude, longitude)
         for latitude, longitude in coordinates
     )
 
@@ -172,7 +174,7 @@ def first_coordinate(
     placemark: ET.Element,
 ) -> tuple[float, float] | None:
     for latitude, longitude in placemark_coordinates(placemark):
-        if is_in_california(latitude, longitude):
+        if is_in_southern_california(latitude, longitude):
             return latitude, longitude
 
     return None
@@ -309,13 +311,13 @@ def create_filtered_kml(
     ET.SubElement(
         output_document,
         tag("name"),
-    ).text = "DeFlock California ALPR Camera Locations"
+    ).text = "DeFlock Southern California ALPR Camera Locations"
 
     ET.SubElement(
         output_document,
         tag("description"),
     ).text = (
-        "California-only ALPR camera-location layer filtered "
+        "Southern California-only ALPR camera-location layer filtered "
         "from the DeFlock CONUS KML."
     )
 
@@ -335,7 +337,7 @@ def create_filtered_kml(
     ET.SubElement(
         folder,
         tag("name"),
-    ).text = "California DeFlock Camera Locations"
+    ).text = "Southern California DeFlock Camera Locations"
 
     for placemark in selected_placemarks:
         folder.append(copy.deepcopy(placemark))
@@ -346,7 +348,7 @@ def create_filtered_kml(
 def write_json(cameras: list[dict[str, Any]]) -> None:
     payload = {
         "source_key": "deflock",
-        "title": "DeFlock California ALPR Camera Locations",
+        "title": "DeFlock Southern California ALPR Camera Locations",
         "generated_at": int(time.time()),
         "count": len(cameras),
         "attribution": "Camera-location data provided by DeFlock",
@@ -381,17 +383,17 @@ def write_filtered_kml(tree: ET.ElementTree) -> None:
 
 def write_network_kml() -> None:
     target_url = (
-        f"{PUBLIC_BASE_URL}"
-        "/atak/data/kml/deflock-california.kml"
-    )
+    f"{PUBLIC_BASE_URL}"
+    "/atak/data/kml/deflock-socal.kml"
+)
 
     content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>DeFlock California ALPR Camera Locations</name>
+    <name>DeFlock Southern California ALPR Camera Locations</name>
 
     <NetworkLink>
-      <name>DeFlock California ALPR Camera Locations</name>
+      <name>DeFlock Southern California ALPR Camera Locations</name>
       <refreshVisibility>1</refreshVisibility>
       <flyToView>0</flyToView>
 
@@ -429,7 +431,7 @@ def main() -> int:
         all_placemarks,
         start=1,
     ):
-        if not placemark_is_in_california(placemark):
+        if not placemark_is_in_southern_california(placemark):
             continue
 
         selected_placemarks.append(placemark)
@@ -440,18 +442,18 @@ def main() -> int:
             cameras.append(camera)
 
     log(f"Source placemarks: {len(all_placemarks)}")
-    log(f"California placemarks: {len(selected_placemarks)}")
+    log(f"Southern California placemarks: {len(selected_placemarks)}")
 
     if not selected_placemarks:
         if KML_FILE.exists() and JSON_FILE.exists():
             log(
-                "No California placemarks returned; preserving "
+                "No Southern California placemarks returned; preserving "
                 "the previous files."
             )
             return 0
 
         raise RuntimeError(
-            "No California placemarks were found."
+            "No Southern California placemarks were found."
         )
 
     filtered_tree = create_filtered_kml(
