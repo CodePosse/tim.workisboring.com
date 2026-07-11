@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>Cal OES Traffic Cameras Auto Refresh</name>
+    <name>Cal OES Traffic Cameras</name>
     <NetworkLink>
       <name>Cal OES Traffic Cameras</name>
       <refreshVisibility>1</refreshVisibility>

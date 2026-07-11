@@ -4,33 +4,69 @@ from __future__ import annotations
 import html
 import json
 import os
-import sys
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin
 
 import requests
 
 
-API_BASE = "https://openwebcamdb.com/api/v1/"
 PUBLIC_BASE_URL = "https://tim.workisboring.com"
 
-OUT_DIR = Path("/var/www/html/atak")
-DATA_DIR = OUT_DIR / "data"
+ATAK_DIRECTORY = Path("/var/www/html/atak")
+DATA_DIRECTORY = ATAK_DIRECTORY / "data"
+KML_DIRECTORY = DATA_DIRECTORY / "kml"
 
-JSON_FILE = DATA_DIR / "openwebcamdb-cameras.json"
-KML_FILE = OUT_DIR / "openwebcamdb-cameras.kml"
-NETWORK_FILE = OUT_DIR / "openwebcamdb-network.kml"
+DATA_DIRECTORY.mkdir(parents=True, exist_ok=True)
+KML_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
-API_KEY = os.getenv("OPENWEBCAMDB_API_KEY", "").strip()
+SOCAL_BBOX = {
+    "xmin": -121.0,
+    "ymin": 32.3,
+    "xmax": -114.0,
+    "ymax": 36.8,
+    "spatialReference": {"wkid": 4326},
+}
 
-# California geographic envelope.
-CA_SOUTH = 32.3
-CA_NORTH = 42.1
-CA_WEST = -124.6
-CA_EAST = -114.0
+ALERTWEST_API = (
+    "https://api.cdn.prod.alertwest.com/api/firecams/v0/cameras"
+)
+
+CALOES_API = (
+    "https://services.arcgis.com/BLN4oKB0N1YSgvY8/"
+    "arcgis/rest/services/CalOES_California_Webcams/"
+    "FeatureServer/0/query"
+)
+
+USGS_API = "https://api.waterdata.usgs.gov/nims/v0/cameras"
+
+SOURCES = {
+    "alertwest": {
+        "title": "ALERTCalifornia / AlertWest Cameras",
+        "json": "alertwest-cameras.json",
+        "kml": "alertca.kml",
+        "network": "alertca-network.kml",
+    },
+    "caloes-fire": {
+        "title": "Cal OES Fire Cameras",
+        "json": "caloes-fire-cameras.json",
+        "kml": "caloes-fire-cameras.kml",
+        "network": "caloes-fire-network.kml",
+    },
+    "caloes-traffic": {
+        "title": "Cal OES Traffic Cameras",
+        "json": "caloes-traffic-cameras.json",
+        "kml": "caloes-traffic-cameras.kml",
+        "network": "caloes-traffic-network.kml",
+    },
+    "usgs": {
+        "title": "USGS California River and Water Cameras",
+        "json": "usgs-cameras.json",
+        "kml": "usgs-cameras.kml",
+        "network": "usgs-network.kml",
+    },
+}
 
 SESSION = requests.Session()
 SESSION.headers.update({
@@ -39,7 +75,11 @@ SESSION.headers.update({
 })
 
 
-def pick(data: Any, keys: list[str], default: Any = "") -> Any:
+def pick(
+    data: Any,
+    keys: list[str],
+    default: Any = "",
+) -> Any:
     if not isinstance(data, dict):
         return default
 
@@ -52,148 +92,6 @@ def pick(data: Any, keys: list[str], default: Any = "") -> Any:
     return default
 
 
-def nested(data: Any, paths: list[tuple[str, ...]], default: Any = "") -> Any:
-    for path in paths:
-        value = data
-
-        for key in path:
-            if not isinstance(value, dict) or key not in value:
-                value = None
-                break
-
-            value = value[key]
-
-        if value not in (None, "", []):
-            return value
-
-    return default
-
-
-def request_json(
-    path_or_url: str,
-    params: dict[str, Any] | None = None,
-) -> Any:
-    if not API_KEY:
-        raise RuntimeError(
-            "OPENWEBCAMDB_API_KEY is not exported. "
-            "Run: source /etc/socal-tak.env"
-        )
-
-    if path_or_url.startswith(("https://", "http://")):
-        url = path_or_url
-    else:
-        url = urljoin(API_BASE, path_or_url.lstrip("/"))
-
-    max_attempts = 5
-
-    for attempt in range(1, max_attempts + 1):
-        response = SESSION.get(
-            url,
-            params=params,
-            headers={"Authorization": f"Bearer {API_KEY}"},
-            timeout=REQUEST_TIMEOUT,
-        )
-
-        log(f"GET {response.url} -> HTTP {response.status_code}")
-
-        if response.status_code == 429:
-            try:
-                payload = response.json()
-            except ValueError:
-                payload = {}
-
-            retry_after = payload.get("retry_after")
-
-            if retry_after is None:
-                retry_after = response.headers.get("Retry-After", 60)
-
-            try:
-                retry_after = int(retry_after)
-            except (TypeError, ValueError):
-                retry_after = 60
-
-            retry_after = max(retry_after, 5)
-
-            if attempt >= max_attempts:
-                raise RuntimeError(
-                    f"OpenWebcamDB rate limit persisted after "
-                    f"{max_attempts} attempts."
-                )
-
-            log(
-                f"Rate limited. Waiting {retry_after + 2} seconds "
-                f"before retry {attempt + 1}/{max_attempts}."
-            )
-
-            time.sleep(retry_after + 2)
-            continue
-
-        response.raise_for_status()
-
-        try:
-            return response.json()
-        except ValueError as exc:
-            preview = response.text[:500]
-            raise RuntimeError(
-                f"OpenWebcamDB returned invalid JSON: {preview}"
-            ) from exc
-
-    raise RuntimeError("OpenWebcamDB request failed unexpectedly.")
-
-def extract_items(payload: Any) -> list[dict[str, Any]]:
-    if isinstance(payload, list):
-        return [item for item in payload if isinstance(item, dict)]
-
-    if not isinstance(payload, dict):
-        return []
-
-    for key in ("webcams", "data", "items", "results"):
-        value = payload.get(key)
-
-        if isinstance(value, list):
-            return [item for item in value if isinstance(item, dict)]
-
-        if isinstance(value, dict):
-            for nested_key in ("webcams", "items", "results", "data"):
-                nested_value = value.get(nested_key)
-
-                if isinstance(nested_value, list):
-                    return [
-                        item
-                        for item in nested_value
-                        if isinstance(item, dict)
-                    ]
-
-    return []
-
-
-def extract_next_page(payload: Any) -> str | None:
-    if not isinstance(payload, dict):
-        return None
-
-    direct = pick(payload, ["next", "next_page", "nextPage"], None)
-
-    if isinstance(direct, str) and direct:
-        return direct
-
-    for container_key in ("links", "pagination", "meta"):
-        container = payload.get(container_key)
-
-        if not isinstance(container, dict):
-            continue
-
-        next_value = pick(
-            container,
-            ["next", "next_page", "nextPage", "next_url"],
-            None,
-        )
-
-        if isinstance(next_value, str) and next_value:
-            return next_value
-
-    return None
-
-
 def as_float(value: Any) -> float | None:
     try:
         return float(value)
@@ -201,302 +99,131 @@ def as_float(value: Any) -> float | None:
         return None
 
 
-def coordinates(camera: dict[str, Any]) -> tuple[float | None, float | None]:
-    location = camera.get("location")
-    if not isinstance(location, dict):
-        location = {}
-
-    lat = pick(
-        camera,
-        ["latitude", "lat"],
-        pick(location, ["latitude", "lat"], None),
+def request_json(
+    url: str,
+    params: dict[str, Any] | None = None,
+) -> Any:
+    response = SESSION.get(
+        url,
+        params=params,
+        timeout=45,
     )
 
-    lon = pick(
-        camera,
-        ["longitude", "lon", "lng"],
-        pick(location, ["longitude", "lon", "lng"], None),
-    )
-
-    return as_float(lat), as_float(lon)
+    response.raise_for_status()
+    return response.json()
 
 
-def is_california(camera: dict[str, Any], lat: float, lon: float) -> bool:
-    location = camera.get("location")
-    if not isinstance(location, dict):
-        location = {}
-
-    state = str(
-        pick(
-            camera,
-            ["state", "state_code", "region"],
-            pick(location, ["state", "state_code", "region"], ""),
-        )
-    ).strip().lower()
-
-    country = str(
-        pick(
-            camera,
-            ["country", "country_code"],
-            pick(location, ["country", "country_code"], ""),
-        )
-    ).strip().lower()
-
-    if country and country not in (
-        "us",
-        "usa",
-        "united states",
-        "united states of america",
-    ):
-        return False
-
-    if state and state not in ("ca", "california"):
-        return False
-
-    return (
-        CA_SOUTH <= lat <= CA_NORTH
-        and CA_WEST <= lon <= CA_EAST
-    )
-
-
-def fetch_detail(summary: dict[str, Any]) -> dict[str, Any]:
-    slug = str(pick(summary, ["slug"], "")).strip()
-
-    if not slug:
-        return summary
-
-    try:
-        detail = request_json(f"webcams/{slug}")
-    except requests.RequestException as exc:
-        print(f"Detail request failed for {slug}: {exc}", file=sys.stderr)
-        return summary
-
-    if isinstance(detail, dict):
-        for key in ("webcam", "data", "result"):
-            if isinstance(detail.get(key), dict):
-                return detail[key]
-
-        return detail
-
-    return summary
-
-
-def category_text(camera: dict[str, Any]) -> str:
-    categories = camera.get("categories", [])
-
-    if isinstance(categories, list):
-        names: list[str] = []
-
-        for item in categories:
-            if isinstance(item, dict):
-                name = pick(item, ["name", "title", "slug"], "")
-            else:
-                name = str(item)
-
-            if name:
-                names.append(str(name))
-
-        if names:
-            return ", ".join(names)
-
-    if isinstance(categories, str) and categories:
-        return categories
-
-    return str(pick(camera, ["category", "type"], "Tourist Webcam"))
-
-
-def normalize(camera: dict[str, Any]) -> dict[str, Any] | None:
-    lat, lon = coordinates(camera)
-
-    if lat is None or lon is None:
-        return None
-
-    if not is_california(camera, lat, lon):
-        return None
-
-    location = camera.get("location")
-    if not isinstance(location, dict):
-        location = {}
-
-    slug = str(pick(camera, ["slug"], f"{lat}-{lon}"))
-
-    thumbnail = nested(
-        camera,
-        [
-            ("images", "thumbnail"),
-            ("images", "preview"),
-            ("image", "thumbnail"),
-            ("image", "preview"),
-            ("image", "url"),
-            ("thumbnail",),
-            ("thumbnail_url",),
-            ("preview",),
-            ("preview_url",),
-        ],
-        "",
-    )
-
-    page_url = nested(
-        camera,
-        [
-            ("urls", "detail"),
-            ("urls", "web"),
-            ("page_url",),
-            ("webcam_url",),
-            ("url",),
-        ],
-        "",
-    )
-
-    if not page_url and slug:
-        page_url = f"https://openwebcamdb.com/webcams/{slug}"
-
-    stream_url = str(
-        pick(
-            camera,
-            ["stream_url", "streamUrl", "live_url"],
-            "",
-        )
-    )
-
-    city = str(
-        pick(
-            camera,
-            ["city"],
-            pick(location, ["city"], ""),
-        )
-    )
-
-    county = str(
-        pick(
-            camera,
-            ["county"],
-            pick(location, ["county"], ""),
-        )
-    )
-
+def arcgis_params() -> dict[str, str]:
     return {
-        "id": f"openwebcamdb-{slug}",
-        "slug": slug,
-        "name": str(
-            pick(
-                camera,
-                ["title", "name"],
-                "OpenWebcamDB Camera",
-            )
-        ),
-        "source": "OpenWebcamDB",
-        "category": f"🏖️ {category_text(camera)}",
-        "lat": lat,
-        "lon": lon,
-        "county": county,
-        "city": city,
-        "heading": "",
-        "thumbnail": str(thumbnail or ""),
-        # Prefer the public detail page. Keep the stream separately.
-        "url": str(page_url or ""),
-        "stream_url": stream_url,
-        "attribution": "Powered by OpenWebcamDB.com",
+        "f": "json",
+        "where": "1=1",
+        "outFields": "*",
+        "returnGeometry": "true",
+        "outSR": "4326",
+        "geometry": json.dumps(SOCAL_BBOX),
+        "geometryType": "esriGeometryEnvelope",
+        "spatialRel": "esriSpatialRelIntersects",
+        "resultRecordCount": "3000",
     }
 
 
-def fetch_summaries() -> list[dict[str, Any]]:
-    all_items: list[dict[str, Any]] = []
-    seen_slugs: set[str] = set()
+def write_json(
+    source_key: str,
+    cameras: list[dict[str, Any]],
+) -> None:
+    source = SOURCES[source_key]
+    destination = DATA_DIRECTORY / source["json"]
 
-    next_url: str | None = "webcams"
-    page = 1
-
-    while next_url and page <= 20:
-        params = None
-
-        if next_url == "webcams":
-            params = {
-                "limit": 100,
-                "page": page,
-            }
-
-        payload = request_json(next_url, params=params)
-        items = extract_items(payload)
-
-        if not items:
-            break
-
-        new_items = 0
-
-        for item in items:
-            slug = str(pick(item, ["slug"], "")).strip()
-
-            if slug and slug in seen_slugs:
-                continue
-
-            if slug:
-                seen_slugs.add(slug)
-
-            all_items.append(item)
-            new_items += 1
-
-        explicit_next = extract_next_page(payload)
-
-        if explicit_next:
-            next_url = explicit_next
-        elif len(items) >= 100 and new_items:
-            page += 1
-            next_url = "webcams"
-        else:
-            next_url = None
-
-    return all_items
-
-
-def fetch_cameras() -> list[dict[str, Any]]:
-    summaries = fetch_summaries()
-    cameras: list[dict[str, Any]] = []
-
-    for summary in summaries:
-        lat, lon = coordinates(summary)
-
-        # Avoid spending detail requests on obviously non-California cameras.
-        if lat is not None and lon is not None:
-            if not is_california(summary, lat, lon):
-                continue
-
-        detail = fetch_detail(summary)
-        camera = normalize(detail)
-
-        if camera:
-            cameras.append(camera)
-
-    cameras.sort(key=lambda item: (item["name"].lower(), item["id"]))
-    return cameras
-
-
-def write_json(cameras: list[dict[str, Any]]) -> None:
     payload = {
-        "source_key": "openwebcamdb",
-        "title": "OpenWebcamDB California Cameras",
+        "source_key": source_key,
+        "title": source["title"],
         "generated_at": int(time.time()),
         "count": len(cameras),
-        "attribution": "Powered by OpenWebcamDB.com",
         "cameras": cameras,
     }
 
-    temporary = JSON_FILE.with_suffix(".json.tmp")
+    temporary = destination.with_suffix(".json.tmp")
+
     temporary.write_text(
-        json.dumps(payload, indent=2, ensure_ascii=False),
+        json.dumps(
+            payload,
+            indent=2,
+            ensure_ascii=False,
+        ),
         encoding="utf-8",
     )
-    temporary.replace(JSON_FILE)
+
+    temporary.replace(destination)
 
 
-def write_kml(cameras: list[dict[str, Any]]) -> None:
-    kml = ET.Element("kml", xmlns="http://www.opengis.net/kml/2.2")
-    document = ET.SubElement(kml, "Document")
-    ET.SubElement(document, "name").text = (
-        "OpenWebcamDB California Cameras"
+def description_html(camera: dict[str, Any]) -> str:
+    parts = [
+        f"<b>{html.escape(str(camera.get('name', 'Camera')))}</b><br>",
+        (
+            "Type: "
+            f"{html.escape(str(camera.get('category', '')))}<br>"
+        ),
+        (
+            "Source: "
+            f"{html.escape(str(camera.get('source', '')))}<br>"
+        ),
+    ]
+
+    if camera.get("county"):
+        parts.append(
+            f"County: {html.escape(str(camera['county']))}<br>"
+        )
+
+    if camera.get("heading") not in (None, ""):
+        parts.append(
+            f"View: {html.escape(str(camera['heading']))}°<br>"
+        )
+
+    if camera.get("url"):
+        parts.append(
+            '<a href="'
+            f'{html.escape(str(camera["url"]))}'
+            '">Open camera page</a><br>'
+        )
+
+    if camera.get("timelapse"):
+        parts.append(
+            '<a href="'
+            f'{html.escape(str(camera["timelapse"]))}'
+            '">Open timelapse</a><br>'
+        )
+
+    if camera.get("thumbnail"):
+        thumbnail = html.escape(str(camera["thumbnail"]))
+        parts.append(
+            f'<a href="{thumbnail}">Open latest image</a><br>'
+            f'<img src="{thumbnail}" width="320"><br>'
+        )
+
+    return "<![CDATA[" + "".join(parts) + "]]>"
+
+
+def write_kml(
+    source_key: str,
+    cameras: list[dict[str, Any]],
+) -> None:
+    source = SOURCES[source_key]
+    destination = KML_DIRECTORY / source["kml"]
+
+    kml = ET.Element(
+        "kml",
+        xmlns="http://www.opengis.net/kml/2.2",
     )
 
-    style = ET.SubElement(document, "Style", id="openwebcam-camera")
+    document = ET.SubElement(kml, "Document")
+    ET.SubElement(document, "name").text = source["title"]
+
+    style = ET.SubElement(
+        document,
+        "Style",
+        id="camera-style",
+    )
+
     icon_style = ET.SubElement(style, "IconStyle")
     ET.SubElement(icon_style, "scale").text = "1.1"
 
@@ -506,83 +233,438 @@ def write_kml(cameras: list[dict[str, Any]]) -> None:
     )
 
     folder = ET.SubElement(document, "Folder")
-    ET.SubElement(folder, "name").text = (
-        "OpenWebcamDB California Cameras"
-    )
+    ET.SubElement(folder, "name").text = source["title"]
 
     for camera in cameras:
+        latitude = as_float(camera.get("lat"))
+        longitude = as_float(camera.get("lon"))
+
+        if latitude is None or longitude is None:
+            continue
+
         placemark = ET.SubElement(folder, "Placemark")
-        ET.SubElement(placemark, "name").text = camera["name"]
-        ET.SubElement(placemark, "styleUrl").text = "#openwebcam-camera"
 
-        description = f"""<![CDATA[
-<b>{html.escape(camera["name"])}</b><br>
-Source: OpenWebcamDB<br>
-Category: {html.escape(camera.get("category", ""))}<br>
-City: {html.escape(camera.get("city", ""))}<br>
-County: {html.escape(camera.get("county", ""))}<br>
-{f'<a href="{html.escape(camera["url"])}">Open webcam page</a><br>' if camera.get("url") else ""}
-{f'<a href="{html.escape(camera["stream_url"])}">Open live stream</a><br>' if camera.get("stream_url") else ""}
-{f'<a href="{html.escape(camera["thumbnail"])}">Open preview image</a><br><img src="{html.escape(camera["thumbnail"])}" width="320">' if camera.get("thumbnail") else ""}
-<br><a href="https://openwebcamdb.com/">Powered by OpenWebcamDB.com</a>
-]]>"""
+        ET.SubElement(
+            placemark,
+            "name",
+        ).text = str(camera.get("name", "Camera"))
 
-        ET.SubElement(placemark, "description").text = description
+        ET.SubElement(
+            placemark,
+            "styleUrl",
+        ).text = "#camera-style"
+
+        ET.SubElement(
+            placemark,
+            "description",
+        ).text = description_html(camera)
 
         point = ET.SubElement(placemark, "Point")
-        ET.SubElement(point, "coordinates").text = (
-            f'{camera["lon"]},{camera["lat"]},0'
-        )
 
-    temporary = KML_FILE.with_suffix(".kml.tmp")
+        ET.SubElement(
+            point,
+            "coordinates",
+        ).text = f"{longitude},{latitude},0"
+
+    temporary = destination.with_suffix(".kml.tmp")
+
     ET.ElementTree(kml).write(
         temporary,
         encoding="utf-8",
         xml_declaration=True,
     )
-    temporary.replace(KML_FILE)
+
+    temporary.replace(destination)
 
 
-def write_network_kml() -> None:
+def write_network_kml(source_key: str) -> None:
+    source = SOURCES[source_key]
+    destination = KML_DIRECTORY / source["network"]
+
+    target_url = (
+        f"{PUBLIC_BASE_URL}/atak/data/kml/{source['kml']}"
+    )
+
     content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>OpenWebcamDB California Cameras</name>
+    <name>{html.escape(source["title"])}</name>
     <NetworkLink>
-      <name>OpenWebcamDB California Cameras</name>
+      <name>{html.escape(source["title"])}</name>
       <refreshVisibility>1</refreshVisibility>
       <Link>
-        <href>{PUBLIC_BASE_URL}/atak/openwebcamdb-cameras.kml</href>
+        <href>{target_url}</href>
         <refreshMode>onInterval</refreshMode>
-        <refreshInterval>3600</refreshInterval>
+        <refreshInterval>900</refreshInterval>
       </Link>
     </NetworkLink>
   </Document>
 </kml>
 """
 
-    NETWORK_FILE.write_text(content, encoding="utf-8")
+    destination.write_text(content, encoding="utf-8")
+
+
+def write_source(
+    source_key: str,
+    cameras: list[dict[str, Any]],
+) -> None:
+    if not cameras:
+        json_path = DATA_DIRECTORY / SOURCES[source_key]["json"]
+        kml_path = KML_DIRECTORY / SOURCES[source_key]["kml"]
+
+        if json_path.exists() and kml_path.exists():
+            print(
+                f"{source_key}: 0 returned; preserving existing feed"
+            )
+            write_network_kml(source_key)
+            return
+
+    write_json(source_key, cameras)
+    write_kml(source_key, cameras)
+    write_network_kml(source_key)
+
+    print(f"{source_key}: {len(cameras)}")
+
+
+def fetch_alertwest() -> list[dict[str, Any]]:
+    cameras: list[dict[str, Any]] = []
+    payload = request_json(ALERTWEST_API)
+
+    if not isinstance(payload, list):
+        return cameras
+
+    for camera in payload:
+        if not isinstance(camera, dict):
+            continue
+
+        site = camera.get("site")
+        image = camera.get("image")
+        position = camera.get("position")
+
+        if not isinstance(site, dict):
+            site = {}
+
+        if not isinstance(image, dict):
+            image = {}
+
+        if not isinstance(position, dict):
+            position = {}
+
+        latitude = as_float(site.get("latitude"))
+        longitude = as_float(site.get("longitude"))
+
+        if latitude is None or longitude is None:
+            continue
+
+        image_url = str(
+            pick(image, ["url", "thumbnail"], "")
+        )
+
+        cameras.append({
+            "id": (
+                "alertwest-"
+                + str(
+                    pick(
+                        camera,
+                        ["id", "name"],
+                        f"{latitude}-{longitude}",
+                    )
+                )
+            ),
+            "name": str(
+                pick(
+                    camera,
+                    ["name"],
+                    "ALERTCalifornia Camera",
+                )
+            ),
+            "source": "ALERTCalifornia / AlertWest",
+            "category": "🔥 Fire Camera",
+            "lat": latitude,
+            "lon": longitude,
+            "county": str(pick(site, ["county"], "")),
+            "heading": pick(position, ["pan"], ""),
+            "thumbnail": image_url,
+            "url": image_url or "https://alertcalifornia.org/",
+        })
+
+    return cameras
+
+
+def classify_caloes(
+    attributes: dict[str, Any],
+) -> tuple[str | None, str | None]:
+    text = " ".join([
+        str(pick(attributes, ["CameraType"], "")),
+        str(pick(attributes, ["Display_Type"], "")),
+        str(pick(attributes, ["Source"], "")),
+        str(pick(attributes, ["Location"], "")),
+        str(pick(attributes, ["Webcam_URL"], "")),
+        str(pick(attributes, ["Consolidated_URL"], "")),
+    ]).lower()
+
+    if "alert" in text or "fire" in text:
+        return "caloes-fire", "🔥 Fire Camera"
+
+    if any(
+        keyword in text
+        for keyword in (
+            "traffic",
+            "caltrans",
+            "road",
+            "highway",
+            "freeway",
+        )
+    ):
+        return "caloes-traffic", "🚗 Traffic Camera"
+
+    return None, None
+
+
+def fetch_caloes() -> dict[str, list[dict[str, Any]]]:
+    buckets = {
+        "caloes-fire": [],
+        "caloes-traffic": [],
+    }
+
+    payload = request_json(
+        CALOES_API,
+        params=arcgis_params(),
+    )
+
+    if not isinstance(payload, dict):
+        return buckets
+
+    for feature in payload.get("features", []):
+        if not isinstance(feature, dict):
+            continue
+
+        attributes = feature.get("attributes")
+        geometry = feature.get("geometry")
+
+        if not isinstance(attributes, dict):
+            attributes = {}
+
+        if not isinstance(geometry, dict):
+            geometry = {}
+
+        latitude = as_float(geometry.get("y"))
+        longitude = as_float(geometry.get("x"))
+
+        if latitude is None or longitude is None:
+            continue
+
+        source_key, category = classify_caloes(attributes)
+
+        if not source_key or not category:
+            continue
+
+        buckets[source_key].append({
+            "id": (
+                "caloes-"
+                + str(
+                    pick(
+                        attributes,
+                        ["OBJECTID", "GlobalID"],
+                        f"{latitude}-{longitude}",
+                    )
+                )
+            ),
+            "name": str(
+                pick(
+                    attributes,
+                    ["Location", "Name", "NAME"],
+                    "Cal OES Webcam",
+                )
+            ),
+            "source": str(
+                pick(attributes, ["Source"], "Cal OES")
+            ),
+            "category": category,
+            "lat": latitude,
+            "lon": longitude,
+            "county": str(
+                pick(attributes, ["County"], "")
+            ).title(),
+            "heading": pick(
+                attributes,
+                ["View_Degrees"],
+                "",
+            ),
+            "thumbnail": str(
+                pick(
+                    attributes,
+                    ["Thumbnail_Url"],
+                    "",
+                )
+            ),
+            "url": str(
+                pick(
+                    attributes,
+                    [
+                        "Webcam_URL",
+                        "Consolidated_URL",
+                        "Source_URL",
+                    ],
+                    "",
+                )
+            ),
+        })
+
+    return buckets
+
+
+def in_california(latitude: float, longitude: float) -> bool:
+    return (
+        32.3 <= latitude <= 42.1
+        and -124.6 <= longitude <= -114.0
+    )
+
+
+def fetch_usgs() -> list[dict[str, Any]]:
+    cameras: list[dict[str, Any]] = []
+    payload = request_json(USGS_API)
+
+    if isinstance(payload, dict):
+        payload = (
+            payload.get("cameras")
+            or payload.get("items")
+            or payload.get("data")
+            or []
+        )
+
+    if not isinstance(payload, list):
+        return cameras
+
+    for camera in payload:
+        if not isinstance(camera, dict):
+            continue
+
+        if camera.get("hideCam"):
+            continue
+
+        state = str(
+            pick(
+                camera,
+                ["stateAbrv", "state", "stateCode"],
+                "",
+            )
+        ).upper()
+
+        if state and state not in {"CA", "CALIFORNIA"}:
+            continue
+
+        latitude = as_float(
+            pick(camera, ["lat", "latitude"], None)
+        )
+
+        longitude = as_float(
+            pick(
+                camera,
+                ["lng", "lon", "longitude"],
+                None,
+            )
+        )
+
+        if latitude is None or longitude is None:
+            continue
+
+        if not in_california(latitude, longitude):
+            continue
+
+        camera_id = str(
+            pick(
+                camera,
+                ["camId", "cameraId", "id"],
+                f"{latitude}-{longitude}",
+            )
+        )
+
+        thumbnail_directory = str(
+            pick(camera, ["thumbDir"], "")
+        )
+
+        small_directory = str(
+            pick(camera, ["smallDir"], "")
+        )
+
+        overlay_directory = str(
+            pick(camera, ["overlayDir"], "")
+        )
+
+        timelapse_directory = str(
+            pick(camera, ["tlDir"], "")
+        )
+
+        thumbnail = (
+            f"{thumbnail_directory}{camera_id}_newest.jpg"
+            if thumbnail_directory
+            else ""
+        )
+
+        image_url = (
+            f"{small_directory or overlay_directory}"
+            f"{camera_id}_newest.jpg"
+            if small_directory or overlay_directory
+            else ""
+        )
+
+        timelapse = (
+            f"{timelapse_directory}{camera_id}.mp4"
+            if timelapse_directory
+            else ""
+        )
+
+        cameras.append({
+            "id": f"usgs-{camera_id}",
+            "name": str(
+                pick(
+                    camera,
+                    ["camName", "cameraName", "name"],
+                    "USGS Camera",
+                )
+            ),
+            "source": "USGS NIMS",
+            "category": "🌊 River / Water Camera",
+            "lat": latitude,
+            "lon": longitude,
+            "county": "",
+            "heading": "",
+            "thumbnail": thumbnail or image_url,
+            "url": image_url or timelapse,
+            "timelapse": timelapse,
+        })
+
+    return cameras
 
 
 def main() -> int:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    try:
+        write_source("alertwest", fetch_alertwest())
+    except Exception as error:
+        print(f"alertwest failed: {error}")
 
     try:
-        cameras = fetch_cameras()
-    except Exception as exc:
-        print(f"OpenWebcamDB failed: {exc}", file=sys.stderr)
-        return 1
+        caloes = fetch_caloes()
 
-    # Protect the last known-good feed from an empty API response.
-    if not cameras and JSON_FILE.exists() and KML_FILE.exists():
-        print("OpenWebcamDB returned 0; preserving existing files.")
-        return 0
+        write_source(
+            "caloes-fire",
+            caloes["caloes-fire"],
+        )
 
-    write_json(cameras)
-    write_kml(cameras)
-    write_network_kml()
+        write_source(
+            "caloes-traffic",
+            caloes["caloes-traffic"],
+        )
+    except Exception as error:
+        print(f"caloes failed: {error}")
 
-    print(f"OpenWebcamDB: {len(cameras)} California cameras")
+    try:
+        write_source("usgs", fetch_usgs())
+    except Exception as error:
+        print(f"usgs failed: {error}")
+
     return 0
 
 
