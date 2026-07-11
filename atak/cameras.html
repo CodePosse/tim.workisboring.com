@@ -146,7 +146,7 @@
       margin-bottom: 1rem;
     }
 
-    .links a,
+    a, .links a,
     .powered a {
       color: var(--link);
       text-decoration: none;
@@ -195,7 +195,7 @@
       font-size: .72rem;
       margin-bottom: .4rem;
     }
-
+#atak-help-title{margin:0px;padding:0px 5px}
     .popup {
       max-width: 340px;
     }
@@ -307,7 +307,7 @@
     }
 
     .powered {
-      margin-top: 1rem;
+      margin-top: .25rem;
       color: var(--muted);
     }
 
@@ -334,10 +334,9 @@
   <div id="app">
     <aside>
       <h1>📷 SoCal TAK/GIS Cameras</h1>
-      <div class="subtitle">Public camera layers for ATAK training and situational awareness.</div>
-
-      <button class="btn" type="button" id="share-link-btn">Share Link 🔗</button>
-
+      <div class="subtitle">Public camera layers for <a href="https://tak.gov/" target="_blank" rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank" rel="noopener noreferrer">Google Earth</a><br>
+      <a href="javascrpt:void(0);" id="share-link-btn">Share Link 🔗</a>
+</div>  
       <div class="status" id="status">Select a camera layer to load.</div>
 
       <input id="search" type="search" placeholder="Search name, county, source…"
@@ -352,11 +351,9 @@
           Traffic</div>
         <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
-        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy
-          Webcams
-          can timeout after 5 minutes</div>
+        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy   Webcams</div>
         <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
-            aria-label="Curated Southern California cameras"> 🏖️ Curated SoCal Beaches, Mountains &amp; Attractions
+            aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
       </div>
 
@@ -372,12 +369,12 @@
       </section>
 
       <div class="links">
-        <a href="/atak/alertca-network.kml">ATAK: ALERTCalifornia Network KML</a>
-        <a href="/atak/caloes-fire-network.kml">ATAK: Cal OES Fire Network KML</a>
-        <a href="/atak/caloes-traffic-network.kml">ATAK: Cal OES Traffic Network KML</a>
-        <a href="/atak/usgs-network.kml">ATAK: USGS Network KML</a>
-        <a href="/atak/windy-webcams-network.kml">ATAK: Windy Webcams Network KML</a>
-        <a href="/atak/curated-socal-network.kml">ATAK: Curated SoCal Cameras Network KML</a>
+        <a href="/atak/alertca-network.kml">ALERTCalifornia Network KML</a>
+        <a href="/atak/caloes-fire-network.kml">Cal OES Fire Network KML</a>
+        <a href="/atak/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
+        <a href="/atak/usgs-network.kml">USGS Network KML</a>
+        <a href="/atak/windy-webcams-network.kml">Windy Webcams Network KML</a>
+        <a href="/atak/curated-socal-network.kml">Curated SoCal Cameras Network KML</a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
