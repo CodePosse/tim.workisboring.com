@@ -32,315 +32,8 @@
     content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIV camera feeds.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-2: #1f2937;
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent: #38bdf8;
-      --border: #334155;
-      --link: #7dd3fc;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      scrollbar-gutter: stable;
-    }
-
-    ::selection {
-      color: white;
-      background-color: rgba(26, 168, 40, 0.337);
-    }
-
-    #app {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      height: 100%;
-    }
-
-    aside {
-      background-attachment: fixed;
-      background:
-        radial-gradient(circle at top right, #f5329d51, transparent 28%),
-        radial-gradient(circle at left 20%,
-          rgba(133, 168, 26, 0.337),
-          transparent 25%),
-        linear-gradient(180deg, var(--bg) 0%, hwb(221 10% 64%) 100%);
-      border-right: 1px solid var(--border);
-      overflow-y: auto;
-      padding: 1rem;
-    }
-
-    #map {
-      height: 100%;
-      min-height: 100vh;
-    }
-
-    h1 {
-      font-size: 1.25rem;
-      margin: 0 0 .25rem;
-    }
-
-    h2 {
-      font-size: 1rem;
-      margin: 1rem 0 .5rem;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: .9rem;
-      margin-bottom: 1rem;
-    }
-
-    .status,
-    .atak-help {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: .75rem;
-      padding: .75rem;
-      margin-bottom: 1rem;
-      font-size: .9rem;
-    }
-
-    .atak-help ol {
-      margin: .5rem 0 0 1.25rem;
-      padding: 0;
-      color: var(--muted);
-    }
-
-    .atak-help li {
-      margin-bottom: .35rem;
-    }
-
-    input[type="search"] {
-      width: 100%;
-      padding: .7rem .8rem;
-      border-radius: .65rem;
-      border: 1px solid var(--border);
-      background: #020617;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    .filters {
-      display: grid;
-      gap: .5rem;
-      margin-bottom: 1rem;
-    }
-
-    .mygroup {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    .links {
-      display: grid;
-      gap: .35rem;
-      margin-bottom: 1rem;
-    }
-
-    a,
-    .links a,
-    .powered a {
-      color: var(--link);
-      text-decoration: none;
-      font-size: .9rem;
-      overflow-wrap: anywhere;
-    }
-
-    .links a:hover,
-    .powered a:hover {
-      text-decoration: underline;
-    }
-
-    .camera-list {
-      display: grid;
-      gap: .65rem;
-    }
-
-    .card {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: .75rem;
-      padding: .75rem;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-    }
-
-    .card strong {
-      display: block;
-      margin-bottom: .2rem;
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: .15rem .45rem;
-      border-radius: 999px;
-      background: #0f766e;
-      color: white;
-      font-size: .72rem;
-      margin-bottom: .4rem;
-    }
-
-    #atak-help-title {
-      margin: 0px;
-      padding: 0px 5px
-    }
-
-    .popup {
-      max-width: 340px;
-    }
-
-    .popup img {
-      width: 100%;
-      max-width: 320px;
-      border-radius: 8px;
-      display: block;
-      margin-top: .5rem;
-    }
-
-    .popup a {
-      color: #0369a1;
-      display: inline-block;
-      margin-top: .35rem;
-    }
-
-    .popup-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      margin-top: .65rem;
-    }
-
-    .popup-actions button {
-      margin: 0;
-      border-radius: .5rem;
-      font-size: .82rem;
-      padding: .35rem .6rem;
-    }
-
-    .popup-video {
-      display: none;
-      margin-top: .65rem;
-      aspect-ratio: 16 / 9;
-      width: 100%;
-      min-width: 280px;
-    }
-
-    .popup-video.is-visible {
-      display: block;
-    }
-
-    .popup-video iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      border-radius: .5rem;
-      background: #000;
-    }
-
-    .popup-image {
-      margin-top: .65rem;
-      width: 100%;
-    }
-
-    .popup-image button {
-      display: block;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      border: 0;
-      border-radius: .5rem;
-      background: transparent;
-      cursor: zoom-in;
-    }
-
-    .popup-image img {
-      width: 100%;
-      max-width: 320px;
-      height: auto;
-      border-radius: .5rem;
-      display: block;
-      margin: 0;
-      background: #000;
-    }
-
-    .popup.expanded .popup-image img {
-      max-width: none;
-    }
-
-    .popup.expanded {
-      width: min(80vw, 900px);
-      max-width: 900px;
-    }
-
-    .popup.expanded .popup-video {
-      min-width: 0;
-    }
-
-    .btn,
-    button {
-      color: #fff;
-      background-color: #232f3d;
-      border-radius: 1rem;
-      margin: .5rem 0 1rem;
-      padding: 6px 12px;
-      border: 1px solid white;
-      cursor: pointer;
-    }
-
-    .btn:hover,
-    .btn:focus,
-    button:hover,
-    button:focus {
-      background-color: #005498;
-      text-decoration: none;
-    }
-
-    .powered {
-      margin-top: .25rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 900px) {
-      #app {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-      }
-
-      aside {
-        max-height: 46vh;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-      }
-
-      #map {
-        min-height: 54vh;
-      }
-    }
-  </style>
+  <base href="https://tim.workisboring.com/">
+  <link rel="stylesheet" href="/atak/css/cameras.css">
 </head>
 
 <body>
@@ -371,6 +64,9 @@
         <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
             aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
+        <div class="mygroup"><input type="checkbox" data-layer="deflock" aria-label="deFLOCK CAMERAS"> 🚨 DeFlock ALPR
+          Camera Locations
+        </div>
       </div>
 
       <section class="atak-help" aria-labelledby="atak-help-title">
@@ -391,6 +87,7 @@
         <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
         <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
         <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
+        <a href="/atak/data/kml/deflock-network.kml">ATAK: DeFlock ALPR Camera Map </a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -407,7 +104,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+  <script src="https://unpkg.com/@mapbox/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
   <script>
     const SOURCES = {
       alertwest: {
@@ -421,6 +118,11 @@
       "caloes-traffic": {
         label: "Cal OES Traffic",
         json: "/atak/data/caloes-traffic-cameras.json"
+      },
+      deflock: {
+        label: "DeFlock ALPR Cameras",
+        type: "kml",
+        url: "/atak/data/kml/deflock-us-conus.kml"
       },
       usgs: {
         label: "USGS River / Water",
@@ -812,6 +514,44 @@
     console.log("%c Welcome to: " + window.location.href + " now go home or my GitHub: CodePosse", "background: navy; color: #bada55; font-size: 28px;font-family:'Comic Sans MS';padding:10px;border:3px dashed red;");
 
   </script>
+  <script>async function ensureLayerLoaded(layerName) {
+      if (loadedLayers.has(layerName)) return;
+
+      const source = SOURCES[layerName];
+      document.getElementById("status").textContent =
+        `Loading ${source.label}…`;
+
+      if (source.type === "kml") {
+        await new Promise((resolve, reject) => {
+          const kmlLayer = omnivore.kml(source.url)
+            .on("ready", function () {
+              kmlLayer.eachLayer(layer => {
+                layer.addTo(layers[layerName]);
+              });
+
+              loadedLayers.add(layerName);
+              resolve();
+            })
+            .on("error", reject);
+        });
+
+        return;
+      }
+
+      const response = await fetch(source.json);
+
+      if (!response.ok) {
+        throw new Error(`Failed to load ${source.label}`);
+      }
+
+      const payload = await response.json();
+
+      for (const camera of payload.cameras || []) {
+        addCamera({ ...camera, layer: layerName });
+      }
+
+      loadedLayers.add(layerName);
+    }</script>
 </body>
 
 </html>
