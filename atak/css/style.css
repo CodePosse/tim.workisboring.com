@@ -26,6 +26,10 @@ body {
   background: var(--bg);
   color: var(--text);
   scrollbar-gutter: stable;
+    transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
 
 ::selection {
@@ -310,5 +314,10 @@ button:focus {
 
   #map {
     min-height: 54vh;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
   }
 }
