@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Useful Learning, Savings & Research Resources</title>
+  <meta name="description" content="A searchable and sortable directory of career, money, free, travel, and research resources.">
+  <meta name="theme-color" content="#0d6efd">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --resource-border: rgba(0, 0, 0, .09);
+    }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(13, 110, 253, .12), transparent 32rem),
+        #f8f9fa;
+    }
+    .hero {
+      background: linear-gradient(135deg, #17233a, #0d6efd);
+      color: #fff;
+    }
+    .directory-card {
+      border: 1px solid var(--resource-border);
+      box-shadow: 0 .75rem 2.5rem rgba(15, 23, 42, .08);
+    }
+    .resource-link::after {
+      content: " ↗";
+      font-size: .8em;
+    }
+    .sort-button {
+      color: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .sort-button:hover,
+    .sort-button:focus {
+      color: var(--bs-primary);
+    }
+    .sort-indicator {
+      display: inline-block;
+      width: 1rem;
+      margin-left: .2rem;
+      color: var(--bs-secondary-color);
+    }
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .summary-cell {
+      min-width: 24rem;
+    }
+    .empty-state {
+      display: none;
+    }
+    @media (max-width: 767.98px) {
+      thead {
+        display: none;
+      }
+      table, tbody, tr, td {
+        display: block;
+        width: 100%;
+      }
+      tbody {
+        padding: .75rem;
+      }
+      tbody tr {
+        position: relative;
+        margin-bottom: .75rem;
+        padding: 1rem;
+        border: 1px solid var(--resource-border);
+        border-radius: 1rem;
+        background: #fff;
+      }
+      tbody tr:last-child {
+        margin-bottom: 0;
+      }
+      tbody td {
+        padding: .2rem 0;
+        border: 0;
+      }
+      tbody td:first-child {
+        display: none;
+      }
+      tbody td:nth-child(2) {
+        padding-right: 6rem;
+        font-size: 1.05rem;
+      }
+      tbody td:nth-child(3) {
+        margin-top: .45rem;
+        min-width: 0;
+        color: var(--bs-secondary-color);
+      }
+      tbody td:nth-child(4) {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero py-5">
+    <div class="container py-3">
+      <span class="badge rounded-pill text-bg-light text-primary mb-3">Resource Directory</span>
+      <h1 class="display-5 fw-bold mb-3">Useful Learning, Savings & Research Resources</h1>
+      <p class="lead col-lg-9 mb-0">
+        Search, filter, and sort a curated collection of training programs, free services,
+        travel tools, money-saving resources, and research utilities.
+      </p><p>This is a textbook example of vibe code design slop.</p>
+    </div>
+  </header>
+
+ <main class="container py-4 py-lg-5">
+    <section class="directory-card card rounded-4 overflow-hidden">
+      <div class="card-body p-3 p-lg-4 border-bottom">
+        <div class="row g-3 align-items-end">
+          <div class="col-lg-6">
+            <label for="resourceSearch" class="form-label fw-semibold">Search resources</label>
+            <input id="resourceSearch" class="form-control form-control-lg" type="search"
+                   placeholder="Search names and summaries…" autocomplete="off">
+          </div>
+          <div class="col-sm-7 col-lg-3">
+            <label for="categoryFilter" class="form-label fw-semibold">Category</label>
+            <select id="categoryFilter" class="form-select form-select-lg">
+              <option value="all">All categories</option>
+              <option value="career">Career</option>
+              <option value="freebies">Freebies</option>
+              <option value="money">Money</option>
+              <option value="travel">Travel</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="col-sm-5 col-lg-3">
+            <button id="resetFilters" type="button" class="btn btn-outline-secondary btn-lg w-100">
+              Reset
+            </button>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between gap-2 mt-3">
+          <p id="resultCount" class="mb-0 text-secondary" aria-live="polite"></p>
+          <small class="text-secondary">Select a column heading to sort.</small>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="resourceTable">
+          <caption class="visually-hidden">Sortable directory of useful online resources.</caption>
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="ps-4" style="width: 5rem;">#</th>
+              <th scope="col">
+                <button class="btn btn-link sort-button p-0" type="button" data-sort="name">
+                  Resource <span class="sort-indicator" aria-hidden="true"></span>
+                </button>
+              </th>
+              <th scope="col">Summary</th>
+              <th scope="col" class="pe-4">
+                <button class="btn btn-link sort-button p-0" type="button" data-sort="category">
+                  Category <span class="sort-indicator" aria-hidden="true"></span>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-name="fema emergency management institute" data-summary="browse fema emergency management institute courses, schedules, prerequisites, and enrollment information for emergency-management training." data-category="career">
+        <td class="text-secondary fw-semibold">1</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://training.fema.gov/emicourses/" target="_blank" rel="noopener noreferrer">
+            FEMA Emergency Management Institute
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Browse FEMA Emergency Management Institute courses, schedules, prerequisites, and enrollment information for emergency-management training.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="freecodecamp responsive web design" data-summary="a project-based curriculum for learning modern html, css, responsive layouts, accessibility, and front-end design fundamentals." data-category="career">
+        <td class="text-secondary fw-semibold">2</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/learn/responsive-web-design-v9/" target="_blank" rel="noopener noreferrer">
+            freeCodeCamp Responsive Web Design
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A project-based curriculum for learning modern HTML, CSS, responsive layouts, accessibility, and front-end design fundamentals.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="google search certification" data-summary="google skillshop provides self-paced product training and certification paths for google tools, including advertising and measurement products." data-category="career">
+        <td class="text-secondary fw-semibold">3</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">
+            Google Search Certification
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Google Skillshop provides self-paced product training and certification paths for Google tools, including advertising and measurement products.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="uipath robotic process automation" data-summary="uipath academy offers online learning paths for robotic process automation, automation development, and related professional skills." data-category="career">
+        <td class="text-secondary fw-semibold">4</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.uipath.com/rpa/academy" target="_blank" rel="noopener noreferrer">
+            UiPath Robotic Process Automation
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">UiPath Academy offers online learning paths for robotic process automation, automation development, and related professional skills.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="kaggle machine learning" data-summary="a hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises." data-category="career">
+        <td class="text-secondary fw-semibold">5</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.kaggle.com/learn/intro-to-machine-learning" target="_blank" rel="noopener noreferrer">
+            Kaggle Machine Learning
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="atlassian jira fundamentals" data-summary="training and certification preparation for essential jira software concepts, workflows, boards, issue tracking, and team collaboration." data-category="career">
+        <td class="text-secondary fw-semibold">6</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://community.atlassian.com/learning/certifications/jira-software-essentials" target="_blank" rel="noopener noreferrer">
+            Atlassian Jira Fundamentals
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Training and certification preparation for essential Jira Software concepts, workflows, boards, issue tracking, and team collaboration.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="saylor academy business administration" data-summary="a catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects." data-category="career">
+        <td class="text-secondary fw-semibold">7</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://learn.saylor.org/course/index.php?categoryid=6" target="_blank" rel="noopener noreferrer">
+            Saylor Academy Business Administration
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="semrush seo toolkit" data-summary="a semrush academy course introducing seo workflows and the platform’s tools for keyword research, audits, competitive research, and reporting." data-category="career">
+        <td class="text-secondary fw-semibold">8</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-toolkit-crash-course/" target="_blank" rel="noopener noreferrer">
+            Semrush SEO Toolkit
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A Semrush Academy course introducing SEO workflows and the platform’s tools for keyword research, audits, competitive research, and reporting.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="semrush seo essentials" data-summary="an seo fundamentals course explaining how to research, optimize, measure, and improve organic search performance with semrush." data-category="career">
+        <td class="text-secondary fw-semibold">9</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-essentials-with-semrush/" target="_blank" rel="noopener noreferrer">
+            Semrush SEO Essentials
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">An SEO fundamentals course explaining how to research, optimize, measure, and improve organic search performance with Semrush.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="hubspot inbound marketing" data-summary="a course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth." data-category="career">
+        <td class="text-secondary fw-semibold">10</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://academy.hubspot.com/courses/inbound-marketing" target="_blank" rel="noopener noreferrer">
+            HubSpot Inbound Marketing
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="google analytics certification" data-summary="google skillshop provides training and certification resources for google analytics and other google business products." data-category="career">
+        <td class="text-secondary fw-semibold">11</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">
+            Google Analytics Certification
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Google Skillshop provides training and certification resources for Google Analytics and other Google business products.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="freecodecamp" data-summary="a free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development." data-category="career">
+        <td class="text-secondary fw-semibold">12</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">
+            freeCodeCamp
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="alternativeto" data-summary="a community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations." data-category="career">
+        <td class="text-secondary fw-semibold">13</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
+            AlternativeTo
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations.</td>
+        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+      </tr>
+      <tr data-name="camelcamelcamel" data-summary="an amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends." data-category="money">
+        <td class="text-secondary fw-semibold">14</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://camelcamelcamel.com/" target="_blank" rel="noopener noreferrer">
+            CamelCamelCamel
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">An Amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends.</td>
+        <td><span class="badge rounded-pill text-bg-success">Money</span></td>
+      </tr>
+      <tr data-name="ilovepdf" data-summary="a browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing pdf files." data-category="freebies">
+        <td class="text-secondary fw-semibold">15</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.ilovepdf.com/" target="_blank" rel="noopener noreferrer">
+            iLovePDF
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing PDF files.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="davinci resolve" data-summary="professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition." data-category="freebies">
+        <td class="text-secondary fw-semibold">16</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener noreferrer">
+            DaVinci Resolve
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="this person does not exist" data-summary="displays ai-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals." data-category="freebies">
+        <td class="text-secondary fw-semibold">17</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://thispersondoesnotexist.com/" target="_blank" rel="noopener noreferrer">
+            This Person Does Not Exist
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Displays AI-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="littlesis.org" data-summary="a public-interest research database that maps relationships among influential people, organizations, corporations, and institutions." data-category="other">
+        <td class="text-secondary fw-semibold">18</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://littlesis.org/" target="_blank" rel="noopener noreferrer">
+            LittleSis.org
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A public-interest research database that maps relationships among influential people, organizations, corporations, and institutions.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="skiplagged" data-summary="a travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies." data-category="travel">
+        <td class="text-secondary fw-semibold">19</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://skiplagged.com/" target="_blank" rel="noopener noreferrer">
+            Skiplagged
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies.</td>
+        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+      </tr>
+      <tr data-name="pimeyes" data-summary="a facial-image search engine that looks for visually similar faces across publicly accessible websites." data-category="other">
+        <td class="text-secondary fw-semibold">20</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://pimeyes.com/en" target="_blank" rel="noopener noreferrer">
+            PimEyes
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A facial-image search engine that looks for visually similar faces across publicly accessible websites.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="osint framework" data-summary="a categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records." data-category="other">
+        <td class="text-secondary fw-semibold">21</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://osintframework.com/" target="_blank" rel="noopener noreferrer">
+            OSINT Framework
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="shodan" data-summary="a search engine for internet-connected devices and exposed services, commonly used for security research and network visibility." data-category="other">
+        <td class="text-secondary fw-semibold">22</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer">
+            Shodan
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A search engine for internet-connected devices and exposed services, commonly used for security research and network visibility.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="importyeti" data-summary="a searchable database of u.s. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships." data-category="other">
+        <td class="text-secondary fw-semibold">23</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.importyeti.com/" target="_blank" rel="noopener noreferrer">
+            ImportYeti
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A searchable database of U.S. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="wigle" data-summary="a community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans." data-category="other">
+        <td class="text-secondary fw-semibold">24</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://wigle.net/" target="_blank" rel="noopener noreferrer">
+            WiGLE
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="futurepedia" data-summary="a directory of ai tools organized by use case, with listings for productivity, content, development, business, and creative workflows." data-category="other">
+        <td class="text-secondary fw-semibold">25</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.futurepedia.io/" target="_blank" rel="noopener noreferrer">
+            Futurepedia
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A directory of AI tools organized by use case, with listings for productivity, content, development, business, and creative workflows.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="privacy.com" data-summary="a service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details." data-category="other">
+        <td class="text-secondary fw-semibold">26</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.privacy.com/" target="_blank" rel="noopener noreferrer">
+            Privacy.com
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="publicwww" data-summary="a source-code search engine for finding websites that contain specific html, javascript, css, analytics ids, or other code snippets." data-category="other">
+        <td class="text-secondary fw-semibold">27</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://publicwww.com/" target="_blank" rel="noopener noreferrer">
+            PublicWWW
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A source-code search engine for finding websites that contain specific HTML, JavaScript, CSS, analytics IDs, or other code snippets.</td>
+        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+      </tr>
+      <tr data-name="free city tours on your layover" data-summary="a prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers." data-category="travel">
+        <td class="text-secondary fw-semibold">28</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.google.com/search?q=airport+free+city+tour+transit+tour+layover+program" target="_blank" rel="noopener noreferrer">
+            Free City Tours on Your Layover
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers.</td>
+        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+      </tr>
+      <tr data-name="trustedhousesitters" data-summary="a membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care." data-category="travel">
+        <td class="text-secondary fw-semibold">29</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.trustedhousesitters.com/" target="_blank" rel="noopener noreferrer">
+            TrustedHousesitters
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care.</td>
+        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+      </tr>
+      <tr data-name="needymeds" data-summary="a nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs." data-category="freebies">
+        <td class="text-secondary fw-semibold">30</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://needymeds.org/" target="_blank" rel="noopener noreferrer">
+            NeedyMeds
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="rxassist" data-summary="a directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost." data-category="freebies">
+        <td class="text-secondary fw-semibold">31</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://rxassist.org/" target="_blank" rel="noopener noreferrer">
+            RxAssist
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="free museum entry via library passes" data-summary="los angeles county library’s discover &amp; go portal for reserving free or discounted passes to participating museums and cultural attractions." data-category="freebies">
+        <td class="text-secondary fw-semibold">32</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://colapublib.discoverandgo.net/" target="_blank" rel="noopener noreferrer">
+            Free Museum Entry via Library Passes
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Los Angeles County Library’s Discover &amp; Go portal for reserving free or discounted passes to participating museums and cultural attractions.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="missingmoney" data-summary="a multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name." data-category="freebies">
+        <td class="text-secondary fw-semibold">33</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://missingmoney.com/" target="_blank" rel="noopener noreferrer">
+            MissingMoney
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">A multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="irs volunteer tax preparation" data-summary="official information for locating vita and tce sites that provide free basic tax-return preparation to qualifying taxpayers." data-category="freebies">
+        <td class="text-secondary fw-semibold">34</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener noreferrer">
+            IRS Volunteer Tax Preparation
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">Official information for locating VITA and TCE sites that provide free basic tax-return preparation to qualifying taxpayers.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+      <tr data-name="find a health center" data-summary="an official locator for federally funded health centers that provide primary care and related services, often using income-based fees." data-category="freebies">
+        <td class="text-secondary fw-semibold">35</td>
+        <td>
+          <a class="resource-link fw-semibold text-decoration-none" href="https://findahealthcenter.hrsa.gov/" target="_blank" rel="noopener noreferrer">
+            Find a Health Center
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </td>
+        <td class="summary-cell">An official locator for federally funded health centers that provide primary care and related services, often using income-based fees.</td>
+        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty-state text-center p-5">
+        <h2 class="h5">No matching resources</h2>
+        <p class="text-secondary mb-3">Try another search term or category.</p>
+        <button type="button" class="btn btn-primary" data-reset>Clear filters</button>
+      </div>
+    </section>
+
+    <p class="small text-secondary mt-3 mb-0">
+      External links open in a new tab. Availability, eligibility, pricing, and course details may change.
+    </p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+ (() => {
+      const table = document.getElementById('resourceTable');
+      const tbody = table.querySelector('tbody');
+      const searchInput = document.getElementById('resourceSearch');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const resultCount = document.getElementById('resultCount');
+      const emptyState = document.getElementById('emptyState');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      let sortKey = 'name';
+      let sortDirection = 'asc';
+
+      function visibleRows() {
+        return rows.filter(row => row.hidden === false);
+      }
+
+      function renumberRows() {
+        let visibleIndex = 1;
+
+        Array.from(tbody.querySelectorAll('tr')).forEach(row => {
+          const numberCell = row.querySelector('td:first-child');
+
+          if (!row.hidden) {
+            numberCell.textContent = visibleIndex;
+            visibleIndex += 1;
+          } else {
+            numberCell.textContent = '';
+          }
+        });
+      }
+
+      function updateCount() {
+        const count = visibleRows().length;
+        resultCount.textContent = `${count} resource${count === 1 ? '' : 's'} shown`;
+        emptyState.style.display = count === 0 ? 'block' : 'none';
+        table.style.display = count === 0 ? 'none' : '';
+        renumberRows();
+      }
+
+      function filterRows() {
+        const term = searchInput.value.trim().toLowerCase();
+        const category = categoryFilter.value;
+
+        rows.forEach(row => {
+          const matchesText =
+            row.dataset.name.includes(term) ||
+            row.dataset.summary.includes(term);
+          const matchesCategory =
+            category === 'all' || row.dataset.category === category;
+          row.hidden = !(matchesText && matchesCategory);
+        });
+
+        updateCount();
+      }
+
+      function sortRows(key) {
+        if (sortKey === key) {
+          sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+          sortKey = key;
+          sortDirection = 'asc';
+        }
+
+        rows.sort((a, b) => {
+          const first = a.dataset[key];
+          const second = b.dataset[key];
+          return first.localeCompare(second, undefined, { sensitivity: 'base' }) *
+            (sortDirection === 'asc' ? 1 : -1);
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+        renumberRows();
+
+        document.querySelectorAll('.sort-button').forEach(button => {
+          const indicator = button.querySelector('.sort-indicator');
+          const active = button.dataset.sort === sortKey;
+          indicator.textContent = active ? (sortDirection === 'asc' ? '▲' : '▼') : '';
+          button.setAttribute('aria-sort', active
+            ? (sortDirection === 'asc' ? 'ascending' : 'descending')
+            : 'none');
+        });
+      }
+
+      function reset() {
+        searchInput.value = '';
+        categoryFilter.value = 'all';
+        filterRows();
+        searchInput.focus();
+      }
+
+      searchInput.addEventListener('input', filterRows);
+      categoryFilter.addEventListener('change', filterRows);
+      document.getElementById('resetFilters').addEventListener('click', reset);
+      document.querySelector('[data-reset]').addEventListener('click', reset);
+
+      document.querySelectorAll('.sort-button').forEach(button => {
+        button.addEventListener('click', () => sortRows(button.dataset.sort));
+      });
+
+      rows.forEach(row => row.hidden = false);
+      sortRows('name');
+      sortDirection = 'desc';
+      sortRows('name');
+      filterRows();
+    })();
+  </script>
+</body>
+</html>

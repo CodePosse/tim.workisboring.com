@@ -11,81 +11,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css" media="screen">
     html,
     body,
-    #map {
+    a {
       height: 100%;
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    .panel {
-      position: absolute;
-      z-index: 1000;
-      top: 12px;
-      left: 12px;
-      background: white;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, .2);
-      max-width: 320px;
-    }
-
-    .panel h1 {
-      font-size: 1rem;
-      margin: 0 0 6px;
-    }
-
-    .panel label {
-      display: block;
-      margin-top: 6px;
-      font-size: .9rem;
-    }
-
-    .popup {
-      max-width: 340px;
-    }
-
-    .popup img {
-      width: 100%;
-      max-width: 320px;
-      height: auto;
-      display: block;
-      margin-top: .5rem;
-      border-radius: 6px;
-    }
-
-    .popup a {
-      display: inline-block;
-      margin-top: .35rem;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: #eee;
-      font-size: .75rem;
-      margin-bottom: 4px;
-    }
-
-    body {
       color: #333;
       font-family: "PT Sans", sans-serif;
-      font-weight: 400;
-      font-style: normal;
     }
   </style>
 </head>
 
 <body>greetings fellow traveller
-
-  <p>If you are looking for KML maps for ATAK for Calfire, try these: <a href="atak/">short intro</a>
-    <a href="atak/cameras.html">this</a> <br>
-    <a href="https://filmsupplies.com/mesh/">SoCal Mesh set up guide</a>
-
-
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <p>If you are looking for KML maps for ATAK learning, try these:
+          </p>
+          <div class="list-group">
+            <a href="./atak/cameras.html" class="list-group-item list-group-item-action">ATAK maps</a>
+            <a href="./atak" class="list-group-item list-group-item-action">ATAK intro/ettiquette</a>
+            <a href="https://filmsupplies.com/mesh/" class="list-group-item list-group-item-action" target="_blank"
+              rel="noopener noreferrer">SoCal Mesh set up guide</a>
+            <a href="./code" class="list-group-item list-group-item-action">ugly vibe code design list from YT: chill
+              dude explains</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>
