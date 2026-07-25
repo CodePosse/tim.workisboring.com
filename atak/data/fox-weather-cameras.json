@@ -1,7 +1,7 @@
 {
   "source_key": "fox-weather",
   "title": "FOX / Weather Vision Southern California Cameras",
-  "generated_at": 1785016946,
+  "generated_at": 1785017798,
   "count": 4,
   "cameras": [
     {
@@ -31,8 +31,9 @@
       "heading": "",
       "thumbnail": "",
       "url": "https://www.fox10phoenix.com/webcams-los-angeles",
+      "embed_url": "https://api.wetmet.net/widgets/stream/frame.php?uid=a4a30b2291758ac24d435acf266bb100",
       "stream_url": "",
-      "stream_type": "external-page",
+      "stream_type": "iframe",
       "region": "Southern California",
       "attribution": "FOX 10 Phoenix / Weather Vision"
     },

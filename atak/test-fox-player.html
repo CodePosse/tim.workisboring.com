@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FOX Weather Vision Player Test</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .player-wrapper {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    .player-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>LAX Live Camera</h1>
+
+  <div class="player-wrapper">
+    <iframe
+      src="https://api.wetmet.net/widgets/stream/frame.php?uid=a4a30b2291758ac24d435acf266bb100"
+      title="LAX Airport live webcam"
+      loading="lazy"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+  </div>
+</body>
+</html>
