@@ -31,9 +31,15 @@
   <meta name="twitter:description"
     content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIVE camera feeds.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <base href="https://tim.workisboring.com/">
-  <link rel="stylesheet" href="/atak/css/style.css">
+
+  <link rel="stylesheet" href="./css/style.css">
 
   <style>
     .popup-live-player {
@@ -59,52 +65,153 @@
       border: 0;
     }
   </style>
+
+  <style id="bootstrap-camera-layout">
+    html,
+    body,
+    #app {
+      height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    #app {
+      display: flex;
+      width: 100%;
+    }
+
+    #app > aside {
+      width: min(420px, 100%);
+      flex: 0 0 min(420px, 100%);
+      overflow-y: auto;
+      background: var(--bs-body-bg);
+      border-right: var(--bs-border-width) solid var(--bs-border-color);
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    #map {
+      flex: 1 1 auto;
+      min-width: 0;
+      min-height: 100%;
+    }
+
+    .filters {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .mygroup {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.7rem;
+      border: var(--bs-border-width) solid var(--bs-border-color);
+      border-radius: var(--bs-border-radius);
+      background: var(--bs-tertiary-bg);
+    }
+
+    .mygroup input {
+      flex: 0 0 auto;
+    }
+
+    .camera-list .card {
+      cursor: pointer;
+      margin-bottom: 0.55rem;
+      padding: 0.7rem;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .camera-list .card:hover,
+    .camera-list .card:focus-within {
+      transform: translateY(-1px);
+      box-shadow: var(--bs-box-shadow-sm);
+    }
+
+    .links {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .links a {
+      display: block;
+    }
+
+    .leaflet-popup-content .btn {
+      margin: 0.15rem 0.15rem 0.15rem 0;
+    }
+
+    @media (max-width: 767.98px) {
+      body {
+        overflow: auto;
+      }
+
+      #app {
+        display: block;
+        height: auto;
+      }
+
+      #app > aside {
+        width: 100%;
+        max-height: none;
+        border-right: 0;
+        border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+      }
+
+      #map {
+        height: 65vh;
+        min-height: 480px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <div id="app">
-    <aside>
-      <h1>📷 SoCal TAK/GIS Cameras</h1>
-      <div class="subtitle">Public camera layers for <a href="https://tak.gov/" target="_blank"
+    <aside class="shadow-sm">
+      <h1 class="h3 mb-2"><i class="bi bi-camera-video me-2" aria-hidden="true"></i>SoCal TAK/GIS Cameras</h1>
+      <div class="subtitle text-body-secondary small mb-3">Public camera layers for <a href="https://tak.gov/" target="_blank"
           rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be
         used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank"
           rel="noopener noreferrer">Google Earth</a><br>
-        <button type="button" id="share-link-btn">Share 🔗</button>
+        <button type="button" id="share-link-btn" class="btn btn-outline-primary btn-sm mt-2"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
       </div>
-      <div class="status" id="status">Select a camera layer to load.</div>
+      <div class="status alert alert-secondary py-2 px-3 mb-3" id="status" role="status">Select a camera layer to load.</div>
 
-      <input id="search" type="search" placeholder="Search name, county, source…"
+      <input id="search" class="form-control mb-3" type="search" placeholder="Search name, county, source…"
         aria-label="Search cameras by name, county, or source">
 
-      <div class="filters">
-        <div class="mygroup"><input type="checkbox" data-layer="alertwest" aria-label="ALERTCalifornia / AlertWest"> 🔥
+      <div class="filters mb-3">
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="alertwest" aria-label="ALERTCalifornia / AlertWest"> 🔥
           ALERTCalifornia / AlertWest</div>
-        <div class="mygroup"><input type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire
         </div>
-        <div class="mygroup"><input type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
           Traffic</div>
         <div class="mygroup">
-          <input type="checkbox" data-layer="caltrans" aria-label="Caltrans Traffic Cameras">
-          Caltrans Traffic Cameras
+          <input class="form-check-input mt-0" type="checkbox" data-layer="caltrans" aria-label="Caltrans Traffic Cameras">
+          🚗 Caltrans Traffic Cameras
         </div>
 
         <div class="mygroup">
-          <input type="checkbox" data-layer="fox-weather" aria-label="FOX Weather Vision Cameras">
-          FOX / Weather Vision Live Cameras
+          <input class="form-check-input mt-0" type="checkbox" data-layer="fox-weather" aria-label="FOX Weather Vision Cameras">
+           🌎 Weather Vision Live Cameras
         </div>
-        <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
-        <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
-        <div class="mygroup"><input type="checkbox" data-layer="curated-socal"
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="curated-socal"
             aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
-        <div class="mygroup"><input type="checkbox" data-layer="deflock" aria-label="deFLOCK CAMERAS"> 🚨 DeFlock ALPR
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="deflock" aria-label="deFLOCK CAMERAS"> 🚨 DeFlock ALPR
           Cameras in CA
         </div>
       </div>
 
-      <section class="atak-help" aria-labelledby="atak-help-title">
-        <h2 id="atak-help-title">Add a camera layer to ATAK Android</h2>
+      <section class="atak-help card card-body mb-3" aria-labelledby="atak-help-title">
+        <h2 id="atak-help-title" class="h5">Add a camera layer to ATAK Android</h2>
         <ol>
           <li>Open ATAK-CIV on Android.</li>
           <li>Open the main menu and choose <strong>Import Manager</strong>.</li>
@@ -113,7 +220,7 @@
           <li>After import, pan/zoom to California and enable the overlay if needed.</li>
         </ol>
       </section>
-      <details>
+      <details class="card card-body mb-3">
         <summary>Network KML Files (expand)</summary>
         <p class="links">
           <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
@@ -130,7 +237,7 @@
         </p>
       </details>
 
-      <div class="camera-list" id="cameraList"></div>
+      <div class="camera-list" id="cameraList" aria-live="polite"></div>
 
       <div class="powered">
         <small>Powered by: <a href="https://github.com/CodePosse/tim.workisboring.com" rel="nofollow noopener"
@@ -184,6 +291,89 @@
         json: "/atak/data/curated-socal-cameras.json"
       }
     };
+
+    const FOX_WEATHER_FALLBACK_CAMERAS = [
+      {
+        id: "fox-weather-oakland-estuary",
+        name: "Oakland Estuary – San Francisco Bay",
+        source: "FOX 10 / Weather Vision",
+        category: "Live Bay Webcam",
+        lat: 37.7955,
+        lon: -122.2780,
+        city: "Oakland",
+        county: "Alameda",
+        url: "https://www.fox10phoenix.com/webcams-sf-bay",
+        streamType: "external-page",
+        attribution: "FOX 10 Phoenix / Weather Vision",
+        featured: true,
+        priority: 75,
+        tags: ["Oakland", "San Francisco Bay", "estuary", "live webcam"]
+      },
+      {
+        id: "fox-weather-bay-point",
+        name: "Bay Point – Highway 4",
+        source: "FOX 10 / Weather Vision",
+        category: "Live Traffic Webcam",
+        lat: 38.0291,
+        lon: -121.9616,
+        city: "Bay Point",
+        county: "Contra Costa",
+        url: "https://www.fox10phoenix.com/webcams-bay-point",
+        streamType: "external-page",
+        attribution: "FOX 10 Phoenix / Weather Vision",
+        featured: true,
+        priority: 75,
+        tags: ["Bay Point", "Highway 4", "traffic", "live webcam"]
+      },
+      {
+        id: "fox-weather-emeryville",
+        name: "Emeryville – Oakland Area",
+        source: "FOX 10 / Weather Vision",
+        category: "Live City Webcam",
+        lat: 37.8313,
+        lon: -122.2852,
+        city: "Emeryville",
+        county: "Alameda",
+        url: "https://www.fox10phoenix.com/webcams-emeryville",
+        streamType: "external-page",
+        attribution: "FOX 10 Phoenix / Weather Vision",
+        featured: true,
+        priority: 75,
+        tags: ["Emeryville", "Oakland", "San Francisco Bay", "live webcam"]
+      },
+      {
+        id: "fox-weather-santa-monica",
+        name: "Santa Monica Beach",
+        source: "FOX 10 / Weather Vision",
+        category: "Live Beach Webcam",
+        lat: 34.0094,
+        lon: -118.4973,
+        city: "Santa Monica",
+        county: "Los Angeles",
+        url: "https://www.fox10phoenix.com/webcams-santa-monica-beach",
+        embedUrl: "https://api.wetmet.net/widgets/stream/frame.php?uid=0985333ee65625a3b1139ed97b4f27bc",
+        streamType: "iframe",
+        attribution: "FOX 10 Phoenix / Weather Vision",
+        featured: true,
+        priority: 90,
+        tags: ["Santa Monica", "beach", "ocean", "live webcam"]
+      }
+    ];
+
+    function mergeUniqueCameras(primary, fallback) {
+      const merged = [];
+      const seen = new Set();
+
+      [...primary, ...fallback].forEach(camera => {
+        const key = camera.id || camera.url || `${camera.name}|${camera.lat}|${camera.lon}`;
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        merged.push(camera);
+      });
+
+      return merged;
+    }
+
     const map = L.map("map").setView([34.35, -117.8], 7);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -253,7 +443,7 @@
 
       if (youtubeId) {
         mediaControls.push(`
-          <button type="button" class="video-toggle" data-youtube-id="${escapeHtml(youtubeId)}">
+          <button type="button" class="video-toggle btn btn-primary btn-sm" data-youtube-id="${escapeHtml(youtubeId)}">
             Show video
           </button>
         `);
@@ -262,7 +452,7 @@
       if (embedUrl) {
         mediaControls.push(`
           <button type="button"
-                  class="live-player-toggle"
+                  class="live-player-toggle btn btn-primary btn-sm"
                   data-embed-url="${escapeHtml(embedUrl)}">
             Show live player
           </button>
@@ -277,7 +467,7 @@
 
       if (youtubeId || embedUrl || largeImageUrl) {
         mediaControls.push(`
-          <button type="button" class="popup-expand-toggle">
+          <button type="button" class="popup-expand-toggle btn btn-outline-secondary btn-sm">
             Expand
           </button>
         `);
@@ -307,7 +497,7 @@
 
       return `
         <div class="popup">
-          <span class="badge">${escapeHtml(cam.category || cam.source)}</span><br>
+          <span class="badge text-bg-secondary">${escapeHtml(cam.category || cam.source)}</span><br>
           <strong>${escapeHtml(cam.name)}</strong><br>
           Source: ${escapeHtml(cam.source || "")}<br>
           ${cam.operator && cam.operator !== cam.source ? `Operator: ${escapeHtml(cam.operator)}<br>` : ""}
@@ -315,7 +505,7 @@
           ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
           ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
-          ${cam.url ? `<a href="${escapeHtml(cam.url)}" target="_blank" rel="noopener">Open camera page</a><br>` : ""}
+          ${cam.url ? `<a class="btn btn-outline-primary btn-sm my-1" href="${escapeHtml(cam.url)}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right me-1"></i>Open camera page</a><br>` : ""}
           ${channelUrl ? `<a href="${escapeHtml(channelUrl)}" target="_blank" rel="noopener">Open YouTube streams</a><br>` : ""}
           ${cam.tags?.length ? `Tags: ${escapeHtml(cam.tags.join(", "))}<br>` : ""}
           ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
@@ -378,7 +568,9 @@
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
-      const cameras = payload.cameras || [];
+      const cameras = layerName === "fox-weather"
+        ? mergeUniqueCameras(payload.cameras || [], FOX_WEATHER_FALLBACK_CAMERAS)
+        : (payload.cameras || []);
 
       cameras.forEach(cam => {
         addCamera({ ...cam, layer: layerName });
@@ -420,9 +612,9 @@
 
       filtered.slice(0, 100).forEach(cam => {
         const card = document.createElement("div");
-        card.className = "card";
+        card.className = "card border-0 bg-body-tertiary";
         card.innerHTML = `
-          <span class="badge">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
+          <span class="badge text-bg-secondary mb-1">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
           <strong>${escapeHtml(cam.name)}</strong>
           <div class="meta">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
         `;
@@ -619,6 +811,10 @@
     console.log("%c Welcome to: " + window.location.href + " now go home or my GitHub: CodePosse", "background: navy; color: #bada55; font-size: 28px;font-family:'Comic Sans MS';padding:10px;border:3px dashed red;");
 
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+          crossorigin="anonymous"></script>
 </body>
 
 </html>
