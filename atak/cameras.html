@@ -40,132 +40,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <link rel="stylesheet" href="./css/style.css">
-
-  <style>
-    .popup-live-player {
-      margin-top: 0.75rem;
-    }
-
-    .popup-live-player[hidden] {
-      display: none;
-    }
-
-    .popup-live-player-frame {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: #000;
-      border-radius: 0.5rem;
-    }
-
-    .popup-live-player-frame iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-  </style>
-
-  <style id="bootstrap-camera-layout">
-    html,
-    body,
-    #app {
-      height: 100%;
-    }
-
-    body {
-      overflow: hidden;
-    }
-
-    #app {
-      display: flex;
-      width: 100%;
-    }
-
-    #app > aside {
-      width: min(420px, 100%);
-      flex: 0 0 min(420px, 100%);
-      overflow-y: auto;
-      background: var(--bs-body-bg);
-      border-right: var(--bs-border-width) solid var(--bs-border-color);
-      padding: 1rem;
-      z-index: 1000;
-    }
-
-    #map {
-      flex: 1 1 auto;
-      min-width: 0;
-      min-height: 100%;
-    }
-
-    .filters {
-      display: grid;
-      gap: 0.45rem;
-    }
-
-    .mygroup {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.55rem 0.7rem;
-      border: var(--bs-border-width) solid var(--bs-border-color);
-      border-radius: var(--bs-border-radius);
-      background: var(--bs-tertiary-bg);
-    }
-
-    .mygroup input {
-      flex: 0 0 auto;
-    }
-
-    .camera-list .card {
-      cursor: pointer;
-      margin-bottom: 0.55rem;
-      padding: 0.7rem;
-      transition: transform 120ms ease, box-shadow 120ms ease;
-    }
-
-    .camera-list .card:hover,
-    .camera-list .card:focus-within {
-      transform: translateY(-1px);
-      box-shadow: var(--bs-box-shadow-sm);
-    }
-
-    .links {
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    .links a {
-      display: block;
-    }
-
-    .leaflet-popup-content .btn {
-      margin: 0.15rem 0.15rem 0.15rem 0;
-    }
-
-    @media (max-width: 767.98px) {
-      body {
-        overflow: auto;
-      }
-
-      #app {
-        display: block;
-        height: auto;
-      }
-
-      #app > aside {
-        width: 100%;
-        max-height: none;
-        border-right: 0;
-        border-bottom: var(--bs-border-width) solid var(--bs-border-color);
-      }
-
-      #map {
-        height: 65vh;
-        min-height: 480px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -210,8 +84,8 @@
         </div>
       </div>
 
-      <section class="atak-help card card-body mb-3" aria-labelledby="atak-help-title">
-        <h2 id="atak-help-title" class="h5">Add a camera layer to ATAK Android</h2>
+      <details class="atak-help card card-body mb-3 bg-light" aria-labelledby="atak-help-title">
+        <summary id="atak-help-title">Add a camera layer to ATAK +</summary>
         <ol>
           <li>Open ATAK-CIV on Android.</li>
           <li>Open the main menu and choose <strong>Import Manager</strong>.</li>
@@ -219,9 +93,9 @@
           <li>Copy one Network KML URL below and paste it into ATAK.</li>
           <li>After import, pan/zoom to California and enable the overlay if needed.</li>
         </ol>
-      </section>
-      <details class="card card-body mb-3">
-        <summary>Network KML Files (expand)</summary>
+      </details>
+      <details class="card card-body mb-3 bg-light">
+        <summary>Network KML Files +</summary>
         <p class="links">
           <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
           <a href="/atak/data/kml/caloes-fire-network.kml">Cal OES Fire Network KML</a>
@@ -612,11 +486,11 @@
 
       filtered.slice(0, 100).forEach(cam => {
         const card = document.createElement("div");
-        card.className = "card border-0 bg-body-tertiary";
+        card.className = "card border-1 text-dark";
         card.innerHTML = `
-          <span class="badge text-bg-secondary mb-1">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
+          <span class="badge text-primary mb-1">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
           <strong>${escapeHtml(cam.name)}</strong>
-          <div class="meta">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
+          <div class="fs-6 fw-light">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
         `;
         card.addEventListener("click", () => {
           map.setView([cam.lat, cam.lon], 12);

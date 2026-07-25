@@ -4,18 +4,138 @@
   --panel-2: #1f2937;
   --text: #f8fafc;
   --muted: #cbd5e1;
-  --accent: #38bdf8;
+  --accent: #385a69;
+  --border-light: hsl(216, 24%, 43%);
   --border: #334155;
-  --link: #7dd3fc;
+  --link: #57a8c4;
+  --bs-border-radius: 10px;
 }
 
 html,
-body {
+body,
+#app {
   scrollbar-gutter: stable;
-    transition:
+  transition:
     transform 0.18s ease,
     border-color 0.18s ease,
     background 0.18s ease;
+background: var(--muted);
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  width: 100%;
+}
+
+#app > aside {
+  width: min(420px, 100%);
+  flex: 0 0 min(420px, 100%);
+  overflow-y: auto;
+
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  z-index: 1000;
+}
+
+#map {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 100%;
+}
+
+.filters {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.mygroup {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--bs-border-radius);
+  background: #e4e4e4;
+  .form-check-input{border: 1px solid var(--border-light);flex: 0 0 auto;}
+}
+.camera-list .card {
+  cursor: pointer;
+  margin-bottom: 0.55rem;
+  padding: 0.7rem;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+  background: #e4e4e4;
+  color: #333;
+}
+
+.camera-list .card:hover,
+.camera-list .card:focus-within {
+  transform: translateY(-1px);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+.links {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.links a {
+  display: block;
+}
+
+.leaflet-popup-content .btn {
+  margin: 0.15rem 0.15rem 0.15rem 0;
+}
+
+@media (max-width: 767.98px) {
+  body {
+    overflow: auto;
+  }
+
+  #app {
+    display: block;
+    height: auto;
+  }
+
+  #app > aside {
+    width: 100%;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid solid var(--border);
+  }
+
+  #map {
+    height: 65vh;
+    min-height: 480px;
+  }
+}
+.popup-live-player {
+  margin-top: 0.75rem;
+}
+
+.popup-live-player[hidden] {
+  display: none;
+}
+
+.popup-live-player-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+  border-radius: 0.5rem;
+}
+
+.popup-live-player-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 ::selection {
@@ -23,40 +143,22 @@ body {
   background-color: rgb(29, 65, 32);
 }
 
-aside {
-  background-attachment: fixed;
-  background:
-    radial-gradient(circle at top right, #f5329d51, transparent 28%),
-    radial-gradient(
-      circle at left 20%,
-      rgba(133, 168, 26, 0.337),
-      transparent 25%
-    ),
-    linear-gradient(180deg, var(--bg) 0%, hwb(221 10% 64%) 100%);
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  padding: 1rem;
+.mygroup:hover,
+.camera-list .card:hover {
+  border-color: var(--border);
+  box-shadow: 0 0 10px var(--accent);
+  color:white;
 }
-card:hover {
-  border-color: var(--accent);
+.mygroup:hover {
+  background-color: var(--link);
 }
-
+.camera-list .card:hover {
+  background-color: var(--link);
+}
 
 .meta {
   color: var(--muted);
   font-size: 0.85rem;
-}
-
-
-.btn,
-button {
-  color: #fff;
-  background-color: #232f3d;
-  border-radius: 1rem;
-  margin: 0.5rem 0 1rem;
-  padding: 6px 12px;
-  border: 1px solid white;
-  cursor: pointer;
 }
 
 .btn:hover,
@@ -72,22 +174,6 @@ button:focus {
   color: var(--muted);
 }
 
-@media (max-width: 900px) {
-  #app {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-
-  aside {
-    max-height: 46vh;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  #map {
-    min-height: 54vh;
-  }
-}
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
