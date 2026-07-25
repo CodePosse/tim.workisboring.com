@@ -58,6 +58,15 @@
         </div>
         <div class="mygroup"><input type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
           Traffic</div>
+        <div class="mygroup">
+          <input type="checkbox" data-layer="caltrans" aria-label="Caltrans Traffic Cameras">
+          Caltrans Traffic Cameras
+        </div>
+
+        <div class="mygroup">
+          <input type="checkbox" data-layer="fox-weather" aria-label="FOX Weather Vision Cameras">
+          FOX / Weather Vision Live Cameras
+        </div>
         <div class="mygroup"><input type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
         <div class="mygroup"><input type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
@@ -88,6 +97,8 @@
         <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
         <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
         <a href="/atak/data/kml/deflock-socal-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
+        <a href="/atak/caltrans-network.kml">ATAK: Caltrans Traffic Camera Network KML </a>
+        <a href="/atak/fox-weather-network.kml">ATAK: FOX / Weather Vision Network KML </a>
         <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
           rel="noopener">Flock Cameras (DIY)</a>
       </div>
@@ -120,6 +131,14 @@
       "caloes-traffic": {
         label: "Cal OES Traffic",
         json: "/atak/data/caloes-traffic-cameras.json"
+      },
+      caltrans: {
+        label: "Caltrans Traffic Cameras",
+        json: "/atak/data/caltrans-cameras.json"
+      },
+      "fox-weather": {
+        label: "FOX / Weather Vision",
+        json: "/atak/data/fox-weather-cameras.json"
       },
       deflock: {
         label: "DeFlock California ALPR Locations",
