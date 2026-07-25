@@ -1,98 +1,3 @@
-ChatGPT Plus
-
-
-
-
-
-Worked for 23s
-sortable-resource-directory.html
-
-The page includes:
-
-35 cleaned resource entries with timestamps removed
-
-Br
-gory filtering
-
-Sortable resource and category columns
-
-Responsive desktop table and mobile card layout
-
-Accessible labels, focus behavior, result counts, and external-link notices
-
-Bootstrap 5.3.8, the current Bootstrap 5.3 release 
-
-I separated the two Semrush courses and the two prescription-assistance sites into individual sortable entries. The airport layover item links to a prepared Google search because the source text did not specify a single destination page. 
-
-
-
-why are the numbers out of order
-
-The first column used fixed numbers from the original list. Sorting rearranged the rows, but those fixed numbers moved with them.
-
-I updated the page so the numbering is recalculated after sorting or filtering.
-
-sortable-resource-directory.html 
-
-
-
-Today 1:28 PM
-
-index(19).html
-File
-This is the last revision i made to the page, let's add these search engines to this list. Millionshort, Boardreader, ProPublica Nonprofit Explorer, The ICIJ Offshore Leaks Database, https://lumendatabase.org, https://yacy.net/, https://ahmia.fi/, Archive.ph, TruePeopleSearch
-
-I added the following resources to your existing page (without changing your layout or JavaScript): 
-
-
-MillionShort
-
-Boardreader
-
-ProPublica Nonprofit Explorer
-
-ICIJ Offshore Leaks Database
-
-Lumen Database
-
-YaCy
-
-Ahmia
-
-Archive.ph
-
-TruePeopleSearch
-
-Each entry includes:
-
-A link
-
-A concise one-line summary
-
-Category: Other (so it works with your existing filters)
-
-You can download the updated version here:
-
-index-updated-search-engines.html
-
-Looking at the page, I also have a few ideas that would make it much more useful:
-
-Add an "OSINT" category separate from "Other" (Shodan, OSINT Framework, Ahmia, Lumen, ICIJ, LittleSis, etc.).
-
-Add tags (AI, Privacy, Research, Shopping, Travel, Government, Search Engine, etc.) so users can filter by more than one category.
-
-Add favicon icons beside each resource.
-
-Add Copy Link and Favorite buttons.
-
-Add a "New" badge for recently added resources.
-
-Add client-side pagination once the list grows past ~100 resources.
-
-Include a small "Why use this?" expandable section for each tool with practical examples.
-
-I think this directory could easily grow into a polished "Awesome Web Tools" reference site. 
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -652,7 +557,7 @@ I think this directory could easily grow into a polished "Awesome Web Tools" ref
 <td class="summary-cell">An official locator for federally funded health centers that provide primary care and related services, often using income-based fees.</td>
 <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
 </tr>
-<tr data-category="other" data-name="millionshort" data-summary="search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources."><td class="text-secondary fw-semibold">36</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://millionshort.com/" rel="noopener noreferrer" target="_blank">MillionShort</a></td><td class="summary-cell">Search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="boardreader" data-summary="searches forums, message boards, and online communities for discussions and user-generated content."><td class="text-secondary fw-semibold">37</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://boardreader.com/" rel="noopener noreferrer" target="_blank">Boardreader</a></td><td class="summary-cell">Searches forums, message boards, and online communities for discussions and user-generated content.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="propublica nonprofit explorer" data-summary="search irs form 990 filings and financial information for u.s. nonprofit organizations."><td class="text-secondary fw-semibold">38</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://projects.propublica.org/nonprofits/" rel="noopener noreferrer" target="_blank">ProPublica Nonprofit Explorer</a></td><td class="summary-cell">Search IRS Form 990 filings and financial information for U.S. nonprofit organizations.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="icij offshore leaks database" data-summary="investigate offshore companies, trusts, and individuals from major investigative journalism datasets."><td class="text-secondary fw-semibold">39</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://offshoreleaks.icij.org/" rel="noopener noreferrer" target="_blank">ICIJ Offshore Leaks Database</a></td><td class="summary-cell">Investigate offshore companies, trusts, and individuals from major investigative journalism datasets.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="lumen database" data-summary="research legal complaints and content-removal requests submitted to websites and search engines."><td class="text-secondary fw-semibold">40</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://lumendatabase.org/" rel="noopener noreferrer" target="_blank">Lumen Database</a></td><td class="summary-cell">Research legal complaints and content-removal requests submitted to websites and search engines.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="yacy" data-summary="open-source decentralized peer-to-peer search engine that anyone can run."><td class="text-secondary fw-semibold">41</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://yacy.net/" rel="noopener noreferrer" target="_blank">YaCy</a></td><td class="summary-cell">Open-source decentralized peer-to-peer search engine that anyone can run.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="ahmia" data-summary="search engine for publicly indexed tor (.onion) websites."><td class="text-secondary fw-semibold">42</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://ahmia.fi/" rel="noopener noreferrer" target="_blank">Ahmia</a></td><td class="summary-cell">Search engine for publicly indexed Tor (.onion) websites.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="archive.ph" data-summary="archive and view permanent snapshots of web pages."><td class="text-secondary fw-semibold">43</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://archive.ph/" rel="noopener noreferrer" target="_blank">Archive.ph</a></td><td class="summary-cell">Archive and view permanent snapshots of web pages.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="truepeoplesearch" data-summary="locate publicly available u.s. contact information, addresses, and possible relatives."><td class="text-secondary fw-semibold">44</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.truepeoplesearch.com/" rel="noopener noreferrer" target="_blank">TruePeopleSearch</a></td><td class="summary-cell">Locate publicly available U.S. contact information, addresses, and possible relatives.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr></tbody>
+<tr data-category="other" data-name="millionshort" data-summary="search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources."><td class="text-secondary fw-semibold">36</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://millionshort.com/" rel="noopener noreferrer" target="_blank">MillionShort</a></td><td class="summary-cell">Search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="boardreader" data-summary="searches forums, message boards, and community discussions."><td class="text-secondary fw-semibold">37</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://boardreader.com/" rel="noopener noreferrer" target="_blank">Boardreader</a></td><td class="summary-cell">Searches forums, message boards, and community discussions.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="propublica nonprofit explorer" data-summary="search irs form 990 filings and nonprofit financial information."><td class="text-secondary fw-semibold">38</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://projects.propublica.org/nonprofits/" rel="noopener noreferrer" target="_blank">ProPublica Nonprofit Explorer</a></td><td class="summary-cell">Search IRS Form 990 filings and nonprofit financial information.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="icij offshore leaks database" data-summary="investigate offshore companies, trusts, and individuals from major data leaks."><td class="text-secondary fw-semibold">39</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://offshoreleaks.icij.org/" rel="noopener noreferrer" target="_blank">ICIJ Offshore Leaks Database</a></td><td class="summary-cell">Investigate offshore companies, trusts, and individuals from major data leaks.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="lumen database" data-summary="research legal takedown notices and content removal requests."><td class="text-secondary fw-semibold">40</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://lumendatabase.org/" rel="noopener noreferrer" target="_blank">Lumen Database</a></td><td class="summary-cell">Research legal takedown notices and content removal requests.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="yacy" data-summary="open-source decentralized peer-to-peer search engine."><td class="text-secondary fw-semibold">41</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://yacy.net/" rel="noopener noreferrer" target="_blank">YaCy</a></td><td class="summary-cell">Open-source decentralized peer-to-peer search engine.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="ahmia" data-summary="search engine for publicly indexed tor (.onion) websites."><td class="text-secondary fw-semibold">42</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://ahmia.fi/" rel="noopener noreferrer" target="_blank">Ahmia</a></td><td class="summary-cell">Search engine for publicly indexed Tor (.onion) websites.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="archive.ph" data-summary="archive and view snapshots of web pages."><td class="text-secondary fw-semibold">43</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://archive.ph/" rel="noopener noreferrer" target="_blank">Archive.ph</a></td><td class="summary-cell">Archive and view snapshots of web pages.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="truepeoplesearch" data-summary="locate publicly available u.s. contact information."><td class="text-secondary fw-semibold">44</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.truepeoplesearch.com/" rel="noopener noreferrer" target="_blank">TruePeopleSearch</a></td><td class="summary-cell">Locate publicly available U.S. contact information.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="hemingway editor" data-summary="improves readability by highlighting complex writing and passive voice."><td class="text-secondary fw-semibold">45</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://hemingwayapp.com/" rel="noopener noreferrer" target="_blank">Hemingway Editor</a></td><td class="summary-cell">Improves readability by highlighting complex writing and passive voice.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="justwatch" data-summary="find where movies and tv shows are streaming."><td class="text-secondary fw-semibold">46</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.justwatch.com/" rel="noopener noreferrer" target="_blank">JustWatch</a></td><td class="summary-cell">Find where movies and TV shows are streaming.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="mynoise" data-summary="custom ambient sounds for focus, sleep, and relaxation."><td class="text-secondary fw-semibold">47</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://mynoise.net/" rel="noopener noreferrer" target="_blank">MyNoise</a></td><td class="summary-cell">Custom ambient sounds for focus, sleep, and relaxation.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="ninite" data-summary="install and update multiple windows applications automatically."><td class="text-secondary fw-semibold">48</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://ninite.com/" rel="noopener noreferrer" target="_blank">Ninite</a></td><td class="summary-cell">Install and update multiple Windows applications automatically.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="photopea" data-summary="browser-based image editor compatible with psd files."><td class="text-secondary fw-semibold">49</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.photopea.com/" rel="noopener noreferrer" target="_blank">Photopea</a></td><td class="summary-cell">Browser-based image editor compatible with PSD files.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="perplexity ai" data-summary="ai search engine with cited answers from the web."><td class="text-secondary fw-semibold">50</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.perplexity.ai/" rel="noopener noreferrer" target="_blank">Perplexity AI</a></td><td class="summary-cell">AI search engine with cited answers from the web.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="scribe" data-summary="automatically creates step-by-step documentation from your workflow."><td class="text-secondary fw-semibold">51</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://scribe.com/" rel="noopener noreferrer" target="_blank">Scribe</a></td><td class="summary-cell">Automatically creates step-by-step documentation from your workflow.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr></tbody>
 </table>
 </div>
 <div class="empty-state text-center p-5" id="emptyState">
@@ -774,4 +679,3 @@ I think this directory could easily grow into a polished "Awesome Web Tools" ref
   </script>
 </body>
 </html>
-
