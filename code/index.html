@@ -1,13 +1,109 @@
-<!doctype html>
+ChatGPT Plus
+
+
+
+
+
+Worked for 23s
+sortable-resource-directory.html
+
+The page includes:
+
+35 cleaned resource entries with timestamps removed
+
+Br
+gory filtering
+
+Sortable resource and category columns
+
+Responsive desktop table and mobile card layout
+
+Accessible labels, focus behavior, result counts, and external-link notices
+
+Bootstrap 5.3.8, the current Bootstrap 5.3 release 
+
+I separated the two Semrush courses and the two prescription-assistance sites into individual sortable entries. The airport layover item links to a prepared Google search because the source text did not specify a single destination page. 
+
+
+
+why are the numbers out of order
+
+The first column used fixed numbers from the original list. Sorting rearranged the rows, but those fixed numbers moved with them.
+
+I updated the page so the numbering is recalculated after sorting or filtering.
+
+sortable-resource-directory.html 
+
+
+
+Today 1:28 PM
+
+index(19).html
+File
+This is the last revision i made to the page, let's add these search engines to this list. Millionshort, Boardreader, ProPublica Nonprofit Explorer, The ICIJ Offshore Leaks Database, https://lumendatabase.org, https://yacy.net/, https://ahmia.fi/, Archive.ph, TruePeopleSearch
+
+I added the following resources to your existing page (without changing your layout or JavaScript): 
+
+
+MillionShort
+
+Boardreader
+
+ProPublica Nonprofit Explorer
+
+ICIJ Offshore Leaks Database
+
+Lumen Database
+
+YaCy
+
+Ahmia
+
+Archive.ph
+
+TruePeopleSearch
+
+Each entry includes:
+
+A link
+
+A concise one-line summary
+
+Category: Other (so it works with your existing filters)
+
+You can download the updated version here:
+
+index-updated-search-engines.html
+
+Looking at the page, I also have a few ideas that would make it much more useful:
+
+Add an "OSINT" category separate from "Other" (Shodan, OSINT Framework, Ahmia, Lumen, ICIJ, LittleSis, etc.).
+
+Add tags (AI, Privacy, Research, Shopping, Travel, Government, Search Engine, etc.) so users can filter by more than one category.
+
+Add favicon icons beside each resource.
+
+Add Copy Link and Favorite buttons.
+
+Add a "New" badge for recently added resources.
+
+Add client-side pagination once the list grows past ~100 resources.
+
+Include a small "Why use this?" expandable section for each tool with practical examples.
+
+I think this directory could easily grow into a polished "Awesome Web Tools" reference site. 
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Useful Learning, Savings & Research Resources</title>
-  <meta name="description" content="A searchable and sortable directory of career, money, free, travel, and research resources.">
-  <meta name="theme-color" content="#0d6efd">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Useful Learning, Savings &amp; Research Resources</title>
+<meta content="A searchable and sortable directory of career, money, free, travel, and research resources." name="description"/>
+<meta content="#0d6efd" name="theme-color"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
     :root {
       --resource-border: rgba(0, 0, 0, .09);  scroll-behavior: smooth;
     }
@@ -111,473 +207,466 @@
   </style>
 </head>
 <body>
-  <header class="hero py-5">
-    <div class="container py-3">
-      <span class="badge rounded-pill text-bg-light text-primary mb-3">Resource Directory</span>
-      <h1 class="display-5 fw-bold mb-3">Useful Learning, Savings & Research Resources</h1>
-      <p class="lead col-lg-9 mb-0">
+<header class="hero py-5">
+<div class="container py-3">
+<span class="badge rounded-pill text-bg-light text-primary mb-3">Resource Directory</span>
+<h1 class="display-5 fw-bold mb-3">Useful Learning, Savings &amp; Research Resources</h1>
+<p class="lead col-lg-9 mb-0">
         Search, filter, and sort a curated collection of training programs, free services,
         travel tools, money-saving resources, and research utilities.
       </p><p>This is a textbook example of vibe code design slop.</p>
-    </div>
-  </header>
-
- <main class="container py-4 py-lg-5">
-    <section class="directory-card card rounded-4 overflow-hidden">
-      <div class="card-body p-3 p-lg-4 border-bottom">
-        <div class="row g-3 align-items-end">
-          <div class="col-lg-6">
-            <label for="resourceSearch" class="form-label fw-semibold">Search resources</label>
-            <input id="resourceSearch" class="form-control form-control-lg" type="search"
-                   placeholder="Search names and summaries…" autocomplete="off">
-          </div>
-          <div class="col-sm-7 col-lg-3">
-            <label for="categoryFilter" class="form-label fw-semibold">Category</label>
-            <select id="categoryFilter" class="form-select form-select-lg">
-              <option value="all">All categories</option>
-              <option value="career">Career</option>
-              <option value="freebies">Freebies</option>
-              <option value="money">Money</option>
-              <option value="travel">Travel</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="col-sm-5 col-lg-3">
-            <button id="resetFilters" type="button" class="btn btn-outline-secondary btn-lg w-100">
+</div>
+</header>
+<main class="container py-4 py-lg-5">
+<section class="directory-card card rounded-4 overflow-hidden">
+<div class="card-body p-3 p-lg-4 border-bottom">
+<div class="row g-3 align-items-end">
+<div class="col-lg-6">
+<label class="form-label fw-semibold" for="resourceSearch">Search resources</label>
+<input autocomplete="off" class="form-control form-control-lg" id="resourceSearch" placeholder="Search names and summaries…" type="search"/>
+</div>
+<div class="col-sm-7 col-lg-3">
+<label class="form-label fw-semibold" for="categoryFilter">Category</label>
+<select class="form-select form-select-lg" id="categoryFilter">
+<option value="all">All categories</option>
+<option value="career">Career</option>
+<option value="freebies">Freebies</option>
+<option value="money">Money</option>
+<option value="travel">Travel</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="col-sm-5 col-lg-3">
+<button class="btn btn-outline-secondary btn-lg w-100" id="resetFilters" type="button">
               Reset
             </button>
-          </div>
-        </div>
-        <div class="d-flex flex-wrap justify-content-between gap-2 mt-3">
-          <p id="resultCount" class="mb-0 text-secondary" aria-live="polite"></p>
-          <small class="text-secondary">Select a column heading to sort.</small>
-        </div>
-      </div>
-
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0" id="resourceTable">
-          <caption class="visually-hidden">Sortable directory of useful online resources.</caption>
-          <thead class="table-light">
-            <tr>
-              <th scope="col" class="ps-4" style="width: 5rem;">#</th>
-              <th scope="col">
-                <button class="btn btn-link sort-button p-0" type="button" data-sort="name">
-                  Resource <span class="sort-indicator" aria-hidden="true"></span>
-                </button>
-              </th>
-              <th scope="col">Summary</th>
-              <th scope="col" class="pe-4">
-                <button class="btn btn-link sort-button p-0" type="button" data-sort="category">
-                  Category <span class="sort-indicator" aria-hidden="true"></span>
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            
-      <tr data-name="fema emergency management institute" data-summary="browse fema emergency management institute courses, schedules, prerequisites, and enrollment information for emergency-management training." data-category="career">
-        <td class="text-secondary fw-semibold">1</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://training.fema.gov/emicourses/" target="_blank" rel="noopener noreferrer">
+</div>
+</div>
+<div class="d-flex flex-wrap justify-content-between gap-2 mt-3">
+<p aria-live="polite" class="mb-0 text-secondary" id="resultCount"></p>
+<small class="text-secondary">Select a column heading to sort.</small>
+</div>
+</div>
+<div class="table-responsive">
+<table class="table table-hover align-middle mb-0" id="resourceTable">
+<caption class="visually-hidden">Sortable directory of useful online resources.</caption>
+<thead class="table-light">
+<tr>
+<th class="ps-4" scope="col" style="width: 5rem;">#</th>
+<th scope="col">
+<button class="btn btn-link sort-button p-0" data-sort="name" type="button">
+                  Resource <span aria-hidden="true" class="sort-indicator"></span>
+</button>
+</th>
+<th scope="col">Summary</th>
+<th class="pe-4" scope="col">
+<button class="btn btn-link sort-button p-0" data-sort="category" type="button">
+                  Category <span aria-hidden="true" class="sort-indicator"></span>
+</button>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr data-category="career" data-name="fema emergency management institute" data-summary="browse fema emergency management institute courses, schedules, prerequisites, and enrollment information for emergency-management training.">
+<td class="text-secondary fw-semibold">1</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://training.fema.gov/emicourses/" rel="noopener noreferrer" target="_blank">
             FEMA Emergency Management Institute
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Browse FEMA Emergency Management Institute courses, schedules, prerequisites, and enrollment information for emergency-management training.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="freecodecamp responsive web design" data-summary="a project-based curriculum for learning modern html, css, responsive layouts, accessibility, and front-end design fundamentals." data-category="career">
-        <td class="text-secondary fw-semibold">2</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/learn/responsive-web-design-v9/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Browse FEMA Emergency Management Institute courses, schedules, prerequisites, and enrollment information for emergency-management training.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="freecodecamp responsive web design" data-summary="a project-based curriculum for learning modern html, css, responsive layouts, accessibility, and front-end design fundamentals.">
+<td class="text-secondary fw-semibold">2</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/learn/responsive-web-design-v9/" rel="noopener noreferrer" target="_blank">
             freeCodeCamp Responsive Web Design
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A project-based curriculum for learning modern HTML, CSS, responsive layouts, accessibility, and front-end design fundamentals.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="google search certification" data-summary="google skillshop provides self-paced product training and certification paths for google tools, including advertising and measurement products." data-category="career">
-        <td class="text-secondary fw-semibold">3</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A project-based curriculum for learning modern HTML, CSS, responsive layouts, accessibility, and front-end design fundamentals.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="google search certification" data-summary="google skillshop provides self-paced product training and certification paths for google tools, including advertising and measurement products.">
+<td class="text-secondary fw-semibold">3</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" rel="noopener noreferrer" target="_blank">
             Google Search Certification
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Google Skillshop provides self-paced product training and certification paths for Google tools, including advertising and measurement products.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="uipath robotic process automation" data-summary="uipath academy offers online learning paths for robotic process automation, automation development, and related professional skills." data-category="career">
-        <td class="text-secondary fw-semibold">4</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.uipath.com/rpa/academy" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Google Skillshop provides self-paced product training and certification paths for Google tools, including advertising and measurement products.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="uipath robotic process automation" data-summary="uipath academy offers online learning paths for robotic process automation, automation development, and related professional skills.">
+<td class="text-secondary fw-semibold">4</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.uipath.com/rpa/academy" rel="noopener noreferrer" target="_blank">
             UiPath Robotic Process Automation
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">UiPath Academy offers online learning paths for robotic process automation, automation development, and related professional skills.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="kaggle machine learning" data-summary="a hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises." data-category="career">
-        <td class="text-secondary fw-semibold">5</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.kaggle.com/learn/intro-to-machine-learning" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">UiPath Academy offers online learning paths for robotic process automation, automation development, and related professional skills.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="kaggle machine learning" data-summary="a hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises.">
+<td class="text-secondary fw-semibold">5</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.kaggle.com/learn/intro-to-machine-learning" rel="noopener noreferrer" target="_blank">
             Kaggle Machine Learning
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="atlassian jira fundamentals" data-summary="training and certification preparation for essential jira software concepts, workflows, boards, issue tracking, and team collaboration." data-category="career">
-        <td class="text-secondary fw-semibold">6</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://community.atlassian.com/learning/certifications/jira-software-essentials" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A hands-on introductory course covering core machine-learning concepts through short lessons and practical coding exercises.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="atlassian jira fundamentals" data-summary="training and certification preparation for essential jira software concepts, workflows, boards, issue tracking, and team collaboration.">
+<td class="text-secondary fw-semibold">6</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://community.atlassian.com/learning/certifications/jira-software-essentials" rel="noopener noreferrer" target="_blank">
             Atlassian Jira Fundamentals
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Training and certification preparation for essential Jira Software concepts, workflows, boards, issue tracking, and team collaboration.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="saylor academy business administration" data-summary="a catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects." data-category="career">
-        <td class="text-secondary fw-semibold">7</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://learn.saylor.org/course/index.php?categoryid=6" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Training and certification preparation for essential Jira Software concepts, workflows, boards, issue tracking, and team collaboration.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="saylor academy business administration" data-summary="a catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects.">
+<td class="text-secondary fw-semibold">7</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://learn.saylor.org/course/index.php?categoryid=6" rel="noopener noreferrer" target="_blank">
             Saylor Academy Business Administration
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="semrush seo toolkit" data-summary="a semrush academy course introducing seo workflows and the platform’s tools for keyword research, audits, competitive research, and reporting." data-category="career">
-        <td class="text-secondary fw-semibold">8</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-toolkit-crash-course/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A catalog of self-paced business administration courses covering management, accounting, marketing, finance, and related subjects.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="semrush seo toolkit" data-summary="a semrush academy course introducing seo workflows and the platform’s tools for keyword research, audits, competitive research, and reporting.">
+<td class="text-secondary fw-semibold">8</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-toolkit-crash-course/" rel="noopener noreferrer" target="_blank">
             Semrush SEO Toolkit
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A Semrush Academy course introducing SEO workflows and the platform’s tools for keyword research, audits, competitive research, and reporting.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="semrush seo essentials" data-summary="an seo fundamentals course explaining how to research, optimize, measure, and improve organic search performance with semrush." data-category="career">
-        <td class="text-secondary fw-semibold">9</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-essentials-with-semrush/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A Semrush Academy course introducing SEO workflows and the platform’s tools for keyword research, audits, competitive research, and reporting.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="semrush seo essentials" data-summary="an seo fundamentals course explaining how to research, optimize, measure, and improve organic search performance with semrush.">
+<td class="text-secondary fw-semibold">9</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.semrush.com/academy/courses/seo-essentials-with-semrush/" rel="noopener noreferrer" target="_blank">
             Semrush SEO Essentials
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">An SEO fundamentals course explaining how to research, optimize, measure, and improve organic search performance with Semrush.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="hubspot inbound marketing" data-summary="a course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth." data-category="career">
-        <td class="text-secondary fw-semibold">10</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://academy.hubspot.com/courses/inbound-marketing" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">An SEO fundamentals course explaining how to research, optimize, measure, and improve organic search performance with Semrush.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="hubspot inbound marketing" data-summary="a course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth.">
+<td class="text-secondary fw-semibold">10</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://academy.hubspot.com/courses/inbound-marketing" rel="noopener noreferrer" target="_blank">
             HubSpot Inbound Marketing
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="google analytics certification" data-summary="google skillshop provides training and certification resources for google analytics and other google business products." data-category="career">
-        <td class="text-secondary fw-semibold">11</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A course covering inbound marketing strategy, content creation, promotion, lead nurturing, and customer-focused growth.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="google analytics certification" data-summary="google skillshop provides training and certification resources for google analytics and other google business products.">
+<td class="text-secondary fw-semibold">11</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://skillshop.withgoogle.com/" rel="noopener noreferrer" target="_blank">
             Google Analytics Certification
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Google Skillshop provides training and certification resources for Google Analytics and other Google business products.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="freecodecamp" data-summary="a free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development." data-category="career">
-        <td class="text-secondary fw-semibold">12</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Google Skillshop provides training and certification resources for Google Analytics and other Google business products.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="freecodecamp" data-summary="a free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development.">
+<td class="text-secondary fw-semibold">12</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.freecodecamp.org/" rel="noopener noreferrer" target="_blank">
             freeCodeCamp
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="alternativeto" data-summary="a community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations." data-category="career">
-        <td class="text-secondary fw-semibold">13</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A free learning platform with coding curricula, projects, certifications, articles, and practice resources for web and software development.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="career" data-name="alternativeto" data-summary="a community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations.">
+<td class="text-secondary fw-semibold">13</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://alternativeto.net/" rel="noopener noreferrer" target="_blank">
             AlternativeTo
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations.</td>
-        <td><span class="badge rounded-pill text-bg-primary">Career</span></td>
-      </tr>
-      <tr data-name="camelcamelcamel" data-summary="an amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends." data-category="money">
-        <td class="text-secondary fw-semibold">14</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://camelcamelcamel.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A community-driven directory for discovering software and web-service alternatives based on platform, features, licensing, and user recommendations.</td>
+<td><span class="badge rounded-pill text-bg-primary">Career</span></td>
+</tr>
+<tr data-category="money" data-name="camelcamelcamel" data-summary="an amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends.">
+<td class="text-secondary fw-semibold">14</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://camelcamelcamel.com/" rel="noopener noreferrer" target="_blank">
             CamelCamelCamel
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">An Amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends.</td>
-        <td><span class="badge rounded-pill text-bg-success">Money</span></td>
-      </tr>
-      <tr data-name="ilovepdf" data-summary="a browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing pdf files." data-category="freebies">
-        <td class="text-secondary fw-semibold">15</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.ilovepdf.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">An Amazon price-tracking service with product price histories, drop alerts, and tools for comparing current prices with past trends.</td>
+<td><span class="badge rounded-pill text-bg-success">Money</span></td>
+</tr>
+<tr data-category="freebies" data-name="ilovepdf" data-summary="a browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing pdf files.">
+<td class="text-secondary fw-semibold">15</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.ilovepdf.com/" rel="noopener noreferrer" target="_blank">
             iLovePDF
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing PDF files.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="davinci resolve" data-summary="professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition." data-category="freebies">
-        <td class="text-secondary fw-semibold">16</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A browser-based collection of tools for merging, splitting, compressing, converting, organizing, and editing PDF files.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="davinci resolve" data-summary="professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition.">
+<td class="text-secondary fw-semibold">16</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.blackmagicdesign.com/products/davinciresolve" rel="noopener noreferrer" target="_blank">
             DaVinci Resolve
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="this person does not exist" data-summary="displays ai-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals." data-category="freebies">
-        <td class="text-secondary fw-semibold">17</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://thispersondoesnotexist.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Professional video editing, color correction, visual effects, motion graphics, and audio post-production software with a capable free edition.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="this person does not exist" data-summary="displays ai-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals.">
+<td class="text-secondary fw-semibold">17</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://thispersondoesnotexist.com/" rel="noopener noreferrer" target="_blank">
             This Person Does Not Exist
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Displays AI-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="littlesis.org" data-summary="a public-interest research database that maps relationships among influential people, organizations, corporations, and institutions." data-category="other">
-        <td class="text-secondary fw-semibold">18</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://littlesis.org/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Displays AI-generated portraits of fictional people, demonstrating synthetic face generation rather than photographs of real individuals.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="other" data-name="littlesis.org" data-summary="a public-interest research database that maps relationships among influential people, organizations, corporations, and institutions.">
+<td class="text-secondary fw-semibold">18</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://littlesis.org/" rel="noopener noreferrer" target="_blank">
             LittleSis.org
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A public-interest research database that maps relationships among influential people, organizations, corporations, and institutions.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="skiplagged" data-summary="a travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies." data-category="travel">
-        <td class="text-secondary fw-semibold">19</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://skiplagged.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A public-interest research database that maps relationships among influential people, organizations, corporations, and institutions.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="travel" data-name="skiplagged" data-summary="a travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies.">
+<td class="text-secondary fw-semibold">19</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://skiplagged.com/" rel="noopener noreferrer" target="_blank">
             Skiplagged
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies.</td>
-        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
-      </tr>
-      <tr data-name="pimeyes" data-summary="a facial-image search engine that looks for visually similar faces across publicly accessible websites." data-category="other">
-        <td class="text-secondary fw-semibold">20</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://pimeyes.com/en" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A travel search site for comparing airfare and hotels, including itineraries that may use hidden-city ticketing strategies.</td>
+<td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+</tr>
+<tr data-category="other" data-name="pimeyes" data-summary="a facial-image search engine that looks for visually similar faces across publicly accessible websites.">
+<td class="text-secondary fw-semibold">20</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://pimeyes.com/en" rel="noopener noreferrer" target="_blank">
             PimEyes
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A facial-image search engine that looks for visually similar faces across publicly accessible websites.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="osint framework" data-summary="a categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records." data-category="other">
-        <td class="text-secondary fw-semibold">21</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://osintframework.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A facial-image search engine that looks for visually similar faces across publicly accessible websites.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="osint framework" data-summary="a categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records.">
+<td class="text-secondary fw-semibold">21</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://osintframework.com/" rel="noopener noreferrer" target="_blank">
             OSINT Framework
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="shodan" data-summary="a search engine for internet-connected devices and exposed services, commonly used for security research and network visibility." data-category="other">
-        <td class="text-secondary fw-semibold">22</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A categorized directory of open-source intelligence tools and resources for researching people, domains, networks, media, and public records.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="shodan" data-summary="a search engine for internet-connected devices and exposed services, commonly used for security research and network visibility.">
+<td class="text-secondary fw-semibold">22</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.shodan.io/" rel="noopener noreferrer" target="_blank">
             Shodan
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A search engine for internet-connected devices and exposed services, commonly used for security research and network visibility.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="importyeti" data-summary="a searchable database of u.s. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships." data-category="other">
-        <td class="text-secondary fw-semibold">23</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.importyeti.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A search engine for internet-connected devices and exposed services, commonly used for security research and network visibility.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="importyeti" data-summary="a searchable database of u.s. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships.">
+<td class="text-secondary fw-semibold">23</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.importyeti.com/" rel="noopener noreferrer" target="_blank">
             ImportYeti
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A searchable database of U.S. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="wigle" data-summary="a community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans." data-category="other">
-        <td class="text-secondary fw-semibold">24</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://wigle.net/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A searchable database of U.S. maritime import records for researching suppliers, customers, shipment patterns, and supply-chain relationships.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="wigle" data-summary="a community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans.">
+<td class="text-secondary fw-semibold">24</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://wigle.net/" rel="noopener noreferrer" target="_blank">
             WiGLE
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="futurepedia" data-summary="a directory of ai tools organized by use case, with listings for productivity, content, development, business, and creative workflows." data-category="other">
-        <td class="text-secondary fw-semibold">25</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.futurepedia.io/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A community-built database and map of wireless networks and cellular observations collected through wardriving and contributed scans.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="futurepedia" data-summary="a directory of ai tools organized by use case, with listings for productivity, content, development, business, and creative workflows.">
+<td class="text-secondary fw-semibold">25</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.futurepedia.io/" rel="noopener noreferrer" target="_blank">
             Futurepedia
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A directory of AI tools organized by use case, with listings for productivity, content, development, business, and creative workflows.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="privacy.com" data-summary="a service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details." data-category="other">
-        <td class="text-secondary fw-semibold">26</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.privacy.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A directory of AI tools organized by use case, with listings for productivity, content, development, business, and creative workflows.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="privacy.com" data-summary="a service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details.">
+<td class="text-secondary fw-semibold">26</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.privacy.com/" rel="noopener noreferrer" target="_blank">
             Privacy.com
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="publicwww" data-summary="a source-code search engine for finding websites that contain specific html, javascript, css, analytics ids, or other code snippets." data-category="other">
-        <td class="text-secondary fw-semibold">27</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://publicwww.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A service for creating controlled virtual payment cards that can limit merchants, spending amounts, and exposure of card details.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="other" data-name="publicwww" data-summary="a source-code search engine for finding websites that contain specific html, javascript, css, analytics ids, or other code snippets.">
+<td class="text-secondary fw-semibold">27</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://publicwww.com/" rel="noopener noreferrer" target="_blank">
             PublicWWW
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A source-code search engine for finding websites that contain specific HTML, JavaScript, CSS, analytics IDs, or other code snippets.</td>
-        <td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
-      </tr>
-      <tr data-name="free city tours on your layover" data-summary="a prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers." data-category="travel">
-        <td class="text-secondary fw-semibold">28</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.google.com/search?q=airport+free+city+tour+transit+tour+layover+program" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A source-code search engine for finding websites that contain specific HTML, JavaScript, CSS, analytics IDs, or other code snippets.</td>
+<td><span class="badge rounded-pill text-bg-secondary">Other</span></td>
+</tr>
+<tr data-category="travel" data-name="free city tours on your layover" data-summary="a prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers.">
+<td class="text-secondary fw-semibold">28</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.google.com/search?q=airport+free+city+tour+transit+tour+layover+program" rel="noopener noreferrer" target="_blank">
             Free City Tours on Your Layover
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers.</td>
-        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
-      </tr>
-      <tr data-name="trustedhousesitters" data-summary="a membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care." data-category="travel">
-        <td class="text-secondary fw-semibold">29</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.trustedhousesitters.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A prepared web search for airports and tourism programs offering free or low-cost city tours to eligible passengers during long layovers.</td>
+<td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+</tr>
+<tr data-category="travel" data-name="trustedhousesitters" data-summary="a membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care.">
+<td class="text-secondary fw-semibold">29</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.trustedhousesitters.com/" rel="noopener noreferrer" target="_blank">
             TrustedHousesitters
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care.</td>
-        <td><span class="badge rounded-pill text-bg-info">Travel</span></td>
-      </tr>
-      <tr data-name="needymeds" data-summary="a nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs." data-category="freebies">
-        <td class="text-secondary fw-semibold">30</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://needymeds.org/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A membership marketplace connecting travelers with pet owners who exchange accommodation for in-home pet and property care.</td>
+<td><span class="badge rounded-pill text-bg-info">Travel</span></td>
+</tr>
+<tr data-category="freebies" data-name="needymeds" data-summary="a nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs.">
+<td class="text-secondary fw-semibold">30</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://needymeds.org/" rel="noopener noreferrer" target="_blank">
             NeedyMeds
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="rxassist" data-summary="a directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost." data-category="freebies">
-        <td class="text-secondary fw-semibold">31</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://rxassist.org/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A nonprofit information resource for prescription-assistance programs, discount options, clinics, and other ways to reduce healthcare costs.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="rxassist" data-summary="a directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost.">
+<td class="text-secondary fw-semibold">31</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://rxassist.org/" rel="noopener noreferrer" target="_blank">
             RxAssist
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="free museum entry via library passes" data-summary="los angeles county library’s discover &amp; go portal for reserving free or discounted passes to participating museums and cultural attractions." data-category="freebies">
-        <td class="text-secondary fw-semibold">32</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://colapublib.discoverandgo.net/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A directory of pharmaceutical patient-assistance programs and resources that may help eligible people obtain medications at reduced cost.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="free museum entry via library passes" data-summary="los angeles county library’s discover &amp; go portal for reserving free or discounted passes to participating museums and cultural attractions.">
+<td class="text-secondary fw-semibold">32</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://colapublib.discoverandgo.net/" rel="noopener noreferrer" target="_blank">
             Free Museum Entry via Library Passes
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Los Angeles County Library’s Discover &amp; Go portal for reserving free or discounted passes to participating museums and cultural attractions.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="missingmoney" data-summary="a multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name." data-category="freebies">
-        <td class="text-secondary fw-semibold">33</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://missingmoney.com/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Los Angeles County Library’s Discover &amp; Go portal for reserving free or discounted passes to participating museums and cultural attractions.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="missingmoney" data-summary="a multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name.">
+<td class="text-secondary fw-semibold">33</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://missingmoney.com/" rel="noopener noreferrer" target="_blank">
             MissingMoney
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">A multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="irs volunteer tax preparation" data-summary="official information for locating vita and tce sites that provide free basic tax-return preparation to qualifying taxpayers." data-category="freebies">
-        <td class="text-secondary fw-semibold">34</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">A multi-state search service for checking participating government unclaimed-property databases for money or assets held in your name.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="irs volunteer tax preparation" data-summary="official information for locating vita and tce sites that provide free basic tax-return preparation to qualifying taxpayers.">
+<td class="text-secondary fw-semibold">34</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" rel="noopener noreferrer" target="_blank">
             IRS Volunteer Tax Preparation
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">Official information for locating VITA and TCE sites that provide free basic tax-return preparation to qualifying taxpayers.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-      <tr data-name="find a health center" data-summary="an official locator for federally funded health centers that provide primary care and related services, often using income-based fees." data-category="freebies">
-        <td class="text-secondary fw-semibold">35</td>
-        <td>
-          <a class="resource-link fw-semibold text-decoration-none" href="https://findahealthcenter.hrsa.gov/" target="_blank" rel="noopener noreferrer">
+</a>
+</td>
+<td class="summary-cell">Official information for locating VITA and TCE sites that provide free basic tax-return preparation to qualifying taxpayers.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="freebies" data-name="find a health center" data-summary="an official locator for federally funded health centers that provide primary care and related services, often using income-based fees.">
+<td class="text-secondary fw-semibold">35</td>
+<td>
+<a class="resource-link fw-semibold text-decoration-none" href="https://findahealthcenter.hrsa.gov/" rel="noopener noreferrer" target="_blank">
             Find a Health Center
             <span class="visually-hidden">(opens in a new tab)</span>
-          </a>
-        </td>
-        <td class="summary-cell">An official locator for federally funded health centers that provide primary care and related services, often using income-based fees.</td>
-        <td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
-      </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="emptyState" class="empty-state text-center p-5">
-        <h2 class="h5">No matching resources</h2>
-        <p class="text-secondary mb-3">Try another search term or category.</p>
-        <button type="button" class="btn btn-primary" data-reset>Clear filters</button>
-      </div>
-    </section>
-
-    <p class="small text-secondary mt-3 mb-0">
+</a>
+</td>
+<td class="summary-cell">An official locator for federally funded health centers that provide primary care and related services, often using income-based fees.</td>
+<td><span class="badge rounded-pill text-bg-warning">Freebies</span></td>
+</tr>
+<tr data-category="other" data-name="millionshort" data-summary="search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources."><td class="text-secondary fw-semibold">36</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://millionshort.com/" rel="noopener noreferrer" target="_blank">MillionShort</a></td><td class="summary-cell">Search engine that removes the most popular websites from results, helping uncover lesser-known pages and alternative sources.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="boardreader" data-summary="searches forums, message boards, and online communities for discussions and user-generated content."><td class="text-secondary fw-semibold">37</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://boardreader.com/" rel="noopener noreferrer" target="_blank">Boardreader</a></td><td class="summary-cell">Searches forums, message boards, and online communities for discussions and user-generated content.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="propublica nonprofit explorer" data-summary="search irs form 990 filings and financial information for u.s. nonprofit organizations."><td class="text-secondary fw-semibold">38</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://projects.propublica.org/nonprofits/" rel="noopener noreferrer" target="_blank">ProPublica Nonprofit Explorer</a></td><td class="summary-cell">Search IRS Form 990 filings and financial information for U.S. nonprofit organizations.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="icij offshore leaks database" data-summary="investigate offshore companies, trusts, and individuals from major investigative journalism datasets."><td class="text-secondary fw-semibold">39</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://offshoreleaks.icij.org/" rel="noopener noreferrer" target="_blank">ICIJ Offshore Leaks Database</a></td><td class="summary-cell">Investigate offshore companies, trusts, and individuals from major investigative journalism datasets.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="lumen database" data-summary="research legal complaints and content-removal requests submitted to websites and search engines."><td class="text-secondary fw-semibold">40</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://lumendatabase.org/" rel="noopener noreferrer" target="_blank">Lumen Database</a></td><td class="summary-cell">Research legal complaints and content-removal requests submitted to websites and search engines.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="yacy" data-summary="open-source decentralized peer-to-peer search engine that anyone can run."><td class="text-secondary fw-semibold">41</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://yacy.net/" rel="noopener noreferrer" target="_blank">YaCy</a></td><td class="summary-cell">Open-source decentralized peer-to-peer search engine that anyone can run.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="ahmia" data-summary="search engine for publicly indexed tor (.onion) websites."><td class="text-secondary fw-semibold">42</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://ahmia.fi/" rel="noopener noreferrer" target="_blank">Ahmia</a></td><td class="summary-cell">Search engine for publicly indexed Tor (.onion) websites.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="archive.ph" data-summary="archive and view permanent snapshots of web pages."><td class="text-secondary fw-semibold">43</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://archive.ph/" rel="noopener noreferrer" target="_blank">Archive.ph</a></td><td class="summary-cell">Archive and view permanent snapshots of web pages.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr><tr data-category="other" data-name="truepeoplesearch" data-summary="locate publicly available u.s. contact information, addresses, and possible relatives."><td class="text-secondary fw-semibold">44</td><td><a class="resource-link fw-semibold text-decoration-none" href="https://www.truepeoplesearch.com/" rel="noopener noreferrer" target="_blank">TruePeopleSearch</a></td><td class="summary-cell">Locate publicly available U.S. contact information, addresses, and possible relatives.</td><td><span class="badge rounded-pill text-bg-secondary">Other</span></td></tr></tbody>
+</table>
+</div>
+<div class="empty-state text-center p-5" id="emptyState">
+<h2 class="h5">No matching resources</h2>
+<p class="text-secondary mb-3">Try another search term or category.</p>
+<button class="btn btn-primary" data-reset="" type="button">Clear filters</button>
+</div>
+</section>
+<p class="small text-secondary mt-3 mb-0">
       External links open in a new tab. Availability, eligibility, pricing, and course details may change.
     </p>
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
  (() => {
       const table = document.getElementById('resourceTable');
       const tbody = table.querySelector('tbody');
@@ -685,3 +774,4 @@
   </script>
 </body>
 </html>
+
