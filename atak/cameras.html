@@ -34,6 +34,31 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <base href="https://tim.workisboring.com/">
   <link rel="stylesheet" href="/atak/css/style.css">
+
+  <style>
+    .popup-live-player {
+      margin-top: 0.75rem;
+    }
+
+    .popup-live-player[hidden] {
+      display: none;
+    }
+
+    .popup-live-player-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+      border-radius: 0.5rem;
+    }
+
+    .popup-live-player-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -88,20 +113,22 @@
           <li>After import, pan/zoom to California and enable the overlay if needed.</li>
         </ol>
       </section>
-
-      <div class="links">
-        <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
-        <a href="/atak/data/kml/caloes-fire-network.kml">Cal OES Fire Network KML</a>
-        <a href="/atak/data/kml/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
-        <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
-        <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
-        <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
-        <a href="/atak/data/kml/deflock-socal-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
-        <a href="/atak/caltrans-network.kml">ATAK: Caltrans Traffic Camera Network KML </a>
-        <a href="/atak/fox-weather-network.kml">ATAK: FOX / Weather Vision Network KML </a>
-        <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
-          rel="noopener">Flock Cameras (DIY)</a>
-      </div>
+      <details>
+        <summary>Network KML Files (expand)</summary>
+        <p class="links">
+          <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
+          <a href="/atak/data/kml/caloes-fire-network.kml">Cal OES Fire Network KML</a>
+          <a href="/atak/data/kml/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
+          <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
+          <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
+          <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
+          <a href="/atak/data/kml/deflock-socal-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
+          <a href="/atak/caltrans-network.kml">ATAK: Caltrans Traffic Camera Network KML </a>
+          <a href="/atak/fox-weather-network.kml">ATAK: FOX / Weather Vision Network KML </a>
+          <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
+            rel="noopener">Flock Cameras (DIY)</a>
+        </p>
+      </details>
 
       <div class="camera-list" id="cameraList"></div>
 
@@ -212,6 +239,7 @@
     function cameraPopup(cam) {
       const youtubeUrl = cam.youtubeUrl || "";
       const channelUrl = cam.channelUrl || "";
+      const embedUrl = cam.embedUrl || cam.embed_url || "";
       const youtubeId = getYouTubeVideoId(youtubeUrl);
       const largeImageUrl =
         cam.originalImageUrl ||
@@ -231,13 +259,23 @@
         `);
       }
 
+      if (embedUrl) {
+        mediaControls.push(`
+          <button type="button"
+                  class="live-player-toggle"
+                  data-embed-url="${escapeHtml(embedUrl)}">
+            Show live player
+          </button>
+        `);
+      }
+
       const thumbnailUrl =
         cam.thumbnail ||
         cam.imageUrl ||
         largeImageUrl ||
         "";
 
-      if (youtubeId || largeImageUrl) {
+      if (youtubeId || embedUrl || largeImageUrl) {
         mediaControls.push(`
           <button type="button" class="popup-expand-toggle">
             Expand
@@ -263,6 +301,7 @@
       const mediaSection = mediaControls.length || imageSection ? `
         ${mediaControls.length ? `<div class="popup-actions">${mediaControls.join("")}</div>` : ""}
         ${youtubeId ? '<div class="popup-video" aria-hidden="true"></div>' : ""}
+        ${embedUrl ? '<div class="popup-live-player" aria-hidden="true" hidden></div>' : ""}
         ${imageSection}
       ` : "";
 
@@ -305,6 +344,7 @@
         originalImageUrl: cam.originalImageUrl || "",
         youtubeUrl: cam.youtubeUrl || cam.youtube || "",
         channelUrl: cam.channelUrl || "",
+        embedUrl: cam.embedUrl || cam.embed_url || "",
         sourceType: cam.sourceType || "webcam",
         priority: Number(cam.priority ?? 50),
         featured: Boolean(cam.featured),
@@ -452,6 +492,51 @@
         return;
       }
 
+      const livePlayerButton = event.target.closest(".live-player-toggle");
+
+      if (livePlayerButton) {
+        const popup = livePlayerButton.closest(".popup");
+        const livePlayer = popup?.querySelector(".popup-live-player");
+        const embedUrl = livePlayerButton.dataset.embedUrl;
+
+        if (!popup || !livePlayer || !embedUrl) return;
+
+        const isVisible = livePlayer.hidden;
+        livePlayer.hidden = !isVisible;
+        livePlayer.setAttribute("aria-hidden", String(!isVisible));
+        livePlayerButton.textContent = isVisible ? "Hide live player" : "Show live player";
+
+        if (isVisible && !livePlayer.querySelector("iframe")) {
+          const frameWrapper = document.createElement("div");
+          frameWrapper.className = "popup-live-player-frame";
+
+          const iframe = document.createElement("iframe");
+          iframe.src = embedUrl;
+          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} live player`;
+          iframe.loading = "lazy";
+          iframe.allow = "autoplay; fullscreen; picture-in-picture";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allowFullscreen = true;
+
+          frameWrapper.appendChild(iframe);
+          livePlayer.appendChild(frameWrapper);
+        } else if (!isVisible) {
+          livePlayer.replaceChildren();
+        }
+
+        const leafletContent = livePlayerButton.closest(".leaflet-popup-content");
+        if (leafletContent && isVisible) {
+          leafletContent.style.width = "min(80vw, 900px)";
+          popup.classList.add("expanded");
+
+          const expandButton = popup.querySelector(".popup-expand-toggle");
+          if (expandButton) expandButton.textContent = "Collapse";
+        }
+
+        map.invalidateSize();
+        return;
+      }
+
       const imageButton = event.target.closest(".image-expand-toggle");
 
       if (imageButton) {
@@ -534,44 +619,6 @@
     console.log("%c Welcome to: " + window.location.href + " now go home or my GitHub: CodePosse", "background: navy; color: #bada55; font-size: 28px;font-family:'Comic Sans MS';padding:10px;border:3px dashed red;");
 
   </script>
-  <script>async function ensureLayerLoaded(layerName) {
-      if (loadedLayers.has(layerName)) return;
-
-      const source = SOURCES[layerName];
-      document.getElementById("status").textContent =
-        `Loading ${source.label}…`;
-
-      if (source.type === "kml") {
-        await new Promise((resolve, reject) => {
-          const kmlLayer = omnivore.kml(source.url)
-            .on("ready", function () {
-              kmlLayer.eachLayer(layer => {
-                layer.addTo(layers[layerName]);
-              });
-
-              loadedLayers.add(layerName);
-              resolve();
-            })
-            .on("error", reject);
-        });
-
-        return;
-      }
-
-      const response = await fetch(source.json);
-
-      if (!response.ok) {
-        throw new Error(`Failed to load ${source.label}`);
-      }
-
-      const payload = await response.json();
-
-      for (const camera of payload.cameras || []) {
-        addCamera({ ...camera, layer: layerName });
-      }
-
-      loadedLayers.add(layerName);
-    }</script>
 </body>
 
 </html>
