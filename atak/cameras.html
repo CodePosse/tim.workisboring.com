@@ -168,6 +168,23 @@
 
     const FOX_WEATHER_FALLBACK_CAMERAS = [
       {
+        id: "fox-weather-ontario-airport",
+        name: "Ontario International Airport",
+        source: "FOX 10 / Weather Vision",
+        category: "Live Airport Webcam",
+        lat: 34.0560,
+        lon: -117.6012,
+        city: "Ontario",
+        county: "San Bernardino",
+        url: "https://www.fox10phoenix.com/webcams-ontario",
+        embedUrl: "https://www.fox10phoenix.com/webcams-ontario",
+        streamType: "iframe",
+        attribution: "FOX 10 Phoenix / Weather Vision",
+        featured: true,
+        priority: 85,
+        tags: ["Ontario", "airport", "San Bernardino County", "live webcam"]
+      },
+      {
         id: "fox-weather-oakland-estuary",
         name: "Oakland Estuary – San Francisco Bay",
         source: "FOX 10 / Weather Vision",
@@ -177,7 +194,8 @@
         city: "Oakland",
         county: "Alameda",
         url: "https://www.fox10phoenix.com/webcams-sf-bay",
-        streamType: "external-page",
+        embedUrl: "https://www.fox10phoenix.com/webcams-sf-bay",
+        streamType: "iframe",
         attribution: "FOX 10 Phoenix / Weather Vision",
         featured: true,
         priority: 75,
@@ -193,7 +211,8 @@
         city: "Bay Point",
         county: "Contra Costa",
         url: "https://www.fox10phoenix.com/webcams-bay-point",
-        streamType: "external-page",
+        embedUrl: "https://www.fox10phoenix.com/webcams-bay-point",
+        streamType: "iframe",
         attribution: "FOX 10 Phoenix / Weather Vision",
         featured: true,
         priority: 75,
@@ -209,7 +228,8 @@
         city: "Emeryville",
         county: "Alameda",
         url: "https://www.fox10phoenix.com/webcams-emeryville",
-        streamType: "external-page",
+        embedUrl: "https://www.fox10phoenix.com/webcams-emeryville",
+        streamType: "iframe",
         attribution: "FOX 10 Phoenix / Weather Vision",
         featured: true,
         priority: 75,
@@ -608,9 +628,10 @@
 
           const iframe = document.createElement("iframe");
           iframe.src = embedUrl;
-          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} live player`;
+          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} FOX Weather Vision live player`;
           iframe.loading = "lazy";
           iframe.allow = "autoplay; fullscreen; picture-in-picture";
+          iframe.sandbox = "allow-scripts allow-same-origin allow-forms allow-popups allow-presentation";
           iframe.referrerPolicy = "strict-origin-when-cross-origin";
           iframe.allowFullscreen = true;
 
