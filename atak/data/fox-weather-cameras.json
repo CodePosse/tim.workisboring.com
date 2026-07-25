@@ -1,0 +1,72 @@
+{
+  "source_key": "fox-weather",
+  "title": "FOX / Weather Vision Southern California Cameras",
+  "generated_at": 1785016946,
+  "count": 4,
+  "cameras": [
+    {
+      "id": "fox-weather-catalina-island",
+      "name": "Catalina Island – Avalon",
+      "source": "FOX 10 / Weather Vision",
+      "category": "Live Island Webcam",
+      "lat": 33.3428,
+      "lon": -118.3282,
+      "county": "Los Angeles",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.fox10phoenix.com/webcams-catalina",
+      "stream_url": "",
+      "stream_type": "external-page",
+      "region": "Southern California",
+      "attribution": "FOX 10 Phoenix / Weather Vision"
+    },
+    {
+      "id": "fox-weather-lax",
+      "name": "Los Angeles – LAX Airport",
+      "source": "FOX 10 / Weather Vision",
+      "category": "Live Airport Webcam",
+      "lat": 33.9416,
+      "lon": -118.4085,
+      "county": "Los Angeles",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.fox10phoenix.com/webcams-los-angeles",
+      "stream_url": "",
+      "stream_type": "external-page",
+      "region": "Southern California",
+      "attribution": "FOX 10 Phoenix / Weather Vision"
+    },
+    {
+      "id": "fox-weather-ontario-airport",
+      "name": "Ontario International Airport",
+      "source": "FOX 10 / Weather Vision",
+      "category": "Live Airport Webcam",
+      "lat": 34.056,
+      "lon": -117.6012,
+      "county": "San Bernardino",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.fox10phoenix.com/webcams-ontario",
+      "stream_url": "",
+      "stream_type": "external-page",
+      "region": "Southern California",
+      "attribution": "FOX 10 Phoenix / Weather Vision"
+    },
+    {
+      "id": "fox-weather-santa-monica",
+      "name": "Santa Monica Beach",
+      "source": "FOX 10 / Weather Vision",
+      "category": "Live Beach Webcam",
+      "lat": 34.0094,
+      "lon": -118.4973,
+      "county": "Los Angeles",
+      "heading": "",
+      "thumbnail": "",
+      "url": "https://www.fox10phoenix.com/webcams-santa-monica-beach",
+      "stream_url": "",
+      "stream_type": "external-page",
+      "region": "Southern California",
+      "attribution": "FOX 10 Phoenix / Weather Vision"
+    }
+  ]
+}

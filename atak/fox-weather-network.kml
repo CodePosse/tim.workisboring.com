@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>FOX / Weather Vision Cameras Auto Refresh</name>
+    <NetworkLink>
+      <name>FOX / Weather Vision Southern California Cameras</name>
+      <refreshVisibility>1</refreshVisibility>
+      <Link>
+        <href>https://tim.workisboring.com/atak/fox-weather-cameras.kml</href>
+        <refreshMode>onInterval</refreshMode>
+        <refreshInterval>21600</refreshInterval>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
