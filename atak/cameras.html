@@ -235,17 +235,44 @@
     ];
 
     function mergeUniqueCameras(primary, fallback) {
-      const merged = [];
-      const seen = new Set();
+      const records = new Map();
 
-      [...primary, ...fallback].forEach(camera => {
-        const key = camera.id || camera.url || `${camera.name}|${camera.lat}|${camera.lon}`;
-        if (!key || seen.has(key)) return;
-        seen.add(key);
-        merged.push(camera);
+      const cameraKey = camera =>
+        camera.id ||
+        camera.url ||
+        `${camera.name || ""}|${camera.lat ?? camera.latitude}|${camera.lon ?? camera.longitude}`;
+
+      fallback.forEach(camera => {
+        const key = cameraKey(camera);
+        if (key) records.set(key, { ...camera });
       });
 
-      return merged;
+      primary.forEach(camera => {
+        const key = cameraKey(camera);
+        if (!key) return;
+
+        const existing = records.get(key) || {};
+        const merged = { ...existing, ...camera };
+
+        merged.embedUrl =
+          camera.embedUrl ||
+          camera.embed_url ||
+          existing.embedUrl ||
+          existing.embed_url ||
+          "";
+
+        merged.embed_url = merged.embedUrl;
+        merged.streamType =
+          camera.streamType ||
+          camera.stream_type ||
+          existing.streamType ||
+          existing.stream_type ||
+          (merged.embedUrl ? "iframe" : "external-page");
+
+        records.set(key, merged);
+      });
+
+      return [...records.values()];
     }
 
     const map = L.map("map").setView([34.35, -117.8], 7);
@@ -326,9 +353,9 @@
       if (embedUrl) {
         mediaControls.push(`
           <button type="button"
-                  class="live-player-toggle btn btn-primary btn-sm"
+                  class="live-player-toggle btn btn-live btn-sm"
                   data-embed-url="${escapeHtml(embedUrl)}">
-            Show live player
+            <i class="bi bi-play-circle-fill me-1" aria-hidden="true"></i>Play live camera
           </button>
         `);
       }
@@ -379,6 +406,7 @@
           ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
           ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
           ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
+          ${embedUrl ? `<div class="live-available"><i class="bi bi-broadcast-pin me-1" aria-hidden="true"></i>Embedded live player available</div>` : ""}
           ${cam.url ? `<a class="btn btn-outline-primary btn-sm my-1" href="${escapeHtml(cam.url)}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right me-1"></i>Open camera page</a><br>` : ""}
           ${channelUrl ? `<a href="${escapeHtml(channelUrl)}" target="_blank" rel="noopener">Open YouTube streams</a><br>` : ""}
           ${cam.tags?.length ? `Tags: ${escapeHtml(cam.tags.join(", "))}<br>` : ""}
@@ -570,7 +598,9 @@
         const isVisible = livePlayer.hidden;
         livePlayer.hidden = !isVisible;
         livePlayer.setAttribute("aria-hidden", String(!isVisible));
-        livePlayerButton.textContent = isVisible ? "Hide live player" : "Show live player";
+        livePlayerButton.innerHTML = isVisible
+          ? '<i class="bi bi-stop-circle me-1" aria-hidden="true"></i>Stop live camera'
+          : '<i class="bi bi-play-circle-fill me-1" aria-hidden="true"></i>Play live camera';
 
         if (isVisible && !livePlayer.querySelector("iframe")) {
           const frameWrapper = document.createElement("div");
@@ -658,6 +688,17 @@
 
         map.invalidateSize();
       }
+    });
+
+    map.on("popupclose", event => {
+      const popupElement = event.popup?.getElement();
+      if (!popupElement) return;
+
+      popupElement.querySelectorAll(".popup-live-player").forEach(player => {
+        player.replaceChildren();
+        player.hidden = true;
+        player.setAttribute("aria-hidden", "true");
+      });
     });
 
     const shareLinkBtn = document.getElementById("share-link-btn");
