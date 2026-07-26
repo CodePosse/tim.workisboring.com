@@ -580,16 +580,16 @@ Live railroad view near the Union Pacific line in Redding.<br>
 Category: Tourist<br>
 City: Las Vegas<br>
 County: Clark<br>
-Operator: LV Strip Cam<br>
-Encore Hotel Las Vegas Strip Live feed.<br>
-<a href="https://www.wynnlasvegas.com/rooms-and-suites/encore-rooms/encore-deluxe-resort">Camera Page</a><br>
+Operator: LV Sphere<br>
+Sphere is a next-generation entertainment venue in Las Vegas<br>
+<a href="https://www.thesphere.com/">Camera Page</a><br>
 <a href="https://www.youtube.com/watch?v=IWn4Iv1yFgM">YouTube Live</a><br>
 Notes: Use is subject to the operator&#x27;s published terms.]]></description>
         <styleUrl>#camera</styleUrl>
         <ExtendedData>
           <Data name="id"><value>lasvegas</value></Data>
           <Data name="category"><value>Tourist</value></Data>
-          <Data name="operator"><value>LV Strip Cam</value></Data>
+          <Data name="operator"><value>LV Sphere</value></Data>
           <Data name="source"><value>Curated Southern California Cameras</value></Data>
         </ExtendedData>
         <Point>
