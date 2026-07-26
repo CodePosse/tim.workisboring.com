@@ -1,132 +1,358 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <title>SoCal TAK/GIS Cameras | Public Camera Maps</title>
+  <title>SoCal TAK Cameras | Public Camera Map for ATAK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description"
-    content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIVE camera feeds.">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
+  <meta name="description" content="Public camera dashboard for ATAK training and situational awareness, including ALERTCalifornia, Cal OES, USGS, curated tourist cameras, and Windy webcams.">
+  <link rel="icon" href="/favicon.ico">
   <link rel="canonical" href="https://tim.workisboring.com/atak/cameras.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="SoCal TAK/GIS Cameras">
-  <meta property="og:description"
-    content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIVE camera feeds.">
-  <meta property="og:logo" content="https://tim.workisboring.com/atak/img/social-card.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://tim.workisboring.com/atak/cameras.html">
-  <meta property="og:site_name" content="tim.workisboring.com">
-  <meta property="og:image" content="https://tim.workisboring.com/atak/img/social-card.png">
-  <meta name="og:locale" content="en_US" />
-  <meta name="og:region" content="US-CA" />
-  <meta name="og:postal-code" content="90210" />
-  <meta name="og:country-name" content="USA" />
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SoCal TAK/GIS Cameras">
-  <meta name="twitter:description"
-    content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIVE camera feeds.">
-  <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        crossorigin="anonymous">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --sidebar-width: 350px;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: #111827;
+      color: #e5e7eb;
+      overflow: hidden;
+    }
+
+    a {
+      color: #60a5fa;
+    }
+
+    .app-shell {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background: #111827;
+      border-right: 1px solid #374151;
+      overflow-y: auto;
+      padding: 1rem;
+      z-index: 1001;
+    }
+
+    .map-wrap {
+      position: relative;
+      min-width: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 100vh;
+      background: #1f2937;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      margin: 0;
+    }
+
+    .brand-copy {
+      color: #9ca3af;
+      font-size: .9rem;
+      margin: .35rem 0 1rem;
+    }
+
+    .panel-card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: .75rem;
+      padding: .85rem;
+      margin-bottom: .85rem;
+    }
+
+    .layer-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      padding: .55rem 0;
+      border-bottom: 1px solid #374151;
+    }
+
+    .layer-row:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-row label {
+      cursor: pointer;
+      line-height: 1.2;
+    }
+
+    .layer-status {
+      display: block;
+      color: #9ca3af;
+      font-size: .75rem;
+      margin-top: .2rem;
+    }
+
+    .camera-list {
+      max-height: 38vh;
+      overflow-y: auto;
+    }
+
+    .camera-list-item {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: #e5e7eb;
+      border: 0;
+      border-bottom: 1px solid #374151;
+      padding: .65rem .2rem;
+    }
+
+    .camera-list-item:hover,
+    .camera-list-item:focus {
+      background: #374151;
+      outline: 0;
+    }
+
+    .camera-list-item small {
+      color: #9ca3af;
+      display: block;
+    }
+
+    .map-toolbar {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      z-index: 800;
+      display: flex;
+      gap: .5rem;
+    }
+
+    .status-box {
+      font-size: .82rem;
+      max-height: 180px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .popup {
+      min-width: 260px;
+      max-width: 360px;
+      color: #111827;
+    }
+
+    .popup h3 {
+      font-size: 1rem;
+      margin: .35rem 0;
+    }
+
+    .popup .badge {
+      font-size: .72rem;
+    }
+
+    .popup img {
+      width: 100%;
+      max-height: 210px;
+      object-fit: cover;
+      border-radius: .4rem;
+      margin-top: .65rem;
+      cursor: zoom-in;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: .4rem;
+      margin-top: .65rem;
+    }
+
+    .leaflet-popup-content {
+      margin: 12px 14px;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: .65rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --sidebar-width: min(88vw, 350px);
+      }
+
+      .app-shell {
+        display: block;
+      }
+
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar-width);
+        transform: translateX(-100%);
+        transition: transform .2s ease;
+        box-shadow: 8px 0 30px rgba(0,0,0,.35);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div id="app">
-    <aside class="shadow-sm">
-      <h1 class="h3 mb-2"><i class="bi bi-camera-video me-2" aria-hidden="true"></i>SoCal TAK/GIS Cameras</h1>
-      <div class="subtitle text-body-secondary small mb-3">Public camera layers for <a href="https://tak.gov/" target="_blank"
-          rel="noopener noreferrer">ATAK/CivTAK</a> training and situational awareness and anywhere KML files can be
-        used in GIS applications like <a href="https://earth.google.com/web/?hl=en_US" target="_blank"
-          rel="noopener noreferrer">Google Earth</a><br>
-        <button type="button" id="share-link-btn" class="btn btn-outline-primary btn-sm mt-2"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <h1 class="brand-title">SoCal TAK Cameras</h1>
+          <p class="brand-copy">Public camera layers for ATAK training and situational awareness.</p>
+        </div>
+        <button class="btn btn-sm btn-outline-light mobile-toggle" id="closeSidebar" type="button" aria-label="Close menu">×</button>
       </div>
-      <div class="status alert alert-secondary py-2 px-3 mb-3" id="status" role="status">Select a camera layer to load.</div>
 
-      <input id="search" class="form-control mb-3" type="search" placeholder="Search name, county, source…"
-        aria-label="Search cameras by name, county, or source">
-
-      <div class="filters mb-3">
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="alertwest" aria-label="ALERTCalifornia / AlertWest"> 🔥
-          ALERTCalifornia / AlertWest</div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire
-        </div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
-          Traffic</div>
-        <div class="mygroup">
-          <input class="form-check-input mt-0" type="checkbox" data-layer="caltrans" aria-label="Caltrans Traffic Cameras">
-          🚗 Caltrans Traffic Cameras
-        </div>
-
-        <div class="mygroup">
-          <input class="form-check-input mt-0" type="checkbox" data-layer="fox-weather" aria-label="FOX Weather Vision Cameras">
-           🌎 Weather Vision Live Cameras
-        </div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
-          Water</div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="curated-socal"
-            aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
-        </div>
-        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="deflock" aria-label="deFLOCK CAMERAS"> 🚨 DeFlock ALPR
-          Cameras in CA
+      <div class="panel-card">
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm flex-grow-1" id="shareButton" type="button">Share Link</button>
+          <button class="btn btn-outline-light btn-sm" id="fitButton" type="button">Fit Cameras</button>
         </div>
       </div>
 
-      <details class="atak-help card card-body mb-3 bg-light" aria-labelledby="atak-help-title">
-        <summary id="atak-help-title">Add a camera layer to ATAK +</summary>
-        <ol>
-          <li>Open ATAK-CIV on Android.</li>
-          <li>Open the main menu and choose <strong>Import Manager</strong>.</li>
-          <li>Choose <strong>Import from URL</strong>.</li>
-          <li>Copy one Network KML URL below and paste it into ATAK.</li>
-          <li>After import, pan/zoom to California and enable the overlay if needed.</li>
+      <section class="panel-card">
+        <h2 class="h6">Camera layers</h2>
+        <p class="small text-secondary mb-2">Select a camera layer to load.</p>
+
+        <div id="layerControls">
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-alertwest" data-layer="alertwest">
+            <label for="layer-alertwest">
+              ALERTCalifornia / AlertWest
+              <span class="layer-status" data-status="alertwest">Not loaded</span>
+            </label>
+          </div>
+
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-caloes-fire" data-layer="caloes-fire">
+            <label for="layer-caloes-fire">
+              Cal OES Fire
+              <span class="layer-status" data-status="caloes-fire">Not loaded</span>
+            </label>
+          </div>
+
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-caloes-traffic" data-layer="caloes-traffic">
+            <label for="layer-caloes-traffic">
+              Cal OES Traffic
+              <span class="layer-status" data-status="caloes-traffic">Not loaded</span>
+            </label>
+          </div>
+
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-usgs" data-layer="usgs">
+            <label for="layer-usgs">
+              USGS River / Water
+              <span class="layer-status" data-status="usgs">Not loaded</span>
+            </label>
+          </div>
+
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-curated-tourist" data-layer="curated-tourist" checked>
+            <label for="layer-curated-tourist">
+              ⚓ Curated California Tourist Cameras
+              <span class="layer-status" data-status="curated-tourist">Loading…</span>
+            </label>
+          </div>
+
+          <div class="layer-row">
+            <input class="form-check-input" type="checkbox" id="layer-windy" data-layer="windy">
+            <label for="layer-windy">
+              Windy Webcams
+              <span class="layer-status" data-status="windy">May time out after five minutes</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-card">
+        <label class="form-label small" for="cameraSearch">Search loaded cameras</label>
+        <input class="form-control form-control-sm" id="cameraSearch" type="search" placeholder="Name, city, county, source">
+        <div class="small text-secondary mt-2" id="cameraCount">0 cameras loaded</div>
+        <div class="camera-list mt-2" id="cameraList"></div>
+      </section>
+
+      <section class="panel-card">
+        <h2 class="h6">Load diagnostics</h2>
+        <div class="status-box text-secondary" id="diagnostics">Ready.</div>
+      </section>
+
+      <section class="panel-card">
+        <h2 class="h6">Add a camera layer to ATAK Android</h2>
+        <ol class="small ps-3">
+          <li>Open ATAK-CIV.</li>
+          <li>Open Import Manager.</li>
+          <li>Choose Import from URL.</li>
+          <li>Paste a Network KML URL.</li>
+          <li>Enable the imported overlay.</li>
         </ol>
-      </details>
-      <details class="card card-body mb-3 bg-light">
-        <summary>Network KML Files +</summary>
-        <p class="links">
-          <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
-          <a href="/atak/data/kml/caloes-fire-network.kml">Cal OES Fire Network KML</a>
-          <a href="/atak/data/kml/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
-          <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
-          <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
-          <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
-          <a href="/atak/data/kml/deflock-socal-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
-          <a href="/atak/caltrans-network.kml">ATAK: Caltrans Traffic Camera Network KML </a>
-          <a href="/atak/fox-weather-network.kml">ATAK: FOX / Weather Vision Network KML </a>
-          <a href="https://getgotak.com/blogs/news/making-the-invisible-visible-deflock-me-atak-map" target="_blank"
-            rel="noopener">Flock Cameras (DIY)</a>
-        </p>
-      </details>
 
-      <div class="camera-list" id="cameraList" aria-live="polite"></div>
+        <div class="d-grid gap-2">
+          <a class="btn btn-sm btn-outline-info" href="https://tim.workisboring.com/atak/alertwest-network.kml">ALERTCalifornia Network KML</a>
+          <a class="btn btn-sm btn-outline-info" href="https://tim.workisboring.com/atak/caloes-fire-network.kml">Cal OES Fire Network KML</a>
+          <a class="btn btn-sm btn-outline-info" href="https://tim.workisboring.com/atak/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
+          <a class="btn btn-sm btn-outline-info" href="https://tim.workisboring.com/atak/usgs-network.kml">USGS Network KML</a>
+          <a class="btn btn-sm btn-outline-warning" href="https://tim.workisboring.com/atak/curated-socal-network.kml">Curated Tourist Network KML</a>
+          <a class="btn btn-sm btn-outline-info" href="https://tim.workisboring.com/atak/windy-network.kml">Windy Network KML</a>
+        </div>
+      </section>
 
-      <div class="powered">
-        <small>Powered by: <a href="https://github.com/CodePosse/tim.workisboring.com" rel="nofollow noopener"
-            target="_blank">CodePosse</a> and
-          <a href="https://maps.deflock.org/" rel="nofollow noopener" target="_blank"> Flock data provided by
-            DeFlock </a></small>
-      </div>
+      <footer class="small text-secondary pb-3">
+        Powered by <a href="https://github.com/CodePosse" target="_blank" rel="noopener">CodePosse</a>.
+      </footer>
     </aside>
 
-    <main id="map"></main>
+    <main class="map-wrap">
+      <div class="map-toolbar">
+        <button class="btn btn-dark btn-sm mobile-toggle" id="openSidebar" type="button">Layers</button>
+      </div>
+      <div id="map" aria-label="Camera map"></div>
+    </main>
   </div>
 
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-secondary">
+          <h2 class="modal-title fs-5" id="imageModalTitle">Camera image</h2>
+          <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="imageModalImage" class="img-fluid rounded" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/@mapbox/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
+
   <script>
+    "use strict";
+
     const SOURCES = {
       alertwest: {
         label: "ALERTCalifornia / AlertWest",
@@ -140,175 +366,67 @@
         label: "Cal OES Traffic",
         json: "/atak/data/caloes-traffic-cameras.json"
       },
-      caltrans: {
-        label: "Caltrans Traffic Cameras",
-        json: "/atak/data/caltrans-cameras.json"
-      },
-      "fox-weather": {
-        label: "FOX / Weather Vision",
-        json: "/atak/data/fox-weather-cameras.json"
-      },
-      deflock: {
-        label: "DeFlock California ALPR Locations",
-        json: "/atak/data/deflock-socal.json"
-      },
       usgs: {
         label: "USGS River / Water",
         json: "/atak/data/usgs-cameras.json"
       },
-      windy: {
-        label: "Windy Tourist Webcams",
-        json: "/atak/api/windy.php"
+      "curated-tourist": {
+        label: "Curated California Tourist Cameras",
+        json: "/atak/data/curated-socal-cameras.json",
+        noCache: true
       },
-      "curated-socal": {
-        label: "Curated SoCal Beaches, Mountains & Attractions",
-        json: "/atak/data/curated-socal-cameras.json"
+      windy: {
+        label: "Windy Webcams",
+        json: "/atak/api/windy.php",
+        noCache: true
       }
     };
 
-    const FOX_WEATHER_FALLBACK_CAMERAS = [
-      {
-        id: "fox-weather-ontario-airport",
-        name: "Ontario International Airport",
-        source: "FOX 10 / Weather Vision",
-        category: "Live Airport Webcam",
-        lat: 34.0560,
-        lon: -117.6012,
-        city: "Ontario",
-        county: "San Bernardino",
-        url: "https://www.fox10phoenix.com/webcams-ontario",
-        embedUrl: "https://www.fox10phoenix.com/webcams-ontario",
-        streamType: "iframe",
-        attribution: "FOX 10 Phoenix / Weather Vision",
-        featured: true,
-        priority: 85,
-        tags: ["Ontario", "airport", "San Bernardino County", "live webcam"]
-      },
-      {
-        id: "fox-weather-oakland-estuary",
-        name: "Oakland Estuary – San Francisco Bay",
-        source: "FOX 10 / Weather Vision",
-        category: "Live Bay Webcam",
-        lat: 37.7955,
-        lon: -122.2780,
-        city: "Oakland",
-        county: "Alameda",
-        url: "https://www.fox10phoenix.com/webcams-sf-bay",
-        embedUrl: "https://www.fox10phoenix.com/webcams-sf-bay",
-        streamType: "iframe",
-        attribution: "FOX 10 Phoenix / Weather Vision",
-        featured: true,
-        priority: 75,
-        tags: ["Oakland", "San Francisco Bay", "estuary", "live webcam"]
-      },
-      {
-        id: "fox-weather-bay-point",
-        name: "Bay Point – Highway 4",
-        source: "FOX 10 / Weather Vision",
-        category: "Live Traffic Webcam",
-        lat: 38.0291,
-        lon: -121.9616,
-        city: "Bay Point",
-        county: "Contra Costa",
-        url: "https://www.fox10phoenix.com/webcams-bay-point",
-        embedUrl: "https://www.fox10phoenix.com/webcams-bay-point",
-        streamType: "iframe",
-        attribution: "FOX 10 Phoenix / Weather Vision",
-        featured: true,
-        priority: 75,
-        tags: ["Bay Point", "Highway 4", "traffic", "live webcam"]
-      },
-      {
-        id: "fox-weather-emeryville",
-        name: "Emeryville – Oakland Area",
-        source: "FOX 10 / Weather Vision",
-        category: "Live City Webcam",
-        lat: 37.8313,
-        lon: -122.2852,
-        city: "Emeryville",
-        county: "Alameda",
-        url: "https://www.fox10phoenix.com/webcams-emeryville",
-        embedUrl: "https://www.fox10phoenix.com/webcams-emeryville",
-        streamType: "iframe",
-        attribution: "FOX 10 Phoenix / Weather Vision",
-        featured: true,
-        priority: 75,
-        tags: ["Emeryville", "Oakland", "San Francisco Bay", "live webcam"]
-      },
-      {
-        id: "fox-weather-santa-monica",
-        name: "Santa Monica Beach",
-        source: "FOX 10 / Weather Vision",
-        category: "Live Beach Webcam",
-        lat: 34.0094,
-        lon: -118.4973,
-        city: "Santa Monica",
-        county: "Los Angeles",
-        url: "https://www.fox10phoenix.com/webcams-santa-monica-beach",
-        embedUrl: "https://api.wetmet.net/widgets/stream/frame.php?uid=0985333ee65625a3b1139ed97b4f27bc",
-        streamType: "iframe",
-        attribution: "FOX 10 Phoenix / Weather Vision",
-        featured: true,
-        priority: 90,
-        tags: ["Santa Monica", "beach", "ocean", "live webcam"]
-      }
-    ];
+    const REQUIRED_CURATED_IDS = new Set([
+      "youtube-cxyr04bwvmc",
+      "youtube-kes0ruixg8s",
+      "castro-street-cam"
+    ]);
 
-    function mergeUniqueCameras(primary, fallback) {
-      const records = new Map();
-
-      const cameraKey = camera =>
-        camera.id ||
-        camera.url ||
-        `${camera.name || ""}|${camera.lat ?? camera.latitude}|${camera.lon ?? camera.longitude}`;
-
-      fallback.forEach(camera => {
-        const key = cameraKey(camera);
-        if (key) records.set(key, { ...camera });
-      });
-
-      primary.forEach(camera => {
-        const key = cameraKey(camera);
-        if (!key) return;
-
-        const existing = records.get(key) || {};
-        const merged = { ...existing, ...camera };
-
-        merged.embedUrl =
-          camera.embedUrl ||
-          camera.embed_url ||
-          existing.embedUrl ||
-          existing.embed_url ||
-          "";
-
-        merged.embed_url = merged.embedUrl;
-        merged.streamType =
-          camera.streamType ||
-          camera.stream_type ||
-          existing.streamType ||
-          existing.stream_type ||
-          (merged.embedUrl ? "iframe" : "external-page");
-
-        records.set(key, merged);
-      });
-
-      return [...records.values()];
-    }
-
-    const map = L.map("map").setView([34.35, -117.8], 7);
+    const map = L.map("map", {
+      center: [36.7783, -119.4179],
+      zoom: 6,
+      preferCanvas: true
+    });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      attribution: "&copy; OpenStreetMap contributors"
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     const layers = {};
-    Object.keys(SOURCES).forEach(key => {
-      layers[key] = L.layerGroup();
+    const loadedLayers = new Set();
+    const loadingLayers = new Map();
+    const allCameras = [];
+    const markersById = new Map();
+
+    Object.keys(SOURCES).forEach(layerName => {
+      layers[layerName] = L.layerGroup();
     });
 
-    const loadedLayers = new Set();
-    let allCameras = [];
+    const sidebar = document.getElementById("sidebar");
+    const cameraSearch = document.getElementById("cameraSearch");
+    const cameraList = document.getElementById("cameraList");
+    const cameraCount = document.getElementById("cameraCount");
+    const diagnostics = document.getElementById("diagnostics");
+    const imageModalElement = document.getElementById("imageModal");
+    const imageModal = new bootstrap.Modal(imageModalElement);
+
+    function log(message, isError = false) {
+      const line = `${new Date().toLocaleTimeString()} ${message}`;
+      diagnostics.textContent = `${line}\n${diagnostics.textContent}`.trim();
+      (isError ? console.error : console.log)(message);
+    }
+
+    function setLayerStatus(layerName, text) {
+      const element = document.querySelector(`[data-status="${layerName}"]`);
+      if (element) element.textContent = text;
+    }
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -319,438 +437,544 @@
         .replaceAll("'", "&#039;");
     }
 
-    function getYouTubeVideoId(value) {
-      if (!value) return "";
+    function firstNonEmpty(...values) {
+      for (const value of values) {
+        if (value !== undefined && value !== null && String(value).trim() !== "") {
+          return value;
+        }
+      }
+      return "";
+    }
+
+    function getYouTubeVideoId(url) {
+      if (!url) return "";
 
       try {
-        const url = new URL(value, window.location.origin);
-        const host = url.hostname.replace(/^www\./, "");
+        const parsed = new URL(url, window.location.href);
+        const host = parsed.hostname.replace(/^www\./, "");
 
         if (host === "youtu.be") {
-          return url.pathname.split("/").filter(Boolean)[0] || "";
+          return parsed.pathname.split("/").filter(Boolean)[0] || "";
         }
 
-        if (host === "youtube.com" || host === "m.youtube.com" || host === "music.youtube.com") {
-          if (url.pathname === "/watch") {
-            return url.searchParams.get("v") || "";
+        if (host.endsWith("youtube.com")) {
+          if (parsed.pathname === "/watch") {
+            return parsed.searchParams.get("v") || "";
           }
 
-          const parts = url.pathname.split("/").filter(Boolean);
-          if (["embed", "live", "shorts"].includes(parts[0])) {
-            return parts[1] || "";
+          const parts = parsed.pathname.split("/").filter(Boolean);
+          const embedIndex = parts.findIndex(part => ["embed", "live", "shorts"].includes(part));
+          if (embedIndex >= 0 && parts[embedIndex + 1]) {
+            return parts[embedIndex + 1];
           }
         }
       } catch (error) {
-        console.warn("Invalid YouTube URL:", value, error);
+        console.warn("Unable to parse YouTube URL", url, error);
       }
 
       return "";
     }
 
-    function cameraPopup(cam) {
-      const youtubeUrl = cam.youtubeUrl || "";
-      const channelUrl = cam.channelUrl || "";
-      const embedUrl = cam.embedUrl || cam.embed_url || "";
-      const youtubeId = getYouTubeVideoId(youtubeUrl);
-      const largeImageUrl =
-        cam.originalImageUrl ||
-        cam.fullImageUrl ||
-        cam.largeImageUrl ||
-        cam.imageUrl ||
-        cam.thumbnail ||
-        "";
+    function extractCameraArray(payload) {
+      if (Array.isArray(payload)) return payload;
 
-      const mediaControls = [];
+      const candidates = [
+        payload?.cameras,
+        payload?.features,
+        payload?.data,
+        payload?.results,
+        payload?.items
+      ];
 
-      if (youtubeId) {
-        mediaControls.push(`
-          <button type="button" class="video-toggle btn btn-primary btn-sm" data-youtube-id="${escapeHtml(youtubeId)}">
-            Show video
-          </button>
-        `);
+      for (const candidate of candidates) {
+        if (Array.isArray(candidate)) return candidate;
       }
 
-      if (embedUrl) {
-        mediaControls.push(`
-          <button type="button"
-                  class="live-player-toggle btn btn-live btn-sm"
-                  data-embed-url="${escapeHtml(embedUrl)}">
-            <i class="bi bi-play-circle-fill me-1" aria-hidden="true"></i>Play live camera
-          </button>
-        `);
+      throw new Error("JSON did not contain a camera array.");
+    }
+
+    function normalizeCamera(raw, layerName, index) {
+      const properties = raw?.properties && typeof raw.properties === "object"
+        ? raw.properties
+        : {};
+
+      const geometryCoordinates = Array.isArray(raw?.geometry?.coordinates)
+        ? raw.geometry.coordinates
+        : [];
+
+      const latitude = Number(firstNonEmpty(
+        raw?.lat,
+        raw?.latitude,
+        properties.lat,
+        properties.latitude,
+        geometryCoordinates[1]
+      ));
+
+      const longitude = Number(firstNonEmpty(
+        raw?.lon,
+        raw?.lng,
+        raw?.longitude,
+        properties.lon,
+        properties.lng,
+        properties.longitude,
+        geometryCoordinates[0]
+      ));
+
+      const youtubeUrl = firstNonEmpty(
+        raw?.youtubeUrl,
+        properties.youtubeUrl,
+        raw?.youtube_url,
+        properties.youtube_url
+      );
+
+      const pageUrl = firstNonEmpty(
+        raw?.pageUrl,
+        properties.pageUrl,
+        raw?.url,
+        properties.url,
+        youtubeUrl,
+        raw?.streamUrl,
+        properties.streamUrl,
+        raw?.channelUrl,
+        properties.channelUrl
+      );
+
+      const imageUrl = firstNonEmpty(
+        raw?.imageUrl,
+        properties.imageUrl,
+        raw?.thumbnail,
+        properties.thumbnail,
+        raw?.thumbnailUrl,
+        properties.thumbnailUrl,
+        raw?.Thumbnail_Url,
+        properties.Thumbnail_Url
+      );
+
+      const streamUrl = firstNonEmpty(
+        raw?.streamUrl,
+        properties.streamUrl,
+        raw?.stream,
+        properties.stream,
+        youtubeUrl
+      );
+
+      const id = String(firstNonEmpty(
+        raw?.id,
+        properties.id,
+        raw?.uid,
+        properties.uid,
+        `${layerName}-${index}-${latitude}-${longitude}`
+      ));
+
+      return {
+        ...properties,
+        ...raw,
+        id,
+        layer: layerName,
+        name: String(firstNonEmpty(
+          raw?.name,
+          properties.name,
+          raw?.title,
+          properties.title,
+          raw?.cameraName,
+          properties.cameraName,
+          id
+        )),
+        latitude,
+        longitude,
+        lat: latitude,
+        lon: longitude,
+        city: String(firstNonEmpty(raw?.city, properties.city)),
+        county: String(firstNonEmpty(raw?.county, properties.county)),
+        category: String(firstNonEmpty(
+          raw?.category,
+          properties.category,
+          raw?.sourceType,
+          properties.sourceType,
+          SOURCES[layerName].label
+        )),
+        source: String(firstNonEmpty(
+          raw?.source,
+          properties.source,
+          raw?.operator,
+          properties.operator,
+          SOURCES[layerName].label
+        )),
+        operator: String(firstNonEmpty(raw?.operator, properties.operator)),
+        description: String(firstNonEmpty(raw?.description, properties.description)),
+        notes: String(firstNonEmpty(raw?.notes, properties.notes)),
+        attribution: String(firstNonEmpty(raw?.attribution, properties.attribution)),
+        pageUrl,
+        url: pageUrl,
+        imageUrl,
+        thumbnail: imageUrl,
+        streamUrl,
+        youtubeUrl,
+        channelUrl: firstNonEmpty(raw?.channelUrl, properties.channelUrl),
+        timelapse: firstNonEmpty(raw?.timelapse, properties.timelapse),
+        enabled: raw?.enabled !== false && properties.enabled !== false
+      };
+    }
+
+    function isValidCamera(camera) {
+      return camera.enabled &&
+        Number.isFinite(camera.latitude) &&
+        Number.isFinite(camera.longitude) &&
+        camera.latitude >= -90 &&
+        camera.latitude <= 90 &&
+        camera.longitude >= -180 &&
+        camera.longitude <= 180;
+    }
+
+    function markerColor(layerName) {
+      const colors = {
+        alertwest: "#dc2626",
+        "caloes-fire": "#f97316",
+        "caloes-traffic": "#eab308",
+        usgs: "#2563eb",
+        "curated-tourist": "#9333ea",
+        windy: "#0891b2"
+      };
+
+      return colors[layerName] || "#374151";
+    }
+
+    function makeMarker(camera) {
+      return L.circleMarker([camera.latitude, camera.longitude], {
+        radius: camera.layer === "curated-tourist" ? 7 : 5,
+        weight: 2,
+        color: "#ffffff",
+        fillColor: markerColor(camera.layer),
+        fillOpacity: .9
+      });
+    }
+
+    function popupHtml(camera) {
+      const youtubeId = getYouTubeVideoId(camera.youtubeUrl || camera.streamUrl || camera.pageUrl);
+
+      const links = [];
+      if (camera.pageUrl) {
+        links.push(`<a href="${escapeHtml(camera.pageUrl)}" target="_blank" rel="noopener noreferrer">Open camera page</a>`);
+      }
+      if (camera.streamUrl && camera.streamUrl !== camera.pageUrl) {
+        links.push(`<a href="${escapeHtml(camera.streamUrl)}" target="_blank" rel="noopener noreferrer">Open stream</a>`);
+      }
+      if (camera.channelUrl) {
+        links.push(`<a href="${escapeHtml(camera.channelUrl)}" target="_blank" rel="noopener noreferrer">Open channel</a>`);
+      }
+      if (camera.timelapse) {
+        links.push(`<a href="${escapeHtml(camera.timelapse)}" target="_blank" rel="noopener noreferrer">Open timelapse</a>`);
       }
 
-      const thumbnailUrl =
-        cam.thumbnail ||
-        cam.imageUrl ||
-        largeImageUrl ||
-        "";
+      const location = [camera.city, camera.county].filter(Boolean).join(", ");
 
-      if (youtubeId || embedUrl || largeImageUrl) {
-        mediaControls.push(`
-          <button type="button" class="popup-expand-toggle btn btn-outline-secondary btn-sm">
-            Expand
-          </button>
-        `);
-      }
+      const youtubeEmbed = youtubeId
+        ? `<iframe
+             class="video-frame"
+             src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}"
+             title="${escapeHtml(camera.name)}"
+             loading="lazy"
+             referrerpolicy="strict-origin-when-cross-origin"
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+             allowfullscreen>
+           </iframe>`
+        : "";
 
-      const imageSection = !youtubeId && thumbnailUrl ? `
-        <div class="popup-image">
-          <button type="button"
-                  class="image-expand-toggle"
-                  data-thumbnail-url="${escapeHtml(thumbnailUrl)}"
-                  data-large-image-url="${escapeHtml(largeImageUrl || thumbnailUrl)}"
-                  aria-label="Expand ${escapeHtml(cam.name)} image">
-            <img src="${escapeHtml(thumbnailUrl)}"
-                 alt="${escapeHtml(cam.name)} current view"
-                 loading="lazy"
-                 decoding="async">
-          </button>
-        </div>
-      ` : "";
-
-      const mediaSection = mediaControls.length || imageSection ? `
-        ${mediaControls.length ? `<div class="popup-actions">${mediaControls.join("")}</div>` : ""}
-        ${youtubeId ? '<div class="popup-video" aria-hidden="true"></div>' : ""}
-        ${embedUrl ? '<div class="popup-live-player" aria-hidden="true" hidden></div>' : ""}
-        ${imageSection}
-      ` : "";
+      const image = camera.imageUrl
+        ? `<img
+             src="${escapeHtml(camera.imageUrl)}"
+             alt="${escapeHtml(camera.name)}"
+             loading="lazy"
+             data-expand-image="${escapeHtml(camera.imageUrl)}"
+             data-expand-title="${escapeHtml(camera.name)}"
+             onerror="this.style.display='none'">`
+        : "";
 
       return `
         <div class="popup">
-          <span class="badge text-bg-secondary">${escapeHtml(cam.category || cam.source)}</span><br>
-          <strong>${escapeHtml(cam.name)}</strong><br>
-          Source: ${escapeHtml(cam.source || "")}<br>
-          ${cam.operator && cam.operator !== cam.source ? `Operator: ${escapeHtml(cam.operator)}<br>` : ""}
-          ${cam.city ? `City: ${escapeHtml(cam.city)}<br>` : ""}
-          ${cam.county ? `County: ${escapeHtml(cam.county)}<br>` : ""}
-          ${cam.description ? `${escapeHtml(cam.description)}<br>` : ""}
-          ${cam.heading ? `View: ${escapeHtml(cam.heading)}°<br>` : ""}
-          ${embedUrl ? `<div class="live-available"><i class="bi bi-broadcast-pin me-1" aria-hidden="true"></i>Embedded live player available</div>` : ""}
-          ${cam.url ? `<a class="btn btn-outline-primary btn-sm my-1" href="${escapeHtml(cam.url)}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right me-1"></i>Open camera page</a><br>` : ""}
-          ${channelUrl ? `<a href="${escapeHtml(channelUrl)}" target="_blank" rel="noopener">Open YouTube streams</a><br>` : ""}
-          ${cam.tags?.length ? `Tags: ${escapeHtml(cam.tags.join(", "))}<br>` : ""}
-          ${cam.timelapse ? `<a href="${escapeHtml(cam.timelapse)}" target="_blank" rel="noopener">Open timelapse</a><br>` : ""}
-          ${mediaSection}
-          ${cam.attribution ? `<small>${escapeHtml(cam.attribution)}</small>` : ""}
-        </div>
-      `;
+          <span class="badge text-bg-dark">${escapeHtml(camera.category || camera.source)}</span>
+          <h3>${escapeHtml(camera.name)}</h3>
+          ${location ? `<div><strong>Location:</strong> ${escapeHtml(location)}</div>` : ""}
+          ${camera.source ? `<div><strong>Source:</strong> ${escapeHtml(camera.source)}</div>` : ""}
+          ${camera.description ? `<p class="my-2">${escapeHtml(camera.description)}</p>` : ""}
+          ${links.length ? `<div class="d-grid gap-1 my-2">${links.join("")}</div>` : ""}
+          ${youtubeEmbed}
+          ${image}
+          ${camera.notes ? `<div class="small mt-2"><strong>Notes:</strong> ${escapeHtml(camera.notes)}</div>` : ""}
+          ${camera.attribution ? `<div class="small text-secondary mt-2">${escapeHtml(camera.attribution)}</div>` : ""}
+        </div>`;
     }
 
-    function addCamera(cam) {
-      const lat = Number(cam.lat ?? cam.latitude);
-      const lon = Number(cam.lon ?? cam.longitude);
-
-      if (!Number.isFinite(lat) || !Number.isFinite(lon) || !layers[cam.layer]) return;
-
-      const normalizedCamera = {
-        ...cam,
-        lat,
-        lon,
-        source: cam.source || cam.operator || SOURCES[cam.layer]?.label || "",
-        url: cam.url || cam.pageUrl || cam.streamUrl || "",
-        thumbnail: cam.thumbnail || cam.imageUrl || "",
-        imageUrl: cam.imageUrl || "",
-        largeImageUrl: cam.largeImageUrl || cam.previewUrl || "",
-        fullImageUrl: cam.fullImageUrl || "",
-        originalImageUrl: cam.originalImageUrl || "",
-        youtubeUrl: cam.youtubeUrl || cam.youtube || "",
-        channelUrl: cam.channelUrl || "",
-        embedUrl: cam.embedUrl || cam.embed_url || "",
-        sourceType: cam.sourceType || "webcam",
-        priority: Number(cam.priority ?? 50),
-        featured: Boolean(cam.featured),
-        tags: Array.isArray(cam.tags) ? cam.tags : [],
-        category: cam.category || "Camera"
-      };
-
-      const marker = L.marker([lat, lon]).bindPopup(cameraPopup(normalizedCamera), {
-        maxWidth: 920,
-        minWidth: 300,
-        autoPanPadding: [24, 24]
-      });
-      marker.addTo(layers[cam.layer]);
-      normalizedCamera.marker = marker;
-      allCameras.push(normalizedCamera);
-    }
-
-    async function ensureLayerLoaded(layerName) {
-      if (loadedLayers.has(layerName)) return;
-
-      const source = SOURCES[layerName];
-      document.getElementById("status").textContent = `Loading ${source.label}…`;
-
-      const requestUrl = layerName === "windy"
-        ? `${source.json}?t=${Date.now()}`
-        : source.json;
-
-      const response = await fetch(requestUrl, {
-        cache: layerName === "windy" ? "no-store" : "default"
-      });
-      if (!response.ok) throw new Error(`Failed to load ${source.label}`);
-
-      const payload = await response.json();
-      const cameras = layerName === "fox-weather"
-        ? mergeUniqueCameras(payload.cameras || [], FOX_WEATHER_FALLBACK_CAMERAS)
-        : (payload.cameras || []);
-
-      cameras.forEach(cam => {
-        addCamera({ ...cam, layer: layerName });
+    function addCamera(camera) {
+      const marker = makeMarker(camera);
+      marker.bindPopup(() => popupHtml(camera), {
+        maxWidth: 380,
+        minWidth: 280
       });
 
-      loadedLayers.add(layerName);
-    }
+      marker.on("popupopen", event => {
+        const popupElement = event.popup.getElement();
+        if (!popupElement) return;
 
-    function renderList() {
-      const query = document.getElementById("search").value.toLowerCase().trim();
-      const active = new Set(
-        [...document.querySelectorAll("[data-layer]:checked")].map(input => input.dataset.layer)
-      );
-
-      const filtered = allCameras.filter(cam => {
-        if (!active.has(cam.layer)) return false;
-        if (!query) return true;
-
-        return [
-          cam.name,
-          cam.source,
-          cam.operator,
-          cam.category,
-          cam.city,
-          cam.county,
-          cam.sourceType,
-          ...(cam.tags || [])
-        ].join(" ").toLowerCase().includes(query);
-      });
-
-      filtered.sort((a, b) =>
-        Number(b.featured) - Number(a.featured) ||
-        Number(b.priority || 0) - Number(a.priority || 0) ||
-        String(a.name || "").localeCompare(String(b.name || ""))
-      );
-
-      const list = document.getElementById("cameraList");
-      list.innerHTML = "";
-
-      filtered.slice(0, 100).forEach(cam => {
-        const card = document.createElement("div");
-        card.className = "card border-1 text-dark";
-        card.innerHTML = `
-          <span class="badge text-primary mb-1">${cam.featured ? "★ " : ""}${escapeHtml(cam.category || cam.layer)}</span>
-          <strong>${escapeHtml(cam.name)}</strong>
-          <div class="fs-6 fw-light">${escapeHtml(cam.source || "")}${cam.city ? " · " + escapeHtml(cam.city) : ""}${cam.county ? " · " + escapeHtml(cam.county) : ""}</div>
-        `;
-        card.addEventListener("click", () => {
-          map.setView([cam.lat, cam.lon], 12);
-          cam.marker.openPopup();
+        popupElement.querySelectorAll("[data-expand-image]").forEach(image => {
+          image.addEventListener("click", () => {
+            const modalImage = document.getElementById("imageModalImage");
+            const modalTitle = document.getElementById("imageModalTitle");
+            modalImage.src = image.dataset.expandImage;
+            modalImage.alt = image.dataset.expandTitle || "Camera image";
+            modalTitle.textContent = image.dataset.expandTitle || "Camera image";
+            imageModal.show();
+          });
         });
-        list.appendChild(card);
       });
 
-      document.getElementById("status").textContent =
-        `${filtered.length} visible / ${allCameras.length} loaded cameras`;
+      marker.addTo(layers[camera.layer]);
+      markersById.set(camera.id, marker);
+      allCameras.push(camera);
+    }
+
+    async function loadLayer(layerName) {
+      if (!SOURCES[layerName]) {
+        throw new Error(`Unknown layer: ${layerName}`);
+      }
+
+      if (loadedLayers.has(layerName)) {
+        return;
+      }
+
+      if (loadingLayers.has(layerName)) {
+        return loadingLayers.get(layerName);
+      }
+
+      const promise = (async () => {
+        const source = SOURCES[layerName];
+        setLayerStatus(layerName, "Loading…");
+
+        const separator = source.json.includes("?") ? "&" : "?";
+        const requestUrl = source.noCache
+          ? `${source.json}${separator}t=${Date.now()}`
+          : source.json;
+
+        log(`Loading ${source.label} from ${requestUrl}`);
+
+        const response = await fetch(requestUrl, {
+          cache: source.noCache ? "no-store" : "default",
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`${source.label}: HTTP ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const records = extractCameraArray(payload);
+        let added = 0;
+        let skipped = 0;
+        const foundRequired = new Set();
+
+        records.forEach((raw, index) => {
+          const camera = normalizeCamera(raw, layerName, index);
+
+          if (REQUIRED_CURATED_IDS.has(camera.id)) {
+            foundRequired.add(camera.id);
+          }
+
+          if (!isValidCamera(camera)) {
+            skipped += 1;
+            console.warn("Skipped invalid camera", camera.id, camera);
+            return;
+          }
+
+          addCamera(camera);
+          added += 1;
+        });
+
+        loadedLayers.add(layerName);
+        setLayerStatus(layerName, `${added} loaded${skipped ? `, ${skipped} skipped` : ""}`);
+        log(`${source.label}: ${added} cameras loaded, ${skipped} skipped.`);
+
+        if (layerName === "curated-tourist") {
+          const missing = [...REQUIRED_CURATED_IDS].filter(id => !foundRequired.has(id));
+
+          if (missing.length) {
+            log(`WARNING: required curated IDs missing from live JSON: ${missing.join(", ")}`, true);
+          } else {
+            log("Confirmed required cameras in live JSON: CXYr04BWvmc, KES0RUIXg8s, and Castro Street Cam.");
+          }
+        }
+
+        renderCameraList();
+      })();
+
+      loadingLayers.set(layerName, promise);
+
+      try {
+        await promise;
+      } finally {
+        loadingLayers.delete(layerName);
+      }
+    }
+
+    function activeCameras() {
+      return allCameras.filter(camera => map.hasLayer(layers[camera.layer]));
+    }
+
+    function renderCameraList() {
+      const query = cameraSearch.value.trim().toLowerCase();
+
+      const visible = activeCameras()
+        .filter(camera => {
+          if (!query) return true;
+
+          const searchable = [
+            camera.id,
+            camera.name,
+            camera.city,
+            camera.county,
+            camera.source,
+            camera.category
+          ].join(" ").toLowerCase();
+
+          return searchable.includes(query);
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      cameraCount.textContent = `${visible.length} camera${visible.length === 1 ? "" : "s"} shown`;
+      cameraList.replaceChildren();
+
+      if (!visible.length) {
+        const empty = document.createElement("div");
+        empty.className = "small text-secondary py-2";
+        empty.textContent = "No loaded cameras match this search.";
+        cameraList.appendChild(empty);
+        return;
+      }
+
+      visible.slice(0, 500).forEach(camera => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "camera-list-item";
+        button.innerHTML = `
+          <strong>${escapeHtml(camera.name)}</strong>
+          <small>${escapeHtml([camera.city, camera.county, camera.source].filter(Boolean).join(" · "))}</small>`;
+
+        button.addEventListener("click", () => {
+          const marker = markersById.get(camera.id);
+          map.setView([camera.latitude, camera.longitude], Math.max(map.getZoom(), 12));
+          marker?.openPopup();
+          sidebar.classList.remove("open");
+        });
+
+        cameraList.appendChild(button);
+      });
+
+      if (visible.length > 500) {
+        const note = document.createElement("div");
+        note.className = "small text-secondary py-2";
+        note.textContent = `Showing the first 500 of ${visible.length} matching cameras.`;
+        cameraList.appendChild(note);
+      }
+    }
+
+    function fitActiveCameras() {
+      const activeLayers = Object.entries(layers)
+        .filter(([, layer]) => map.hasLayer(layer))
+        .map(([, layer]) => layer);
+
+      const group = L.featureGroup(activeLayers.flatMap(layer => layer.getLayers()));
+
+      if (group.getLayers().length) {
+        map.fitBounds(group.getBounds().pad(.08), {
+          maxZoom: 13
+        });
+      }
+    }
+
+    async function setLayerEnabled(layerName, enabled) {
+      const input = document.querySelector(`[data-layer="${layerName}"]`);
+
+      try {
+        if (enabled) {
+          await loadLayer(layerName);
+          layers[layerName].addTo(map);
+        } else {
+          map.removeLayer(layers[layerName]);
+        }
+
+        renderCameraList();
+      } catch (error) {
+        console.error(error);
+        log(`FAILED ${SOURCES[layerName]?.label || layerName}: ${error.message}`, true);
+        setLayerStatus(layerName, `Failed: ${error.message}`);
+        if (input) input.checked = false;
+      }
     }
 
     document.querySelectorAll("[data-layer]").forEach(input => {
-      input.addEventListener("change", async () => {
-        const layerName = input.dataset.layer;
-        const layer = layers[layerName];
-
-        try {
-          if (input.checked) {
-            await ensureLayerLoaded(layerName);
-            map.addLayer(layer);
-          } else {
-            map.removeLayer(layer);
-          }
-
-          renderList();
-        } catch (error) {
-          console.error(error);
-          input.checked = false;
-          document.getElementById("status").textContent = `Failed to load ${SOURCES[layerName].label}.`;
-        }
+      input.addEventListener("change", () => {
+        setLayerEnabled(input.dataset.layer, input.checked);
       });
     });
 
-    document.getElementById("search").addEventListener("input", renderList);
+    cameraSearch.addEventListener("input", renderCameraList);
 
-    document.addEventListener("click", event => {
-      const videoButton = event.target.closest(".video-toggle");
+    document.getElementById("fitButton").addEventListener("click", fitActiveCameras);
 
-      if (videoButton) {
-        const popup = videoButton.closest(".popup");
-        const videoContainer = popup?.querySelector(".popup-video");
-        const videoId = videoButton.dataset.youtubeId;
+    document.getElementById("shareButton").addEventListener("click", async () => {
+      const url = window.location.href;
 
-        if (!popup || !videoContainer || !videoId) return;
-
-        const isVisible = videoContainer.classList.toggle("is-visible");
-        videoContainer.setAttribute("aria-hidden", String(!isVisible));
-        videoButton.textContent = isVisible ? "Hide video" : "Show video";
-
-        if (isVisible && !videoContainer.querySelector("iframe")) {
-          const iframe = document.createElement("iframe");
-          iframe.src =
-            `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
-          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} live video`;
-          iframe.loading = "lazy";
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-          iframe.referrerPolicy = "strict-origin-when-cross-origin";
-          iframe.allowFullscreen = true;
-          videoContainer.appendChild(iframe);
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: document.title,
+            url
+          });
+          return;
         }
 
-        map.invalidateSize();
-        return;
-      }
-
-      const livePlayerButton = event.target.closest(".live-player-toggle");
-
-      if (livePlayerButton) {
-        const popup = livePlayerButton.closest(".popup");
-        const livePlayer = popup?.querySelector(".popup-live-player");
-        const embedUrl = livePlayerButton.dataset.embedUrl;
-
-        if (!popup || !livePlayer || !embedUrl) return;
-
-        const isVisible = livePlayer.hidden;
-        livePlayer.hidden = !isVisible;
-        livePlayer.setAttribute("aria-hidden", String(!isVisible));
-        livePlayerButton.innerHTML = isVisible
-          ? '<i class="bi bi-stop-circle me-1" aria-hidden="true"></i>Stop live camera'
-          : '<i class="bi bi-play-circle-fill me-1" aria-hidden="true"></i>Play live camera';
-
-        if (isVisible && !livePlayer.querySelector("iframe")) {
-          const frameWrapper = document.createElement("div");
-          frameWrapper.className = "popup-live-player-frame";
-
-          const iframe = document.createElement("iframe");
-          iframe.src = embedUrl;
-          iframe.title = `${popup.querySelector("strong")?.textContent || "Camera"} FOX Weather Vision live player`;
-          iframe.loading = "lazy";
-          iframe.allow = "autoplay; fullscreen; picture-in-picture";
-          iframe.sandbox = "allow-scripts allow-same-origin allow-forms allow-popups allow-presentation";
-          iframe.referrerPolicy = "strict-origin-when-cross-origin";
-          iframe.allowFullscreen = true;
-
-          frameWrapper.appendChild(iframe);
-          livePlayer.appendChild(frameWrapper);
-        } else if (!isVisible) {
-          livePlayer.replaceChildren();
+        await navigator.clipboard.writeText(url);
+        log("Map URL copied to clipboard.");
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          log(`Unable to share URL: ${error.message}`, true);
         }
-
-        const leafletContent = livePlayerButton.closest(".leaflet-popup-content");
-        if (leafletContent && isVisible) {
-          leafletContent.style.width = "min(80vw, 900px)";
-          popup.classList.add("expanded");
-
-          const expandButton = popup.querySelector(".popup-expand-toggle");
-          if (expandButton) expandButton.textContent = "Collapse";
-        }
-
-        map.invalidateSize();
-        return;
-      }
-
-      const imageButton = event.target.closest(".image-expand-toggle");
-
-      if (imageButton) {
-        const popup = imageButton.closest(".popup");
-        const leafletContent = imageButton.closest(".leaflet-popup-content");
-        const image = imageButton.querySelector("img");
-        const thumbnailUrl = imageButton.dataset.thumbnailUrl;
-        const largeImageUrl = imageButton.dataset.largeImageUrl || thumbnailUrl;
-
-        if (!popup || !leafletContent || !image || !largeImageUrl) return;
-
-        const expanded = popup.classList.toggle("expanded");
-        leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
-        image.src = expanded ? largeImageUrl : thumbnailUrl;
-        imageButton.setAttribute(
-          "aria-label",
-          expanded ? "Collapse camera image" : "Expand camera image"
-        );
-
-        const expandButton = popup.querySelector(".popup-expand-toggle");
-        if (expandButton) {
-          expandButton.textContent = expanded ? "Collapse" : "Expand";
-        }
-
-        map.invalidateSize();
-        return;
-      }
-
-      const expandButton = event.target.closest(".popup-expand-toggle");
-
-      if (expandButton) {
-        const popup = expandButton.closest(".popup");
-        const leafletContent = expandButton.closest(".leaflet-popup-content");
-
-        if (!popup || !leafletContent) return;
-
-        const expanded = popup.classList.toggle("expanded");
-        expandButton.textContent = expanded ? "Collapse" : "Expand";
-        leafletContent.style.width = expanded ? "min(80vw, 900px)" : "340px";
-
-        const imageButton = popup.querySelector(".image-expand-toggle");
-        const image = imageButton?.querySelector("img");
-
-        if (imageButton && image) {
-          const thumbnailUrl = imageButton.dataset.thumbnailUrl;
-          const largeImageUrl = imageButton.dataset.largeImageUrl || thumbnailUrl;
-          image.src = expanded ? largeImageUrl : thumbnailUrl;
-          imageButton.setAttribute(
-            "aria-label",
-            expanded ? "Collapse camera image" : "Expand camera image"
-          );
-        }
-
-        map.invalidateSize();
       }
     });
 
-    map.on("popupclose", event => {
-      const popupElement = event.popup?.getElement();
-      if (!popupElement) return;
-
-      popupElement.querySelectorAll(".popup-live-player").forEach(player => {
-        player.replaceChildren();
-        player.hidden = true;
-        player.setAttribute("aria-hidden", "true");
-      });
+    document.getElementById("openSidebar").addEventListener("click", () => {
+      sidebar.classList.add("open");
     });
 
-    const shareLinkBtn = document.getElementById("share-link-btn");
+    document.getElementById("closeSidebar").addEventListener("click", () => {
+      sidebar.classList.remove("open");
+    });
 
-    if (shareLinkBtn) {
-      shareLinkBtn.addEventListener("click", async () => {
-        const shareData = {
-          title: document.title,
-          text: "SoCal TAK/GIS Cameras",
-          url: document.location.href
-        };
+    map.on("click", () => {
+      if (window.innerWidth <= 900) {
+        sidebar.classList.remove("open");
+      }
+    });
 
-        try {
-          if (navigator.share) {
-            await navigator.share(shareData);
-          } else {
-            await navigator.clipboard.writeText(document.location.href);
-            document.getElementById("status").textContent = "Link copied to clipboard.";
-          }
-        } catch (error) {
-          console.error("Error sharing content:", error);
-        }
-      });
+    async function initialize() {
+      const initiallyChecked = [...document.querySelectorAll("[data-layer]:checked")];
+
+      for (const input of initiallyChecked) {
+        await setLayerEnabled(input.dataset.layer, true);
+      }
+
+      const requiredCamera = allCameras.find(camera => REQUIRED_CURATED_IDS.has(camera.id));
+      if (requiredCamera) {
+        map.setView([requiredCamera.latitude, requiredCamera.longitude], 7);
+      } else {
+        fitActiveCameras();
+      }
     }
-    console.log("%c Welcome to: " + window.location.href + " now go home or my GitHub: CodePosse", "background: navy; color: #bada55; font-size: 28px;font-family:'Comic Sans MS';padding:10px;border:3px dashed red;");
 
+    initialize().catch(error => {
+      log(`Initialization failed: ${error.message}`, true);
+    });
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-          crossorigin="anonymous"></script>
 </body>
-
 </html>
