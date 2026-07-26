@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "name": "Southern California Embeddable YouTube Cameras",
   "description": "Direct YouTube webcam and live-stream entries only. Every marker has an embeddable youtubeUrl.",
-  "updated": "2026-07-10",
+  "updated": "2026-07-25",
   "cameras": [
     {
       "id": "huntington-beach-pier-live",
@@ -816,6 +816,65 @@
         "youtube"
       ],
       "notes": ""
+    },
+    {
+      "id": "san-francisco-oakland-bay-bridge-live",
+      "name": "San Francisco–Oakland Bay Bridge Live Camera",
+      "enabled": true,
+      "category": "Bridge",
+      "latitude": 37.786111,
+      "longitude": -122.389167,
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "state": "California",
+      "operator": "ABC7 San Francisco",
+      "description": "24/7 live view of the San Francisco–Oakland Bay Bridge.",
+      "pageUrl": "https://abc7news.com/post/san-francisco-oakland-bay-bridge-live-camera-247-stream/16847336/",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CXYr04BWvmc",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 97,
+      "featured": true,
+      "tags": [
+        "bay bridge",
+        "bridge",
+        "san francisco",
+        "oakland",
+        "traffic",
+        "youtube"
+      ],
+      "notes": "Camera mounted near The Watermark with a view toward the Bay Bridge."
+    },
+    {
+      "id": "golden-gate-bridge-live-cijnx",
+      "name": "Golden Gate Bridge Live Camera",
+      "enabled": true,
+      "category": "Bridge",
+      "latitude": 37.8199,
+      "longitude": -122.4783,
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "state": "California",
+      "operator": "YouTube Live Camera",
+      "description": "Live camera view of the Golden Gate Bridge.",
+      "pageUrl": "https://www.youtube.com/watch?v=CijNX_Wsdbo",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CijNX_Wsdbo",
+      "channelUrl": "",
+      "imageUrl": "",
+      "streamUrl": "",
+      "sourceType": "youtube",
+      "priority": 96,
+      "featured": true,
+      "tags": [
+        "golden gate bridge",
+        "bridge",
+        "san francisco",
+        "bay",
+        "youtube"
+      ],
+      "notes": "Named from the previously requested Golden Gate Bridge camera; exact camera mounting point was not published."
     }
   ]
 }

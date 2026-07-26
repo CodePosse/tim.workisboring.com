@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Southern California Embeddable YouTube Cameras</name>
-    <description>Generated 2026-07-26T01:16:42.047949+00:00; 28 enabled cameras</description>
+    <description>Generated 2026-07-26T01:28:04.742689+00:00; 30 enabled cameras</description>
     <Style id="camera">
       <IconStyle>
         <scale>1.0</scale>
@@ -148,6 +148,53 @@ Notes: Use is subject to the operator&#x27;s published terms.]]></description>
         </ExtendedData>
         <Point>
           <coordinates>-117.385361,33.194570,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Bridge</name>
+      <Placemark>
+        <name>Golden Gate Bridge Live Camera</name>
+        <description><![CDATA[<b>Golden Gate Bridge Live Camera</b><br>
+Category: Bridge<br>
+City: San Francisco<br>
+County: San Francisco<br>
+Operator: YouTube Live Camera<br>
+Live camera view of the Golden Gate Bridge.<br>
+<a href="https://www.youtube.com/watch?v=CijNX_Wsdbo">Camera Page</a><br>
+<a href="https://www.youtube.com/watch?v=CijNX_Wsdbo">YouTube Live</a><br>
+Notes: Named from the previously requested Golden Gate Bridge camera; exact camera mounting point was not published.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>golden-gate-bridge-live-cijnx</value></Data>
+          <Data name="category"><value>Bridge</value></Data>
+          <Data name="operator"><value>YouTube Live Camera</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-122.478300,37.819900,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>San Francisco–Oakland Bay Bridge Live Camera</name>
+        <description><![CDATA[<b>San Francisco–Oakland Bay Bridge Live Camera</b><br>
+Category: Bridge<br>
+City: San Francisco<br>
+County: San Francisco<br>
+Operator: ABC7 San Francisco<br>
+24/7 live view of the San Francisco–Oakland Bay Bridge.<br>
+<a href="https://abc7news.com/post/san-francisco-oakland-bay-bridge-live-camera-247-stream/16847336/">Camera Page</a><br>
+<a href="https://www.youtube.com/watch?v=CXYr04BWvmc">YouTube Live</a><br>
+Notes: Camera mounted near The Watermark with a view toward the Bay Bridge.]]></description>
+        <styleUrl>#camera</styleUrl>
+        <ExtendedData>
+          <Data name="id"><value>san-francisco-oakland-bay-bridge-live</value></Data>
+          <Data name="category"><value>Bridge</value></Data>
+          <Data name="operator"><value>ABC7 San Francisco</value></Data>
+          <Data name="source"><value>Curated Southern California Cameras</value></Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>-122.389167,37.786111,0</coordinates>
         </Point>
       </Placemark>
     </Folder>
