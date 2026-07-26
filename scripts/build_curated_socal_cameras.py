@@ -115,21 +115,6 @@ def normalize_camera(raw: Any, index: int) -> dict[str, Any]:
     if not isinstance(enabled, bool):
         raise CatalogError(f'Camera "{camera_id}" enabled must be true or false.')
 
-    page_url = clean_url(raw.get("pageUrl"))
-    image_url = clean_url(raw.get("imageUrl"))
-    stream_url = clean_url(raw.get("streamUrl"))
-    youtube_url = clean_url(raw.get("youtubeUrl"))
-    channel_url = clean_url(raw.get("channelUrl"))
-
-    # Older curated-camera records may store YouTube links in youtubeUrl
-    # instead of pageUrl/streamUrl. Treat youtubeUrl as both the public
-    # camera page and the stream link when those standard fields are empty.
-    if not page_url:
-        page_url = youtube_url or channel_url
-
-    if not stream_url and youtube_url:
-        stream_url = youtube_url
-
     camera = {
         "id": camera_id,
         "name": name,
@@ -141,19 +126,18 @@ def normalize_camera(raw: Any, index: int) -> dict[str, Any]:
         "county": clean_text(raw.get("county")),
         "operator": clean_text(raw.get("operator")),
         "description": clean_text(raw.get("description")),
-        "pageUrl": page_url,
-        "imageUrl": image_url,
-        "streamUrl": stream_url,
-        "youtubeUrl": youtube_url,
-        "channelUrl": channel_url,
+        "pageUrl": clean_url(raw.get("pageUrl")),
+        "youtubeUrl": clean_url(raw.get("youtubeUrl")),
+        "imageUrl": clean_url(raw.get("imageUrl")),
+        "streamUrl": clean_url(raw.get("streamUrl")),
         "notes": clean_text(raw.get("notes")),
     }
 
     if not any(
-        camera[field] for field in ("pageUrl", "imageUrl", "streamUrl")
+        camera[field] for field in ("pageUrl", "youtubeUrl", "imageUrl", "streamUrl")
     ):
         raise CatalogError(
-            f'Camera "{camera_id}" must have pageUrl, imageUrl, or streamUrl.'
+            f'Camera "{camera_id}" must have pageUrl, youtubeUrl, imageUrl, or streamUrl.'
         )
 
     return camera
@@ -213,18 +197,11 @@ def description_html(camera: dict[str, Any]) -> str:
     if camera["description"]:
         lines.append(html.escape(camera["description"]))
 
-    page_label = "Camera Page"
-    stream_label = "Open Stream"
-
-    if camera.get("youtubeUrl"):
-        page_label = "YouTube Page"
-        stream_label = "Open YouTube Stream"
-
     links = [
-        link(page_label, camera["pageUrl"]),
+        link("Camera Page", camera["pageUrl"]),
+        link("YouTube Live", camera["youtubeUrl"]),
         link("Latest Image", camera["imageUrl"]),
-        link(stream_label, camera["streamUrl"]),
-        link("Channel Page", camera.get("channelUrl", "")),
+        link("Open Stream", camera["streamUrl"]),
     ]
     lines.extend(item for item in links if item)
 
