@@ -1,7 +1,7 @@
 {
   "source_key": "caloes-fire",
   "title": "Cal OES Fire Cameras",
-  "generated_at": 1785023113,
+  "generated_at": 1785024913,
   "count": 525,
   "cameras": [
     {
@@ -1596,7 +1596,7 @@
       "lat": 34.61136599999999,
       "lon": -117.290405,
       "county": "Sanbernardino",
-      "heading": 172.57,
+      "heading": 274.8,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Quartzite2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Quartzite2"
     },
@@ -1656,7 +1656,7 @@
       "lat": 33.98933799999998,
       "lon": -117.247681,
       "county": "Riverside",
-      "heading": 243.45,
+      "heading": 243.51,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-RechePeak1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-RechePeak1"
     },
@@ -1824,7 +1824,7 @@
       "lat": 34.213500999999994,
       "lon": -117.50090000000002,
       "county": "Sanbernardino",
-      "heading": 23.13,
+      "heading": 355.21,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-SanSevaine1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-SanSevaine1"
     },
@@ -2064,7 +2064,7 @@
       "lat": 34.383202,
       "lon": -117.663902,
       "county": "Losangeles",
-      "heading": 74.87,
+      "heading": 19.59,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Table2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Table2"
     },
@@ -2628,7 +2628,7 @@
       "lat": 34.415668,
       "lon": -119.845253,
       "county": "Santabarbara",
-      "heading": 359.46,
+      "heading": 271.37,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-UCSBCampus/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-UCSBCampus"
     },
@@ -2796,7 +2796,7 @@
       "lat": 34.835891999999994,
       "lon": -118.898293,
       "county": "Kern",
-      "heading": 0.83,
+      "heading": 0.82,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-LebecOaks1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-LebecOaks1"
     },
@@ -2868,7 +2868,7 @@
       "lat": 34.903048999999996,
       "lon": -118.904259,
       "county": "Kern",
-      "heading": 165.19,
+      "heading": 170.25,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Grapevine1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Grapevine1"
     },
@@ -2880,7 +2880,7 @@
       "lat": 34.903048999999996,
       "lon": -118.904259,
       "county": "Kern",
-      "heading": 155.16,
+      "heading": 169.72,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Grapevine2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Grapevine2"
     },
@@ -3024,7 +3024,7 @@
       "lat": 34.80382199999999,
       "lon": -118.815796,
       "county": "Losangeles",
-      "heading": 65.14,
+      "heading": 317.4,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Gorman2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Gorman2"
     },
@@ -3984,7 +3984,7 @@
       "lat": 35.65205,
       "lon": -120.35134900000001,
       "county": "Sanluisobispo",
-      "heading": 308.03,
+      "heading": 308.7,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-Shandon1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-Shandon1"
     },
@@ -5016,7 +5016,7 @@
       "lat": 34.410148,
       "lon": -119.70766600000002,
       "county": "Santabarbara",
-      "heading": 56.2,
+      "heading": 55.33,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-TVHillMontecito1/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-TVHillMontecito1"
     },
@@ -5640,7 +5640,7 @@
       "lat": 34.013936,
       "lon": -117.13854699999999,
       "county": "Sanbernardino",
-      "heading": 123.23,
+      "heading": 123.26,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-SunsetRedlands2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-SunsetRedlands2"
     },
@@ -6060,7 +6060,7 @@
       "lat": 33.105349,
       "lon": -117.23532800000001,
       "county": "Sandiego",
-      "heading": 246.63,
+      "heading": 246.62,
       "thumbnail": "https://cameras.alertcalifornia.org/public-camera-data/Axis-LaCosta2/latest-frame.jpg",
       "url": "https://cameras.alertcalifornia.org/?id=Axis-LaCosta2"
     },
