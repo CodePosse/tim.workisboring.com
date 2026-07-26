@@ -115,6 +115,21 @@ def normalize_camera(raw: Any, index: int) -> dict[str, Any]:
     if not isinstance(enabled, bool):
         raise CatalogError(f'Camera "{camera_id}" enabled must be true or false.')
 
+    page_url = clean_url(raw.get("pageUrl"))
+    image_url = clean_url(raw.get("imageUrl"))
+    stream_url = clean_url(raw.get("streamUrl"))
+    youtube_url = clean_url(raw.get("youtubeUrl"))
+    channel_url = clean_url(raw.get("channelUrl"))
+
+    # Older curated-camera records may store YouTube links in youtubeUrl
+    # instead of pageUrl/streamUrl. Treat youtubeUrl as both the public
+    # camera page and the stream link when those standard fields are empty.
+    if not page_url:
+        page_url = youtube_url or channel_url
+
+    if not stream_url and youtube_url:
+        stream_url = youtube_url
+
     camera = {
         "id": camera_id,
         "name": name,
@@ -126,9 +141,11 @@ def normalize_camera(raw: Any, index: int) -> dict[str, Any]:
         "county": clean_text(raw.get("county")),
         "operator": clean_text(raw.get("operator")),
         "description": clean_text(raw.get("description")),
-        "pageUrl": clean_url(raw.get("pageUrl")),
-        "imageUrl": clean_url(raw.get("imageUrl")),
-        "streamUrl": clean_url(raw.get("streamUrl")),
+        "pageUrl": page_url,
+        "imageUrl": image_url,
+        "streamUrl": stream_url,
+        "youtubeUrl": youtube_url,
+        "channelUrl": channel_url,
         "notes": clean_text(raw.get("notes")),
     }
 
@@ -196,10 +213,18 @@ def description_html(camera: dict[str, Any]) -> str:
     if camera["description"]:
         lines.append(html.escape(camera["description"]))
 
+    page_label = "Camera Page"
+    stream_label = "Open Stream"
+
+    if camera.get("youtubeUrl"):
+        page_label = "YouTube Page"
+        stream_label = "Open YouTube Stream"
+
     links = [
-        link("Camera Page", camera["pageUrl"]),
+        link(page_label, camera["pageUrl"]),
         link("Latest Image", camera["imageUrl"]),
-        link("Open Stream", camera["streamUrl"]),
+        link(stream_label, camera["streamUrl"]),
+        link("Channel Page", camera.get("channelUrl", "")),
     ]
     lines.extend(item for item in links if item)
 
