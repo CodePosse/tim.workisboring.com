@@ -480,12 +480,13 @@
       const source = SOURCES[layerName];
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
-      const requestUrl = layerName === "windy"
-        ? `${source.json}?t=${Date.now()}`
+      const shouldBypassCache = layerName === "windy" || layerName === "curated-socal";
+      const requestUrl = shouldBypassCache
+        ? `${source.json}${source.json.includes("?") ? "&" : "?"}t=${Date.now()}`
         : source.json;
 
       const response = await fetch(requestUrl, {
-        cache: layerName === "windy" ? "no-store" : "default"
+        cache: shouldBypassCache ? "no-store" : "default"
       });
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
