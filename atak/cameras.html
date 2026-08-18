@@ -61,6 +61,10 @@
           ALERTCalifornia / AlertWest</div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-fire" aria-label="Cal OES Fire"> 🔥 Cal OES Fire
         </div>
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="nifc-incidents" aria-label="NIFC Current Fire Incidents"> 🔥 NIFC Current Fires
+        </div>
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="nifc-perimeters" aria-label="NIFC Current Fire Perimeters"> 🔴 NIFC Fire Perimeters
+        </div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="caloes-traffic" aria-label="Cal OES Traffic"> 🚗 Cal OES
           Traffic</div>
         <div class="mygroup">
@@ -99,6 +103,8 @@
         <p class="links">
           <a href="/atak/data/kml/alertca-network.kml">ALERTCalifornia Network KML</a>
           <a href="/atak/data/kml/caloes-fire-network.kml">Cal OES Fire Network KML</a>
+          <a href="/atak/data/kml/nifc-current-incidents-network.kml">NIFC Current Fire Incidents Network KML</a>
+          <a href="/atak/data/kml/nifc-current-perimeters-network.kml">NIFC Current Fire Perimeters Network KML</a>
           <a href="/atak/data/kml/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
           <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
           <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
@@ -135,6 +141,16 @@
       "caloes-fire": {
         label: "Cal OES Fire",
         json: "/atak/data/caloes-fire-cameras.json"
+      },
+      "nifc-incidents": {
+        label: "NIFC Current Fires",
+        json: "/atak/data/nifc/nifc-current-incidents.geojson",
+        type: "geojson-incidents"
+      },
+      "nifc-perimeters": {
+        label: "NIFC Fire Perimeters",
+        json: "/atak/data/nifc/nifc-current-perimeters.geojson",
+        type: "geojson-perimeters"
       },
       "caloes-traffic": {
         label: "Cal OES Traffic",
@@ -474,13 +490,198 @@
       allCameras.push(normalizedCamera);
     }
 
+    function firstNifcValue(properties, keys, fallback = "") {
+      for (const key of keys) {
+        const value = properties?.[key];
+        if (value !== undefined && value !== null && value !== "") return value;
+      }
+      return fallback;
+    }
+
+    function formatNifcNumber(value) {
+      if (value === undefined || value === null || value === "") return "";
+      const number = Number(value);
+      return Number.isFinite(number)
+        ? number.toLocaleString(undefined, { maximumFractionDigits: 1 })
+        : String(value);
+    }
+
+    function formatNifcDate(value) {
+      if (value === undefined || value === null || value === "") return "";
+      let date;
+      if (typeof value === "number") {
+        date = new Date(value);
+      } else {
+        const numeric = Number(value);
+        date = Number.isFinite(numeric) && String(value).length >= 10
+          ? new Date(numeric)
+          : new Date(value);
+      }
+      return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString();
+    }
+
+    function nifcPopupRow(label, value) {
+      if (value === undefined || value === null || value === "") return "";
+      return `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${escapeHtml(value)}</td></tr>`;
+    }
+
+    function nifcIncidentPopup(feature) {
+      const p = feature.properties || {};
+      const name = firstNifcValue(p, ["IncidentName", "IncidentNameClean"], "Unnamed Fire");
+      const acres = firstNifcValue(p, ["DailyAcres", "CalculatedAcres", "DiscoveryAcres", "GISAcres"]);
+      const contained = firstNifcValue(p, ["PercentContained"]);
+      const cause = firstNifcValue(p, ["FireCause", "FireCauseGeneral"]);
+      const discovery = firstNifcValue(p, ["FireDiscoveryDateTime", "DiscoveryDate"]);
+      const type = firstNifcValue(p, ["IncidentTypeCategory", "IncidentTypeKind", "IncidentType"]);
+      const agency = firstNifcValue(p, ["POOProtectingAgency", "PrimaryFireOrganization", "UnitOrOtherAgencyIdentifier"]);
+      const irwin = firstNifcValue(p, ["IrwinID", "IRWINID"]);
+
+      return `
+        <div class="popup">
+          <span class="badge text-bg-danger">Current Fire</span><br>
+          <strong>🔥 ${escapeHtml(name)}</strong>
+          <table class="table table-sm mt-2 mb-1">
+            ${type ? nifcPopupRow("Type", type) : ""}
+            ${acres !== "" ? nifcPopupRow("Acres", formatNifcNumber(acres)) : ""}
+            ${contained !== "" ? nifcPopupRow("Contained", `${formatNifcNumber(contained)}%`) : ""}
+            ${cause ? nifcPopupRow("Cause", cause) : ""}
+            ${discovery ? nifcPopupRow("Discovery", formatNifcDate(discovery)) : ""}
+            ${agency ? nifcPopupRow("Agency", agency) : ""}
+            ${irwin ? nifcPopupRow("IRWIN ID", irwin) : ""}
+          </table>
+          <small>Source: NIFC / WFIGS</small>
+        </div>
+      `;
+    }
+
+    function nifcPerimeterPopup(feature) {
+      const p = feature.properties || {};
+      const name = firstNifcValue(p, ["IncidentName", "IncidentNameClean"], "Unnamed Fire");
+      const acres = firstNifcValue(p, ["GISAcres", "CalculatedAcres", "DailyAcres"]);
+      const date = firstNifcValue(p, ["DateCurrent", "CurrentDate", "CreateDate", "ModifiedOnDateTime_dt"]);
+      const type = firstNifcValue(p, ["IncidentTypeCategory", "IncidentTypeKind", "IncidentType"]);
+
+      return `
+        <div class="popup">
+          <span class="badge text-bg-warning">Fire Perimeter</span><br>
+          <strong>🔥 ${escapeHtml(name)}</strong>
+          <table class="table table-sm mt-2 mb-1">
+            ${type ? nifcPopupRow("Type", type) : ""}
+            ${acres !== "" ? nifcPopupRow("Acres", formatNifcNumber(acres)) : ""}
+            ${date ? nifcPopupRow("Perimeter Date", formatNifcDate(date)) : ""}
+          </table>
+          <small>Source: NIFC / WFIGS</small>
+        </div>
+      `;
+    }
+
+    function nifcIsPrescribedFire(feature) {
+      const p = feature.properties || {};
+      const values = [
+        p.IncidentTypeCategory,
+        p.IncidentTypeKind,
+        p.IncidentType
+      ].filter(Boolean).join(" ").toLowerCase();
+
+      return values.includes("prescribed") || values.split(/\s+/).includes("rx");
+    }
+
+    function nifcPerimeterStyle(feature) {
+      if (nifcIsPrescribedFire(feature)) {
+        return {
+          color: "#fd7e14",
+          weight: 2,
+          opacity: 0.9,
+          fillColor: "#fd7e14",
+          fillOpacity: 0.20
+        };
+      }
+
+      return {
+        color: "#dc3545",
+        weight: 2,
+        opacity: 0.95,
+        fillColor: "#dc3545",
+        fillOpacity: 0.20
+      };
+    }
+
+    const nifcIncidentIcon = L.divIcon({
+      className: "",
+      html: '<div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:#dc3545;color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.45);font-size:16px;line-height:1;">🔥</div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -14]
+    });
+
+    function addNifcIncidentFeature(feature, layerName) {
+      if (feature?.geometry?.type !== "Point") return;
+      const coords = feature.geometry.coordinates;
+      if (!Array.isArray(coords) || coords.length < 2) return;
+
+      const lon = Number(coords[0]);
+      const lat = Number(coords[1]);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+
+      const p = feature.properties || {};
+      const name = firstNifcValue(p, ["IncidentName", "IncidentNameClean"], "Unnamed Fire");
+      const acres = firstNifcValue(p, ["DailyAcres", "CalculatedAcres", "DiscoveryAcres", "GISAcres"]);
+      const county = firstNifcValue(p, ["POOCounty", "County"]);
+      const marker = L.marker([lat, lon], { icon: nifcIncidentIcon })
+        .bindPopup(nifcIncidentPopup(feature), {
+          maxWidth: 920,
+          minWidth: 300,
+          autoPanPadding: [24, 24]
+        });
+
+      marker.addTo(layers[layerName]);
+
+      allCameras.push({
+        id: firstNifcValue(p, ["IrwinID", "IRWINID", "UniqueFireIdentifier"], `nifc-${lat}-${lon}`),
+        name,
+        source: "NIFC / WFIGS",
+        operator: firstNifcValue(p, ["POOProtectingAgency", "PrimaryFireOrganization"]),
+        category: "Current Fire",
+        city: "",
+        county,
+        sourceType: "wildfire",
+        priority: 100,
+        featured: true,
+        tags: ["NIFC", "WFIGS", "wildfire", acres !== "" ? `${formatNifcNumber(acres)} acres` : ""].filter(Boolean),
+        lat,
+        lon,
+        layer: layerName,
+        marker
+      });
+    }
+
+    function addNifcPerimeterFeatures(payload, layerName) {
+      const geoJsonLayer = L.geoJSON(payload, {
+        style: nifcPerimeterStyle,
+        onEachFeature(feature, layer) {
+          layer.bindPopup(nifcPerimeterPopup(feature), {
+            maxWidth: 920,
+            minWidth: 300,
+            autoPanPadding: [24, 24]
+          });
+        }
+      });
+
+      geoJsonLayer.addTo(layers[layerName]);
+    }
+
     async function ensureLayerLoaded(layerName) {
       if (loadedLayers.has(layerName)) return;
 
       const source = SOURCES[layerName];
       document.getElementById("status").textContent = `Loading ${source.label}…`;
 
-      const shouldBypassCache = layerName === "windy" || layerName === "curated-socal";
+      const shouldBypassCache =
+        layerName === "windy" ||
+        layerName === "curated-socal" ||
+        source.type === "geojson-incidents" ||
+        source.type === "geojson-perimeters";
+
       const requestUrl = shouldBypassCache
         ? `${source.json}${source.json.includes("?") ? "&" : "?"}t=${Date.now()}`
         : source.json;
@@ -488,9 +689,31 @@
       const response = await fetch(requestUrl, {
         cache: shouldBypassCache ? "no-store" : "default"
       });
+
       if (!response.ok) throw new Error(`Failed to load ${source.label}`);
 
       const payload = await response.json();
+
+      if (source.type === "geojson-incidents") {
+        if (payload?.type !== "FeatureCollection" || !Array.isArray(payload.features)) {
+          throw new Error(`Invalid GeoJSON returned for ${source.label}`);
+        }
+
+        payload.features.forEach(feature => addNifcIncidentFeature(feature, layerName));
+        loadedLayers.add(layerName);
+        return;
+      }
+
+      if (source.type === "geojson-perimeters") {
+        if (payload?.type !== "FeatureCollection" || !Array.isArray(payload.features)) {
+          throw new Error(`Invalid GeoJSON returned for ${source.label}`);
+        }
+
+        addNifcPerimeterFeatures(payload, layerName);
+        loadedLayers.add(layerName);
+        return;
+      }
+
       const cameras = layerName === "fox-weather"
         ? mergeUniqueCameras(payload.cameras || [], FOX_WEATHER_FALLBACK_CAMERAS)
         : (payload.cameras || []);
@@ -549,7 +772,7 @@
       });
 
       document.getElementById("status").textContent =
-        `${filtered.length} visible / ${allCameras.length} loaded cameras`;
+        `${filtered.length} visible / ${allCameras.length} loaded map items`;
     }
 
     document.querySelectorAll("[data-layer]").forEach(input => {
