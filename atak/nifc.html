@@ -1,0 +1,1402 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>NIFC Current Fire Map | tim.workisboring.com</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="NIFC and WFIGS current wildfire incident and fire perimeter map."
+  >
+
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="/favicon.ico"
+  >
+
+  <link
+    href="/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: #f8f9fa;
+    }
+
+    #app {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      height: 100vh;
+    }
+
+    aside {
+      overflow-y: auto;
+      background: #fff;
+      border-right: 1px solid #dee2e6;
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .layer-option {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .layer-option:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-option input {
+      margin-top: .3rem;
+    }
+
+    .layer-description {
+      color: #6c757d;
+      font-size: .85rem;
+    }
+
+    .layer-count {
+      display: inline-block;
+      min-width: 2rem;
+      padding: .1rem .4rem;
+      border-radius: .5rem;
+      background: #e9ecef;
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    .fire-popup {
+      min-width: 260px;
+    }
+
+    .fire-popup strong {
+      font-size: 1rem;
+    }
+
+    .fire-popup-table {
+      width: 100%;
+      margin-top: .5rem;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+
+    .fire-popup-table td {
+      vertical-align: top;
+      padding: .15rem .3rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .fire-popup-table td:first-child {
+      width: 42%;
+      font-weight: 600;
+    }
+
+    .incident-marker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: #dc3545;
+      color: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .45);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .status-line {
+      font-size: .9rem;
+    }
+
+    .source-note {
+      font-size: .8rem;
+      color: #6c757d;
+    }
+
+    @media (max-width: 900px) {
+      #app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      aside {
+        max-height: 42vh;
+        border-right: 0;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      #map {
+        min-height: 58vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <aside class="shadow-sm">
+
+      <h1 class="h4 mb-2">
+        🔥 NIFC Current Fire Map
+      </h1>
+
+      <p class="text-body-secondary small">
+        Current NIFC/WFIGS wildfire incident points and fire perimeter
+        polygons for the Western United States.
+      </p>
+
+      <div
+        id="status"
+        class="alert alert-secondary py-2 px-3 status-line"
+        role="status"
+      >
+        Loading fire data…
+      </div>
+
+      <div class="card mb-3">
+
+        <div class="card-header fw-semibold">
+          Fire Layers
+        </div>
+
+        <div class="card-body">
+
+          <label class="layer-option">
+
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="toggle-incidents"
+              checked
+            >
+
+            <span>
+              <strong>
+                🔥 Current Fire Incidents
+              </strong>
+
+              <span
+                class="layer-count"
+                id="incident-count"
+              >
+                0
+              </span>
+
+              <span class="layer-description d-block">
+                Current NIFC/WFIGS wildfire incident locations.
+              </span>
+            </span>
+
+          </label>
+
+          <label class="layer-option">
+
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="toggle-perimeters"
+              checked
+            >
+
+            <span>
+              <strong>
+                🔴 Current Fire Perimeters
+              </strong>
+
+              <span
+                class="layer-count"
+                id="perimeter-count"
+              >
+                0
+              </span>
+
+              <span class="layer-description d-block">
+                Current wildfire and prescribed-fire perimeter polygons.
+              </span>
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+      <div class="d-grid gap-2 mb-3">
+
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="fit-fire-data"
+        >
+          <i
+            class="bi bi-arrows-fullscreen me-1"
+            aria-hidden="true"
+          ></i>
+          Fit Map to Fire Data
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          id="reload-fire-data"
+        >
+          <i
+            class="bi bi-arrow-clockwise me-1"
+            aria-hidden="true"
+          ></i>
+          Reload Fire Data
+        </button>
+
+      </div>
+
+      <div class="card mb-3">
+
+        <div class="card-header fw-semibold">
+          ATAK Network KML
+        </div>
+
+        <div class="card-body">
+
+          <div class="mb-2">
+
+            <a
+              href="/atak/data/kml/nifc-current-incidents-network.kml"
+            >
+              NIFC Current Incidents Network KML
+            </a>
+
+          </div>
+
+          <div>
+
+            <a
+              href="/atak/data/kml/nifc-current-perimeters-network.kml"
+            >
+              NIFC Current Perimeters Network KML
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <p class="source-note">
+        Source: NIFC / WFIGS current wildfire data.
+        This page uses the locally generated GeoJSON files rather than
+        querying ArcGIS directly from the browser.
+      </p>
+
+      <p class="source-note mb-0">
+
+        <a href="/atak/cameras.html">
+          ← Back to TAK/GIS Cameras
+        </a>
+
+      </p>
+
+    </aside>
+
+    <main id="map"></main>
+
+  </div>
+
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
+
+  <script>
+
+    "use strict";
+
+
+    /*
+     * ---------------------------------------------------------------
+     * File locations
+     * ---------------------------------------------------------------
+     */
+
+    const INCIDENT_GEOJSON_URL =
+      "/atak/data/nifc/nifc-current-incidents.geojson";
+
+    const PERIMETER_GEOJSON_URL =
+      "/atak/data/nifc/nifc-current-perimeters.geojson";
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Map
+     * ---------------------------------------------------------------
+     */
+
+    const map = L.map("map").setView(
+      [37.5, -119.5],
+      6
+    );
+
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 18,
+
+        attribution:
+          "&copy; OpenStreetMap contributors"
+      }
+    ).addTo(map);
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Layer containers
+     * ---------------------------------------------------------------
+     */
+
+    const incidentLayer = L.layerGroup();
+
+    const perimeterLayer = L.layerGroup();
+
+
+    incidentLayer.addTo(map);
+
+    perimeterLayer.addTo(map);
+
+
+    let incidentGeoJsonLayer = null;
+
+    let perimeterGeoJsonLayer = null;
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Utility helpers
+     * ---------------------------------------------------------------
+     */
+
+    function escapeHtml(value) {
+
+      return String(
+        value ?? ""
+      )
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+
+    function firstValue(
+      properties,
+      keys,
+      fallback = ""
+    ) {
+
+      for (const key of keys) {
+
+        const value =
+          properties?.[key];
+
+        if (
+          value !== undefined &&
+          value !== null &&
+          value !== ""
+        ) {
+          return value;
+        }
+      }
+
+      return fallback;
+    }
+
+
+    function formatNumber(value) {
+
+      if (
+        value === undefined ||
+        value === null ||
+        value === ""
+      ) {
+        return "";
+      }
+
+      const number =
+        Number(value);
+
+      if (
+        !Number.isFinite(number)
+      ) {
+        return escapeHtml(value);
+      }
+
+      return number.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits: 1
+        }
+      );
+    }
+
+
+    function formatDate(value) {
+
+      if (
+        value === undefined ||
+        value === null ||
+        value === ""
+      ) {
+        return "";
+      }
+
+      let date;
+
+
+      /*
+       * ArcGIS sometimes provides epoch milliseconds.
+       */
+
+      if (
+        typeof value === "number"
+      ) {
+
+        date =
+          new Date(value);
+
+      } else {
+
+        const numeric =
+          Number(value);
+
+        if (
+          Number.isFinite(numeric) &&
+          String(value).length >= 10
+        ) {
+
+          date =
+            new Date(numeric);
+
+        } else {
+
+          date =
+            new Date(value);
+        }
+      }
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return escapeHtml(value);
+      }
+
+
+      return date.toLocaleString();
+    }
+
+
+    function popupRow(
+      label,
+      value
+    ) {
+
+      if (
+        value === undefined ||
+        value === null ||
+        value === ""
+      ) {
+        return "";
+      }
+
+      return `
+        <tr>
+          <td>${escapeHtml(label)}</td>
+          <td>${escapeHtml(value)}</td>
+        </tr>
+      `;
+    }
+
+
+    function setStatus(
+      message,
+      type = "secondary"
+    ) {
+
+      const status =
+        document.getElementById(
+          "status"
+        );
+
+      status.className =
+        `alert alert-${type} py-2 px-3 status-line`;
+
+      status.textContent =
+        message;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Incident point popups
+     * ---------------------------------------------------------------
+     */
+
+    function buildIncidentPopup(
+      feature
+    ) {
+
+      const p =
+        feature.properties || {};
+
+
+      const name =
+        firstValue(
+          p,
+          [
+            "IncidentName",
+            "IncidentNameClean"
+          ],
+          "Unnamed Fire"
+        );
+
+
+      const acres =
+        firstValue(
+          p,
+          [
+            "DailyAcres",
+            "CalculatedAcres",
+            "DiscoveryAcres",
+            "GISAcres"
+          ]
+        );
+
+
+      const contained =
+        firstValue(
+          p,
+          [
+            "PercentContained"
+          ]
+        );
+
+
+      const cause =
+        firstValue(
+          p,
+          [
+            "FireCause",
+            "FireCauseGeneral"
+          ]
+        );
+
+
+      const discoveryDate =
+        firstValue(
+          p,
+          [
+            "FireDiscoveryDateTime",
+            "DiscoveryDate"
+          ]
+        );
+
+
+      const incidentType =
+        firstValue(
+          p,
+          [
+            "IncidentTypeCategory",
+            "IncidentTypeKind",
+            "IncidentType"
+          ]
+        );
+
+
+      const agency =
+        firstValue(
+          p,
+          [
+            "POOProtectingAgency",
+            "PrimaryFireOrganization",
+            "UnitOrOtherAgencyIdentifier"
+          ]
+        );
+
+
+      const irwin =
+        firstValue(
+          p,
+          [
+            "IrwinID",
+            "IRWINID"
+          ]
+        );
+
+
+      let rows = "";
+
+
+      if (incidentType) {
+
+        rows += popupRow(
+          "Type",
+          incidentType
+        );
+      }
+
+
+      if (acres !== "") {
+
+        rows += popupRow(
+          "Acres",
+          formatNumber(acres)
+        );
+      }
+
+
+      if (contained !== "") {
+
+        rows += popupRow(
+          "Contained",
+          `${formatNumber(contained)}%`
+        );
+      }
+
+
+      if (cause) {
+
+        rows += popupRow(
+          "Cause",
+          cause
+        );
+      }
+
+
+      if (discoveryDate) {
+
+        rows += popupRow(
+          "Discovery",
+          formatDate(
+            discoveryDate
+          )
+        );
+      }
+
+
+      if (agency) {
+
+        rows += popupRow(
+          "Agency",
+          agency
+        );
+      }
+
+
+      if (irwin) {
+
+        rows += popupRow(
+          "IRWIN ID",
+          irwin
+        );
+      }
+
+
+      return `
+        <div class="fire-popup">
+
+          <span
+            class="badge text-bg-danger mb-1"
+          >
+            Current Fire
+          </span>
+
+          <br>
+
+          <strong>
+            🔥 ${escapeHtml(name)}
+          </strong>
+
+          <table class="fire-popup-table">
+            ${rows}
+          </table>
+
+          <small class="text-body-secondary">
+            Source: NIFC / WFIGS
+          </small>
+
+        </div>
+      `;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Perimeter popup
+     * ---------------------------------------------------------------
+     */
+
+    function buildPerimeterPopup(
+      feature
+    ) {
+
+      const p =
+        feature.properties || {};
+
+
+      const name =
+        firstValue(
+          p,
+          [
+            "IncidentName",
+            "IncidentNameClean"
+          ],
+          "Unnamed Fire"
+        );
+
+
+      const acres =
+        firstValue(
+          p,
+          [
+            "GISAcres",
+            "CalculatedAcres",
+            "DailyAcres"
+          ]
+        );
+
+
+      const perimeterDate =
+        firstValue(
+          p,
+          [
+            "DateCurrent",
+            "CurrentDate",
+            "CreateDate",
+            "ModifiedOnDateTime_dt"
+          ]
+        );
+
+
+      const incidentType =
+        firstValue(
+          p,
+          [
+            "IncidentTypeCategory",
+            "IncidentTypeKind",
+            "IncidentType"
+          ]
+        );
+
+
+      let rows = "";
+
+
+      if (incidentType) {
+
+        rows += popupRow(
+          "Type",
+          incidentType
+        );
+      }
+
+
+      if (acres !== "") {
+
+        rows += popupRow(
+          "Acres",
+          formatNumber(acres)
+        );
+      }
+
+
+      if (perimeterDate) {
+
+        rows += popupRow(
+          "Perimeter Date",
+          formatDate(
+            perimeterDate
+          )
+        );
+      }
+
+
+      return `
+        <div class="fire-popup">
+
+          <span
+            class="badge text-bg-warning mb-1"
+          >
+            Fire Perimeter
+          </span>
+
+          <br>
+
+          <strong>
+            🔥 ${escapeHtml(name)}
+          </strong>
+
+          <table class="fire-popup-table">
+            ${rows}
+          </table>
+
+          <small class="text-body-secondary">
+            Source: NIFC / WFIGS
+          </small>
+
+        </div>
+      `;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Prescribed-fire detection
+     * ---------------------------------------------------------------
+     */
+
+    function isPrescribedFire(
+      feature
+    ) {
+
+      const p =
+        feature.properties || {};
+
+
+      const values = [
+
+        p.IncidentTypeCategory,
+
+        p.IncidentTypeKind,
+
+        p.IncidentType
+
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+
+      return (
+        values.includes(
+          "prescribed"
+        ) ||
+
+        values
+          .split(/\s+/)
+          .includes("rx")
+      );
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * GeoJSON styles
+     * ---------------------------------------------------------------
+     */
+
+    function perimeterStyle(
+      feature
+    ) {
+
+      if (
+        isPrescribedFire(feature)
+      ) {
+
+        return {
+          color: "#fd7e14",
+          weight: 2,
+          opacity: .9,
+          fillColor: "#fd7e14",
+          fillOpacity: .20
+        };
+      }
+
+
+      return {
+        color: "#dc3545",
+        weight: 2,
+        opacity: .95,
+        fillColor: "#dc3545",
+        fillOpacity: .20
+      };
+    }
+
+
+    const incidentIcon =
+      L.divIcon({
+        className: "",
+
+        html:
+          '<div class="incident-marker">🔥</div>',
+
+        iconSize: [
+          28,
+          28
+        ],
+
+        iconAnchor: [
+          14,
+          14
+        ],
+
+        popupAnchor: [
+          0,
+          -14
+        ]
+      });
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Fetch helper
+     * ---------------------------------------------------------------
+     */
+
+    async function fetchGeoJson(
+      url
+    ) {
+
+      const requestUrl =
+        `${url}?t=${Date.now()}`;
+
+
+      const response =
+        await fetch(
+          requestUrl,
+          {
+            cache: "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          `HTTP ${response.status} loading ${url}`
+        );
+      }
+
+
+      const payload =
+        await response.json();
+
+
+      if (
+        payload?.type !==
+        "FeatureCollection"
+      ) {
+
+        throw new Error(
+          `Unexpected GeoJSON in ${url}`
+        );
+      }
+
+
+      if (
+        !Array.isArray(
+          payload.features
+        )
+      ) {
+
+        throw new Error(
+          `GeoJSON has no features array: ${url}`
+        );
+      }
+
+
+      return payload;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Load incidents
+     * ---------------------------------------------------------------
+     */
+
+    async function loadIncidents() {
+
+      const payload =
+        await fetchGeoJson(
+          INCIDENT_GEOJSON_URL
+        );
+
+
+      incidentLayer.clearLayers();
+
+
+      incidentGeoJsonLayer =
+        L.geoJSON(
+          payload,
+          {
+
+            pointToLayer(
+              feature,
+              latlng
+            ) {
+
+              return L.marker(
+                latlng,
+                {
+                  icon: incidentIcon
+                }
+              );
+            },
+
+
+            onEachFeature(
+              feature,
+              layer
+            ) {
+
+              layer.bindPopup(
+                buildIncidentPopup(
+                  feature
+                ),
+                {
+                  maxWidth: 420
+                }
+              );
+            }
+
+          }
+        );
+
+
+      incidentGeoJsonLayer.addTo(
+        incidentLayer
+      );
+
+
+      document
+        .getElementById(
+          "incident-count"
+        )
+        .textContent =
+          payload.features.length;
+
+
+      return payload.features.length;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Load perimeters
+     * ---------------------------------------------------------------
+     */
+
+    async function loadPerimeters() {
+
+      const payload =
+        await fetchGeoJson(
+          PERIMETER_GEOJSON_URL
+        );
+
+
+      perimeterLayer.clearLayers();
+
+
+      perimeterGeoJsonLayer =
+        L.geoJSON(
+          payload,
+          {
+
+            style:
+              perimeterStyle,
+
+
+            onEachFeature(
+              feature,
+              layer
+            ) {
+
+              layer.bindPopup(
+                buildPerimeterPopup(
+                  feature
+                ),
+                {
+                  maxWidth: 420
+                }
+              );
+            }
+
+          }
+        );
+
+
+      perimeterGeoJsonLayer.addTo(
+        perimeterLayer
+      );
+
+
+      document
+        .getElementById(
+          "perimeter-count"
+        )
+        .textContent =
+          payload.features.length;
+
+
+      return payload.features.length;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Load everything
+     * ---------------------------------------------------------------
+     */
+
+    async function loadFireData() {
+
+      setStatus(
+        "Loading NIFC fire data…"
+      );
+
+
+      try {
+
+        const [
+          incidentCount,
+          perimeterCount
+        ] =
+          await Promise.all([
+            loadIncidents(),
+            loadPerimeters()
+          ]);
+
+
+        setStatus(
+          `${incidentCount} incidents and ${perimeterCount} fire perimeters loaded.`,
+          "success"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        setStatus(
+          `Failed to load NIFC fire data: ${error.message}`,
+          "danger"
+        );
+      }
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Fit map
+     * ---------------------------------------------------------------
+     */
+
+    function fitFireData() {
+
+      const bounds =
+        L.latLngBounds();
+
+
+      if (
+        incidentGeoJsonLayer
+      ) {
+
+        const incidentBounds =
+          incidentGeoJsonLayer.getBounds();
+
+
+        if (
+          incidentBounds.isValid()
+        ) {
+
+          bounds.extend(
+            incidentBounds
+          );
+        }
+      }
+
+
+      if (
+        perimeterGeoJsonLayer
+      ) {
+
+        const perimeterBounds =
+          perimeterGeoJsonLayer.getBounds();
+
+
+        if (
+          perimeterBounds.isValid()
+        ) {
+
+          bounds.extend(
+            perimeterBounds
+          );
+        }
+      }
+
+
+      if (
+        bounds.isValid()
+      ) {
+
+        map.fitBounds(
+          bounds,
+          {
+            padding: [
+              30,
+              30
+            ],
+            maxZoom: 9
+          }
+        );
+      }
+    }
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Layer checkboxes
+     * ---------------------------------------------------------------
+     */
+
+    document
+      .getElementById(
+        "toggle-incidents"
+      )
+      .addEventListener(
+        "change",
+        event => {
+
+          if (
+            event.target.checked
+          ) {
+
+            map.addLayer(
+              incidentLayer
+            );
+
+          } else {
+
+            map.removeLayer(
+              incidentLayer
+            );
+          }
+        }
+      );
+
+
+    document
+      .getElementById(
+        "toggle-perimeters"
+      )
+      .addEventListener(
+        "change",
+        event => {
+
+          if (
+            event.target.checked
+          ) {
+
+            map.addLayer(
+              perimeterLayer
+            );
+
+          } else {
+
+            map.removeLayer(
+              perimeterLayer
+            );
+          }
+        }
+      );
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Buttons
+     * ---------------------------------------------------------------
+     */
+
+    document
+      .getElementById(
+        "fit-fire-data"
+      )
+      .addEventListener(
+        "click",
+        fitFireData
+      );
+
+
+    document
+      .getElementById(
+        "reload-fire-data"
+      )
+      .addEventListener(
+        "click",
+        loadFireData
+      );
+
+
+    /*
+     * ---------------------------------------------------------------
+     * Initial load
+     * ---------------------------------------------------------------
+     */
+
+    loadFireData();
+
+  </script>
+
+
+  <script
+    src="/js/bootstrap.bundle.min.js"
+  ></script>
+
+</body>
+
+</html>
+

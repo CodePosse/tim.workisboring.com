@@ -1,8 +1,8 @@
 {
   "source_key": "usgs",
   "title": "USGS California River and Water Cameras",
-  "generated_at": 1785025819,
-  "count": 36,
+  "generated_at": 1787020219,
+  "count": 37,
   "cameras": [
     {
       "id": "usgs-CA_Arroyo_De_La_Laguna_at_Verona",
@@ -250,6 +250,19 @@
       "thumbnail": "https://usgs-nims-images.s3.amazonaws.com/thumbnail/CA_Mokelumne_River_at_Andrus_Island_near_Terminous/CA_Mokelumne_River_at_Andrus_Island_near_Terminous_newest.jpg",
       "url": "https://usgs-nims-images.s3.amazonaws.com/720/CA_Mokelumne_River_at_Andrus_Island_near_Terminous/CA_Mokelumne_River_at_Andrus_Island_near_Terminous_newest.jpg",
       "timelapse": "https://usgs-nims-images.s3.amazonaws.com/timelapse/CA_Mokelumne_River_at_Andrus_Island_near_Terminous/CA_Mokelumne_River_at_Andrus_Island_near_Terminous.mp4"
+    },
+    {
+      "id": "usgs-CA_Santa_Ana_R_bl_Prado_Dam",
+      "name": "Santa Ana R bl Prado Dam",
+      "source": "USGS NIMS",
+      "category": "🌊 River / Water Camera",
+      "lat": 33.8833487464323,
+      "lon": -117.64532963562,
+      "county": "",
+      "heading": "",
+      "thumbnail": "https://usgs-nims-images.s3.amazonaws.com/thumbnail/CA_Santa_Ana_R_bl_Prado_Dam/CA_Santa_Ana_R_bl_Prado_Dam_newest.jpg",
+      "url": "https://usgs-nims-images.s3.amazonaws.com/720/CA_Santa_Ana_R_bl_Prado_Dam/CA_Santa_Ana_R_bl_Prado_Dam_newest.jpg",
+      "timelapse": "https://usgs-nims-images.s3.amazonaws.com/timelapse/CA_Santa_Ana_R_bl_Prado_Dam/CA_Santa_Ana_R_bl_Prado_Dam.mp4"
     },
     {
       "id": "usgs-CA_Salsipuedes_C_nr_Lompoc",
