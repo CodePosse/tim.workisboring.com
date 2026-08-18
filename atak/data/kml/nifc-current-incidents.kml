@@ -7,7 +7,7 @@
 
   <description>
     NIFC / WFIGS current wildfire incident points.
-    Generated 2026-08-18T02:46:25.195642+00:00.
+    Generated 2026-08-18T03:00:16.269774+00:00.
   </description>
 
   <Style id="wildfireIncident">
@@ -81,41 +81,22 @@ IRWIN ID: df61072e-a656-4e3d-b681-cf66533c7879
     </Placemark>
 
     <Placemark>
-      <name>🔥 52</name>
+      <name>🔥 FA #32</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>52</b><br>
+<b>FA #32</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Discovery: 1787010900000<br>
-IRWIN ID: d157c5b8-7249-4ea3-87f6-46dcbedfbc5c
-      ]]></description>
-
-      <Point>
-        <coordinates>-117.1280867,32.8430983000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-288908</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-288908</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
+Acres: 0.1<br>
 Cause: Undetermined<br>
-Discovery: 1786794120000<br>
-IRWIN ID: e8c0ac3b-7394-481e-9469-4974b1d75b2b
+Discovery: 1786799981000<br>
+IRWIN ID: ec48e7f1-96f6-400b-a7bc-6067dd37e9ca
       ]]></description>
 
       <Point>
-        <coordinates>-118.23906,33.92717,0</coordinates>
+        <coordinates>-119.797068,42.057918,0</coordinates>
       </Point>
 
     </Placemark>
@@ -143,27 +124,6 @@ IRWIN ID: 5a533167-5d8e-48d7-9e94-d3658afd753b
     </Placemark>
 
     <Placemark>
-      <name>🔥 WISHON</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>WISHON</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 1<br>
-Cause: Undetermined<br>
-Discovery: 1786831614000<br>
-IRWIN ID: b9b8d78c-04af-47e2-8c72-984314e1643b
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.9715,37.0245,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 0445 CROSSWHITE</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -181,6 +141,27 @@ IRWIN ID: 1b0219ee-5298-4fef-9927-c2666d9d53fc
 
       <Point>
         <coordinates>-120.199167,44.8033330000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Ove</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Ove</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.25<br>
+Cause: Undetermined<br>
+Discovery: 1786977854000<br>
+IRWIN ID: 222ff405-9b6a-471a-9537-3b49480b2b86
+      ]]></description>
+
+      <Point>
+        <coordinates>-116.21595,46.5938320000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -208,43 +189,20 @@ IRWIN ID: 84fd3d7e-6b04-49cd-a729-ed3178a49c42
     </Placemark>
 
     <Placemark>
-      <name>🔥 BARBER ROAD</name>
+      <name>🔥 Nelson</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>BARBER ROAD</b><br>
+<b>Nelson</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.2<br>
-Cause: Natural<br>
-Discovery: 1786991642000<br>
-IRWIN ID: 6150721c-6a92-4267-8467-9df4bd4cda16
+Discovery: 1786874400000<br>
+IRWIN ID: 88b7c90b-bf20-4773-9f4b-47000559082f
       ]]></description>
 
       <Point>
-        <coordinates>-120.9048,46.9834500000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 VICTOR</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>VICTOR</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1786849326000<br>
-IRWIN ID: 68ed65f8-00be-4d65-b1ab-414366093f64
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.393437,34.3593220000001,0</coordinates>
+        <coordinates>-123.6991667,41.0752778,0</coordinates>
       </Point>
 
     </Placemark>
@@ -267,6 +225,27 @@ IRWIN ID: c953057c-5469-4b86-ac90-d6d9dada831f
 
       <Point>
         <coordinates>-120.511717,45.2107500000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 PORTALES SPRINGS</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>PORTALES SPRINGS</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 2<br>
+Cause: Natural<br>
+Discovery: 1786848180000<br>
+IRWIN ID: 5e4f6d10-719a-40c5-8dd7-92a6dfcc901b
+      ]]></description>
+
+      <Point>
+        <coordinates>-103.27764,34.1350200000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -332,6 +311,27 @@ IRWIN ID: 50a81c59-3efb-45b5-bb49-2e195b09da8d
 
       <Point>
         <coordinates>-104.664683,44.562647,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-289546</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-289546</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786834687000<br>
+IRWIN ID: ea3c5ed8-174e-4a43-8622-ae6ffa3d15f0
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.2391,33.9281500000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -424,22 +424,22 @@ IRWIN ID: 406734a4-be3e-48fb-b5fd-227c8318a12b
     </Placemark>
 
     <Placemark>
-      <name>🔥 Pole</name>
+      <name>🔥 Green Mountain</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Pole</b><br>
+<b>Green Mountain</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.5<br>
 Cause: Undetermined<br>
-Discovery: 1786841431000<br>
-IRWIN ID: 8cf57526-c1fd-4e76-93da-431a9c500de5
+Discovery: 1786839862000<br>
+IRWIN ID: 177955e1-e716-484a-b382-706323552610
       ]]></description>
 
       <Point>
-        <coordinates>-121.5052,42.4733670000001,0</coordinates>
+        <coordinates>-121.22435,48.3009220000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -483,27 +483,6 @@ IRWIN ID: b451676e-5826-479b-8444-e4453019ae92
 
       <Point>
         <coordinates>-121.95492317,45.0254738900001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Owl Creek</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Owl Creek</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 25.8<br>
-Cause: Natural<br>
-Discovery: 1786910556000<br>
-IRWIN ID: ae1b6403-9940-45ed-b317-2b35a5c21eab
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.243889,45.051944,0</coordinates>
       </Point>
 
     </Placemark>
@@ -574,25 +553,6 @@ IRWIN ID: 0de1a2af-2f45-40cc-968b-1df23fc3a34f
     </Placemark>
 
     <Placemark>
-      <name>🔥 Sorrento</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Sorrento</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Discovery: 1786912620000<br>
-IRWIN ID: 935a7271-98f6-440e-85c1-1e954330267d
-      ]]></description>
-
-      <Point>
-        <coordinates>-117.1985083,32.9135667,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 0611 GREEN MOUNTAIN</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -615,22 +575,43 @@ IRWIN ID: bc318834-b454-4aad-90a6-62d4de886b5c
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290246</name>
+      <name>🔥 CR - HIGHWAY</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290246</b><br>
+<b>CR - HIGHWAY</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786880923000<br>
-IRWIN ID: b2683cd0-668a-48f5-8bd5-64b5d45157d3
+Discovery: 1786913143000<br>
+IRWIN ID: 2e79161a-f2ea-4c07-b562-dfd46a24c677
       ]]></description>
 
       <Point>
-        <coordinates>-117.97676,34.0134100000001,0</coordinates>
+        <coordinates>-120.2859,47.5245,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 DAY</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>DAY</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786799012000<br>
+IRWIN ID: 88b13135-6720-4f59-9575-f1c71170bf37
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.633,37.044,0</coordinates>
       </Point>
 
     </Placemark>
@@ -653,27 +634,6 @@ IRWIN ID: 11edcec0-a4c3-417e-bc71-d4bd798503b6
 
       <Point>
         <coordinates>-116.397033,45.3571670000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 CREEK</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>CREEK</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786809964000<br>
-IRWIN ID: 127e9af6-4c40-4dfb-8a38-dcefde16852e
-      ]]></description>
-
-      <Point>
-        <coordinates>-123.381593,41.8221830000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -722,86 +682,85 @@ IRWIN ID: c88f2c7d-6a6c-4c7d-ba73-932badc26330
     </Placemark>
 
     <Placemark>
-      <name>🔥 Middle Hunt</name>
+      <name>🔥 Marlow Canyon</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Middle Hunt</b><br>
+<b>Marlow Canyon</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 5.5<br>
+Cause: Human<br>
+Discovery: 1787017557000<br>
+IRWIN ID: cea72434-b8b4-478b-8708-5187465d1794
+      ]]></description>
+
+      <Point>
+        <coordinates>-112.166833,41.8525000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 GERDIE</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>GERDIE</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 34.6<br>
+Cause: Natural<br>
+Discovery: 1786908720000<br>
+IRWIN ID: 329236b3-867c-4cdc-996b-adb5946e9e1d
+      ]]></description>
+
+      <Point>
+        <coordinates>-116.65255,43.0203330000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 WALT SMITH</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>WALT SMITH</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.1<br>
 Cause: Undetermined<br>
-Discovery: 1787009640000<br>
-IRWIN ID: 1b61d295-b522-42f7-a5d9-1b3e596e4339
+Discovery: 1786998720000<br>
+IRWIN ID: c7cab00c-c58e-4e4e-86fb-004fd685e495
       ]]></description>
 
       <Point>
-        <coordinates>-107.033583,40.1683170000001,0</coordinates>
+        <coordinates>-105.75378,33.4327970000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 Picture Rock</name>
+      <name>🔥 Canal Bon</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Picture Rock</b><br>
+<b>Canal Bon</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 1277<br>
-Contained: 10%<br>
+Acres: 0.2<br>
 Cause: Undetermined<br>
-Discovery: 1786909351000<br>
-IRWIN ID: 7c564599-3140-4711-843a-d863f53c265d
+Discovery: 1786921200000<br>
+IRWIN ID: 139dc4f8-9938-4ca0-82e3-d05f0211f0db
       ]]></description>
 
       <Point>
-        <coordinates>-120.774487,43.00919,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-290975</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290975</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786927203000<br>
-IRWIN ID: b49dd6ea-77eb-4bb3-ab24-216a6cf409de
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.17957,34.6638600000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-292153</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-292153</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1787004289000<br>
-IRWIN ID: 99cd92c6-5fb8-453a-bad7-78cc7d9ff334
-      ]]></description>
-
-      <Point>
-        <coordinates>-117.97937,34.52329,0</coordinates>
+        <coordinates>-105.08593,36.2438700000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -867,25 +826,6 @@ IRWIN ID: 234655a2-5d4b-4569-8915-4dc211588df0
 
       <Point>
         <coordinates>-109.29976,45.6010900000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 ROUNDUP</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>ROUNDUP</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Discovery: 1787009700000<br>
-IRWIN ID: 03e481d3-87ab-48a0-80cc-78ffacc93e42
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.3316667,35.1900000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -957,27 +897,6 @@ IRWIN ID: 2847b83b-9843-4b6f-9594-3dc04456e177
     </Placemark>
 
     <Placemark>
-      <name>🔥 BIKE</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>BIKE</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1787008570000<br>
-IRWIN ID: a6eea512-e1b8-465d-ae3b-19d4948961e1
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.06414,34.0407500000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Clab</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -994,6 +913,49 @@ IRWIN ID: 27413b39-c85d-4b83-981a-1589a7073566
 
       <Point>
         <coordinates>-108.66774,45.89878,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Sarpy</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Sarpy</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 900<br>
+Contained: 0%<br>
+Cause: Undetermined<br>
+Discovery: 1787008620000<br>
+IRWIN ID: 56758ab5-a8f4-486a-b26b-487557aa52e7
+      ]]></description>
+
+      <Point>
+        <coordinates>-107.4745,45.7188330000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 VICTOR</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>VICTOR</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786849095000<br>
+IRWIN ID: efcc899a-f7a0-4301-81f8-c336e66ee3f2
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.41681,34.3253100000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1021,22 +983,22 @@ IRWIN ID: 6c455132-8cc9-4c80-8f08-4f734a489d03
     </Placemark>
 
     <Placemark>
-      <name>🔥 0737 (Redmond FD Assist)</name>
+      <name>🔥 Cottonwood Creek</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>0737 (Redmond FD Assist)</b><br>
+<b>Cottonwood Creek</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.25<br>
-Cause: Undetermined<br>
-Discovery: 1786831500000<br>
-IRWIN ID: 8608a169-6773-40d5-a125-29409e290def
+Acres: 7.12<br>
+Cause: Natural<br>
+Discovery: 1786832328000<br>
+IRWIN ID: 28cc9c1b-c528-4dc9-a383-59c19cbf4a91
       ]]></description>
 
       <Point>
-        <coordinates>-121.189118,44.2424550000001,0</coordinates>
+        <coordinates>-119.443783,38.448333,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1064,28 +1026,6 @@ IRWIN ID: 14e08b9c-1f24-40b2-ac5e-ba04112f33d0
     </Placemark>
 
     <Placemark>
-      <name>🔥 False Bottom Creek</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>False Bottom Creek</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 242<br>
-Contained: 100%<br>
-Cause: Undetermined<br>
-Discovery: 1786916578000<br>
-IRWIN ID: e16ecd3d-034f-43cd-80df-0f8905a53a8e
-      ]]></description>
-
-      <Point>
-        <coordinates>-103.777517,44.560867,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 BIG GRASS</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -1103,28 +1043,6 @@ IRWIN ID: 6b0c72b3-0e12-4695-9022-e1113c0aa8d1
 
       <Point>
         <coordinates>-117.30335,42.6498,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 NUNAMAKER ROAD</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>NUNAMAKER ROAD</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 20870<br>
-Contained: 80%<br>
-Cause: Human<br>
-Discovery: 1786199520000<br>
-IRWIN ID: cd376195-62c5-4722-80b7-dcaa9d628ecc
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.4075,46.5942000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1152,6 +1070,28 @@ IRWIN ID: 3bf54e17-87d6-40e1-b913-81b97515e1d5
     </Placemark>
 
     <Placemark>
+      <name>🔥 NUNAMAKER ROAD</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>NUNAMAKER ROAD</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 20870<br>
+Contained: 80%<br>
+Cause: Human<br>
+Discovery: 1786199520000<br>
+IRWIN ID: cd376195-62c5-4722-80b7-dcaa9d628ecc
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.4075,46.5942000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Stallion</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -1174,22 +1114,22 @@ IRWIN ID: 75b0c6d7-10d4-476a-b691-3d78231b4997
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288953</name>
+      <name>🔥 Dash</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288953</b><br>
+<b>Dash</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
+Acres: 55<br>
 Cause: Undetermined<br>
-Discovery: 1786801315000<br>
-IRWIN ID: aff4b55a-873e-4ce7-9266-67c4717340e7
+Discovery: 1786735800000<br>
+IRWIN ID: 4bbb6d3b-9acc-4f49-9a2b-278d4cb12d57
       ]]></description>
 
       <Point>
-        <coordinates>-118.23906,33.92717,0</coordinates>
+        <coordinates>-104.67544,36.16308,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1216,43 +1156,43 @@ IRWIN ID: 65cf035a-9537-4b28-b364-ab50f7fa5d7c
     </Placemark>
 
     <Placemark>
-      <name>🔥 RICHBAR</name>
+      <name>🔥 LAC-289729</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>RICHBAR</b><br>
+<b>LAC-289729</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786842792000<br>
-IRWIN ID: ddd12b56-f9e7-46df-bf3c-3ef17dda58d1
+Discovery: 1786843942000<br>
+IRWIN ID: 93d5342f-ee93-4bf3-a982-2aeeb64417ef
       ]]></description>
 
       <Point>
-        <coordinates>-118.7214,35.4718330000001,0</coordinates>
+        <coordinates>-118.32154,34.7616200000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-289560</name>
+      <name>🔥 LAC-289580</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-289560</b><br>
+<b>LAC-289580</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786835482000<br>
-IRWIN ID: b82b43c6-b6f7-4640-a0f8-bc433c5b299d
+Discovery: 1786836195000<br>
+IRWIN ID: 3a714d8b-51d1-4e64-bb71-50c6e7c111d6
       ]]></description>
 
       <Point>
-        <coordinates>-118.1795,33.9624900000001,0</coordinates>
+        <coordinates>-118.14817,34.70759,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1289,7 +1229,7 @@ IRWIN ID: 28a994d6-89e3-4460-9a36-d7df4d839df2
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 4509<br>
-Contained: 78%<br>
+Contained: 83%<br>
 Cause: Natural<br>
 Discovery: 1784229000000<br>
 IRWIN ID: bbb22c77-2f2d-419e-a930-9b75a0a55f83
@@ -1302,43 +1242,43 @@ IRWIN ID: bbb22c77-2f2d-419e-a930-9b75a0a55f83
     </Placemark>
 
     <Placemark>
-      <name>🔥 McMullen Creek</name>
+      <name>🔥 Indian Hill</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>McMullen Creek</b><br>
+<b>Indian Hill</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1787001120000<br>
-IRWIN ID: db475539-9766-4f87-b602-d69c2bcc4b9c
+Cause: Natural<br>
+Discovery: 1786989433000<br>
+IRWIN ID: 32fdf456-2087-4634-924b-64bfe5e8e029
       ]]></description>
 
       <Point>
-        <coordinates>-123.57580333,42.2391083300001,0</coordinates>
+        <coordinates>-114.56575,45.8073670000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288806</name>
+      <name>🔥 BAKER</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288806</b><br>
+<b>BAKER</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
+Acres: 0.1<br>
 Cause: Undetermined<br>
-Discovery: 1786781852000<br>
-IRWIN ID: d254f15d-4c0a-444e-a589-6d9f493716a7
+Discovery: 1786781109000<br>
+IRWIN ID: e970461a-6054-4ef1-bab3-9d11fd39815c
       ]]></description>
 
       <Point>
-        <coordinates>-118.0057,34.0519400000001,0</coordinates>
+        <coordinates>-117.66134793,33.75998214,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1431,6 +1371,27 @@ IRWIN ID: 7d70e58c-3570-466c-86f7-8e5f828d0f7f
     </Placemark>
 
     <Placemark>
+      <name>🔥 Dutchman</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Dutchman</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 8<br>
+Cause: Natural<br>
+Discovery: 1786994975000<br>
+IRWIN ID: b6b1ffcd-c63b-4393-ac97-2732a4dbc21e
+      ]]></description>
+
+      <Point>
+        <coordinates>-104.389333,45.954167,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 AUSTIN</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -1448,27 +1409,6 @@ IRWIN ID: 49d1fb0b-74d1-4a95-b8df-066dcc5f06e1
 
       <Point>
         <coordinates>-121.944872,45.0252160000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-290713</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290713</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786915332000<br>
-IRWIN ID: 63c45304-c8e7-4726-9cdf-3773cbc7d2f6
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.09441,34.6530700000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1562,64 +1502,22 @@ IRWIN ID: 96e213f2-ce39-41e9-97be-29ed81e75e38
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288508</name>
+      <name>🔥 Wylie Knob</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288508</b><br>
+<b>Wylie Knob</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786762475000<br>
-IRWIN ID: 7681b0c1-6fc6-41dc-99e9-af27286a724b
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.29855,33.80728,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 BIG SPRINGS</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>BIG SPRINGS</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 6.2<br>
+Acres: 0.25<br>
 Cause: Natural<br>
-Discovery: 1787003340000<br>
-IRWIN ID: d421a8bd-bbaf-4f47-8ec6-a6e94c7b9ba5
+Discovery: 1786974900000<br>
+IRWIN ID: ccd5a6c7-de8d-4b61-87b7-9f7ee2f94135
       ]]></description>
 
       <Point>
-        <coordinates>-107.3075,43.7251670000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-289341</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-289341</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786824827000<br>
-IRWIN ID: 20db59dd-3ddd-43f6-9428-332b152edc0d
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.11228,34.7187700000001,0</coordinates>
+        <coordinates>-116.317383,48.4806170000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1642,6 +1540,48 @@ IRWIN ID: 169e5076-6fcb-42d3-8612-ee474eadf943
 
       <Point>
         <coordinates>-120.145117,44.701267,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 TRAPPER</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>TRAPPER</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Natural<br>
+Discovery: 1786822627000<br>
+IRWIN ID: 517168fc-54ed-4a03-a5cc-4673477628ee
+      ]]></description>
+
+      <Point>
+        <coordinates>-115.423967,43.865867,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Sandstone Ridge</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Sandstone Ridge</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Natural<br>
+Discovery: 1786901713000<br>
+IRWIN ID: a3bfe6fc-23c8-4ddb-ba26-ec6dfc6edfca
+      ]]></description>
+
+      <Point>
+        <coordinates>-113.584872,46.4533950000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1713,22 +1653,43 @@ IRWIN ID: f756826a-6a0b-4256-a3ec-311b5a56b2a3
     </Placemark>
 
     <Placemark>
-      <name>🔥 LG13 Appaloosa</name>
+      <name>🔥 CINNAMON</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LG13 Appaloosa</b><br>
+<b>CINNAMON</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.25<br>
 Cause: Natural<br>
-Discovery: 1786924500000<br>
-IRWIN ID: 9ecfe22d-a75f-4a74-abc2-4afdbecaedff
+Discovery: 1786913192000<br>
+IRWIN ID: 9bb79adf-dbfe-466f-b7fc-796f5c570940
       ]]></description>
 
       <Point>
-        <coordinates>-114.171673,45.9974110000001,0</coordinates>
+        <coordinates>-122.236917,46.141667,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Middle Hunt</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Middle Hunt</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1787009640000<br>
+IRWIN ID: 1b61d295-b522-42f7-a5d9-1b3e596e4339
+      ]]></description>
+
+      <Point>
+        <coordinates>-107.033583,40.1683170000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1751,27 +1712,6 @@ IRWIN ID: a4a8958d-1a03-43bf-9c5b-acda39a2cd96
 
       <Point>
         <coordinates>-115.117667,46.1498330000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Horseshoe Bend</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Horseshoe Bend</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.67<br>
-Cause: Undetermined<br>
-Discovery: 1787005584000<br>
-IRWIN ID: 0fae4020-023e-4bb5-bd5b-268597584b61
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.621062,43.485802,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1820,22 +1760,22 @@ IRWIN ID: b50ee679-c9cf-4304-83f0-e4a0a2a6426c
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-291790</name>
+      <name>🔥 COPPER</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-291790</b><br>
+<b>COPPER</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786987901000<br>
-IRWIN ID: 4df56999-d1d5-4d42-916e-e7fe50879e76
+Discovery: 1786988153000<br>
+IRWIN ID: d2d256fa-86f5-4833-a0a1-ef32e60a486d
       ]]></description>
 
       <Point>
-        <coordinates>-118.14285,34.6017400000001,0</coordinates>
+        <coordinates>-118.53438,34.46004,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1863,22 +1803,43 @@ IRWIN ID: deef5557-eddb-4387-aac1-0f4f16dd2169
     </Placemark>
 
     <Placemark>
-      <name>🔥 Pine</name>
+      <name>🔥 LAC-289448</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Pine</b><br>
+<b>LAC-289448</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
-Cause: Natural<br>
-Discovery: 1786810199000<br>
-IRWIN ID: 54f9c3c9-4d70-439a-8eae-fbf50e9e88cc
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786830206000<br>
+IRWIN ID: 018ce2d4-8264-4b39-8c38-8a12a2ed8b00
       ]]></description>
 
       <Point>
-        <coordinates>-111.992533,36.8207830000001,0</coordinates>
+        <coordinates>-117.74799,34.0234600000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 PADDY GO</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>PADDY GO</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 15<br>
+Cause: Undetermined<br>
+Discovery: 1786388186000<br>
+IRWIN ID: 625639e4-88a0-4e4c-be1d-4bf256b25d02
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.0725,47.564333,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1901,27 +1862,6 @@ IRWIN ID: 09928c90-8de6-43bb-a7c9-8a1dff6d489f
 
       <Point>
         <coordinates>-117.24742,46.40578,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 PADDY GO</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>PADDY GO</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 15<br>
-Cause: Undetermined<br>
-Discovery: 1786388186000<br>
-IRWIN ID: 625639e4-88a0-4e4c-be1d-4bf256b25d02
-      ]]></description>
-
-      <Point>
-        <coordinates>-121.0725,47.564333,0</coordinates>
       </Point>
 
     </Placemark>
@@ -1971,6 +1911,48 @@ IRWIN ID: 0c414cf4-270a-43c2-b34f-e087b5a625f8
     </Placemark>
 
     <Placemark>
+      <name>🔥 BADGER</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BADGER</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 3<br>
+Cause: Undetermined<br>
+Discovery: 1786949254000<br>
+IRWIN ID: 9fd3d7ec-fe95-438f-adc0-bbe387b7b093
+      ]]></description>
+
+      <Point>
+        <coordinates>-119.017776,36.6922520000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 KING MOUNTAIN CWC 260659</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>KING MOUNTAIN CWC 260659</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.5<br>
+Cause: Undetermined<br>
+Discovery: 1786720636000<br>
+IRWIN ID: b1e492c0-2822-4b56-9914-42181a9a42e8
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.43891,46.05078,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Elk</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -1988,27 +1970,6 @@ IRWIN ID: 48a23460-97e0-47b3-bda1-be5b747a0b24
 
       <Point>
         <coordinates>-107.354823,38.1241880000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 BUHR</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>BUHR</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 1.5<br>
-Cause: Natural<br>
-Discovery: 1785006000000<br>
-IRWIN ID: 19da9544-79b0-4f56-9aa3-742b9b6d8eb5
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.1168,36.9371800000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2036,6 +1997,27 @@ IRWIN ID: 81497b9c-a925-4419-a016-27d42b969357
     </Placemark>
 
     <Placemark>
+      <name>🔥 BUHR</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BUHR</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 1.5<br>
+Cause: Natural<br>
+Discovery: 1785006000000<br>
+IRWIN ID: 19da9544-79b0-4f56-9aa3-742b9b6d8eb5
+      ]]></description>
+
+      <Point>
+        <coordinates>-104.1168,36.9371800000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 SAND SPRINGS</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -2057,22 +2039,20 @@ IRWIN ID: 51bc3f61-447b-4996-9ca0-c126ce8eaf71
     </Placemark>
 
     <Placemark>
-      <name>🔥 Progressive &amp; Higgins</name>
+      <name>🔥 52</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Progressive &amp; Higgins</b><br>
+<b>52</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 44.1<br>
-Cause: Undetermined<br>
-Discovery: 1787007321000<br>
-IRWIN ID: e4ce6d5c-9044-48a3-9a9c-f44f01e0d479
+Discovery: 1787010900000<br>
+IRWIN ID: d157c5b8-7249-4ea3-87f6-46dcbedfbc5c
       ]]></description>
 
       <Point>
-        <coordinates>-120.44878,46.4197950000001,0</coordinates>
+        <coordinates>-117.1280867,32.8430983000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2121,22 +2101,22 @@ IRWIN ID: 79bbb8a2-e93c-4514-9dd2-55a7de7f260c
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-291612</name>
+      <name>🔥 Cook Dam</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-291612</b><br>
+<b>Cook Dam</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786979764000<br>
-IRWIN ID: 9b8764eb-3931-43c5-9798-5d8ae3a98942
+Acres: 4.4<br>
+Cause: Natural<br>
+Discovery: 1786920116000<br>
+IRWIN ID: 9c1b1d4e-d5b1-440b-884f-e148d18e02b8
       ]]></description>
 
       <Point>
-        <coordinates>-118.0015,34.0654200000001,0</coordinates>
+        <coordinates>-105.38802,44.416025,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2185,27 +2165,6 @@ IRWIN ID: 79f77ef4-cf07-4b04-a805-586f44e98168
     </Placemark>
 
     <Placemark>
-      <name>🔥 Laughing Waters</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Laughing Waters</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Natural<br>
-Discovery: 1786901932000<br>
-IRWIN ID: 036c611f-ac9d-42ab-bde5-6dc3941479a3
-      ]]></description>
-
-      <Point>
-        <coordinates>-114.844167,48.759467,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Diamante</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -2228,22 +2187,22 @@ IRWIN ID: 7507807a-2c5e-4dac-b4e0-d635a2079266
     </Placemark>
 
     <Placemark>
-      <name>🔥 Cottonwood Creek</name>
+      <name>🔥 LAC-288969</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Cottonwood Creek</b><br>
+<b>LAC-288969</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 7.12<br>
-Cause: Natural<br>
-Discovery: 1786832328000<br>
-IRWIN ID: 28cc9c1b-c528-4dc9-a383-59c19cbf4a91
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786802938000<br>
+IRWIN ID: 8abb9828-5d2e-4591-b6c8-62ab55140651
       ]]></description>
 
       <Point>
-        <coordinates>-119.443783,38.448333,0</coordinates>
+        <coordinates>-118.1586,34.0088900000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2266,48 +2225,6 @@ IRWIN ID: 51c36fa7-cc5b-446b-82ce-384a0a20eb2a
 
       <Point>
         <coordinates>-118.09,46.5360000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Dash</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Dash</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 55<br>
-Cause: Undetermined<br>
-Discovery: 1786735800000<br>
-IRWIN ID: 4bbb6d3b-9acc-4f49-9a2b-278d4cb12d57
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.67544,36.16308,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 HATCHET CANYON</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>HATCHET CANYON</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.3<br>
-Cause: Natural<br>
-Discovery: 1786931280000<br>
-IRWIN ID: 2dd4e008-409f-4167-8f04-2da7daa8602a
-      ]]></description>
-
-      <Point>
-        <coordinates>-105.762333,33.315167,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2356,22 +2273,22 @@ IRWIN ID: b28fc152-f70d-484e-81c9-f8c7a1aec820
     </Placemark>
 
     <Placemark>
-      <name>🔥 Indian Hill</name>
+      <name>🔥 Alder</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Indian Hill</b><br>
+<b>Alder</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.1<br>
 Cause: Natural<br>
-Discovery: 1786989433000<br>
-IRWIN ID: 32fdf456-2087-4634-924b-64bfe5e8e029
+Discovery: 1786994175000<br>
+IRWIN ID: 978937b5-faf4-4ce2-ad72-5d7fe390b6d6
       ]]></description>
 
       <Point>
-        <coordinates>-114.56575,45.8073670000001,0</coordinates>
+        <coordinates>-117.753167,45.8398330000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2399,43 +2316,22 @@ IRWIN ID: 57ab54cb-8a77-4c42-8757-f60dd953c1bc
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-289729</name>
+      <name>🔥 Vine St</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-289729</b><br>
+<b>Vine St</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786843942000<br>
-IRWIN ID: 93d5342f-ee93-4bf3-a982-2aeeb64417ef
+Acres: 0.1<br>
+Cause: Human<br>
+Discovery: 1786834380000<br>
+IRWIN ID: 1ec2c220-e0da-4412-bb60-def40ab92d06
       ]]></description>
 
       <Point>
-        <coordinates>-118.32154,34.7616200000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 FLYNN</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>FLYNN</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1787018926000<br>
-IRWIN ID: 4fe1df7a-ef2c-46a8-9094-9989d0807d69
-      ]]></description>
-
-      <Point>
-        <coordinates>-121.660343,37.7191920000001,0</coordinates>
+        <coordinates>-123.34708333,43.2392166700001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2485,22 +2381,22 @@ IRWIN ID: 38c5c8bc-0931-4c94-af79-6f56b6f91026
     </Placemark>
 
     <Placemark>
-      <name>🔥 BAKER</name>
+      <name>🔥 LAC-288895</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>BAKER</b><br>
+<b>LAC-288895</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786781109000<br>
-IRWIN ID: e970461a-6054-4ef1-bab3-9d11fd39815c
+Discovery: 1786791891000<br>
+IRWIN ID: e57945fe-f8dc-474d-8a26-375065e40440
       ]]></description>
 
       <Point>
-        <coordinates>-117.66134793,33.75998214,0</coordinates>
+        <coordinates>-118.1696,33.9108200000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2550,28 +2446,6 @@ IRWIN ID: f544ae86-cd8f-4c07-8d41-efa39315de48
     </Placemark>
 
     <Placemark>
-      <name>🔥 Stubble</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Stubble</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 15673<br>
-Contained: 93%<br>
-Cause: Natural<br>
-Discovery: 1784832840000<br>
-IRWIN ID: 2066cd11-1a6e-4437-94fc-715756e618ad
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.92,43.1800000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 FOX</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -2589,6 +2463,28 @@ IRWIN ID: 53d5f141-2193-402b-8f97-2a49c3d85a55
 
       <Point>
         <coordinates>-117.212967,44.523917,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Stubble</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Stubble</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 15673<br>
+Contained: 93%<br>
+Cause: Natural<br>
+Discovery: 1784832840000<br>
+IRWIN ID: 2066cd11-1a6e-4437-94fc-715756e618ad
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.92,43.1800000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2616,22 +2512,43 @@ IRWIN ID: 3c6707ca-75c5-48c1-9330-0b69c6a40dae
     </Placemark>
 
     <Placemark>
-      <name>🔥 APOLLO</name>
+      <name>🔥 LAC-290743</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>APOLLO</b><br>
+<b>LAC-290743</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786765725000<br>
-IRWIN ID: a2d36cca-df96-4cf3-b366-f7f08ba6e74a
+Discovery: 1786916902000<br>
+IRWIN ID: 95cd002f-966f-4ba5-aa5f-9d189750569b
       ]]></description>
 
       <Point>
-        <coordinates>-118.54399,34.3936200000001,0</coordinates>
+        <coordinates>-118.23906,33.92717,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-288635</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-288635</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786769077000<br>
+IRWIN ID: 93468fa6-2c6f-42b0-84cf-e1055321db65
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.16069,34.6748700000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2746,48 +2663,6 @@ IRWIN ID: 2f99b774-3e9b-4c4b-bed5-b40ad9f94602
     </Placemark>
 
     <Placemark>
-      <name>🔥 CINNAMON</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>CINNAMON</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.25<br>
-Cause: Natural<br>
-Discovery: 1786913192000<br>
-IRWIN ID: 9bb79adf-dbfe-466f-b7fc-796f5c570940
-      ]]></description>
-
-      <Point>
-        <coordinates>-122.236917,46.141667,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 HIGH</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>HIGH</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.38<br>
-Cause: Undetermined<br>
-Discovery: 1787007640000<br>
-IRWIN ID: 3af09ef2-e2b7-4a79-8547-099fa3f2aefa
-      ]]></description>
-
-      <Point>
-        <coordinates>-122.441583,38.321783,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 CDV #4</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -2804,6 +2679,27 @@ IRWIN ID: 1bb3f7f2-38b4-4194-a291-2eb708a00ef2
 
       <Point>
         <coordinates>-120.173574,41.5227160000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Holland Loop Rd. 3833</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Holland Loop Rd. 3833</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.25<br>
+Cause: Undetermined<br>
+Discovery: 1786909680000<br>
+IRWIN ID: bae0cc5d-fe59-462e-8033-541f191e4fac
+      ]]></description>
+
+      <Point>
+        <coordinates>-123.59918333,42.1216833300001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2831,64 +2727,43 @@ IRWIN ID: 0bac8699-01a7-4d17-a418-4acb6c324e43
     </Placemark>
 
     <Placemark>
-      <name>🔥 Sandstone Ridge</name>
+      <name>🔥 Grassy</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Sandstone Ridge</b><br>
+<b>Grassy</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.25<br>
 Cause: Natural<br>
-Discovery: 1786901713000<br>
-IRWIN ID: a3bfe6fc-23c8-4ddb-ba26-ec6dfc6edfca
+Discovery: 1786838416000<br>
+IRWIN ID: d3c0193d-7d66-4b5b-b514-3bd4baaa756e
       ]]></description>
 
       <Point>
-        <coordinates>-113.584872,46.4533950000001,0</coordinates>
+        <coordinates>-121.14006,48.2011410000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 Crickett Ln 375</name>
+      <name>🔥 LAC-290202</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Crickett Ln 375</b><br>
+<b>LAC-290202</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786835220000<br>
-IRWIN ID: 38338708-f99b-4b83-869b-cf8e890caaec
+Discovery: 1786876084000<br>
+IRWIN ID: 0d548b06-3d78-4e1a-aa91-6cf5fbcdbc3e
       ]]></description>
 
       <Point>
-        <coordinates>-123.62666667,42.17765,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-290108</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290108</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786867638000<br>
-IRWIN ID: c531cb75-8643-4c83-8c7d-d384e58b8b90
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.08671,34.70941,0</coordinates>
+        <coordinates>-117.92158,34.0154900000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -2911,27 +2786,6 @@ IRWIN ID: ccefd7d4-febd-496d-855e-ca0c9944bf0c
 
       <Point>
         <coordinates>-120.907094,44.5885680000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 COPPER</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>COPPER</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786988153000<br>
-IRWIN ID: d2d256fa-86f5-4833-a0a1-ef32e60a486d
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.53438,34.46004,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3025,22 +2879,23 @@ IRWIN ID: baf0d8b7-48fa-43f7-a249-349644693c63
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-289448</name>
+      <name>🔥 Shoshone</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-289448</b><br>
+<b>Shoshone</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786830206000<br>
-IRWIN ID: 018ce2d4-8264-4b39-8c38-8a12a2ed8b00
+Acres: 8000<br>
+Contained: 0%<br>
+Cause: Natural<br>
+Discovery: 1786826980000<br>
+IRWIN ID: 977de644-6d44-44e1-93f6-b8d615edd5ae
       ]]></description>
 
       <Point>
-        <coordinates>-117.74799,34.0234600000001,0</coordinates>
+        <coordinates>-117.67618,39.82989,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3063,27 +2918,6 @@ IRWIN ID: aa3df707-b3f6-41b8-a5ff-bf502a918ffc
 
       <Point>
         <coordinates>-116.607783,48.9275000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 KING MOUNTAIN CWC 260659</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>KING MOUNTAIN CWC 260659</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.5<br>
-Cause: Undetermined<br>
-Discovery: 1786720636000<br>
-IRWIN ID: b1e492c0-2822-4b56-9914-42181a9a42e8
-      ]]></description>
-
-      <Point>
-        <coordinates>-121.43891,46.05078,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3153,6 +2987,27 @@ IRWIN ID: bfd6fded-85e0-49ea-b493-a90765696f66
     </Placemark>
 
     <Placemark>
+      <name>🔥 ROVER</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>ROVER</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786827477000<br>
+IRWIN ID: 17ccb34c-b02f-4ba4-89ed-b26214615af5
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.7956,34.7546300000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 QUAIL SPRINGS</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -3175,22 +3030,22 @@ IRWIN ID: 2d6683d6-91a2-4c00-8771-015c41600c5c
     </Placemark>
 
     <Placemark>
-      <name>🔥 WARNER</name>
+      <name>🔥 BIKE</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>WARNER</b><br>
+<b>BIKE</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1787009195000<br>
-IRWIN ID: 79e6af28-6c48-4b4b-a964-83937ddc924e
+Discovery: 1787008570000<br>
+IRWIN ID: a6eea512-e1b8-465d-ae3b-19d4948961e1
       ]]></description>
 
       <Point>
-        <coordinates>-116.576833,33.284999,0</coordinates>
+        <coordinates>-118.06414,34.0407500000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3238,22 +3093,22 @@ IRWIN ID: 8a73e623-6a18-47d2-b977-f95e30bacec8
     </Placemark>
 
     <Placemark>
-      <name>🔥 FA #32</name>
+      <name>🔥 LAC-288950</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>FA #32</b><br>
+<b>LAC-288950</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786799981000<br>
-IRWIN ID: ec48e7f1-96f6-400b-a7bc-6067dd37e9ca
+Discovery: 1786801136000<br>
+IRWIN ID: a5c29481-619b-4f22-b02e-5fa2fc9ec299
       ]]></description>
 
       <Point>
-        <coordinates>-119.797068,42.057918,0</coordinates>
+        <coordinates>-117.978,34.1149300000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3325,6 +3180,46 @@ IRWIN ID: dfa477f2-305c-49ca-b82e-2af072ab55f8
     </Placemark>
 
     <Placemark>
+      <name>🔥 MTZ/RRU/PALM</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>MTZ/RRU/PALM</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1786841886000<br>
+IRWIN ID: 967c17a2-e405-4e47-965c-738fbffd9bd8
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.279,33.8281670000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 ROUNDUP</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>ROUNDUP</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Discovery: 1787009700000<br>
+IRWIN ID: 03e481d3-87ab-48a0-80cc-78ffacc93e42
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.3316667,35.1900000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 0502</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -3342,27 +3237,6 @@ IRWIN ID: a430cf58-32e0-4019-8252-9b283afd65e9
 
       <Point>
         <coordinates>-120.297013,44.829331,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Ove</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Ove</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.25<br>
-Cause: Undetermined<br>
-Discovery: 1786977854000<br>
-IRWIN ID: 222ff405-9b6a-471a-9537-3b49480b2b86
-      ]]></description>
-
-      <Point>
-        <coordinates>-116.21595,46.5938320000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3411,20 +3285,22 @@ IRWIN ID: 96c64423-59ed-4c78-b205-18bb5f4d0f34
     </Placemark>
 
     <Placemark>
-      <name>🔥 Nelson</name>
+      <name>🔥 LAC-290963</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Nelson</b><br>
+<b>LAC-290963</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Discovery: 1786874400000<br>
-IRWIN ID: 88b7c90b-bf20-4773-9f4b-47000559082f
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786926667000<br>
+IRWIN ID: 3eb10f1c-2e75-4fef-8be2-bd50b93c8beb
       ]]></description>
 
       <Point>
-        <coordinates>-123.6991667,41.0752778,0</coordinates>
+        <coordinates>-117.824,34.1175400000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3452,27 +3328,6 @@ IRWIN ID: 251fd40c-6bcb-4c69-81ec-f105e1328374
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290553</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290553</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786907238000<br>
-IRWIN ID: 647ca121-f223-4ceb-834a-bc537735d367
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.2134,33.92625,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Hairpin</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -3489,27 +3344,6 @@ IRWIN ID: 620381ea-6258-4c8c-b036-57b2d4ff148d
 
       <Point>
         <coordinates>-108.30501,45.7797,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Miners</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Miners</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 4<br>
-Cause: Undetermined<br>
-Discovery: 1786741616000<br>
-IRWIN ID: fa1a7d4e-1165-4585-8d30-e88a978b2c75
-      ]]></description>
-
-      <Point>
-        <coordinates>-121.063,48.212,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3558,22 +3392,64 @@ IRWIN ID: d7761d5d-d267-4830-a3f8-dab7eac7c38a
     </Placemark>
 
     <Placemark>
-      <name>🔥 WEBB</name>
+      <name>🔥 Miners</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>WEBB</b><br>
+<b>Miners</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 15<br>
+Cause: Natural<br>
+Discovery: 1786741616000<br>
+IRWIN ID: fa1a7d4e-1165-4585-8d30-e88a978b2c75
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.063,48.212,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-288749</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-288749</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786772012000<br>
-IRWIN ID: 5b190339-8078-4303-bc16-74ffc7f3883a
+Discovery: 1786776930000<br>
+IRWIN ID: bc2540d3-2534-4ffe-bd36-f7f6ffb5e7d5
       ]]></description>
 
       <Point>
-        <coordinates>-118.27099,34.5959800000001,0</coordinates>
+        <coordinates>-118.18248,33.91706,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-290720</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-290720</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786915626000<br>
+IRWIN ID: 2fc07413-2454-4404-bef1-9f756f5f73d0
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.96959,34.61648,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3596,27 +3472,6 @@ IRWIN ID: 687d3124-6031-4c95-b574-6afb110fd389
 
       <Point>
         <coordinates>-115.093667,46.2559000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 CR - HIGHWAY</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>CR - HIGHWAY</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786913143000<br>
-IRWIN ID: 2e79161a-f2ea-4c07-b562-dfd46a24c677
-      ]]></description>
-
-      <Point>
-        <coordinates>-120.2859,47.5245,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3666,43 +3521,64 @@ IRWIN ID: c8a81ed6-1fd6-492e-ad8d-5085f78eb1fa
     </Placemark>
 
     <Placemark>
-      <name>🔥 Green Mountain</name>
+      <name>🔥 East Spotted Elk</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Green Mountain</b><br>
+<b>East Spotted Elk</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.5<br>
-Cause: Undetermined<br>
-Discovery: 1786839862000<br>
-IRWIN ID: 177955e1-e716-484a-b382-706323552610
+Cause: Human<br>
+Discovery: 1786840915000<br>
+IRWIN ID: 569adad6-9f93-4ed1-9e7c-1eddca5981af
       ]]></description>
 
       <Point>
-        <coordinates>-121.22435,48.3009220000001,0</coordinates>
+        <coordinates>-106.678333,45.6044440000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 DAY</name>
+      <name>🔥 LAC-290281</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>DAY</b><br>
+<b>LAC-290281</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786799012000<br>
-IRWIN ID: 88b13135-6720-4f59-9575-f1c71170bf37
+Discovery: 1786887175000<br>
+IRWIN ID: a8958e3f-58ea-4421-807a-4e90ea5ade5e
       ]]></description>
 
       <Point>
-        <coordinates>-121.633,37.044,0</coordinates>
+        <coordinates>-117.93355,34.1336200000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Smelter</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Smelter</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1786834440000<br>
+IRWIN ID: 0bb22937-df8e-43d7-a558-f26ae3efcd27
+      ]]></description>
+
+      <Point>
+        <coordinates>-113.83025,43.771667,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3773,22 +3649,43 @@ IRWIN ID: 730df9b8-2b03-46cb-8467-e2c915dbd74a
     </Placemark>
 
     <Placemark>
-      <name>🔥 Marlow Canyon</name>
+      <name>🔥 FLYNN</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Marlow Canyon</b><br>
+<b>FLYNN</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 5.5<br>
-Cause: Human<br>
-Discovery: 1787017557000<br>
-IRWIN ID: cea72434-b8b4-478b-8708-5187465d1794
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1787018926000<br>
+IRWIN ID: 4fe1df7a-ef2c-46a8-9094-9989d0807d69
       ]]></description>
 
       <Point>
-        <coordinates>-112.166833,41.8525000000001,0</coordinates>
+        <coordinates>-121.660343,37.7191920000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Wilmont Road</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Wilmont Road</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.5<br>
+Cause: Undetermined<br>
+Discovery: 1786930980000<br>
+IRWIN ID: d6c6e32a-3296-48fb-aaff-f530fdce6a8d
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.43399,48.206686,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3859,22 +3756,43 @@ IRWIN ID: dceba814-01d4-4814-b421-3113fb326d0d
     </Placemark>
 
     <Placemark>
-      <name>🔥 GERDIE</name>
+      <name>🔥 Proctor Creek</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>GERDIE</b><br>
+<b>Proctor Creek</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 34.6<br>
+Acres: 0.1<br>
 Cause: Natural<br>
-Discovery: 1786908720000<br>
-IRWIN ID: 329236b3-867c-4cdc-996b-adb5946e9e1d
+Discovery: 1786901530000<br>
+IRWIN ID: 5ee90ec8-9849-4e3c-9beb-7c279ef4c597
       ]]></description>
 
       <Point>
-        <coordinates>-116.65255,43.0203330000001,0</coordinates>
+        <coordinates>-117.781283,45.7701670000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 GREEN RIDGE</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>GREEN RIDGE</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Natural<br>
+Discovery: 1786985520000<br>
+IRWIN ID: 6c98240a-a4d2-4e37-8f22-cf0d321c2b76
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.1188,48.8902830000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3902,22 +3820,64 @@ IRWIN ID: 4c9d1fd7-7131-412a-9995-ca7789782346
     </Placemark>
 
     <Placemark>
-      <name>🔥 Canal Bon</name>
+      <name>🔥 Cabra Hill</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Canal Bon</b><br>
+<b>Cabra Hill</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.2<br>
-Cause: Undetermined<br>
-Discovery: 1786921200000<br>
-IRWIN ID: 139dc4f8-9938-4ca0-82e3-d05f0211f0db
+Acres: 20<br>
+Cause: Natural<br>
+Discovery: 1786924800000<br>
+IRWIN ID: f17289b8-bfdf-41ba-a6af-068a8f3938f1
       ]]></description>
 
       <Point>
-        <coordinates>-105.08593,36.2438700000001,0</coordinates>
+        <coordinates>-104.53099,35.2810500000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-290351</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-290351</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786894444000<br>
+IRWIN ID: 74ee680a-cd74-43f3-b7e0-dbfabc5e0828
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.23906,33.92717,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-290042</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-290042</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786863434000<br>
+IRWIN ID: 81b1d326-9c45-43e6-93f8-d95b80ef8fcd
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.63059,34.12359,0</coordinates>
       </Point>
 
     </Placemark>
@@ -3945,27 +3905,6 @@ IRWIN ID: 5ac0b49d-3f64-4344-826a-5dbb1925e757
     </Placemark>
 
     <Placemark>
-      <name>🔥 BLACKWATER</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>BLACKWATER</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 66.2<br>
-Cause: Natural<br>
-Discovery: 1786831200000<br>
-IRWIN ID: 434d39bd-19d4-480a-9d13-8d53fd6d61f0
-      ]]></description>
-
-      <Point>
-        <coordinates>-103.16024,34.22513,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 0432</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -3988,64 +3927,43 @@ IRWIN ID: 09290068-0244-4a3c-aed4-6d828812f2b1
     </Placemark>
 
     <Placemark>
-      <name>🔥 POISON</name>
+      <name>🔥 Horseshoe Bend</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>POISON</b><br>
+<b>Horseshoe Bend</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.25<br>
-Cause: Natural<br>
-Discovery: 1786999391000<br>
-IRWIN ID: 18b671ef-b72c-4a42-b682-cf0526d1b5fa
+Acres: 0.67<br>
+Cause: Undetermined<br>
+Discovery: 1787005584000<br>
+IRWIN ID: 0fae4020-023e-4bb5-bd5b-268597584b61
       ]]></description>
 
       <Point>
-        <coordinates>-120.533163,47.4472280000001,0</coordinates>
+        <coordinates>-104.621062,43.485802,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 NIGHTHAWK</name>
+      <name>🔥 IMPOSSIBLE</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>NIGHTHAWK</b><br>
+<b>IMPOSSIBLE</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.5<br>
+Acres: 0.1<br>
 Cause: Human<br>
-Discovery: 1787002959000<br>
-IRWIN ID: 2a50c295-8619-43a4-a0e9-326a8ab763fd
+Discovery: 1786661760000<br>
+IRWIN ID: 98635163-5bb1-475c-a2e1-cea5ba875ef2
       ]]></description>
 
       <Point>
-        <coordinates>-122.886667,48.018467,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Buffalo Spring</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Buffalo Spring</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 15<br>
-Cause: Human<br>
-Discovery: 1786132283000<br>
-IRWIN ID: 9faefc3a-d239-48ea-9ea5-ded946e9b8dc
-      ]]></description>
-
-      <Point>
-        <coordinates>-108.64581,45.9723300000001,0</coordinates>
+        <coordinates>-120.9186,47.11803,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4067,6 +3985,27 @@ IRWIN ID: 3522e0f6-d437-488d-9e63-5e330be78fa4
 
       <Point>
         <coordinates>-108.46262,46.45813,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Buffalo Spring</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Buffalo Spring</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 15<br>
+Cause: Human<br>
+Discovery: 1786132283000<br>
+IRWIN ID: 9faefc3a-d239-48ea-9ea5-ded946e9b8dc
+      ]]></description>
+
+      <Point>
+        <coordinates>-108.64581,45.9723300000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4094,22 +4033,22 @@ IRWIN ID: 7feb8502-6a78-4387-b8a7-fe675182b1bb
     </Placemark>
 
     <Placemark>
-      <name>🔥 BRANSCOMB</name>
+      <name>🔥 Long Cut</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>BRANSCOMB</b><br>
+<b>Long Cut</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1786974041000<br>
-IRWIN ID: 2853f9fe-2c79-48fd-ad2a-c11aea6cdbbb
+Acres: 2.1<br>
+Cause: Natural<br>
+Discovery: 1786825740000<br>
+IRWIN ID: fe7e035f-d910-4f84-b90b-0e73296b2d3d
       ]]></description>
 
       <Point>
-        <coordinates>-123.510317,39.673094,0</coordinates>
+        <coordinates>-118.433217,45.303033,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4137,28 +4076,6 @@ IRWIN ID: bb27075a-ffa2-4619-8f54-1334194cddbc
     </Placemark>
 
     <Placemark>
-      <name>🔥 REEVAS BASIN</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>REEVAS BASIN</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 250<br>
-Contained: 40%<br>
-Cause: Human<br>
-Discovery: 1786827060000<br>
-IRWIN ID: d403aa0f-da05-401e-822a-85120b0dbced
-      ]]></description>
-
-      <Point>
-        <coordinates>-119.25345,48.6437000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Montgomery Draw</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -4176,6 +4093,26 @@ IRWIN ID: daa981cb-a3e9-4568-82de-cf0bc9c50806
 
       <Point>
         <coordinates>-105.8556,44.366767,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Black Hills RX</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Black Hills RX</b><br>
+Source: NIFC / WFIGS<br>
+Type: RX<br>
+Cause: Undetermined<br>
+Discovery: 1785608400000<br>
+IRWIN ID: 1b719683-c6c6-475e-9b4b-be5c05ef7c9d
+      ]]></description>
+
+      <Point>
+        <coordinates>-114.327,42.2289000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4203,22 +4140,23 @@ IRWIN ID: 005f6c67-604a-49e5-bbb9-0abf4924980b
     </Placemark>
 
     <Placemark>
-      <name>🔥 VICTOR</name>
+      <name>🔥 CATO 2</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>VICTOR</b><br>
+<b>CATO 2</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786849095000<br>
-IRWIN ID: efcc899a-f7a0-4301-81f8-c336e66ee3f2
+Acres: 2080<br>
+Contained: 100%<br>
+Cause: Natural<br>
+Discovery: 1786835894000<br>
+IRWIN ID: e345f2a9-98f3-4472-9697-b921ae58eff0
       ]]></description>
 
       <Point>
-        <coordinates>-118.41681,34.3253100000001,0</coordinates>
+        <coordinates>-103.9452,33.5076500000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4263,6 +4201,27 @@ IRWIN ID: 0c7a5b02-3b18-4ced-b10b-e9c315773c19
 
       <Point>
         <coordinates>-118.955667,43.0450000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Honegger</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Honegger</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 2<br>
+Cause: Undetermined<br>
+Discovery: 1786721700000<br>
+IRWIN ID: c1d7a26e-f8ad-425e-97b9-c5d95cc46e7b
+      ]]></description>
+
+      <Point>
+        <coordinates>-104.3669,35.2992600000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4332,6 +4291,27 @@ IRWIN ID: e6d5a2de-d081-4b69-89e9-5038aa4dc2a7
     </Placemark>
 
     <Placemark>
+      <name>🔥 LAC-291790</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-291790</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786987901000<br>
+IRWIN ID: 4df56999-d1d5-4d42-916e-e7fe50879e76
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.14285,34.6017400000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 TANEUM CREEK</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -4353,22 +4333,22 @@ IRWIN ID: 6785740b-97fe-4c1a-9f1a-2b5af68f19e3
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290963</name>
+      <name>🔥 LAC-290975</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290963</b><br>
+<b>LAC-290975</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786926667000<br>
-IRWIN ID: 3eb10f1c-2e75-4fef-8be2-bd50b93c8beb
+Discovery: 1786927203000<br>
+IRWIN ID: b49dd6ea-77eb-4bb3-ab24-216a6cf409de
       ]]></description>
 
       <Point>
-        <coordinates>-117.824,34.1175400000001,0</coordinates>
+        <coordinates>-118.17957,34.6638600000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4395,22 +4375,44 @@ IRWIN ID: dc4342d9-b479-44f1-906c-8abd42e1f59c
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288749</name>
+      <name>🔥 LAC-288806</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288749</b><br>
+<b>LAC-288806</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786776930000<br>
-IRWIN ID: bc2540d3-2534-4ffe-bd36-f7f6ffb5e7d5
+Discovery: 1786781852000<br>
+IRWIN ID: d254f15d-4c0a-444e-a589-6d9f493716a7
       ]]></description>
 
       <Point>
-        <coordinates>-118.18248,33.91706,0</coordinates>
+        <coordinates>-118.0057,34.0519400000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Picture Rock</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Picture Rock</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 1277<br>
+Contained: 10%<br>
+Cause: Undetermined<br>
+Discovery: 1786909351000<br>
+IRWIN ID: 7c564599-3140-4711-843a-d863f53c265d
+      ]]></description>
+
+      <Point>
+        <coordinates>-120.774487,43.00919,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4432,28 +4434,6 @@ IRWIN ID: 5a3ba4ea-6cf4-43a4-93f3-0c3b56d917bf
 
       <Point>
         <coordinates>-109.12551,46.3750000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Bare</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Bare</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 370<br>
-Contained: 100%<br>
-Cause: Undetermined<br>
-Discovery: 1785874454000<br>
-IRWIN ID: 62d2c172-8852-4e3b-9403-340493d47e8b
-      ]]></description>
-
-      <Point>
-        <coordinates>-110.48225,42.758633,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4481,22 +4461,44 @@ IRWIN ID: ee6fcf97-7637-4721-b125-741098779d99
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-289580</name>
+      <name>🔥 Bare</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-289580</b><br>
+<b>Bare</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
+Acres: 370<br>
+Contained: 100%<br>
 Cause: Undetermined<br>
-Discovery: 1786836195000<br>
-IRWIN ID: 3a714d8b-51d1-4e64-bb71-50c6e7c111d6
+Discovery: 1785874454000<br>
+IRWIN ID: 62d2c172-8852-4e3b-9403-340493d47e8b
       ]]></description>
 
       <Point>
-        <coordinates>-118.14817,34.70759,0</coordinates>
+        <coordinates>-110.48225,42.758633,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Healy</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Healy</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 22<br>
+Cause: Natural<br>
+Discovery: 1786832128000<br>
+IRWIN ID: 4b1584d5-78a5-4ebb-bb84-d675436adfa5
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.759055,39.6533930000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4566,22 +4568,22 @@ IRWIN ID: 78ffab8a-0cfa-4690-b90c-29a7e285d8ee
     </Placemark>
 
     <Placemark>
-      <name>🔥 Dutchman</name>
+      <name>🔥 Phillips Creek</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Dutchman</b><br>
+<b>Phillips Creek</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 8<br>
+Acres: 23<br>
 Cause: Natural<br>
-Discovery: 1786994975000<br>
-IRWIN ID: b6b1ffcd-c63b-4393-ac97-2732a4dbc21e
+Discovery: 1786995324000<br>
+IRWIN ID: 3b767f41-7e1b-4d83-b297-35fe9d782d71
       ]]></description>
 
       <Point>
-        <coordinates>-104.389333,45.954167,0</coordinates>
+        <coordinates>-118.002633,45.5701,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4608,6 +4610,27 @@ IRWIN ID: 6ed769b7-7232-4552-98cb-6e07a50d0b75
     </Placemark>
 
     <Placemark>
+      <name>🔥 RICHBAR</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>RICHBAR</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1786842792000<br>
+IRWIN ID: ddd12b56-f9e7-46df-bf3c-3ef17dda58d1
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.7214,35.4718330000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Rio Blanco</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -4625,27 +4648,6 @@ IRWIN ID: 31e42281-5dc8-48b0-9031-af570c7b2cdf
 
       <Point>
         <coordinates>-106.985207,37.124649,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 East Spotted Elk</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>East Spotted Elk</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.5<br>
-Cause: Human<br>
-Discovery: 1786840915000<br>
-IRWIN ID: 569adad6-9f93-4ed1-9e7c-1eddca5981af
-      ]]></description>
-
-      <Point>
-        <coordinates>-106.678333,45.6044440000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4738,85 +4740,64 @@ IRWIN ID: 6bd3e1c0-e7dd-45f0-8588-d698e5e8c6e0
     </Placemark>
 
     <Placemark>
-      <name>🔥 Wylie Knob</name>
+      <name>🔥 Mt. Adams Lake</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Wylie Knob</b><br>
+<b>Mt. Adams Lake</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.25<br>
-Cause: Natural<br>
-Discovery: 1786974900000<br>
-IRWIN ID: ccd5a6c7-de8d-4b61-87b7-9f7ee2f94135
-      ]]></description>
-
-      <Point>
-        <coordinates>-116.317383,48.4806170000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-290281</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290281</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
+Acres: 0.3<br>
 Cause: Undetermined<br>
-Discovery: 1786887175000<br>
-IRWIN ID: a8958e3f-58ea-4421-807a-4e90ea5ade5e
+Discovery: 1786999777000<br>
+IRWIN ID: 6419d55a-3e73-45a4-a312-1983561a80ed
       ]]></description>
 
       <Point>
-        <coordinates>-117.93355,34.1336200000001,0</coordinates>
+        <coordinates>-121.332149,46.2674170000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 TRAPPER</name>
+      <name>🔥 Island</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>TRAPPER</b><br>
+<b>Island</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
+Acres: 5<br>
 Cause: Natural<br>
-Discovery: 1786822627000<br>
-IRWIN ID: 517168fc-54ed-4a03-a5cc-4673477628ee
+Discovery: 1786761240000<br>
+IRWIN ID: 682848a3-ee17-4cf0-a0c0-f251c26bbb93
       ]]></description>
 
       <Point>
-        <coordinates>-115.423967,43.865867,0</coordinates>
+        <coordinates>-102.58069904,43.15831158,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 4050</name>
+      <name>🔥 Post Canyon</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>4050</b><br>
+<b>Post Canyon</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.5<br>
-Cause: Human<br>
-Discovery: 1787005597000<br>
-IRWIN ID: ec10f1bc-1cc3-4cb8-953b-21eacd4be32d
+Acres: 0.6<br>
+Cause: Natural<br>
+Discovery: 1786823808000<br>
+IRWIN ID: 5467a8b7-758c-43f0-9472-cd50527549d8
       ]]></description>
 
       <Point>
-        <coordinates>-113.12833,37.6743300000001,0</coordinates>
+        <coordinates>-109.84125,39.3166170000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4838,27 +4819,6 @@ IRWIN ID: 0f043fb8-8730-4f34-b72e-46c78ac3e36b
 
       <Point>
         <coordinates>-106.7915,44.7673330000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 ROADSIDE HWY 1</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>ROADSIDE HWY 1</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1784383144000<br>
-IRWIN ID: 9056f279-b81b-4ff4-a1b5-5bf433c0d4b1
-      ]]></description>
-
-      <Point>
-        <coordinates>-107.610833,45.619444,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4886,22 +4846,22 @@ IRWIN ID: 8c9cb7a0-936c-4a64-aaef-67a10e597a66
     </Placemark>
 
     <Placemark>
-      <name>🔥 Proctor Creek</name>
+      <name>🔥 ROADSIDE HWY 1</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Proctor Creek</b><br>
+<b>ROADSIDE HWY 1</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.1<br>
-Cause: Natural<br>
-Discovery: 1786901530000<br>
-IRWIN ID: 5ee90ec8-9849-4e3c-9beb-7c279ef4c597
+Cause: Undetermined<br>
+Discovery: 1784383144000<br>
+IRWIN ID: 9056f279-b81b-4ff4-a1b5-5bf433c0d4b1
       ]]></description>
 
       <Point>
-        <coordinates>-117.781283,45.7701670000001,0</coordinates>
+        <coordinates>-107.610833,45.619444,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4929,43 +4889,22 @@ IRWIN ID: 90d3a1f1-ff21-41b3-a4d4-6b7edab8521c
     </Placemark>
 
     <Placemark>
-      <name>🔥 Cabra Hill</name>
+      <name>🔥 LG13 Appaloosa</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Cabra Hill</b><br>
+<b>LG13 Appaloosa</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 20<br>
+Acres: 0.1<br>
 Cause: Natural<br>
-Discovery: 1786924800000<br>
-IRWIN ID: f17289b8-bfdf-41ba-a6af-068a8f3938f1
+Discovery: 1786924500000<br>
+IRWIN ID: 9ecfe22d-a75f-4a74-abc2-4afdbecaedff
       ]]></description>
 
       <Point>
-        <coordinates>-104.53099,35.2810500000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAKELAND</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAKELAND</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.5<br>
-Cause: Human<br>
-Discovery: 1786999200000<br>
-IRWIN ID: b6889869-4a89-4cc9-b400-b17cd0d9e9ed
-      ]]></description>
-
-      <Point>
-        <coordinates>-117.70455,47.550533,0</coordinates>
+        <coordinates>-114.171673,45.9974110000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -4993,44 +4932,43 @@ IRWIN ID: d1298bd1-66ec-461f-b00e-a06f1a8bd1c2
     </Placemark>
 
     <Placemark>
-      <name>🔥 GREENFIELD</name>
+      <name>🔥 SLAUGHTER</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>GREENFIELD</b><br>
+<b>SLAUGHTER</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1787007900000<br>
-IRWIN ID: 926365a2-9c4b-4ecf-8caa-dd6e1ad071f1
+Acres: 31.92<br>
+Cause: Natural<br>
+Discovery: 1787010037000<br>
+IRWIN ID: e2e646f6-f842-465f-9fd7-eac17631b3c7
       ]]></description>
 
       <Point>
-        <coordinates>-117.68275895,33.5579571700001,0</coordinates>
+        <coordinates>-104.551389,32.1561110000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 Cold Springs</name>
+      <name>🔥 WARNER</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Cold Springs</b><br>
+<b>WARNER</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 1966<br>
-Contained: 100%<br>
-Cause: Human<br>
-Discovery: 1786398960000<br>
-IRWIN ID: 7c17864e-a0e6-4673-abba-c07033198d0d
+Acres: 0.5<br>
+Cause: Undetermined<br>
+Discovery: 1787009195000<br>
+IRWIN ID: 79e6af28-6c48-4b4b-a964-83937ddc924e
       ]]></description>
 
       <Point>
-        <coordinates>-105.491389,42.7244440000001,0</coordinates>
+        <coordinates>-116.576833,33.284999,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5058,43 +4996,84 @@ IRWIN ID: 64ffd472-e106-48c8-87b6-2c2f7fb04774
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290042</name>
+      <name>🔥 Cold Springs</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290042</b><br>
+<b>Cold Springs</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786863434000<br>
-IRWIN ID: 81b1d326-9c45-43e6-93f8-d95b80ef8fcd
+Acres: 1966<br>
+Contained: 100%<br>
+Cause: Human<br>
+Discovery: 1786398960000<br>
+IRWIN ID: 7c17864e-a0e6-4673-abba-c07033198d0d
       ]]></description>
 
       <Point>
-        <coordinates>-118.63059,34.12359,0</coordinates>
+        <coordinates>-105.491389,42.7244440000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 Long Cut</name>
+      <name>🔥 Pine</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Long Cut</b><br>
+<b>Pine</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 2.1<br>
+Acres: 0.1<br>
 Cause: Natural<br>
-Discovery: 1786825740000<br>
-IRWIN ID: fe7e035f-d910-4f84-b90b-0e73296b2d3d
+Discovery: 1786810199000<br>
+IRWIN ID: 54f9c3c9-4d70-439a-8eae-fbf50e9e88cc
       ]]></description>
 
       <Point>
-        <coordinates>-118.433217,45.303033,0</coordinates>
+        <coordinates>-111.992533,36.8207830000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 HERMIES</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>HERMIES</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Discovery: 1786779000000<br>
+IRWIN ID: 4e8cf97e-04fa-4427-ae17-f82615a5757a
+      ]]></description>
+
+      <Point>
+        <coordinates>-122.8965,38.3163333000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Slough Canyon</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Slough Canyon</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 40<br>
+Cause: Natural<br>
+Discovery: 1786813200000<br>
+IRWIN ID: 019119da-16c0-40ae-adfe-25ad80ea704e
+      ]]></description>
+
+      <Point>
+        <coordinates>-109.9232,39.3697000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5187,22 +5166,22 @@ IRWIN ID: 19047d8a-1d85-453e-bada-5bd068efc4f2
     </Placemark>
 
     <Placemark>
-      <name>🔥 BADGER</name>
+      <name>🔥 LAC-291356</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>BADGER</b><br>
+<b>LAC-291356</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 3<br>
+Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786949254000<br>
-IRWIN ID: 9fd3d7ec-fe95-438f-adc0-bbe387b7b093
+Discovery: 1786951426000<br>
+IRWIN ID: 48cdb239-e0cf-45cc-b012-de757bbb1368
       ]]></description>
 
       <Point>
-        <coordinates>-119.017776,36.6922520000001,0</coordinates>
+        <coordinates>-118.1706,33.9450000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5274,28 +5253,6 @@ IRWIN ID: bd729423-8d4d-4fa3-bb9a-b738f6c71b88
     </Placemark>
 
     <Placemark>
-      <name>🔥 Sarpy</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Sarpy</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 900<br>
-Contained: 0%<br>
-Cause: Undetermined<br>
-Discovery: 1787008620000<br>
-IRWIN ID: 56758ab5-a8f4-486a-b26b-487557aa52e7
-      ]]></description>
-
-      <Point>
-        <coordinates>-107.4745,45.7188330000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Widemouth 2</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -5313,6 +5270,27 @@ IRWIN ID: 07c99ed8-e61d-43f0-af86-b3a75f30781c
 
       <Point>
         <coordinates>-112.498983,38.728917,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 BARBER ROAD</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BARBER ROAD</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.2<br>
+Cause: Natural<br>
+Discovery: 1786991642000<br>
+IRWIN ID: 6150721c-6a92-4267-8467-9df4bd4cda16
+      ]]></description>
+
+      <Point>
+        <coordinates>-120.9048,46.9834500000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5340,22 +5318,22 @@ IRWIN ID: f0989134-564b-44d7-b186-8c2295c16e5c
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288895</name>
+      <name>🔥 LAC-288908</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288895</b><br>
+<b>LAC-288908</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786791891000<br>
-IRWIN ID: e57945fe-f8dc-474d-8a26-375065e40440
+Discovery: 1786794120000<br>
+IRWIN ID: e8c0ac3b-7394-481e-9469-4974b1d75b2b
       ]]></description>
 
       <Point>
-        <coordinates>-118.1696,33.9108200000001,0</coordinates>
+        <coordinates>-118.23906,33.92717,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5383,27 +5361,6 @@ IRWIN ID: dcb43c28-36f3-4668-82a0-09cb621d8be1
     </Placemark>
 
     <Placemark>
-      <name>🔥 Cook Dam</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Cook Dam</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 4.4<br>
-Cause: Natural<br>
-Discovery: 1786920116000<br>
-IRWIN ID: 9c1b1d4e-d5b1-440b-884f-e148d18e02b8
-      ]]></description>
-
-      <Point>
-        <coordinates>-105.38802,44.416025,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Signal Peak</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -5426,22 +5383,22 @@ IRWIN ID: 092f0d20-3543-4210-ab84-715e3714ba5f
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-289546</name>
+      <name>🔥 Thorn</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-289546</b><br>
+<b>Thorn</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786834687000<br>
-IRWIN ID: ea3c5ed8-174e-4a43-8622-ae6ffa3d15f0
+Acres: 2.29<br>
+Cause: Natural<br>
+Discovery: 1786915148000<br>
+IRWIN ID: 1e46eaae-7835-4258-9208-c5b25736f31b
       ]]></description>
 
       <Point>
-        <coordinates>-118.2391,33.9281500000001,0</coordinates>
+        <coordinates>-117.682333,45.8873330000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5486,27 +5443,6 @@ IRWIN ID: 956240d7-5c2b-476e-b0c7-a1ef1bad6bfa
 
       <Point>
         <coordinates>-106.4085,44.8235000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 PORTALES SPRINGS</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>PORTALES SPRINGS</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 2<br>
-Cause: Natural<br>
-Discovery: 1786848180000<br>
-IRWIN ID: 5e4f6d10-719a-40c5-8dd7-92a6dfcc901b
-      ]]></description>
-
-      <Point>
-        <coordinates>-103.27764,34.1350200000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5620,22 +5556,22 @@ IRWIN ID: 5bc82723-c06f-493f-abe0-afdbc5dab6ae
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288635</name>
+      <name>🔥 LAC-288653</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288635</b><br>
+<b>LAC-288653</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786769077000<br>
-IRWIN ID: 93468fa6-2c6f-42b0-84cf-e1055321db65
+Discovery: 1786770320000<br>
+IRWIN ID: eb61dd71-d7ff-4ffb-9128-8da6c1214f4e
       ]]></description>
 
       <Point>
-        <coordinates>-118.16069,34.6748700000001,0</coordinates>
+        <coordinates>-117.8202,34.01354,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5685,22 +5621,43 @@ IRWIN ID: 6aa4c355-ad18-472f-aaab-78baa9de31b1
     </Placemark>
 
     <Placemark>
-      <name>🔥 Smelter</name>
+      <name>🔥 SNAKE</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Smelter</b><br>
+<b>SNAKE</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786918709000<br>
+IRWIN ID: 90e45756-c68d-49f3-b0c0-e10eaa847bab
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.562323,40.1630210000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Pole</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Pole</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.1<br>
 Cause: Undetermined<br>
-Discovery: 1786834440000<br>
-IRWIN ID: 0bb22937-df8e-43d7-a558-f26ae3efcd27
+Discovery: 1786841431000<br>
+IRWIN ID: 8cf57526-c1fd-4e76-93da-431a9c500de5
       ]]></description>
 
       <Point>
-        <coordinates>-113.83025,43.771667,0</coordinates>
+        <coordinates>-121.5052,42.4733670000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5728,6 +5685,27 @@ IRWIN ID: c8034780-d588-48da-8bc9-c6ced34cd8df
     </Placemark>
 
     <Placemark>
+      <name>🔥 CHURCH 2</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>CHURCH 2</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 132<br>
+Cause: Undetermined<br>
+Discovery: 1787000504000<br>
+IRWIN ID: 112b9b87-43fe-49c0-98c3-cbc6277625c4
+      ]]></description>
+
+      <Point>
+        <coordinates>-116.36187,32.687399,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Frijoles</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -5750,22 +5728,20 @@ IRWIN ID: ad65ff54-337f-4938-af35-bb1744cebf48
     </Placemark>
 
     <Placemark>
-      <name>🔥 Alder</name>
+      <name>🔥 Sorrento</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Alder</b><br>
+<b>Sorrento</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
-Cause: Natural<br>
-Discovery: 1786994175000<br>
-IRWIN ID: 978937b5-faf4-4ce2-ad72-5d7fe390b6d6
+Discovery: 1786912620000<br>
+IRWIN ID: 935a7271-98f6-440e-85c1-1e954330267d
       ]]></description>
 
       <Point>
-        <coordinates>-117.753167,45.8398330000001,0</coordinates>
+        <coordinates>-117.1985083,32.9135667,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5793,27 +5769,6 @@ IRWIN ID: 98bceefd-1e76-40e6-9352-54fd64f60e7d
     </Placemark>
 
     <Placemark>
-      <name>🔥 Holland Loop Rd. 3833</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Holland Loop Rd. 3833</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.25<br>
-Cause: Undetermined<br>
-Discovery: 1786909680000<br>
-IRWIN ID: bae0cc5d-fe59-462e-8033-541f191e4fac
-      ]]></description>
-
-      <Point>
-        <coordinates>-123.59918333,42.1216833300001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Fred Mt</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -5831,6 +5786,27 @@ IRWIN ID: 9214ed4c-46df-4430-b780-5af36fb92bd9
 
       <Point>
         <coordinates>-119.8492,39.7626670000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 4050</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>4050</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.5<br>
+Cause: Human<br>
+Discovery: 1787005597000<br>
+IRWIN ID: ec10f1bc-1cc3-4cb8-953b-21eacd4be32d
+      ]]></description>
+
+      <Point>
+        <coordinates>-113.12833,37.6743300000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -5858,27 +5834,6 @@ IRWIN ID: 7ce74a5f-5438-4d0f-8589-52a029eaa3f7
     </Placemark>
 
     <Placemark>
-      <name>🔥 SLAUGHTER</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>SLAUGHTER</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 31.92<br>
-Cause: Natural<br>
-Discovery: 1787010037000<br>
-IRWIN ID: e2e646f6-f842-465f-9fd7-eac17631b3c7
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.551389,32.1561110000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Egypt</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -5901,64 +5856,43 @@ IRWIN ID: 51f19bd3-95d8-4d13-9efb-861321edb7ae
     </Placemark>
 
     <Placemark>
-      <name>🔥 Grassy</name>
+      <name>🔥 Glacier</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Grassy</b><br>
+<b>Glacier</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.25<br>
+Acres: 0.2<br>
 Cause: Natural<br>
-Discovery: 1786838416000<br>
-IRWIN ID: d3c0193d-7d66-4b5b-b514-3bd4baaa756e
+Discovery: 1786827790000<br>
+IRWIN ID: 2f9e77b3-7367-451e-8966-176aa0e510ff
       ]]></description>
 
       <Point>
-        <coordinates>-121.14006,48.2011410000001,0</coordinates>
+        <coordinates>-121.152972,48.1235150000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290202</name>
+      <name>🔥 LAC-290246</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290202</b><br>
+<b>LAC-290246</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786876084000<br>
-IRWIN ID: 0d548b06-3d78-4e1a-aa91-6cf5fbcdbc3e
+Discovery: 1786880923000<br>
+IRWIN ID: b2683cd0-668a-48f5-8bd5-64b5d45157d3
       ]]></description>
 
       <Point>
-        <coordinates>-117.92158,34.0154900000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 WALT SMITH</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>WALT SMITH</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1786998720000<br>
-IRWIN ID: c7cab00c-c58e-4e4e-86fb-004fd685e495
-      ]]></description>
-
-      <Point>
-        <coordinates>-105.75378,33.4327970000001,0</coordinates>
+        <coordinates>-117.97676,34.0134100000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6117,23 +6051,22 @@ IRWIN ID: ae1ab3c1-454b-489a-af7a-8604ff56c86b
     </Placemark>
 
     <Placemark>
-      <name>🔥 Shoshone</name>
+      <name>🔥 WISHON</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Shoshone</b><br>
+<b>WISHON</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 8000<br>
-Contained: 0%<br>
-Cause: Natural<br>
-Discovery: 1786826980000<br>
-IRWIN ID: 977de644-6d44-44e1-93f6-b8d615edd5ae
+Acres: 1<br>
+Cause: Undetermined<br>
+Discovery: 1786831614000<br>
+IRWIN ID: b9b8d78c-04af-47e2-8c72-984314e1643b
       ]]></description>
 
       <Point>
-        <coordinates>-117.67618,39.82989,0</coordinates>
+        <coordinates>-118.9715,37.0245,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6160,27 +6093,6 @@ IRWIN ID: bd3276c2-6c4d-4670-896d-12608d49468b
     </Placemark>
 
     <Placemark>
-      <name>🔥 FLUME</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>FLUME</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.6<br>
-Cause: Human<br>
-Discovery: 1787007226000<br>
-IRWIN ID: ee06f35a-f2f7-4ecb-bfc2-e99fed4fbf3b
-      ]]></description>
-
-      <Point>
-        <coordinates>-122.352083,41.0887000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Olive Butte</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -6198,6 +6110,48 @@ IRWIN ID: 882db1be-b19e-4733-b3cd-2140c2c822bb
 
       <Point>
         <coordinates>-118.452867,44.745217,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Progressive &amp; Higgins</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Progressive &amp; Higgins</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 44.1<br>
+Cause: Undetermined<br>
+Discovery: 1787007321000<br>
+IRWIN ID: e4ce6d5c-9044-48a3-9a9c-f44f01e0d479
+      ]]></description>
+
+      <Point>
+        <coordinates>-120.44878,46.4197950000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 NIGHTHAWK</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>NIGHTHAWK</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.5<br>
+Cause: Human<br>
+Discovery: 1787002959000<br>
+IRWIN ID: 2a50c295-8619-43a4-a0e9-326a8ab763fd
+      ]]></description>
+
+      <Point>
+        <coordinates>-122.886667,48.018467,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6247,27 +6201,6 @@ IRWIN ID: a0d9b680-54d9-4943-a878-2d3f0e7a7d22
     </Placemark>
 
     <Placemark>
-      <name>🔥 ROVER</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>ROVER</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786827477000<br>
-IRWIN ID: 17ccb34c-b02f-4ba4-89ed-b26214615af5
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.7956,34.7546300000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 0722 ROSENBAUM</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -6277,7 +6210,7 @@ IRWIN ID: 17ccb34c-b02f-4ba4-89ed-b26214615af5
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 483<br>
-Contained: 16%<br>
+Contained: 38%<br>
 Cause: Natural<br>
 Discovery: 1786674720000<br>
 IRWIN ID: 2059a645-6d4b-4ef9-8d1a-8ea49732a456
@@ -6290,22 +6223,43 @@ IRWIN ID: 2059a645-6d4b-4ef9-8d1a-8ea49732a456
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288950</name>
+      <name>🔥 LAC-288953</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288950</b><br>
+<b>LAC-288953</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786801136000<br>
-IRWIN ID: a5c29481-619b-4f22-b02e-5fa2fc9ec299
+Discovery: 1786801315000<br>
+IRWIN ID: aff4b55a-873e-4ce7-9266-67c4717340e7
       ]]></description>
 
       <Point>
-        <coordinates>-117.978,34.1149300000001,0</coordinates>
+        <coordinates>-118.23906,33.92717,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 0737 (Redmond FD Assist)</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>0737 (Redmond FD Assist)</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.25<br>
+Cause: Undetermined<br>
+Discovery: 1786831500000<br>
+IRWIN ID: 8608a169-6773-40d5-a125-29409e290def
+      ]]></description>
+
+      <Point>
+        <coordinates>-121.189118,44.2424550000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6333,22 +6287,22 @@ IRWIN ID: ff6762f8-a3ab-4432-9114-ff06358a7a84
     </Placemark>
 
     <Placemark>
-      <name>🔥 MTZ/RRU/PALM</name>
+      <name>🔥 THE NARROWS</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>MTZ/RRU/PALM</b><br>
+<b>THE NARROWS</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.1<br>
-Cause: Undetermined<br>
-Discovery: 1786841886000<br>
-IRWIN ID: 967c17a2-e405-4e47-965c-738fbffd9bd8
+Acres: 89<br>
+Cause: Human<br>
+Discovery: 1786206060000<br>
+IRWIN ID: 7f8205dd-40b8-4abd-ab53-2c4a87394b87
       ]]></description>
 
       <Point>
-        <coordinates>-117.279,33.8281670000001,0</coordinates>
+        <coordinates>-122.093611,45.1469010000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6371,27 +6325,6 @@ IRWIN ID: 40ef4d3a-a1d9-48da-a96b-a58f164e5e68
 
       <Point>
         <coordinates>-117.277667,44.75525,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 THE NARROWS</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>THE NARROWS</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 89<br>
-Cause: Human<br>
-Discovery: 1786206060000<br>
-IRWIN ID: 7f8205dd-40b8-4abd-ab53-2c4a87394b87
-      ]]></description>
-
-      <Point>
-        <coordinates>-122.093611,45.1469010000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6463,22 +6396,22 @@ IRWIN ID: d1885386-0825-4eb4-8bec-b4c0274c5bbd
     </Placemark>
 
     <Placemark>
-      <name>🔥 Thorn</name>
+      <name>🔥 POISON</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Thorn</b><br>
+<b>POISON</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 2.29<br>
+Acres: 0.25<br>
 Cause: Natural<br>
-Discovery: 1786915148000<br>
-IRWIN ID: 1e46eaae-7835-4258-9208-c5b25736f31b
+Discovery: 1786999391000<br>
+IRWIN ID: 18b671ef-b72c-4a42-b682-cf0526d1b5fa
       ]]></description>
 
       <Point>
-        <coordinates>-117.682333,45.8873330000001,0</coordinates>
+        <coordinates>-120.533163,47.4472280000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6501,6 +6434,27 @@ IRWIN ID: 438c97dc-b8f8-44e1-8c0c-7d58494f4d99
 
       <Point>
         <coordinates>-108.46745,33.2457000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 McMullen Creek</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>McMullen Creek</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1787001120000<br>
+IRWIN ID: db475539-9766-4f87-b602-d69c2bcc4b9c
+      ]]></description>
+
+      <Point>
+        <coordinates>-123.57580333,42.2391083300001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6545,6 +6499,69 @@ IRWIN ID: 0910a9e1-186b-4da3-8ecb-75028dcc057f
 
       <Point>
         <coordinates>-110.639667,46.7365,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 BLACKWATER</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BLACKWATER</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 66.2<br>
+Cause: Natural<br>
+Discovery: 1786831200000<br>
+IRWIN ID: 434d39bd-19d4-480a-9d13-8d53fd6d61f0
+      ]]></description>
+
+      <Point>
+        <coordinates>-103.16024,34.22513,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-290553</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-290553</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786907238000<br>
+IRWIN ID: 647ca121-f223-4ceb-834a-bc537735d367
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.2134,33.92625,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-289560</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-289560</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786835482000<br>
+IRWIN ID: b82b43c6-b6f7-4640-a0f8-bc433c5b299d
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.1795,33.9624900000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6658,85 +6675,65 @@ IRWIN ID: e53d7a7b-30f7-40ce-b772-2ad3253a9b27
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290720</name>
+      <name>🔥 LAC-290713</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290720</b><br>
+<b>LAC-290713</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786915626000<br>
-IRWIN ID: 2fc07413-2454-4404-bef1-9f756f5f73d0
+Discovery: 1786915332000<br>
+IRWIN ID: 63c45304-c8e7-4726-9cdf-3773cbc7d2f6
       ]]></description>
 
       <Point>
-        <coordinates>-117.96959,34.61648,0</coordinates>
+        <coordinates>-118.09441,34.6530700000001,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 SNAKE</name>
+      <name>🔥 False Bottom Creek</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>SNAKE</b><br>
+<b>False Bottom Creek</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
+Acres: 242<br>
+Contained: 100%<br>
 Cause: Undetermined<br>
-Discovery: 1786918709000<br>
-IRWIN ID: 90e45756-c68d-49f3-b0c0-e10eaa847bab
+Discovery: 1786916578000<br>
+IRWIN ID: e16ecd3d-034f-43cd-80df-0f8905a53a8e
       ]]></description>
 
       <Point>
-        <coordinates>-121.562323,40.1630210000001,0</coordinates>
+        <coordinates>-103.777517,44.560867,0</coordinates>
       </Point>
 
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-288653</name>
+      <name>🔥 WEBB</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-288653</b><br>
+<b>WEBB</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
 Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786770320000<br>
-IRWIN ID: eb61dd71-d7ff-4ffb-9128-8da6c1214f4e
+Discovery: 1786772012000<br>
+IRWIN ID: 5b190339-8078-4303-bc16-74ffc7f3883a
       ]]></description>
 
       <Point>
-        <coordinates>-117.8202,34.01354,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 CHURCH 2</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>CHURCH 2</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 132<br>
-Cause: Undetermined<br>
-Discovery: 1787000504000<br>
-IRWIN ID: 112b9b87-43fe-49c0-98c3-cbc6277625c4
-      ]]></description>
-
-      <Point>
-        <coordinates>-116.36187,32.687399,0</coordinates>
+        <coordinates>-118.27099,34.5959800000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6764,22 +6761,22 @@ IRWIN ID: e8f22827-a59b-46d6-9e01-65002c1b9284
     </Placemark>
 
     <Placemark>
-      <name>🔥 I 580  E/ EDEN CANYON RD</name>
+      <name>🔥 MM17 I15</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>I 580  E/ EDEN CANYON RD</b><br>
+<b>MM17 I15</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1787017009000<br>
-IRWIN ID: 1746b5fa-adac-4738-9b93-66fdb41fff2f
+Acres: 0.1<br>
+Cause: Human<br>
+Discovery: 1787011366000<br>
+IRWIN ID: debcd26e-2d15-4cd8-9c57-7a6a7a633737
       ]]></description>
 
       <Point>
-        <coordinates>-122.021094,37.701201,0</coordinates>
+        <coordinates>-113.425714,37.1763480000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -6872,27 +6869,6 @@ IRWIN ID: e602a548-46c4-4074-a213-3e7c70fa9444
     </Placemark>
 
     <Placemark>
-      <name>🔥 Glacier</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Glacier</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.2<br>
-Cause: Natural<br>
-Discovery: 1786827790000<br>
-IRWIN ID: 2f9e77b3-7367-451e-8966-176aa0e510ff
-      ]]></description>
-
-      <Point>
-        <coordinates>-121.152972,48.1235150000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Lake Channel</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -6909,27 +6885,6 @@ IRWIN ID: e6162ef2-ca20-4804-a442-c1c94692d3e7
 
       <Point>
         <coordinates>-113.020005,42.665061,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 GREEN RIDGE</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>GREEN RIDGE</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Natural<br>
-Discovery: 1786985520000<br>
-IRWIN ID: 6c98240a-a4d2-4e37-8f22-cf0d321c2b76
-      ]]></description>
-
-      <Point>
-        <coordinates>-117.1188,48.8902830000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7023,6 +6978,27 @@ IRWIN ID: c255b5c1-9a81-49e1-b5dc-cce84cdfe61f
     </Placemark>
 
     <Placemark>
+      <name>🔥 BIG SPRINGS</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BIG SPRINGS</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 6.2<br>
+Cause: Natural<br>
+Discovery: 1787003340000<br>
+IRWIN ID: d421a8bd-bbaf-4f47-8ec6-a6e94c7b9ba5
+      ]]></description>
+
+      <Point>
+        <coordinates>-107.3075,43.7251670000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Ward</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7109,22 +7085,23 @@ IRWIN ID: a07b4cb8-c751-45d0-a2f9-6e0863bd28ed
     </Placemark>
 
     <Placemark>
-      <name>🔥 LAC-290351</name>
+      <name>🔥 Fielder Mtn</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>LAC-290351</b><br>
+<b>Fielder Mtn</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.01<br>
+Acres: 573<br>
+Contained: 38%<br>
 Cause: Undetermined<br>
-Discovery: 1786894444000<br>
-IRWIN ID: 74ee680a-cd74-43f3-b7e0-dbfabc5e0828
+Discovery: 1786658700000<br>
+IRWIN ID: 6e75a47e-2ae2-42e8-b82a-36174eda16ef
       ]]></description>
 
       <Point>
-        <coordinates>-118.23906,33.92717,0</coordinates>
+        <coordinates>-123.20677425,42.4217473,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7194,28 +7171,6 @@ IRWIN ID: 67b6c5c2-0385-428a-9509-4076bcebd709
     </Placemark>
 
     <Placemark>
-      <name>🔥 Fielder Mtn</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Fielder Mtn</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 573<br>
-Contained: 38%<br>
-Cause: Undetermined<br>
-Discovery: 1786658700000<br>
-IRWIN ID: 6e75a47e-2ae2-42e8-b82a-36174eda16ef
-      ]]></description>
-
-      <Point>
-        <coordinates>-123.20677425,42.4217473,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 WHEELER</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7237,22 +7192,86 @@ IRWIN ID: e3743de2-9be7-4326-b9d4-ec096214029a
     </Placemark>
 
     <Placemark>
-      <name>🔥 Wilmont Road</name>
+      <name>🔥 LAC-289341</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Wilmont Road</b><br>
+<b>LAC-289341</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.5<br>
+Acres: 0.01<br>
 Cause: Undetermined<br>
-Discovery: 1786930980000<br>
-IRWIN ID: d6c6e32a-3296-48fb-aaff-f530fdce6a8d
+Discovery: 1786824827000<br>
+IRWIN ID: 20db59dd-3ddd-43f6-9428-332b152edc0d
       ]]></description>
 
       <Point>
-        <coordinates>-118.43399,48.206686,0</coordinates>
+        <coordinates>-118.11228,34.7187700000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 REEVAS BASIN</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>REEVAS BASIN</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 250<br>
+Contained: 40%<br>
+Cause: Human<br>
+Discovery: 1786827060000<br>
+IRWIN ID: d403aa0f-da05-401e-822a-85120b0dbced
+      ]]></description>
+
+      <Point>
+        <coordinates>-119.25345,48.6437000000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 GREENFIELD</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>GREENFIELD</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1787007900000<br>
+IRWIN ID: 926365a2-9c4b-4ecf-8caa-dd6e1ad071f1
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.68275895,33.5579571700001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 BRANSCOMB</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>BRANSCOMB</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1786974041000<br>
+IRWIN ID: 2853f9fe-2c79-48fd-ad2a-c11aea6cdbbb
+      ]]></description>
+
+      <Point>
+        <coordinates>-123.510317,39.673094,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7368,47 +7387,6 @@ IRWIN ID: 4e04440d-fea1-4fc8-b961-f35f1d3bdf42
     </Placemark>
 
     <Placemark>
-      <name>🔥 Honegger</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Honegger</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 2<br>
-Cause: Undetermined<br>
-Discovery: 1786721700000<br>
-IRWIN ID: c1d7a26e-f8ad-425e-97b9-c5d95cc46e7b
-      ]]></description>
-
-      <Point>
-        <coordinates>-104.3669,35.2992600000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Black Hills RX</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Black Hills RX</b><br>
-Source: NIFC / WFIGS<br>
-Type: RX<br>
-Cause: Undetermined<br>
-Discovery: 1785608400000<br>
-IRWIN ID: 1b719683-c6c6-475e-9b4b-be5c05ef7c9d
-      ]]></description>
-
-      <Point>
-        <coordinates>-114.327,42.2289000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Bench</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7417,8 +7395,8 @@ IRWIN ID: 1b719683-c6c6-475e-9b4b-be5c05ef7c9d
 <b>Bench</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 4000<br>
-Contained: 86%<br>
+Acres: 67071<br>
+Contained: 90%<br>
 Cause: Undetermined<br>
 Discovery: 1784844409000<br>
 IRWIN ID: fe1de2b9-6b86-4bce-8400-a59019bb7932
@@ -7426,6 +7404,48 @@ IRWIN ID: fe1de2b9-6b86-4bce-8400-a59019bb7932
 
       <Point>
         <coordinates>-121.350222,44.6317780000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Laughing Waters</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Laughing Waters</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Natural<br>
+Discovery: 1786901932000<br>
+IRWIN ID: 036c611f-ac9d-42ab-bde5-6dc3941479a3
+      ]]></description>
+
+      <Point>
+        <coordinates>-114.844167,48.759467,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-291612</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-291612</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786979764000<br>
+IRWIN ID: 9b8764eb-3931-43c5-9798-5d8ae3a98942
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.0015,34.0654200000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7448,27 +7468,6 @@ IRWIN ID: 2df78dfc-471e-4d8d-9e21-f4309881a09e
 
       <Point>
         <coordinates>-104.8503,36.3258000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-288969</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-288969</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786802938000<br>
-IRWIN ID: 8abb9828-5d2e-4591-b6c8-62ab55140651
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.1586,34.0088900000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7517,6 +7516,27 @@ IRWIN ID: 3b03df03-8ca9-44ed-a170-457213098a8e
     </Placemark>
 
     <Placemark>
+      <name>🔥 VICTOR</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>VICTOR</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.1<br>
+Cause: Undetermined<br>
+Discovery: 1786849326000<br>
+IRWIN ID: 68ed65f8-00be-4d65-b1ab-414366093f64
+      ]]></description>
+
+      <Point>
+        <coordinates>-118.393437,34.3593220000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Spring</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7538,49 +7558,6 @@ IRWIN ID: a1772cec-73cd-49aa-8b3c-4bc0e5a39f26
     </Placemark>
 
     <Placemark>
-      <name>🔥 CATO 2</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>CATO 2</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 2080<br>
-Contained: 100%<br>
-Cause: Natural<br>
-Discovery: 1786835894000<br>
-IRWIN ID: e345f2a9-98f3-4472-9697-b921ae58eff0
-      ]]></description>
-
-      <Point>
-        <coordinates>-103.9452,33.5076500000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-290743</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-290743</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786916902000<br>
-IRWIN ID: 95cd002f-966f-4ba5-aa5f-9d189750569b
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.23906,33.92717,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Rocky Hills</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7597,6 +7574,27 @@ IRWIN ID: f8845676-9ceb-4774-b6ca-df2a7f981196
 
       <Point>
         <coordinates>-104.93,34.532,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Owl Creek</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Owl Creek</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 25.8<br>
+Cause: Natural<br>
+Discovery: 1786910556000<br>
+IRWIN ID: ae1b6403-9940-45ed-b317-2b35a5c21eab
+      ]]></description>
+
+      <Point>
+        <coordinates>-104.243889,45.051944,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7645,27 +7643,6 @@ IRWIN ID: fd7420f5-94c9-484c-acc3-7b16ecf30842
     </Placemark>
 
     <Placemark>
-      <name>🔥 Vine St</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Vine St</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Human<br>
-Discovery: 1786834380000<br>
-IRWIN ID: 1ec2c220-e0da-4412-bb60-def40ab92d06
-      ]]></description>
-
-      <Point>
-        <coordinates>-123.34708333,43.2392166700001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Mount Tom Creek</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7687,44 +7664,22 @@ IRWIN ID: 7a4391a9-652a-4a28-bede-9856383b4cb4
     </Placemark>
 
     <Placemark>
-      <name>🔥 Healy</name>
+      <name>🔥 Crickett Ln 375</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Healy</b><br>
+<b>Crickett Ln 375</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 22<br>
-Cause: Natural<br>
-Discovery: 1786832128000<br>
-IRWIN ID: 4b1584d5-78a5-4ebb-bb84-d675436adfa5
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786835220000<br>
+IRWIN ID: 38338708-f99b-4b83-869b-cf8e890caaec
       ]]></description>
 
       <Point>
-        <coordinates>-117.759055,39.6533930000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 0450 COVE CREEK</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>0450 COVE CREEK</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 7208<br>
-Contained: 100%<br>
-Cause: Natural<br>
-Discovery: 1784164080000<br>
-IRWIN ID: 4e89d5a2-91ac-4a93-b93f-b0e0279b5a98
-      ]]></description>
-
-      <Point>
-        <coordinates>-120.346403,44.9428990000001,0</coordinates>
+        <coordinates>-123.62666667,42.17765,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7752,6 +7707,28 @@ IRWIN ID: 23230fe2-352a-4036-8a22-0e58c817554c
     </Placemark>
 
     <Placemark>
+      <name>🔥 0450 COVE CREEK</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>0450 COVE CREEK</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 7208<br>
+Contained: 100%<br>
+Cause: Natural<br>
+Discovery: 1784164080000<br>
+IRWIN ID: 4e89d5a2-91ac-4a93-b93f-b0e0279b5a98
+      ]]></description>
+
+      <Point>
+        <coordinates>-120.346403,44.9428990000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 MITCHELL</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7768,27 +7745,6 @@ IRWIN ID: 81823858-311d-4580-a439-fa892743c7c6
 
       <Point>
         <coordinates>-121.970117,45.1386170000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 MM17 I15</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>MM17 I15</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Human<br>
-Discovery: 1787011366000<br>
-IRWIN ID: debcd26e-2d15-4cd8-9c57-7a6a7a633737
-      ]]></description>
-
-      <Point>
-        <coordinates>-113.425714,37.1763480000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7815,6 +7771,27 @@ IRWIN ID: 52235261-1281-4f1a-952f-c713538373b4
     </Placemark>
 
     <Placemark>
+      <name>🔥 HATCHET CANYON</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>HATCHET CANYON</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.3<br>
+Cause: Natural<br>
+Discovery: 1786931280000<br>
+IRWIN ID: 2dd4e008-409f-4167-8f04-2da7daa8602a
+      ]]></description>
+
+      <Point>
+        <coordinates>-105.762333,33.315167,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 0648 TRIANGLE POND</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7836,22 +7813,43 @@ IRWIN ID: 5db4a276-1e7f-43bb-a5d8-585590292839
     </Placemark>
 
     <Placemark>
-      <name>🔥 Phillips Creek</name>
+      <name>🔥 APOLLO</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Phillips Creek</b><br>
+<b>APOLLO</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 23<br>
-Cause: Natural<br>
-Discovery: 1786995324000<br>
-IRWIN ID: 3b767f41-7e1b-4d83-b297-35fe9d782d71
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786765725000<br>
+IRWIN ID: a2d36cca-df96-4cf3-b366-f7f08ba6e74a
       ]]></description>
 
       <Point>
-        <coordinates>-118.002633,45.5701,0</coordinates>
+        <coordinates>-118.54399,34.3936200000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 Phahin</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>Phahin</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 26.02<br>
+Cause: Human<br>
+Discovery: 1786500320000<br>
+IRWIN ID: fea2a4f2-d8c6-40bb-b67c-ebc7dba3bbd7
+      ]]></description>
+
+      <Point>
+        <coordinates>-102.30508333,43.27538889,0</coordinates>
       </Point>
 
     </Placemark>
@@ -7879,69 +7877,6 @@ IRWIN ID: 091081ed-bd23-4610-ae4a-270f95d1711e
     </Placemark>
 
     <Placemark>
-      <name>🔥 Island</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Island</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 5<br>
-Cause: Natural<br>
-Discovery: 1786761240000<br>
-IRWIN ID: 682848a3-ee17-4cf0-a0c0-f251c26bbb93
-      ]]></description>
-
-      <Point>
-        <coordinates>-102.58069904,43.15831158,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Phahin</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Phahin</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 26.02<br>
-Cause: Human<br>
-Discovery: 1786500320000<br>
-IRWIN ID: fea2a4f2-d8c6-40bb-b67c-ebc7dba3bbd7
-      ]]></description>
-
-      <Point>
-        <coordinates>-102.30508333,43.27538889,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Post Canyon</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Post Canyon</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.6<br>
-Cause: Natural<br>
-Discovery: 1786823808000<br>
-IRWIN ID: 5467a8b7-758c-43f0-9472-cd50527549d8
-      ]]></description>
-
-      <Point>
-        <coordinates>-109.84125,39.3166170000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
       <name>🔥 Tartar</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -7964,22 +7899,22 @@ IRWIN ID: db5448a6-fcac-4041-a817-6f8198161dba
     </Placemark>
 
     <Placemark>
-      <name>🔥 Mt. Adams Lake</name>
+      <name>🔥 HIGH</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>Mt. Adams Lake</b><br>
+<b>HIGH</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Acres: 0.3<br>
+Acres: 0.38<br>
 Cause: Undetermined<br>
-Discovery: 1786999777000<br>
-IRWIN ID: 6419d55a-3e73-45a4-a312-1983561a80ed
+Discovery: 1787007640000<br>
+IRWIN ID: 3af09ef2-e2b7-4a79-8547-099fa3f2aefa
       ]]></description>
 
       <Point>
-        <coordinates>-121.332149,46.2674170000001,0</coordinates>
+        <coordinates>-122.441583,38.321783,0</coordinates>
       </Point>
 
     </Placemark>
@@ -8007,6 +7942,69 @@ IRWIN ID: 6ad80de9-cd41-40d3-8939-a86ccf775981
     </Placemark>
 
     <Placemark>
+      <name>🔥 I 580  E/ EDEN CANYON RD</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>I 580  E/ EDEN CANYON RD</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1787017009000<br>
+IRWIN ID: 1746b5fa-adac-4738-9b93-66fdb41fff2f
+      ]]></description>
+
+      <Point>
+        <coordinates>-122.021094,37.701201,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 CREEK</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>CREEK</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786809964000<br>
+IRWIN ID: 127e9af6-4c40-4dfb-8a38-dcefde16852e
+      ]]></description>
+
+      <Point>
+        <coordinates>-123.381593,41.8221830000001,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
+      <name>🔥 LAC-292153</name>
+
+      <styleUrl>#wildfireIncident</styleUrl>
+
+      <description><![CDATA[
+<b>LAC-292153</b><br>
+Source: NIFC / WFIGS<br>
+Type: WF<br>
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1787004289000<br>
+IRWIN ID: 99cd92c6-5fb8-453a-bad7-78cc7d9ff334
+      ]]></description>
+
+      <Point>
+        <coordinates>-117.97937,34.52329,0</coordinates>
+      </Point>
+
+    </Placemark>
+
+    <Placemark>
       <name>🔥 Hoop</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
@@ -8024,27 +8022,6 @@ IRWIN ID: 3bc7b09f-9779-4fae-8b61-07f436b49ff0
 
       <Point>
         <coordinates>-118.752133,42.6377170000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 Slough Canyon</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>Slough Canyon</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 40<br>
-Cause: Natural<br>
-Discovery: 1786813200000<br>
-IRWIN ID: 019119da-16c0-40ae-adfe-25ad80ea704e
-      ]]></description>
-
-      <Point>
-        <coordinates>-109.9232,39.3697000000001,0</coordinates>
       </Point>
 
     </Placemark>
@@ -8093,20 +8070,22 @@ IRWIN ID: 2f64cc51-4222-4f07-b462-0195e39b1dfc
     </Placemark>
 
     <Placemark>
-      <name>🔥 HERMIES</name>
+      <name>🔥 LAC-290108</name>
 
       <styleUrl>#wildfireIncident</styleUrl>
 
       <description><![CDATA[
-<b>HERMIES</b><br>
+<b>LAC-290108</b><br>
 Source: NIFC / WFIGS<br>
 Type: WF<br>
-Discovery: 1786779000000<br>
-IRWIN ID: 4e8cf97e-04fa-4427-ae17-f82615a5757a
+Acres: 0.01<br>
+Cause: Undetermined<br>
+Discovery: 1786867638000<br>
+IRWIN ID: c531cb75-8643-4c83-8c7d-d384e58b8b90
       ]]></description>
 
       <Point>
-        <coordinates>-122.8965,38.3163333000001,0</coordinates>
+        <coordinates>-118.08671,34.70941,0</coordinates>
       </Point>
 
     </Placemark>
@@ -8194,48 +8173,6 @@ IRWIN ID: 2e246597-1f93-4c75-9438-4fc7291dcb71
 
       <Point>
         <coordinates>-107.071167,45.172,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 LAC-291356</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>LAC-291356</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.01<br>
-Cause: Undetermined<br>
-Discovery: 1786951426000<br>
-IRWIN ID: 48cdb239-e0cf-45cc-b012-de757bbb1368
-      ]]></description>
-
-      <Point>
-        <coordinates>-118.1706,33.9450000000001,0</coordinates>
-      </Point>
-
-    </Placemark>
-
-    <Placemark>
-      <name>🔥 IMPOSSIBLE</name>
-
-      <styleUrl>#wildfireIncident</styleUrl>
-
-      <description><![CDATA[
-<b>IMPOSSIBLE</b><br>
-Source: NIFC / WFIGS<br>
-Type: WF<br>
-Acres: 0.1<br>
-Cause: Human<br>
-Discovery: 1786661760000<br>
-IRWIN ID: 98635163-5bb1-475c-a2e1-cea5ba875ef2
-      ]]></description>
-
-      <Point>
-        <coordinates>-120.9186,47.11803,0</coordinates>
       </Point>
 
     </Placemark>
