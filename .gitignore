@@ -11,6 +11,11 @@ lerna-debug.log*
 *.geojson
 atak/data/
 atak/data/*.json
+data/
+data/*.json
+data/*.kml
+data/*.geojson
+data/*.zip
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -106,4 +111,3 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
-data/
