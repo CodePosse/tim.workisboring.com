@@ -106,19 +106,4 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
-# TernJS port file
-.tern-port
-Digital-Divide.zip
-adr/img/prog - Copy/drpa.jpg
-adr/img/prog - Copy/family.jpg
-adr/img/prog - Copy/mcla.jpg
-adr/img/prog - Copy/odr.jpg
-adr/img/prog - Copy/probono.jpg
-adr/img/prog - Copy/rest.jpg
-adr/img/prog - Copy/rlla.jpg
-adr/img/prog - Copy/vend.jpg
-
-*storybook.log
-/pias/css/styles-RW7HNRU5.css
-pias/css/styles-RW7HNRU5.css
-pias/css/styles-SMQGJB3T.css
+data/
