@@ -326,6 +326,11 @@
     const loadedLayers = new Set();
     let allCameras = [];
 
+    const fireFeatureCounts = {
+      "nifc-incidents": 0,
+      "nifc-perimeters": 0
+    };
+
     function escapeHtml(value) {
       return String(value ?? "")
         .replaceAll("&", "&amp;")
@@ -578,6 +583,7 @@
     function nifcIsPrescribedFire(feature) {
       const p = feature.properties || {};
       const values = [
+        p.FeatureCategory,
         p.IncidentTypeCategory,
         p.IncidentTypeKind,
         p.IncidentType
@@ -699,6 +705,8 @@
           throw new Error(`Invalid GeoJSON returned for ${source.label}`);
         }
 
+        fireFeatureCounts["nifc-incidents"] = payload.features.length;
+
         payload.features.forEach(feature => addNifcIncidentFeature(feature, layerName));
         loadedLayers.add(layerName);
         return;
@@ -708,6 +716,8 @@
         if (payload?.type !== "FeatureCollection" || !Array.isArray(payload.features)) {
           throw new Error(`Invalid GeoJSON returned for ${source.label}`);
         }
+
+        fireFeatureCounts["nifc-perimeters"] = payload.features.length;
 
         addNifcPerimeterFeatures(payload, layerName);
         loadedLayers.add(layerName);
@@ -771,8 +781,29 @@
         list.appendChild(card);
       });
 
-      document.getElementById("status").textContent =
-        `${filtered.length} visible / ${allCameras.length} loaded map items`;
+      const nifcIncidentsActive =
+        document.querySelector('[data-layer="nifc-incidents"]')?.checked;
+
+      const nifcPerimetersActive =
+        document.querySelector('[data-layer="nifc-perimeters"]')?.checked;
+
+      const visibleCameraCount = filtered.filter(
+        item => item.layer !== "nifc-incidents"
+      ).length;
+
+      const parts = [
+        `${visibleCameraCount} visible cameras`
+      ];
+
+      if (nifcIncidentsActive) {
+        parts.push(`${fireFeatureCounts["nifc-incidents"]} NIFC fires`);
+      }
+
+      if (nifcPerimetersActive) {
+        parts.push(`${fireFeatureCounts["nifc-perimeters"]} fire perimeters`);
+      }
+
+      document.getElementById("status").textContent = parts.join(" · ");
     }
 
     document.querySelectorAll("[data-layer]").forEach(input => {
