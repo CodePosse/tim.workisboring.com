@@ -148,17 +148,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 9px;
-            min-height: 46px;
-            padding: 11px 16px;
-            background: linear-gradient(135deg, var(--accent), #c97954);
-            color: #fff;
+            gap: 10px;
+            min-height: 48px;
+            padding: 12px 17px;
+            background: #2b2824;
+            color: #fffaf1;
+            border: 2px solid var(--accent);
             border-radius: 13px;
             text-decoration: none;
             font-weight: 800;
-            box-shadow: 0 9px 22px rgba(146,71,44,.22);
+            box-shadow: 0 9px 22px rgba(72,56,43,.20);
             cursor: grab;
             user-select: none;
+            transition: transform .12s ease, background .12s ease, border-color .12s ease;
+        }
+
+        .bookmark:hover {
+            transform: translateY(-1px);
+            background: #1f1c19;
+            border-color: var(--accent);
+        }
+
+        .bookmark-icon {
+            display: inline-grid;
+            place-items: center;
+            width: 1.9rem;
+            height: 1.9rem;
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fffaf1;
+            font-size: 1rem;
+            line-height: 1;
         }
 
         .bookmark:active { cursor: grabbing; }
@@ -168,6 +189,34 @@
             color: var(--muted);
             font-size: .82rem;
             line-height: 1.45;
+        }
+
+        .how-to {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .how-to h2 {
+            margin: 0 0 8px;
+            font-size: .98rem;
+            line-height: 1.3;
+        }
+
+        .how-to ol {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--muted);
+            font-size: .86rem;
+            line-height: 1.55;
+        }
+
+        .how-to li + li {
+            margin-top: 4px;
+        }
+
+        .how-to strong {
+            color: var(--text);
         }
 
         .workspace {
@@ -483,8 +532,19 @@
                 class="bookmark"
                 title="Drag this link to your bookmarks bar"
                 href="javascript:(function(){var u=location.href,t=document.title,d='',s='';try{var m=document.querySelector('meta[name=%22description%22],meta[property=%22og:description%22]');if(m)d=m.content||'';s=String(window.getSelection?window.getSelection():'').trim();navigator.clipboard&&navigator.clipboard.writeText(u);}catch(e){}var q='https://tim.workisboring.com/book.html?url='+encodeURIComponent(u)+'&title='+encodeURIComponent(t)+'&description='+encodeURIComponent(d)+'&selection='+encodeURIComponent(s);var w=window.open(q,'research-list');if(w)w.focus();})();"
-            >🔖 Save to Research</a>
-            <p class="install-hint">Drag the button to Chrome's bookmarks bar. The same Research List tab will be reused while it remains open.</p>
+            ><span class="bookmark-icon" aria-hidden="true">★</span><span>Save to Research</span></a>
+            <p class="install-hint">Drag this button to Chrome's bookmarks bar. The same Research List tab will be reused while it remains open.</p>
+
+            <section class="how-to" aria-labelledby="how-to-title">
+                <h2 id="how-to-title">How to use it</h2>
+                <ol>
+                    <li>Show Chrome's bookmarks bar with <strong>Ctrl+Shift+B</strong> (Windows/Linux) or <strong>⌘+Shift+B</strong> (Mac).</li>
+                    <li>Drag <strong>Save to Research</strong> onto the bookmarks bar.</li>
+                    <li>While browsing any page you want to save, click the bookmarklet.</li>
+                    <li>The page title, URL, description, and selected text are added to this Research List.</li>
+                    <li>Keep this tab open and future saves will reuse it instead of creating more Research List tabs.</li>
+                </ol>
+            </section>
         </aside>
     </header>
 
