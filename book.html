@@ -3,128 +3,513 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Research List BookMarklet</title>
+    <meta name="theme-color" content="#6d5dfc">
+    <meta name="color-scheme" content="light dark">
+
+    <title>Research List Bookmarklet</title>
+    <meta name="description" content="A lightweight personal research bookmarklet for saving, searching, sharing, and exporting useful web pages for later.">
+    <link rel="canonical" href="https://tim.workisboring.com/book.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Research List">
+    <meta property="og:title" content="Research List Bookmarklet">
+    <meta property="og:description" content="Save useful pages from anywhere on the web into one searchable personal research list.">
+    <meta property="og:url" content="https://tim.workisboring.com/book.html">
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Research List Bookmarklet">
+    <meta name="twitter:description" content="Save useful pages from anywhere on the web into one searchable personal research list.">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Research List Bookmarklet",
+      "url": "https://tim.workisboring.com/book.html",
+      "description": "A lightweight personal research bookmarklet for saving, searching, sharing, and exporting useful web pages for later.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern browser with JavaScript enabled",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
 
     <style>
+        :root {
+            --bg: #f5f6fb;
+            --panel: rgba(255,255,255,.88);
+            --panel-solid: #fff;
+            --text: #1f2330;
+            --muted: #6f7481;
+            --border: #e4e6ef;
+            --accent: #6d5dfc;
+            --accent-hover: #5949ec;
+            --accent-soft: #efedff;
+            --danger: #c84747;
+            --danger-soft: #fff0f0;
+            --shadow: 0 12px 34px rgba(37, 42, 60, .08);
+            --radius: 18px;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            max-width: 1100px;
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 9, 87, 0.682), transparent 34rem),
+                linear-gradient(180deg, #fafaff 0%, var(--bg) 45%, #f1f3f8 100%);
+            color: var(--text);
+        }
+
+        a { color: inherit; }
+        button, input { font: inherit; }
+
+        .shell {
+            width: min(1120px, calc(100% - 32px));
             margin: 0 auto;
-            padding: 30px;
-            background: #f5f5f5;
-            color: #222;
+            padding: 38px 0 64px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .11em;
+            text-transform: uppercase;
         }
 
         h1 {
-            margin-bottom: 5px;
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.35rem);
+            line-height: 1.02;
+            letter-spacing: -.04em;
         }
 
         .subtitle {
-            color: #666;
-            margin-bottom: 30px;
+            max-width: 700px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.65;
+        }
+
+        .install-card,
+        .workspace {
+            background: var(--panel);
+            border: 1px solid rgba(228,230,239,.9);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+        }
+
+        .install-card {
+            min-width: 290px;
+            padding: 18px;
+            border-radius: var(--radius);
+        }
+
+        .install-label {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-size: .83rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .bookmark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 46px;
+            padding: 11px 16px;
+            background: linear-gradient(135deg, var(--accent), #8a79ff);
+            color: #fff;
+            border-radius: 13px;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 9px 22px rgba(109,93,252,.24);
+            cursor: grab;
+            user-select: none;
+        }
+
+        .bookmark:active { cursor: grabbing; }
+
+        .install-hint {
+            margin: 10px 2px 0;
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.45;
+        }
+
+        .workspace {
+            border-radius: 24px;
+            overflow: hidden;
         }
 
         .toolbar {
-            display: flex;
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) auto auto auto;
             gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
         }
 
-        button {
-            padding: 8px 14px;
-            cursor: pointer;
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-wrap::before {
+            content: "⌕";
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-52%);
+            color: var(--muted);
+            font-size: 1.2rem;
+            pointer-events: none;
         }
 
         #search {
-            padding: 8px 12px;
-            flex: 1;
-            min-width: 250px;
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 14px 10px 39px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--panel-solid);
+            color: var(--text);
+            outline: none;
+        }
+
+        #search:focus {
+            border-color: rgba(109,93,252,.62);
+            box-shadow: 0 0 0 4px rgba(109,93,252,.10);
+        }
+
+        .button {
+            min-height: 44px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--panel-solid);
+            color: var(--text);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .12s ease, border-color .12s ease, background .12s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            border-color: #cfd2de;
+            background: #fafaff;
+        }
+
+        .button.primary {
+            border-color: transparent;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .button.primary:hover { background: var(--accent-hover); }
+
+        .button.danger {
+            color: var(--danger);
+        }
+
+        .summary-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        #list {
+            padding: 0 16px 16px;
         }
 
         .item {
-            background: white;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,.08);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            padding: 18px;
+            margin-top: 12px;
+            background: var(--panel-solid);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-1px);
+            border-color: #d5d8e4;
+            box-shadow: 0 10px 28px rgba(38,43,61,.07);
+        }
+
+        .item-main { min-width: 0; }
+
+        .item-topline {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 7px;
+        }
+
+        .domain {
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: #5146be;
+            font-size: .75rem;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 260px;
         }
 
         .item-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            margin: 0;
+            font-size: 1.08rem;
+            line-height: 1.35;
+            font-weight: 800;
+        }
+
+        .item-title a {
+            text-decoration: none;
+        }
+
+        .item-title a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .item-description {
+            margin: 8px 0 0;
+            max-width: 830px;
+            color: #565c69;
+            line-height: 1.58;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            overflow: hidden;
         }
 
         .item-url {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: .82rem;
             overflow-wrap: anywhere;
         }
 
         .item-meta {
             margin-top: 8px;
-            color: #777;
-            font-size: 13px;
+            color: #9094a0;
+            font-size: .78rem;
         }
 
         .item-actions {
-            margin-top: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 7px;
         }
 
-        .item-actions button {
-            margin-right: 5px;
+        .icon-button {
+            width: 38px;
+            height: 38px;
+            display: inline-grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .icon-button:hover {
+            background: #f7f7fb;
+            border-color: #cfd2de;
+        }
+
+        .icon-button.delete:hover {
+            background: var(--danger-soft);
+            border-color: #f2caca;
         }
 
         .empty {
-            padding: 40px;
+            margin: 14px 0 0;
+            padding: 70px 24px;
             text-align: center;
-            color: #777;
+            color: var(--muted);
+            background: rgba(255,255,255,.58);
+            border: 1px dashed #d7dae5;
+            border-radius: 16px;
         }
-        .bookmark     {display:inline-block;
-    padding:12px 18px;
-    background:#222;
-    color:#fff;
-    border-radius:8px;
-    text-decoration:none;
-    font-family:Arial,sans-serif;
-    font-weight:bold;
-    cursor:grab;
+
+        .empty strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text);
+            font-size: 1.08rem;
+        }
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 10;
+            max-width: min(360px, calc(100vw - 40px));
+            padding: 11px 15px;
+            border-radius: 12px;
+            background: #1f2330;
+            color: #fff;
+            box-shadow: 0 14px 34px rgba(0,0,0,.2);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: .18s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            padding: 18px 4px 0;
+            color: var(--muted);
+            font-size: .8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 840px) {
+            .hero { grid-template-columns: 1fr; }
+            .install-card { min-width: 0; }
+            .toolbar { grid-template-columns: 1fr 1fr; }
+            .search-wrap { grid-column: 1 / -1; }
+            .item { grid-template-columns: 1fr; }
+            .item-actions { justify-content: flex-start; }
+        }
+
+        @media (max-width: 520px) {
+            .shell { width: min(100% - 20px, 1120px); padding-top: 22px; }
+            .toolbar { grid-template-columns: 1fr; }
+            .search-wrap { grid-column: auto; }
+            .button { width: 100%; }
+            .summary-row { align-items: flex-start; flex-direction: column; }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #4b2e41;
+                --panel: rgba(29,31,42,.88);
+                --panel-solid: #1d1f2a;
+                --text: #f3f4f8;
+                --muted: #a4a8b5;
+                --border: #303341;
+                --accent-soft: #2b2851;
+                --shadow: 0 18px 44px rgba(0,0,0,.28);
+            }
+            body {
+                background: radial-gradient(circle at top left, rgba(252, 151, 93, 0.18), transparent 30rem), #371612;
+            }
+            #search, .button, .icon-button { background: #222532; color: var(--text); }
+            .item-description { color: #c5c8d1; }
+            .domain { color: #c2bbff; }
+            .empty { background: rgba(29,31,42,.58); }
+            .button:hover, .icon-button:hover { background: #292c3a; }
+        }
     </style>
 </head>
-
 <body>
+<div class="shell">
+    <header class="hero">
+        <div>
+            <p class="eyebrow">Personal research inbox</p>
+            <h1>Research List</h1>
+            <p class="subtitle">
+                Save pages as you browse, then come back later to search, share, and export them. Your list stays in this browser's local storage.
+            </p>
+        </div>
 
-<h1>Research List</h1>
-<p>Drag this button to your bookmarks bar:</p>
+        <aside class="install-card">
+            <p class="install-label">Install the bookmarklet</p>
+            <a
+                id="bookmarklet"
+                class="bookmark"
+                title="Drag this link to your bookmarks bar"
+                href="javascript:(function(){var u=location.href,t=document.title,d='',s='';try{var m=document.querySelector('meta[name=%22description%22],meta[property=%22og:description%22]');if(m)d=m.content||'';s=String(window.getSelection?window.getSelection():'').trim();navigator.clipboard&&navigator.clipboard.writeText(u);}catch(e){}var q='https://tim.workisboring.com/book.html?url='+encodeURIComponent(u)+'&title='+encodeURIComponent(t)+'&description='+encodeURIComponent(d)+'&selection='+encodeURIComponent(s);var w=window.open(q,'research-list');if(w)w.focus();})();"
+            >🔖 Save to Research</a>
+            <p class="install-hint">Drag the button to Chrome's bookmarks bar. The same Research List tab will be reused while it remains open.</p>
+        </aside>
+    </header>
 
-<a href="javascript:(function(){const url=window.location.href;const title=document.title;try{navigator.clipboard.writeText(url);}catch(e){}window.open('https://tim.workisboring.com/book.html?url='+encodeURIComponent(url)+'&title='+encodeURIComponent(title),'bookmarker');})();" class="bookmark">
-  🔖 Save to Research
-</a>
-<p class="subtitle">
-    Pages saved with my Research bookmarklet.
-</p>
+    <main class="workspace">
+        <div class="toolbar">
+            <div class="search-wrap">
+                <input id="search" type="search" placeholder="Search titles, descriptions, domains, URLs..." autocomplete="off" aria-label="Search titles, descriptions, domains, URLs...">
+            </div>
+            <button class="button primary" id="shareListButton" type="button">Share</button>
+            <button class="button" id="exportButton" type="button">Export JSON</button>
+            <button class="button" id="exportTextButton" type="button">Export URLs</button>
+        </div>
 
-<div class="toolbar">
-    <input
-        id="search"
-        type="search"
-        placeholder="Search saved pages..."
-    >
+        <div class="summary-row">
+            <span id="summary">0 saved pages</span>
+            <button class="button danger" id="clearButton" type="button">Clear all</button>
+        </div>
 
-    <button id="exportButton">Export JSON</button>
-    <button id="exportTextButton">Export URLs as txt</button>
-    <button id="clearButton">Clear All</button>
+        <div id="list"></div>
+    </main>
+
+    <footer>
+        Saved locally in this browser. Export your list occasionally if it matters to you.
+    </footer>
 </div>
 
-<div id="list"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
+    'use strict';
 
-    const STORAGE_KEY = "researchSites";
+    const STORAGE_KEY = 'researchSites';
+    const APP_URL = 'https://tim.workisboring.com/book.html';
+    let toastTimer;
+
+    // This gives the app a stable named browsing context so the bookmarklet
+    // can keep reusing this tab instead of opening a new one every time.
+    try { window.name = 'research-list'; } catch (e) {}
 
     function getItems() {
         try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            return Array.isArray(parsed) ? parsed : [];
         } catch (e) {
             return [];
         }
@@ -134,245 +519,269 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     }
 
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function hostnameFor(url) {
+        try {
+            return new URL(url).hostname.replace(/^www\./, '');
+        } catch (e) {
+            return '';
+        }
+    }
+
     function addFromURL() {
-
         const params = new URLSearchParams(window.location.search);
+        const url = params.get('url');
+        const title = params.get('title');
+        const description = params.get('description');
+        const selection = params.get('selection');
 
-        const url = params.get("url");
-        const title = params.get("title");
+        if (!url) return;
 
-        if (!url) {
-            return;
+        const now = new Date().toISOString();
+        let items = getItems();
+        const index = items.findIndex(item => item.url === url);
+
+        const record = {
+            id: index >= 0 ? items[index].id : (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
+            title: title || url,
+            url,
+            domain: hostnameFor(url),
+            description: description || (index >= 0 ? items[index].description || '' : ''),
+            selection: selection || (index >= 0 ? items[index].selection || '' : ''),
+            saved: now
+        };
+
+        if (index >= 0) {
+            items.splice(index, 1);
+            showToast('Already saved — refreshed and moved to the top.');
+        } else {
+            showToast('Saved to your Research List.');
         }
 
-        const items = getItems();
+        items.unshift(record);
+        saveItems(items);
 
-        // Don't add duplicate URLs.
-        const existing = items.find(item => item.url === url);
-
-        if (!existing) {
-
-            items.unshift({
-                id: crypto.randomUUID(),
-                title: title || url,
-                url: url,
-                saved: new Date().toISOString()
-            });
-
-            saveItems(items);
-        }
-
-        /*
-         * Remove parameters from browser URL after saving.
-         * This prevents refreshing from looking like another import.
-         */
-        history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
+        history.replaceState({}, document.title, window.location.pathname);
     }
 
     function removeItem(id) {
-
-        const items = getItems().filter(item => item.id !== id);
-
-        saveItems(items);
+        saveItems(getItems().filter(item => item.id !== id));
         render();
+        showToast('Removed from the list.');
     }
 
-    function copyURL(url) {
+    async function copyText(text, successMessage) {
+        try {
+            await navigator.clipboard.writeText(text);
+            showToast(successMessage || 'Copied.');
+        } catch (e) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
+            showToast(successMessage || 'Copied.');
+        }
+    }
 
-        navigator.clipboard.writeText(url)
-            .then(() => {
-                alert("URL copied.");
-            })
-            .catch(() => {
+    async function shareItem(item) {
+        const data = {
+            title: item.title,
+            text: item.description || item.title,
+            url: item.url
+        };
 
-                const textarea = document.createElement("textarea");
+        if (navigator.share) {
+            try {
+                await navigator.share(data);
+                return;
+            } catch (e) {
+                if (e && e.name === 'AbortError') return;
+            }
+        }
 
-                textarea.value = url;
-                document.body.appendChild(textarea);
+        copyText(item.url, 'Web Share unavailable — URL copied instead.');
+    }
 
-                textarea.select();
+    async function shareApp() {
+        const data = {
+            title: 'Research List Bookmarklet',
+            text: 'A lightweight bookmarklet for saving useful pages into one personal research list.',
+            url: APP_URL
+        };
 
-                document.execCommand("copy");
+        if (navigator.share) {
+            try {
+                await navigator.share(data);
+                return;
+            } catch (e) {
+                if (e && e.name === 'AbortError') return;
+            }
+        }
 
-                textarea.remove();
+        copyText(APP_URL, 'Web Share unavailable — app URL copied instead.');
+    }
 
-                alert("URL copied.");
-            });
+    function createIconButton(label, title, className, onClick) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'icon-button' + (className ? ' ' + className : '');
+        button.textContent = label;
+        button.title = title;
+        button.setAttribute('aria-label', title);
+        button.addEventListener('click', onClick);
+        return button;
     }
 
     function render() {
+        const container = document.getElementById('list');
+        const query = document.getElementById('search').value.trim().toLowerCase();
+        const allItems = getItems();
 
-        const container = document.getElementById("list");
-
-        const query =
-            document.getElementById("search")
-                .value
-                .toLowerCase();
-
-        let items = getItems();
+        let items = allItems;
 
         if (query) {
-
             items = items.filter(item => {
+                const haystack = [
+                    item.title,
+                    item.url,
+                    item.domain || hostnameFor(item.url),
+                    item.description,
+                    item.selection
+                ].filter(Boolean).join(' ').toLowerCase();
 
-                return (
-                    item.title.toLowerCase().includes(query) ||
-                    item.url.toLowerCase().includes(query)
-                );
-
+                return haystack.includes(query);
             });
-
         }
 
-        container.innerHTML = "";
+        document.getElementById('summary').textContent = query
+            ? `${items.length} of ${allItems.length} saved pages`
+            : `${allItems.length} saved page${allItems.length === 1 ? '' : 's'}`;
+
+        container.replaceChildren();
 
         if (!items.length) {
-
-            container.innerHTML =
-                '<div class="empty">No saved research pages yet.</div>';
-
+            const empty = document.createElement('div');
+            empty.className = 'empty';
+            empty.innerHTML = query
+                ? '<strong>No matches</strong>Try a different search term.'
+                : '<strong>Your research list is empty</strong>Drag “Save to Research” to the bookmarks bar, then click it on any page you want to revisit.';
+            container.appendChild(empty);
             return;
         }
 
         items.forEach(item => {
+            const wrapper = document.createElement('article');
+            wrapper.className = 'item';
 
-            const wrapper = document.createElement("div");
+            const main = document.createElement('div');
+            main.className = 'item-main';
 
-            wrapper.className = "item";
+            const topline = document.createElement('div');
+            topline.className = 'item-topline';
 
-            const title = document.createElement("div");
+            const domain = document.createElement('span');
+            domain.className = 'domain';
+            domain.textContent = item.domain || hostnameFor(item.url) || 'saved page';
+            topline.appendChild(domain);
 
-            title.className = "item-title";
+            const heading = document.createElement('h2');
+            heading.className = 'item-title';
 
-            const link = document.createElement("a");
-
+            const link = document.createElement('a');
             link.href = item.url;
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            link.textContent = item.title;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = item.title || item.url;
+            heading.appendChild(link);
 
-            title.appendChild(link);
+            main.append(topline, heading);
 
-            const url = document.createElement("div");
+            const descriptionText = item.description || item.selection || '';
+            if (descriptionText) {
+                const description = document.createElement('p');
+                description.className = 'item-description';
+                description.textContent = descriptionText;
+                main.appendChild(description);
+            }
 
-            url.className = "item-url";
+            const url = document.createElement('div');
+            url.className = 'item-url';
             url.textContent = item.url;
+            main.appendChild(url);
 
-            const meta = document.createElement("div");
+            const meta = document.createElement('div');
+            meta.className = 'item-meta';
+            meta.textContent = 'Saved ' + new Date(item.saved).toLocaleString();
+            main.appendChild(meta);
 
-            meta.className = "item-meta";
-
-            meta.textContent =
-                "Saved " +
-                new Date(item.saved).toLocaleString();
-
-            const actions = document.createElement("div");
-
-            actions.className = "item-actions";
-
-            const copyButton = document.createElement("button");
-
-            copyButton.textContent = "Copy URL";
-
-            copyButton.addEventListener("click", () => {
-                copyURL(item.url);
-            });
-
-            const deleteButton = document.createElement("button");
-
-            deleteButton.textContent = "Delete";
-
-            deleteButton.addEventListener("click", () => {
-                removeItem(item.id);
-            });
-
-            actions.append(copyButton, deleteButton);
-
-            wrapper.append(
-                title,
-                url,
-                meta,
-                actions
+            const actions = document.createElement('div');
+            actions.className = 'item-actions';
+            actions.append(
+                createIconButton('↗', 'Share this page', '', () => shareItem(item)),
+                createIconButton('⧉', 'Copy URL', '', () => copyText(item.url, 'URL copied.')),
+                createIconButton('×', 'Delete', 'delete', () => removeItem(item.id))
             );
 
+            wrapper.append(main, actions);
             container.appendChild(wrapper);
-
         });
     }
 
     function download(filename, contents, type) {
-
-        const blob = new Blob(
-            [contents],
-            { type: type }
-        );
-
-        const link = document.createElement("a");
-
+        const blob = new Blob([contents], { type });
+        const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = filename;
-
+        document.body.appendChild(link);
         link.click();
-
-        URL.revokeObjectURL(link.href);
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 0);
     }
 
-    document
-        .getElementById("search")
-        .addEventListener("input", render);
+    document.getElementById('search').addEventListener('input', render);
+    document.getElementById('shareListButton').addEventListener('click', shareApp);
 
-    document
-        .getElementById("exportButton")
-        .addEventListener("click", () => {
+    document.getElementById('exportButton').addEventListener('click', () => {
+        download('research.json', JSON.stringify(getItems(), null, 2), 'application/json');
+    });
 
-            download(
-                "research.json",
-                JSON.stringify(getItems(), null, 2),
-                "application/json"
-            );
+    document.getElementById('exportTextButton').addEventListener('click', () => {
+        const text = getItems().map(item => `${item.title || ''}\n${item.url}`).join('\n\n');
+        download('research-urls.txt', text, 'text/plain');
+    });
 
-        });
+    document.getElementById('clearButton').addEventListener('click', () => {
+        if (!getItems().length) {
+            showToast('Nothing to clear.');
+            return;
+        }
+        if (!confirm('Delete your entire research list from this browser?')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        render();
+        showToast('Research list cleared.');
+    });
 
-    document
-        .getElementById("exportTextButton")
-        .addEventListener("click", () => {
-
-            const text =
-                getItems()
-                    .map(item => item.url)
-                    .join("\n");
-
-            download(
-                "research-urls.txt",
-                text,
-                "text/plain"
-            );
-
-        });
-
-    document
-        .getElementById("clearButton")
-        .addEventListener("click", () => {
-
-            if (!confirm("Delete your entire research list?")) {
-                return;
-            }
-
-            localStorage.removeItem(STORAGE_KEY);
-
-            render();
-        });
+    // Prevent accidental execution of the installer link when someone clicks it
+    // instead of dragging it to the bookmarks bar.
+    document.getElementById('bookmarklet').addEventListener('click', event => {
+        event.preventDefault();
+        showToast('Drag this button to your bookmarks bar.');
+    });
 
     addFromURL();
-
     render();
-
 })();
 </script>
-
 </body>
 </html>
