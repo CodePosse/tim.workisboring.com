@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Research List BookMarklet</title>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        #search {
+            padding: 8px 12px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .item {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.08);
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .item-url {
+            overflow-wrap: anywhere;
+        }
+
+        .item-meta {
+            margin-top: 8px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .item-actions {
+            margin-top: 10px;
+        }
+
+        .item-actions button {
+            margin-right: 5px;
+        }
+
+        .empty {
+            padding: 40px;
+            text-align: center;
+            color: #777;
+        }
+        .bookmark     {display:inline-block;
+    padding:12px 18px;
+    background:#222;
+    color:#fff;
+    border-radius:8px;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-weight:bold;
+    cursor:grab;
+    </style>
+</head>
+
+<body>
+
+<h1>Research List</h1>
+<p>Drag this button to your bookmarks bar:</p>
+
+<a href="javascript:(function(){const url=window.location.href;const title=document.title;try{navigator.clipboard.writeText(url);}catch(e){}window.open('https://tim.workisboring.com/book.html?url='+encodeURIComponent(url)+'&title='+encodeURIComponent(title),'_blank');})();" class="bookmark">
+  🔖 Save to Research
+</a>
+<p class="subtitle">
+    Pages saved with my Research bookmarklet.
+</p>
+
+<div class="toolbar">
+    <input
+        id="search"
+        type="search"
+        placeholder="Search saved pages..."
+    >
+
+    <button id="exportButton">Export JSON</button>
+    <button id="exportTextButton">Export URLs as txt</button>
+    <button id="clearButton">Clear All</button>
+</div>
+
+<div id="list"></div>
+
+<script>
+(function () {
+
+    const STORAGE_KEY = "researchSites";
+
+    function getItems() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveItems(items) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    function addFromURL() {
+
+        const params = new URLSearchParams(window.location.search);
+
+        const url = params.get("url");
+        const title = params.get("title");
+
+        if (!url) {
+            return;
+        }
+
+        const items = getItems();
+
+        // Don't add duplicate URLs.
+        const existing = items.find(item => item.url === url);
+
+        if (!existing) {
+
+            items.unshift({
+                id: crypto.randomUUID(),
+                title: title || url,
+                url: url,
+                saved: new Date().toISOString()
+            });
+
+            saveItems(items);
+        }
+
+        /*
+         * Remove parameters from browser URL after saving.
+         * This prevents refreshing from looking like another import.
+         */
+        history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+    }
+
+    function removeItem(id) {
+
+        const items = getItems().filter(item => item.id !== id);
+
+        saveItems(items);
+        render();
+    }
+
+    function copyURL(url) {
+
+        navigator.clipboard.writeText(url)
+            .then(() => {
+                alert("URL copied.");
+            })
+            .catch(() => {
+
+                const textarea = document.createElement("textarea");
+
+                textarea.value = url;
+                document.body.appendChild(textarea);
+
+                textarea.select();
+
+                document.execCommand("copy");
+
+                textarea.remove();
+
+                alert("URL copied.");
+            });
+    }
+
+    function render() {
+
+        const container = document.getElementById("list");
+
+        const query =
+            document.getElementById("search")
+                .value
+                .toLowerCase();
+
+        let items = getItems();
+
+        if (query) {
+
+            items = items.filter(item => {
+
+                return (
+                    item.title.toLowerCase().includes(query) ||
+                    item.url.toLowerCase().includes(query)
+                );
+
+            });
+
+        }
+
+        container.innerHTML = "";
+
+        if (!items.length) {
+
+            container.innerHTML =
+                '<div class="empty">No saved research pages yet.</div>';
+
+            return;
+        }
+
+        items.forEach(item => {
+
+            const wrapper = document.createElement("div");
+
+            wrapper.className = "item";
+
+            const title = document.createElement("div");
+
+            title.className = "item-title";
+
+            const link = document.createElement("a");
+
+            link.href = item.url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = item.title;
+
+            title.appendChild(link);
+
+            const url = document.createElement("div");
+
+            url.className = "item-url";
+            url.textContent = item.url;
+
+            const meta = document.createElement("div");
+
+            meta.className = "item-meta";
+
+            meta.textContent =
+                "Saved " +
+                new Date(item.saved).toLocaleString();
+
+            const actions = document.createElement("div");
+
+            actions.className = "item-actions";
+
+            const copyButton = document.createElement("button");
+
+            copyButton.textContent = "Copy URL";
+
+            copyButton.addEventListener("click", () => {
+                copyURL(item.url);
+            });
+
+            const deleteButton = document.createElement("button");
+
+            deleteButton.textContent = "Delete";
+
+            deleteButton.addEventListener("click", () => {
+                removeItem(item.id);
+            });
+
+            actions.append(copyButton, deleteButton);
+
+            wrapper.append(
+                title,
+                url,
+                meta,
+                actions
+            );
+
+            container.appendChild(wrapper);
+
+        });
+    }
+
+    function download(filename, contents, type) {
+
+        const blob = new Blob(
+            [contents],
+            { type: type }
+        );
+
+        const link = document.createElement("a");
+
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+
+        link.click();
+
+        URL.revokeObjectURL(link.href);
+    }
+
+    document
+        .getElementById("search")
+        .addEventListener("input", render);
+
+    document
+        .getElementById("exportButton")
+        .addEventListener("click", () => {
+
+            download(
+                "research.json",
+                JSON.stringify(getItems(), null, 2),
+                "application/json"
+            );
+
+        });
+
+    document
+        .getElementById("exportTextButton")
+        .addEventListener("click", () => {
+
+            const text =
+                getItems()
+                    .map(item => item.url)
+                    .join("\n");
+
+            download(
+                "research-urls.txt",
+                text,
+                "text/plain"
+            );
+
+        });
+
+    document
+        .getElementById("clearButton")
+        .addEventListener("click", () => {
+
+            if (!confirm("Delete your entire research list?")) {
+                return;
+            }
+
+            localStorage.removeItem(STORAGE_KEY);
+
+            render();
+        });
+
+    addFromURL();
+
+    render();
+
+})();
+</script>
+
+</body>
+</html>
