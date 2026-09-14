@@ -93,8 +93,8 @@
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 28px;
-            align-items: center;
-            margin-bottom: 22px;
+            align-items: start;
+            margin-bottom: 18px;
         }
 
         .eyebrow {
@@ -219,21 +219,40 @@
             color: var(--text);
         }
 
-        .bookmarklet-share {
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
+        .share-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin: 0 0 22px;
+            padding: 14px 16px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            box-shadow: 0 8px 22px rgba(72,56,43,.06);
         }
 
-        .bookmarklet-share .button {
-            width: 100%;
+        .share-strip-copy {
+            min-width: 0;
         }
 
-        .bookmarklet-share p {
-            margin: 7px 2px 0;
+        .share-strip strong {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--text);
+            font-size: .92rem;
+        }
+
+        .share-strip p {
+            margin: 0;
             color: var(--muted);
-            font-size: .78rem;
+            font-size: .82rem;
             line-height: 1.4;
+        }
+
+        .share-strip .button {
+            flex: 0 0 auto;
+            white-space: nowrap;
         }
 
         .workspace {
@@ -497,6 +516,8 @@
             .search-wrap { grid-column: auto; }
             .button { width: 100%; }
             .summary-row { align-items: flex-start; flex-direction: column; }
+            .share-strip { align-items: stretch; flex-direction: column; }
+            .share-strip .button { width: 100%; }
         }
 
         @media (prefers-color-scheme: dark) {
@@ -563,12 +584,17 @@
                 </ol>
             </section>
 
-            <div class="bookmarklet-share">
-                <button class="button" id="shareListButton" type="button">Share this bookmarklet</button>
-                <p>Shares this bookmarklet/tool page only — not your saved research list.</p>
-            </div>
         </aside>
     </header>
+
+    <!-- Share the public bookmarklet tool page; saved research remains local/private. -->
+    <aside class="share-strip" aria-label="Share this bookmarklet">
+        <div class="share-strip-copy">
+            <strong>Know someone who could use this?</strong>
+            <p>Share the bookmarklet tool page. Your saved research list stays private in your browser.</p>
+        </div>
+        <button class="button" id="shareListButton" type="button">Share the bookmarklet</button>
+    </aside>
 
     <main class="workspace">
         <div class="toolbar">
