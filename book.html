@@ -418,6 +418,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             overflow: hidden;
         }
 
@@ -606,7 +607,7 @@
     <main class="workspace">
         <div class="toolbar">
             <div class="search-wrap">
-                <input id="search" type="search" placeholder="Search titles, descriptions, domains, URLs..." autocomplete="off">
+                <input id="search" type="search" aria-label="Search saved research" placeholder="Search titles, descriptions, domains, URLs..." autocomplete="off">
             </div>
             <button class="button" id="exportButton" type="button">Export JSON</button>
             <button class="button" id="exportTextButton" type="button">Export URLs as txt</button>
