@@ -79,7 +79,6 @@
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
-	<div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="ladot-speed" aria-label="LADOT speed safety"> 🚦 LADOT Speed Safety Systems</div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="curated-socal"
             aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
