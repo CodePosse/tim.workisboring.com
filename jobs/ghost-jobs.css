@@ -1,0 +1,289 @@
+/* Ghost Jobs demo widget: floating status button, report panel, page highlight and toast.
+   Shared by the job-board snapshot demos (LinkedIn, Dice, Indeed, Ladders). */
+:root {
+  --gj-zombie: #b42318;
+  --gj-ghost: #6b4eff;
+  --gj-sun: #d97706;
+  --gj-ink: #17202a;
+  --gj-bg: #fff;
+  --gj-border: #d8dee4;
+}
+
+.ghostjobs-trigger {
+  --gj-cta-glow: rgba(255, 190, 0, .8);
+  --gj-cta-ring: #ffd000;
+  --gj-cta-halo: rgba(255, 138, 0, .22);
+
+  position: fixed;
+  top: 82px;
+  right: 18px;
+  z-index: 2147483646;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff3d8d, #ff8a00 55%, #ffd000);
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px var(--gj-cta-halo), 0 8px 28px rgba(0, 0, 0, .28);
+  animation: gj-cta-pulse 5s ease-in-out 1;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.ghostjobs-trigger::after {
+  position: absolute;
+  inset: -5px;
+  border: 3px solid var(--gj-cta-ring);
+  border-radius: inherit;
+  box-shadow: 0 0 18px var(--gj-cta-glow);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  animation: gj-cta-ring 1.25s ease-out 4;
+}
+
+.ghostjobs-trigger:hover,
+.ghostjobs-trigger:focus-visible {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 5px var(--gj-cta-halo), 0 10px 36px var(--gj-cta-glow);
+}
+
+.ghostjobs-trigger:focus-visible {
+  outline: 3px solid #111827;
+  outline-offset: 4px;
+}
+
+.ghostjobs-trigger[aria-expanded="true"],
+.ghostjobs-trigger[aria-expanded="true"]::after,
+.ghostjobs-trigger[aria-expanded="true"] .ghostjobs-trigger-icon {
+  animation: none;
+}
+
+@keyframes gj-cta-pulse {
+  0%, 100% {
+    filter: saturate(1);
+    box-shadow: 0 0 0 4px var(--gj-cta-halo), 0 8px 28px rgba(0, 0, 0, .28);
+    transform: scale(1) rotate(0);
+  }
+
+  20%, 60% {
+    filter: saturate(1.8);
+    box-shadow: 0 0 28px 10px var(--gj-cta-glow);
+    transform: scale(1.14) rotate(-7deg);
+  }
+
+  40%, 80% {
+    filter: saturate(1.8);
+    box-shadow: 0 0 32px 12px var(--gj-cta-glow);
+    transform: scale(1.08) rotate(7deg);
+  }
+}
+
+@keyframes gj-cta-ring {
+  0% {
+    opacity: .9;
+    transform: scale(.8);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.65);
+  }
+}
+
+.ghostjobs-trigger[data-state="zombie"] {
+  --gj-cta-glow: rgba(23, 128, 61, .78);
+  --gj-cta-ring: #86efac;
+  --gj-cta-halo: rgba(23, 128, 61, .24);
+  background: var(--gj-zombie);
+}
+
+.ghostjobs-trigger[data-state="ghost"] {
+  --gj-cta-glow: rgba(107, 78, 255, .78);
+  --gj-cta-ring: #c4b5fd;
+  --gj-cta-halo: rgba(107, 78, 255, .24);
+  background: var(--gj-ghost);
+}
+
+.ghostjobs-trigger[data-state="sunshine"] {
+  background: var(--gj-sun);
+}
+
+.ghostjobs-trigger-icon {
+  display: inline-block;
+  transform-origin: 50% 75%;
+}
+
+.ghostjobs-trigger[data-state="ghost"] .ghostjobs-trigger-icon {
+  animation: gj-ghost-wiggle .7s ease-in-out 2;
+}
+
+.ghostjobs-trigger[data-state="zombie"] .ghostjobs-trigger-icon {
+  animation: gj-zombie-wiggle .8s ease-in-out 2;
+}
+
+@keyframes gj-ghost-wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
+
+@keyframes gj-zombie-wiggle {
+  0%, 100% { transform: rotate(0) translateY(0); }
+  25% { transform: rotate(-8deg) translateY(-2px); }
+  50% { transform: rotate(7deg) translateY(0); }
+  75% { transform: rotate(-5deg) translateY(-1px); }
+}
+
+.ghostjobs-panel {
+  position: fixed;
+  top: 150px;
+  right: 18px;
+  z-index: 2147483645;
+  display: none;
+  width: min(390px, calc(100vw - 36px));
+  max-height: calc(100vh - 170px);
+  overflow: auto;
+  color: var(--gj-ink);
+  background: var(--gj-bg);
+  border: 1px solid var(--gj-border);
+  border-radius: 16px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, .25);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ghostjobs-panel.open { display: block; }
+
+.ghostjobs-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--gj-border);
+}
+
+.ghostjobs-logo { font-size: 30px; line-height: 1; }
+.ghostjobs-head h2 { margin: 0 0 3px; font-size: 18px; }
+.ghostjobs-head p { margin: 0; color: #59636e; font-size: 12px; }
+.ghostjobs-body { padding: 16px 18px; }
+
+.gj-status {
+  margin-bottom: 14px;
+  padding: 12px 13px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+}
+
+.gj-status strong { display: block; font-size: 16px; }
+.gj-status span { display: block; color: #59636e; font-size: 12px; line-height: 1.4; }
+
+.gj-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 10px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.gj-grid dt { color: #68727d; }
+.gj-grid dd { margin: 0; font-weight: 600; }
+.gj-sites { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.gj-chip {
+  padding: 4px 7px;
+  background: #f6f8fa;
+  border: 1px solid var(--gj-border);
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+.gj-note {
+  margin: 12px 0;
+  padding: 10px;
+  background: #f6f8fa;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.gj-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.gj-btn {
+  padding: 10px 9px;
+  color: #fff;
+  background: #111827;
+  border: 1px solid #111827;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gj-btn.secondary { color: #111827; background: #fff; }
+.gj-btn.ghosted { background: var(--gj-ghost); border-color: var(--gj-ghost); }
+.gj-btn:disabled { opacity: .55; cursor: default; }
+.gj-small { margin-top: 10px; color: #6b7280; font-size: 11px; }
+
+.gj-highlight {
+  position: relative !important;
+  outline: 4px solid var(--gj-highlight, var(--gj-sun)) !important;
+  outline-offset: 5px !important;
+  border-radius: 8px !important;
+}
+
+.gj-highlight::before {
+  position: absolute;
+  z-index: 2147483640;
+  top: -35px;
+  left: 0;
+  padding: 6px 9px;
+  color: #fff;
+  background: var(--gj-highlight, var(--gj-sun));
+  border-radius: 7px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+  content: "Ghost Jobs: freshness warning";
+  font: 700 12px Arial, sans-serif;
+}
+
+.ghostjobs-toast {
+  position: fixed;
+  z-index: 2147483647;
+  bottom: 20px;
+  left: 50%;
+  display: none;
+  padding: 10px 14px;
+  color: #fff;
+  background: #111827;
+  border-radius: 9px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
+  font: 13px Arial, sans-serif;
+  transform: translateX(-50%);
+}
+
+.ghostjobs-toast.show { display: block; }
+
+@media (max-width: 600px) {
+  .ghostjobs-trigger { top: auto; right: 18px; bottom: 18px; }
+  .ghostjobs-panel {
+    top: 12px;
+    right: 12px;
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 90px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghostjobs-trigger,
+  .ghostjobs-trigger::after,
+  .ghostjobs-trigger-icon {
+    animation: none;
+    transition: none;
+  }
+}
+
+.gj-muted { color: #6b7280; font-weight: 400; }
+.gj-sites-label { margin-bottom: 7px; font-size: 12px; font-weight: 700; }
