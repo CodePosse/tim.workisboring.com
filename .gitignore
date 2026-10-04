@@ -111,3 +111,6 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+
+# Private planning notes
+jobs/ghost-jobs-feasibility.md
