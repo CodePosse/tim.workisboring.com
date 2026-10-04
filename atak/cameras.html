@@ -31,7 +31,7 @@
   <meta name="twitter:description"
     content="Camera dashboard for ATAK/GIS training, featuring ALERTCalifornia, Cal OES, USGS, Windy, and curated LIVE camera feeds.">
   <meta name="twitter:image" content="https://tim.workisboring.com/atak/img/social-card.png">
-  
+
   <link href="/css/bootstrap.min.css"
         rel="stylesheet"
         >
@@ -79,7 +79,7 @@
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="usgs" aria-label="USGS River / Water"> 🌊 USGS River /
           Water</div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="windy" aria-label="windy"> 🌎 Windy Webcams</div>
-	<div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="ladot-speed" aria-label="LADOT speed safety"> 🚦 LADOT Speed Safety Systems</div>
+        <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="ladot-speed" aria-label="LADOT speed safety"> 🚦 LADOT Speed Safety Systems</div>
         <div class="mygroup"><input class="form-check-input mt-0" type="checkbox" data-layer="curated-socal"
             aria-label="Curated Southern California cameras"> 🏖️ LIVE Beach, Mountain &amp; Attraction
         </div>
@@ -109,6 +109,7 @@
           <a href="/atak/data/kml/caloes-traffic-network.kml">Cal OES Traffic Network KML</a>
           <a href="/atak/data/kml/usgs-network.kml">USGS Network KML</a>
           <a href="/atak/data/kml/windy-webcams-network.kml">Windy Webcams Network KML</a>
+          <a href="/atak/data/kml/ladot-speed-safety-network.kml">LADOT Speed Safety Network KML</a>
           <a href="/atak/data/kml/curated-socal-network.kml">Curated LIVE Cameras KML</a>
           <a href="/atak/data/kml/deflock-socal-network.kml">ATAK: CA DeFlock ALPR Camera Map </a>
           <a href="/atak/caltrans-network.kml">ATAK: Caltrans Traffic Camera Network KML </a>
@@ -173,11 +174,16 @@
         label: "USGS River / Water",
         json: "/atak/data/usgs-cameras.json"
       },
-      windy: {
-        label: "Windy Tourist Webcams",
-        json: "/atak/api/windy.php"
-      },
-      "curated-socal": {
+           windy: {
+  label: "Windy Tourist Webcams",
+  json: "/atak/api/windy.php"
+},
+"ladot-speed": {
+  label: "LADOT Speed Safety Systems",
+  json: "/atak/data/ladot-speed-safety.geojson",
+  type: "geojson-ladot-speed"
+},
+"curated-socal": {
         label: "Curated SoCal Beaches, Mountains & Attractions",
         json: "/atak/data/curated-socal-cameras.json"
       }
@@ -331,6 +337,8 @@
       "nifc-incidents": 0,
       "nifc-perimeters": 0
     };
+
+    let ladotSpeedFeatureCount = 0;
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -580,6 +588,51 @@
         </div>
       `;
     }
+    function ladotSpeedPopup(feature) {
+      const p = feature.properties || {};
+
+      const street = p.StreetName || "Unnamed Corridor";
+      const fromStreet = p.XStreet2 || "";
+      const toStreet = p.XStreet1 || "";
+      const district = p.DISTRICT ?? "";
+      const speedLimit = p.speed_limi ?? "";
+      const equityArea = p.EquityArea || "";
+      const schoolNearby = p.SchoolNearby || "";
+      const collisions = p.SpeedCollisions2 ?? "";
+      const percentSpeeding = p.Percentspeed ?? "";
+      const totalVehicles = p.TotalVehicles ?? "";
+
+      return `
+        <div class="popup">
+          <span class="badge text-bg-danger">LADOT Speed Safety</span><br>
+          <strong>🚦 ${escapeHtml(street)}</strong>
+          <table class="table table-sm mt-2 mb-1">
+            ${fromStreet ? nifcPopupRow("From", fromStreet) : ""}
+            ${toStreet ? nifcPopupRow("To", toStreet) : ""}
+            ${district !== "" ? nifcPopupRow("Council District", district) : ""}
+            ${speedLimit !== "" ? nifcPopupRow("Speed Limit", `${speedLimit} mph`) : ""}
+            ${equityArea ? nifcPopupRow("Equity Area", equityArea) : ""}
+            ${schoolNearby ? nifcPopupRow("School Nearby", schoolNearby) : ""}
+            ${collisions !== "" ? nifcPopupRow("Speed-Related Collisions", collisions) : ""}
+            ${percentSpeeding !== "" ? nifcPopupRow("Percent Speeding", `${percentSpeeding}%`) : ""}
+            ${totalVehicles !== "" ? nifcPopupRow("Total Vehicles", totalVehicles) : ""}
+          </table>
+          <small>
+            Source: Los Angeles Department of Transportation<br>
+            Official speed-safety corridor; not an exact physical camera position.
+          </small>
+        </div>
+      `;
+    }
+    function ladotSpeedStyle() {
+      return {
+        color: "#dc3545",
+        weight: 3,
+        opacity: 0.95,
+        fillColor: "#dc3545",
+        fillOpacity: 0.15
+      };
+    }
 
     function nifcIsPrescribedFire(feature) {
       const p = feature.properties || {};
@@ -677,6 +730,21 @@
       geoJsonLayer.addTo(layers[layerName]);
     }
 
+    function addLadotSpeedFeatures(payload, layerName) {
+      const geoJsonLayer = L.geoJSON(payload, {
+        style: ladotSpeedStyle,
+        onEachFeature(feature, layer) {
+          layer.bindPopup(ladotSpeedPopup(feature), {
+            maxWidth: 920,
+            minWidth: 300,
+            autoPanPadding: [24, 24]
+          });
+        }
+      });
+
+      geoJsonLayer.addTo(layers[layerName]);
+    }
+
     async function ensureLayerLoaded(layerName) {
       if (loadedLayers.has(layerName)) return;
 
@@ -687,7 +755,8 @@
         layerName === "windy" ||
         layerName === "curated-socal" ||
         source.type === "geojson-incidents" ||
-        source.type === "geojson-perimeters";
+        source.type === "geojson-perimeters" ||
+        source.type === "geojson-ladot-speed";
 
       const requestUrl = shouldBypassCache
         ? `${source.json}${source.json.includes("?") ? "&" : "?"}t=${Date.now()}`
@@ -721,6 +790,18 @@
         fireFeatureCounts["nifc-perimeters"] = payload.features.length;
 
         addNifcPerimeterFeatures(payload, layerName);
+        loadedLayers.add(layerName);
+        return;
+      }
+
+      if (source.type === "geojson-ladot-speed") {
+        if (payload?.type !== "FeatureCollection" || !Array.isArray(payload.features)) {
+          throw new Error(`Invalid GeoJSON returned for ${source.label}`);
+        }
+
+        ladotSpeedFeatureCount = payload.features.length;
+
+        addLadotSpeedFeatures(payload, layerName);
         loadedLayers.add(layerName);
         return;
       }
@@ -788,6 +869,9 @@
       const nifcPerimetersActive =
         document.querySelector('[data-layer="nifc-perimeters"]')?.checked;
 
+      const ladotSpeedActive =
+        document.querySelector('[data-layer="ladot-speed"]')?.checked;
+
       const visibleCameraCount = filtered.filter(
         item => item.layer !== "nifc-incidents"
       ).length;
@@ -802,6 +886,10 @@
 
       if (nifcPerimetersActive) {
         parts.push(`${fireFeatureCounts["nifc-perimeters"]} fire perimeters`);
+      }
+
+      if (ladotSpeedActive) {
+        parts.push(`${ladotSpeedFeatureCount} LADOT speed-safety corridors`);
       }
 
       document.getElementById("status").textContent = parts.join(" · ");
